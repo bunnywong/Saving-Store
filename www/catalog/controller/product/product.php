@@ -223,6 +223,7 @@ class ControllerProductProduct extends Controller {
 
 			$this->document->setTitle($product_info['name']);
 			$this->document->setDescription($product_info['meta_description']);
+			$this->data['meta_description'] = $product_info['meta_description'];	// Bun
 			$this->document->setKeywords($product_info['meta_keyword']);
 			$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), 'canonical');
 			$this->document->addScript('catalog/view/javascript/jquery/tabs.js');

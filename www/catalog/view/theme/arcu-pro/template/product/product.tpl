@@ -99,7 +99,7 @@
 					<?php if ($minimum > 1) { ?>
 					<div class="minimum"><?php echo $text_minimum; ?></div>
 					<?php } ?>
-					<br /><span>產品簡介：</span><?php echo $meta_description; ?>
+					<br /><span>產品簡介：</span><?php echo $meta_description; // Bun ?>
 				</div>
 				<?php if ($profiles): ?>
 				<div class="option">
