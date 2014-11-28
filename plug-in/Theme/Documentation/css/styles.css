@@ -1,0 +1,231 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+body {
+	color: #666;
+	font-size: 14px;
+	line-height: 160%;
+	background-color: #eee;
+	background: #000 url(../images/bg-master.png);
+	font-family: Arial, Helvetica, sans-serif;
+}
+p, pre, blockquote, form, dl, ul, ol, fieldset, address {
+	padding: 0;
+	margin: 12px 0 15px 0;
+}
+fieldset {
+	padding: .5em;
+	border: 1px solid #444;
+}
+small {
+	font-size: .85em;
+}
+img {
+	max-width: 100%;
+}
+label {
+	cursor: pointer;
+}
+hr {
+	height: 0;
+	padding: 0;
+	border: none;
+	line-height: 0;
+	margin: 15px 0;
+	border-top: 1px solid #d4d4d4;
+	border-bottom: 1px solid #fff;
+}
+strong {
+	color: #222;
+	text-decoration: underline;
+}
+/* =============== DEFAULT HTML - CLEARING =============== */
+.clearbreak {
+	clear: both;
+}
+.clearafter:after {
+	height: 0;
+	clear: both;
+	content: "";
+	display: block;
+	visibility: hidden;
+}
+/* =============== DEFAULT HTML - GRID LAYOUT =============== */
+.grid-2 {
+	float: left;
+	width: 46.95%;
+	margin: 0 1.5%;
+}
+.grid-3 {
+	float: left;
+	width: 30.3%;
+	margin: 0 1.5%;
+}
+.grid-4 {
+	float: left;
+	width: 21.975%;
+	margin: 0 1.5%;
+}
+/* =============== DEFAULT HTML - HEADING STYLES =============== */
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	color: #666;
+	line-height: 150%;
+}
+h1 {
+	color: #E0704B;
+	font-size: 36px;
+}
+h2 {
+	color: #525252;
+	font-size: 24px;
+	font-weight: bold;
+}
+h3 {
+	margin: 0.3em 0;
+	font-size: 18px;
+	font-weight: 400;
+}
+h4 {
+	margin: 0.3em 0;
+	font-size: 1.25em;
+	font-weight: 400;
+}
+h5,
+h6 {
+	margin: 0.3em 0;
+	font-size: 1.1em;
+	font-weight: 400;
+}
+/* =============== DEFAULT HTML - LINK STYLES =============== */
+a {
+	color: #E0704B;
+	outline: none;
+	cursor: pointer;
+	text-decoration: none;
+	transition: 0.3s ease-in-out;
+	-moz-transition: 0.3s ease-in-out;
+	-webkit-transition: 0.3s ease-in-out;
+}
+a:hover {
+	color: #AECC6D;
+	text-decoration: underline;
+}
+a img {
+	border: none;
+}
+/* =============== DEFAULT HTML - LIST STYLES =============== */
+ul li {
+	padding: 0;
+	margin: 0.3em 0 0.3em 1.6em;
+}
+ol li {
+	padding: 0;
+	margin: 0.3em 0 0.3em 2em;
+}
+/* =============== LAYOUT =============== */
+.wrapper {
+	padding: 30px;
+}
+#header {
+	padding: 15px;
+	background-color: #fff;
+	border-bottom: 1px solid #E03625;
+}
+#navigation-container {
+	top: 95px;
+	float: left;
+	height: 100%;
+	width: 290px;
+	position: fixed;
+	min-height: 100%;
+}
+#navigation-container img {
+	margin: 50px 0 20px 0;
+}
+#navigation {
+	color: #fff;
+	text-align: right;
+	list-style-type: none;
+	border-top: 1px solid #ddd;
+}
+#navigation li {
+	margin: 0;
+}
+#navigation li a {
+	color: #999;
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+	margin-left: 10px;
+	text-decoration: none;
+	padding: 10px 15px 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+#navigation li a:hover {
+	color: #000;
+}
+#navigation li a.current {
+	color: #E1704B;
+	background-color: #fff;
+}
+#sidebar-container {
+	float: left;
+	bottom: 30px;
+	width: 290px;
+	position: fixed;
+	font-size: 14px;
+	text-align: right;
+}
+#sidebar-container p {
+	margin-right: 15px;
+	margin-bottom: 5px;
+}
+#sidebar-container strong {
+	text-decoration: none;
+}
+#sidebar-container ul {
+	margin-top: 0;
+	margin-right: 15px;
+	text-align: right;
+	list-style-type: none;
+}
+#sidebar-container ul li {
+	margin: 0;
+	display: inline-block;
+}
+#sidebar-container ul li img {
+	width: 32px;
+	height: 32px;
+}
+#content-container {
+	padding-left: 310px;
+	background: #fff url(../images/bg-faux-column.png) -60px top repeat-y;
+}
+#content > div {
+	padding-top: 100px;
+	min-height: 800px;
+}
+.button {
+	color: #fff;
+	border: none;
+	text-indent: 0;
+	cursor: pointer;
+	padding: 5px 14px;
+	display: inline-block;
+	background-color: #3BB24A;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	transition: 0.3s ease;
+	-moz-transition: 0.3s ease;
+	-webkit-transition: 0.3s ease;
+}
+.button:hover {
+	background-color: #E1704B;
+}
+.button a {
+	color: #fff;
+	text-decoration: none;
+}

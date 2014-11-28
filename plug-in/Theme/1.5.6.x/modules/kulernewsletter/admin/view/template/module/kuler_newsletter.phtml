@@ -1,0 +1,664 @@
+<?php
+
+/*--------------------------------------------------------------------------/
+* @Author		KulerThemes.com http://www.kulerthemes.com
+* @Copyright	Copyright (C) 2012 - 2013 KulerThemes.com. All rights reserved.
+* @License		KulerThemes.com Proprietary License
+/---------------------------------------------------------------------------*/
+
+?>
+
+<?php echo $header; ?>
+<?php if (isset($ksb_building_mode)) { ?>
+    <style type="text/css">
+        #header, .breadcrumb, .box > .heading .buttons,.vtabs, #footer {
+            display: none !important;
+        }
+
+        #content {
+            padding: 0 !important;
+        }
+
+        .box > .content {
+            background: none !important;
+        }
+
+        .vtabs-content {
+            padding-left: 15px !important;
+        }
+    </style>
+<?php } ?>
+    <script type="text/javascript">
+        <?php if (isset($ksb_updated_module)) { ?>
+        var ksb_updated_module = <?php echo $ksb_updated_module; ?>;
+        <?php } ?>
+    </script>
+    <div id="content" class="kuler-module">
+    <div class="breadcrumb">
+        <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+            <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+        <?php } ?>
+    </div>
+    <?php if ($error_warning) { ?>
+        <div class="warning"><?php echo $error_warning; ?></div>
+    <?php } ?>
+    <div class="box">
+    <div class="heading clearafter">
+        <h1><img src="./view/kulercore/images/logos/kuler_newsletter.png" alt="<?php echo $heading_title; ?>" /></h1>
+        <div class="buttons">
+            <a onclick="$('#form').submit();" class="button save-settings"><?php echo $button_save; ?></a>
+            <a onclick="$('#op').val('close'); $('#form').submit();" class="button cancel-settings"><?php echo $button_close; ?></a>
+            <a href="<?php echo $cancel; ?>" class="button cancel-settings"><?php echo $button_cancel; ?></a>
+        </div>
+    </div>
+    <div class="content">
+    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+    <input type="hidden" name="vtab" id="vtab" value="<?php echo $vtab ?>" />
+    <input type="hidden" name="htab" id="htab" value="<?php echo $htab ?>" />
+    <input type="hidden" name="op" id="op" />
+
+    <div style="margin: 20px 0 0 30px;">
+        <label><?php echo $__['entry_store']; ?></label>
+        <select name="store_id" id="StoreSelector">
+            <?php foreach ($stores as $store_id => $store_name) { ?>
+                <option value="<?php echo $store_id; ?>"<?php if ($store_id == $selected_store_id) echo ' selected="selected"'; ?>><?php echo $store_name; ?></option>
+            <?php } ?>
+        </select>
+    </div>
+
+    <ul class="vtabs">
+        <?php $module_row = 1; ?>
+        <?php foreach ($modules as $module) { ?>
+            <li>
+                <a href="#tab-module-<?php echo $module_row; ?>" id="module-<?php echo $module_row; ?>">
+                    <?php echo $module['main_title']; ?>
+                    <img class="remove-element" src="view/kulercore/images/icons/icon-delete.png" alt="" onclick="$('.vtabs a:first').trigger('click'); $('#module-<?php echo $module_row; ?>').remove(); $('#tab-module-<?php echo $module_row; ?>').remove(); return false;" />
+                </a>
+            </li>
+            <?php $module_row++; ?>
+        <?php } ?>
+        <li><span class="module-add"><?php echo $button_add_module; ?>&nbsp;<img class="add-element" src="view/kulercore/images/icons/icon-add.png" alt="" onclick="addModule();" /></span></li>
+    </ul>
+    <?php $module_row = 1; ?>
+    <?php foreach ($modules as $module) { ?>
+        <div id="tab-module-<?php echo $module_row; ?>" class="vtabs-content module-<?php echo $module['type'] ?>">
+        <h2>Module</h2>
+        <table class="form">
+            <tr>
+                <td><?php echo $entry_status; ?></td>
+                <td width="10">
+                    <div class="kuler-switch-btn">
+                        <input type='hidden' name='kuler_newsletter_module[<?php echo $module_row; ?>][status]' value='0' />
+                        <input type="checkbox" name="kuler_newsletter_module[<?php echo $module_row; ?>][status]"<?php echo isset($module['status']) && $module['status'] ? ' checked="checked"' : '' ?>  value="1">
+                        <span class="kuler-switch-btn-holder"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_showtitle; ?></td>
+                <td width="10">
+                    <div class="kuler-switch-btn">
+                        <input type='hidden' name='kuler_newsletter_module[<?php echo $module_row; ?>][show_title]' value='0' />
+                        <input type="checkbox" name="kuler_newsletter_module[<?php echo $module_row; ?>][show_title]"<?php echo isset($module['show_title']) && $module['show_title'] ? ' checked="checked"' : '' ?>  value="1">
+                        <span class="kuler-switch-btn-holder"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_title; ?></td>
+                <td>
+                    <?php foreach ($languages as $language) { ?>
+                        <p>
+                            <input type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][module_title][<?php echo $language['language_id']; ?>]" value="<?php echo $module['module_title'][$language['language_id']]; ?>"<?php if ($language['language_id'] == $config_admin_language_id) { ?> class="ModuleTitle" data-shortcode="#ModuleShortCode_<?php echo $module_row; ?>"<?php } ?> />
+                            <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />
+                        </p>
+                    <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_shortcode; ?></td>
+                <td>
+                    <input type="text" id="ModuleShortCode_<?php echo $module_row; ?>" class="ModuleShortCode" name="kuler_newsletter_module[<?php echo $module_row; ?>][shortcode]" value="<?php if (isset($module['shortcode'])) echo $module['shortcode']; ?>" readonly="readonly" size="40" />
+                </td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_pretext; ?></td>
+                <td>
+                    <?php foreach ($languages as $language) { ?>
+                        <p>
+                            <input type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][pre_text][<?php echo $language['language_id']; ?>]" value="<?php echo $module['pre_text'][$language['language_id']]; ?>" />
+                            <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />
+                        </p>
+                    <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_email_text; ?></td>
+                <td>
+                    <?php foreach ($languages as $language) { ?>
+                        <p>
+                            <input type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][email_text][<?php echo $language['language_id']; ?>]" value="<?php echo $module['email_text'][$language['language_id']]; ?>" />
+                            <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />
+                        </p>
+                    <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_subscription_success_message; ?></td>
+                <td>
+                    <?php foreach ($languages as $language) { ?>
+                        <p>
+                            <input type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][subscription_success_message][<?php echo $language['language_id']; ?>]" value="<?php echo $module['subscription_success_message'][$language['language_id']]; ?>" />
+                            <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />
+                        </p>
+                    <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_email_width; ?></td>
+                <td><input type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][email_width]" value="<?php echo isset($module['email_width']) ? $module['email_width'] : '150'; ?>" size="40" /></td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_button_text; ?></td>
+                <td><input type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][button_text]" value="<?php echo isset($module['button_text']) ? $module['button_text'] : 'Subscribe'; ?>" size="40" />
+                    <?php if (isset($error_button_text[$module_row])) { ?>
+                        <span class="error"><?php echo $error_button_text[$module_row]; ?></span>
+                    <?php } ?></td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_layout; ?></td>
+                <td><select name="kuler_newsletter_module[<?php echo $module_row; ?>][layout_id]">
+                        <?php foreach ($layouts as $layout) { ?>
+                            <?php if (isset($module['layout_id']) && $layout['layout_id'] == $module['layout_id']) { ?>
+                                <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
+                            <?php } else { ?>
+                                <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
+                            <?php } ?>
+                        <?php } ?>
+                    </select></td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_position; ?></td>
+                <td><select name="kuler_newsletter_module[<?php echo $module_row; ?>][position]">
+                        <?php if (isset($module['position']) && $module['position'] == 'content_top') { ?>
+                            <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
+                        <?php } else { ?>
+                            <option value="content_top"><?php echo $text_content_top; ?></option>
+                        <?php } ?>
+                        <?php if (isset($module['position']) && $module['position'] == 'content_bottom') { ?>
+                            <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
+                        <?php } else { ?>
+                            <option value="content_bottom"><?php echo $text_content_bottom; ?></option>
+                        <?php } ?>
+                        <?php if (isset($module['position']) && $module['position'] == 'column_left') { ?>
+                            <option value="column_left" selected="selected"><?php echo $text_column_left; ?></option>
+                        <?php } else { ?>
+                            <option value="column_left"><?php echo $text_column_left; ?></option>
+                        <?php } ?>
+                        <?php if (isset($module['position']) && $module['position'] == 'column_right') { ?>
+                            <option value="column_right" selected="selected"><?php echo $text_column_right; ?></option>
+                        <?php } else { ?>
+                            <option value="column_right"><?php echo $text_column_right; ?></option>
+                        <?php } ?>
+                    </select></td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_sort_order; ?></td>
+                <td><input type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo isset($module['sort_order']) ? $module['sort_order'] : ''; ?>" size="3" /></td>
+            </tr>
+            <tr>
+                <td><?php echo $entry_service; ?></td>
+                <td>
+                    <select class="service-type" name="kuler_newsletter_module[<?php echo $module_row; ?>][type]" onchange="return serviceChange(<?php echo $module_row ?>, this);">
+                        <option value="icontact"<?php echo ($module['type'] == 'icontact' ? ' selected="selected"' : '') ?>>iContact</option>
+                        <option value="mailchimp"<?php echo ($module['type'] == 'mailchimp' ? ' selected="selected"' : '') ?>>MailChimp</option>
+                        <option value="aweber"<?php echo ($module['type'] == 'aweber' ? ' selected="selected"' : '') ?>>Aweber</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div id="tab-service-<?php echo $module_row ?>" class="htabs kulerhtabs">
+            <a href="#service-icontact-<?php echo $module_row ?>">iContact</a>
+            <a href="#service-mailchimp-<?php echo $module_row ?>">Mailchimp</a>
+            <a href="#service-aweber-<?php echo $module_row ?>">Aweber</a>
+        </div>
+        <!-- Service: iContact -->
+        <div id="service-icontact-<?php echo $module_row ?>" style="min-height: 223px;">
+            <table class="form">
+                <tr>
+                    <td><?php echo $entry_list_id; ?></td>
+                    <td><select class="service-list" name="kuler_newsletter_module[<?php echo $module_row; ?>][icontact][list_id]">
+                            <?php foreach ($module['icontact']['lists'] as $list) { ?>
+                                <?php if (isset($module['icontact']['list_id']) && $list['id'] == $module['icontact']['list_id']) { ?>
+                                    <option value="<?php echo $list['id']; ?>" selected="selected"><?php echo $list['name']; ?></option>
+                                <?php } else { ?>
+                                    <option value="<?php echo $list['id']; ?>"><?php echo $list['name']; ?></option>
+                                <?php } ?>
+                            <?php } ?>
+                        </select>
+                        <a onclick="return serviceFetch(<?php echo $module_row ?>, 'icontact');" class="button">Fetch</a>
+                        <a onclick="return serviceUpdate(<?php echo $module_row ?>, 'icontact');" class="button">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo $entry_api; ?></td>
+                    <td><input class="service-key" type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][icontact][key]" value="<?php echo isset($module['icontact']['key']) ? $module['icontact']['key'] : ''; ?>" size="40" />
+                        <?php if (isset($error_key['icontact'][$module_row])) { ?>
+                            <span class="error"><?php echo $error_key['icontact'][$module_row]; ?></span>
+                        <?php } ?></td>
+                </tr>
+                <tr class="iContact">
+                    <td><?php echo $entry_username; ?></td>
+                    <td><input type="text" class="service-username" name="kuler_newsletter_module[<?php echo $module_row; ?>][icontact][username]" value="<?php echo isset($module['icontact']['username']) ? $module['icontact']['username'] : ''; ?>" size="40" /></td>
+                </tr>
+                <tr class="iContact">
+                    <td><?php echo $entry_password; ?></td>
+                    <td><input type="text" class="service-password" name="kuler_newsletter_module[<?php echo $module_row; ?>][icontact][password]" value="<?php echo isset($module['icontact']['password']) ? $module['icontact']['password'] : ''; ?>" size="40" /></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Serivce: Mailchimp -->
+        <div id="service-mailchimp-<?php echo $module_row ?>" style="min-height: 223px;">
+            <table class="form">
+                <tr>
+                    <td><?php echo $entry_list_id; ?></td>
+                    <td><select class="service-list" name="kuler_newsletter_module[<?php echo $module_row; ?>][mailchimp][list_id]">
+                            <?php foreach ($module['mailchimp']['lists'] as $list) { ?>
+                                <?php if (isset($module['mailchimp']['list_id']) && $list['id'] == $module['mailchimp']['list_id']) { ?>
+                                    <option value="<?php echo $list['id']; ?>" selected="selected"><?php echo $list['name']; ?></option>
+                                <?php } else { ?>
+                                    <option value="<?php echo $list['id']; ?>"><?php echo $list['name']; ?></option>
+                                <?php } ?>
+                            <?php } ?>
+                        </select>
+                        <a onclick="return serviceFetch(<?php echo $module_row ?>, 'mailchimp');" class="button">Fetch</a>
+                        <a onclick="return serviceUpdate(<?php echo $module_row ?>, 'mailchimp');" class="button">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>API Key:</td>
+                    <td><input class="service-key" type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][mailchimp][key]" value="<?php echo isset($module['mailchimp']['key']) ? $module['mailchimp']['key'] : ''; ?>" size="40" />
+                        <?php if (isset($error_key['mailchimp'][$module_row])) { ?>
+                            <span class="error"><?php echo $error_key['mailchimp'][$module_row]; ?></span>
+                        <?php } ?></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Service: Aweber -->
+        <div id="service-aweber-<?php echo $module_row ?>" style="min-height: 223px;">
+            <table class="form">
+                <tr>
+                    <td><?php echo $entry_list_id; ?></td>
+                    <td><select class="service-list" name="kuler_newsletter_module[<?php echo $module_row; ?>][aweber][list_id]">
+                            <?php foreach ($module['aweber']['lists'] as $list) { ?>
+                                <?php if (isset($module['aweber']['list_id']) && $list['id'] == $module['aweber']['list_id']) { ?>
+                                    <option value="<?php echo $list['id']; ?>" selected="selected"><?php echo $list['name']; ?></option>
+                                <?php } else { ?>
+                                    <option value="<?php echo $list['id']; ?>"><?php echo $list['name']; ?></option>
+                                <?php } ?>
+                            <?php } ?>
+                        </select>
+                        <a onclick="return serviceFetch(<?php echo $module_row ?>, 'aweber');" class="button">Fetch</a>
+                        <a onclick="return serviceUpdate(<?php echo $module_row ?>, 'aweber');" class="button">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Consumer Key:</td>
+                    <td><input class="service-key" type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][aweber][key]" value="<?php echo isset($module['aweber']['key']) ? $module['aweber']['key'] : ''; ?>" size="40" />
+                        <?php if (isset($error_key['aweber'][$module_row])) { ?>
+                            <span class="error"><?php echo $error_key['aweber'][$module_row]; ?></span>
+                        <?php } ?></td>
+                </tr>
+                <tr>
+                    <td>Consumer Secret:</td>
+                    <td><input class="service-secret" type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][aweber][secret]" value="<?php echo isset($module['aweber']['secret']) ? $module['aweber']['secret'] : ''; ?>" size="40" /></td>
+                </tr>
+            </table>
+        </div>
+        </div>
+        <?php $module_row++; ?>
+    <?php } ?>
+    </form>
+    </div>
+    </div>
+    </div>
+    <script type="text/javascript"><!--
+    var saveUrl = '<?php echo $action; ?>';
+    saveUrl = saveUrl.replace(new RegExp('&amp;', 'g'), '&');
+    $('#StoreSelector').on('change', function () {
+        window.location = saveUrl + '&store_id=' + $(this).val();
+    });
+    $('.vtabs a').click(function() {
+        $('#vtab').val($(this).attr('href'));
+    }).tabs();
+
+    <?php $module_row = 1; ?>
+    <?php foreach ($modules as $module) { ?>
+    $('#tab-module-<?php echo $module_row; ?> .htabs a').click(function() {
+        $('#htab').val($(this).attr('href'));
+    }).tabs();
+    $('#tab-service-<?php echo $module_row ?> a[href="#service-<?php echo $module['type'], '-', $module_row; ?>"]').click();
+    <?php $module_row++; ?>
+    <?php } ?>
+    <?php if ($vtab) { ?>
+    $('.vtabs a[href="<?php echo $vtab ?>"]').click();
+    <?php } ?>
+    <?php if ($htab) { ?>
+    $('.htabs a[href="<?php echo $htab ?>"]').click();
+    <?php } ?>
+
+    var module_row = <?php echo $module_row; ?>;
+
+    function serviceChange(row, obj) {
+        $('#tab-service-' + row + ' a[href="#service-' + $(obj).val() + '-' + row + '"]').click();
+        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+    }
+
+    function serviceFetch(row, type) {
+        var key = $('#service-' + type + '-' + row + ' .service-key').val();
+
+        if(key.length < 5) {
+            var dialog = $('<div></div>').html('Please input service api key before use this featured !').dialog({
+                modal: true,
+                height: 'auto',
+                width: 'auto',
+                title: 'Error'
+            });
+            dialog.dialog('open'); return false;
+        }
+
+        $.post(window.location.href, {task: 'getListCache', key: key, type: type}, function(data) {
+            var message = '';
+            if(data && data['status']) {
+                $('#service-' + type + '-' + row + ' .service-list').html(data['content']);
+            } else {
+                var dialog = $('<div></div>').html('Please use Update featured.').dialog({
+                    modal: true,
+                    height: 'auto',
+                    width: 'auto',
+                    title: 'Update'
+                });
+                dialog.dialog('open'); return false;
+            }
+        })
+    }
+
+    function serviceUpdate(row, type) {
+        var valid = true;
+        var param = {
+            task: 'getListAjax',
+            type: type
+        };
+        var field = [];
+        $('#service-' + type + '-' + row + ' input').each(function() {
+            var text = $(this).parent().prev().html();
+            var value = $(this).val();
+            var name = $(this).attr('class').replace('service-', '');
+            if(value.length < 3) {
+                field.push(text.replace(':', ''));
+                valid = false;
+            } else {
+                param[name] = value;
+            }
+        });
+
+        if(!valid) {
+            var dialog = $('<div></div>').html('Please input <strong>' +  field.join('</strong>,<strong>') + '</strong> field before use this featured !').dialog({
+                modal: true,
+                height: 'auto',
+                width: 'auto',
+                title: 'Error'
+            });
+            dialog.dialog('open'); return false;
+        }
+
+        $.post(window.location.href, param, function(data) {
+            var message = '';
+            if(data && data['status']) {
+                $('#service-' + type + '-' + row + ' .service-list').html(data['content']);
+                message = 'Update service list complete !';
+            } else {
+                message = 'Could not get Mailchimp list at this time, please try again latter !';
+            }
+            var dialog = $('<div></div>').html(message).dialog({
+                modal: true,
+                height: 'auto',
+                width: 'auto',
+                title: 'Update'
+            });
+            dialog.dialog('open'); return false;
+        })
+    }
+
+    /**
+     * @todo Event for add new module
+     */
+    function addModule() {
+        html  = '<div id="tab-module-' + module_row + '" class="vtabs-content">';
+        html += '  <h2>Module</h2>';
+        html += '  <table class="form">';
+
+        html += '      <td><?php echo $entry_status; ?></td>';
+        html += '      <td width="10"><div class="kuler-switch-btn">';
+        html += '        <input type="hidden" name="kuler_newsletter_module[' + module_row + '][status]" value="0" />';
+        html += '        <input type="checkbox" name="kuler_newsletter_module[' + module_row + '][status]" value="1" checked="checked" />';
+        html += '        <span class="kuler-switch-btn-holder"></span></div></td>';
+        html += '    </tr>';
+
+        html += '    <tr>';
+        html += '      <td><?php echo $entry_showtitle; ?></td>';
+        html += '      <td width="10"><div class="kuler-switch-btn">';
+        html += '        <input type="hidden" name="kuler_newsletter_module[' + module_row + '][show_title]" value="0" />';
+        html += '        <input type="checkbox" name="kuler_newsletter_module[' + module_row + '][show_title]" value="1" checked="checked" />';
+        html += '        <span class="kuler-switch-btn-holder"></span></div></td>';
+        html += '    </tr>';
+
+        html += '    <tr>';
+        html += '        <td><?php echo $entry_title; ?></td>';
+        html += '        <td>';
+        html += '            <?php foreach ($languages as $language) { ?>';
+        html += '                <p>';
+        html += '                    <input type="text" name="kuler_newsletter_module['+ module_row +'][module_title][<?php echo $language['language_id']; ?>]"<?php if ($language['language_id'] == $config_admin_language_id) { ?> class="ModuleTitle" data-shortcode="#ModuleShortCode_'+ module_row +'"<?php } ?> />';
+        html += '                    <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />';
+        html += '                </p>';
+        html += '            <?php } ?>';
+        html += '        </td>';
+        html += '    </tr>';
+
+        html += '    <tr>';
+        html += '      <td><?php echo $entry_shortcode; ?></td>';
+        html += '      <td><input type="text" id="ModuleShortCode_'+ module_row +'" class="ModuleShortCode" name="kuler_newsletter_module['+ module_row +'][shortcode]" readonly="readonly" size="40" /></td>';
+        html += '    </tr>';
+        html += '    <tr>';
+        html += '        <td><?php echo $entry_pretext; ?></td>';
+        html += '        <td>';
+        html += '            <?php foreach ($languages as $language) { ?>';
+        html += '                <p>';
+        html += '                    <input type="text" name="kuler_newsletter_module['+ module_row +'][pre_text][<?php echo $language['language_id']; ?>]" />';
+        html += '                    <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />';
+        html += '                </p>';
+        html += '            <?php } ?>';
+        html += '        </td>';
+        html += '    </tr>';
+        html += '    <tr>';
+        html += '        <td><?php echo $entry_email_text; ?></td>';
+        html += '        <td>';
+        html += '            <?php foreach ($languages as $language) { ?>';
+        html += '                <p>';
+        html += '                    <input type="text" name="kuler_newsletter_module['+ module_row +'][email_text][<?php echo $language['language_id']; ?>]" value="Your email address" />';
+        html += '                    <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />';
+        html += '                </p>';
+        html += '            <?php } ?>';
+        html += '        </td>';
+        html += '    </tr>';
+
+        html += '    <tr>';
+        html += '        <td><?php echo $entry_subscription_success_message; ?></td>';
+        html += '        <td>';
+        html += '            <?php foreach ($languages as $language) { ?>';
+        html += '                <p>';
+        html += '                    <input type="text" name="kuler_newsletter_module[<?php echo $module_row; ?>][subscription_success_message][<?php echo $language['language_id']; ?>]" value="<?php echo $default_module['subscription_success_message'][$language['language_id']] ?>" />';
+        html += '                    <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />';
+        html += '                </p>';
+        html += '            <?php } ?>';
+        html += '        </td>';
+        html += '    </tr>';
+
+        html += '    <tr>';
+        html += '      <td><?php echo $entry_email_width; ?></td>';
+        html += '      <td><input type="text" name="kuler_newsletter_module[' + module_row + '][email_width]" value="150" size="40" /></td>';
+        html += '    </tr>';
+        html += '    <tr>';
+        html += '      <td><?php echo $entry_button_text; ?></td>';
+        html += '      <td><input type="text" name="kuler_newsletter_module[' + module_row + '][button_text]" value="Subscribe" size="40" /></td>';
+        html += '    </tr>';
+        html += '    <tr>';
+        html += '      <td><?php echo $entry_layout; ?></td>';
+        html += '      <td><select name="kuler_newsletter_module[' + module_row + '][layout_id]">';
+        <?php foreach ($layouts as $layout) { ?>
+        html += '           <option value="<?php echo $layout['layout_id']; ?>"><?php echo addslashes($layout['name']); ?></option>';
+        <?php } ?>
+        html += '      </select></td>';
+        html += '    </tr>';
+        html += '    <tr>';
+        html += '      <td><?php echo $entry_position; ?></td>';
+        html += '      <td><select name="kuler_newsletter_module[' + module_row + '][position]">';
+        html += '        <option value="content_top"><?php echo $text_content_top; ?></option>';
+        html += '        <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
+        html += '        <option value="column_left"><?php echo $text_column_left; ?></option>';
+        html += '        <option value="column_right"><?php echo $text_column_right; ?></option>';
+        html += '      </select></td>';
+        html += '    </tr>';
+        html += '    <tr>';
+
+        html += '    <tr>';
+        html += '      <td><?php echo $entry_sort_order; ?></td>';
+        html += '      <td><input type="text" name="kuler_newsletter_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
+        html += '    </tr>';
+
+        html += '    <tr>';
+        html += '      <td><?php echo $entry_service; ?></td>';
+        html += '      <td><select class="service-type" name="kuler_newsletter_module[<?php echo $module_row; ?>][type]" onchange="return serviceChange('+ module_row +', this);">';
+        html += '      <option value="icontact">iContact</option>';
+        html += '      <option value="mailchimp">MailChimp</option>';
+        html += '      <option value="aweber">Aweber</option></td>';
+        html += '    </tr>';
+        html += '  </table>';
+
+        html += '  <div id="tab-service-' + module_row + '" class="htabs kulerhtabs">';
+        html += '    <a href="#service-icontact-' + module_row + '">iContact</a>';
+        html += '    <a href="#service-mailchimp-' + module_row + '">Mailchimp</a>';
+        html += '    <a href="#service-aweber-' + module_row + '">Aweber</a>';
+        html += '  </div>';
+
+        html += '  <div id="service-icontact-' + module_row + '" style="min-height: 223px;">';
+        html += '    <table class="form">';
+        html += '      <tr>';
+        html += '        <td><?php echo $entry_list_id; ?></td>';
+        html += '        <td><select class="service-list" name="kuler_newsletter_module[' + module_row + '][icontact][list_id]"></select>';
+        html += '        <a onclick="return serviceFetch(' + module_row + ', \'icontact\');" class="button">Fetch</a>';
+        html += '        <a onclick="return serviceUpdate(' + module_row + ', \'icontact\');" class="button">Update</a></td>';
+        html += '      </tr>';
+        html += '      <tr>';
+        html += '        <td><?php echo $entry_api; ?></td>';
+        html += '        <td><input class="service-key" type="text" name="kuler_newsletter_module[' + module_row + '][icontact][key]" value="" size="40" /></td>';
+        html += '      </tr>';
+        html += '      <tr class="iContact">';
+        html += '        <td><?php echo $entry_username; ?></td>';
+        html += '        <td><input type="text" class="service-username" name="kuler_newsletter_module[' + module_row + '][icontact][username]" value="" size="40" /></td>';
+        html += '      </tr>';
+        html += '      <tr class="iContact">';
+        html += '        <td><?php echo $entry_password; ?></td>';
+        html += '        <td><input type="text" class="service-password" name="kuler_newsletter_module[' + module_row + '][icontact][password]" value="" size="40" /></td>';
+        html += '      </tr>';
+        html += '    </table>';
+        html += '  </div>';
+
+        html += '  <div id="service-mailchimp-' + module_row + '" style="min-height: 223px;">';
+        html += '    <table class="form">';
+        html += '      <tr>';
+        html += '        <td><?php echo $entry_list_id; ?></td>';
+        html += '        <td><select class="service-list" name="kuler_newsletter_module[' + module_row + '][mailchimp][list_id]"></select>';
+        html += '        <a onclick="return serviceFetch(' + module_row + ', \'mailchimp\');" class="button">Fetch</a>';
+        html += '        <a onclick="return serviceUpdate(' + module_row + ', \'mailchimp\');" class="button">Update</a></td>';
+        html += '      </tr>';
+        html += '      <tr>';
+        html += '        <td>API Key:</td>';
+        html += '        <td><input class="service-key" type="text" name="kuler_newsletter_module[' + module_row + '][mailchimp][key]" value="" size="40" /></td>';
+        html += '      </tr>';
+        html += '    </table>';
+        html += '  </div>';
+
+        html += '  <div id="service-aweber-' + module_row + '" style="min-height: 223px;">';
+        html += '    <table class="form">';
+        html += '      <tr>';
+        html += '        <td><?php echo $entry_list_id; ?></td>';
+        html += '        <td><select class="service-list" name="kuler_newsletter_module[' + module_row + '][aweber][list_id]"></select>';
+        html += '        <a onclick="return serviceFetch(' + module_row + ', \'aweber\');" class="button">Fetch</a>';
+        html += '        <a onclick="return serviceUpdate(' + module_row + ', \'aweber\');" class="button">Update</a></td>';
+        html += '      </tr>';
+        html += '      <tr>';
+        html += '        <td>Consumer Key:</td>';
+        html += '        <td><input class="service-key" type="text" name="kuler_newsletter_module[' + module_row + '][aweber][key]" value="" size="40" /></td>';
+        html += '      </tr>';
+        html += '      <tr>';
+        html += '        <td>Consumer Secret:</td>';
+        html += '        <td><input class="service-secret" type="text" name="kuler_newsletter_module[' + module_row + '][aweber][secret]" value="" size="40" /></td>';
+        html += '      </tr>';
+        html += '    </table>';
+        html += '  </div>';
+
+        html += '</div>';
+
+        $('#form').append(html);
+
+        $('.module-add').before('<a href="#tab-module-' + module_row + '" id="module-' + module_row + '"><?php echo $text_module ?> ' + module_row + '&nbsp;<img class="remove-element" src="view/kulercore/images/icons/icon-delete.png" alt="" onclick="$(\'.vtabs a:first\').trigger(\'click\'); $(\'#module-' + module_row + '\').remove(); $(\'#tab-module-' + module_row + '\').remove(); return false;" /></a>');
+
+        $('.vtabs a').click(function() {
+            $('#vtab').val($(this).attr('href'));
+        }).tabs();
+
+        $('#tab-module-' + module_row + ' .htabs a').click(function() {
+            $('#htab').val($(this).attr('href'));
+        }).tabs();
+
+        $('#module-' + module_row).trigger('click');
+
+        module_row++;
+    }
+
+    (function () {
+        var moduleName = '<?php echo $moduleName; ?>';
+
+        function generateShortCode(moduleName, moduleTitle) {
+            var shortcode;
+
+            moduleName = moduleName.toLowerCase();
+            moduleTitle = moduleTitle.toLowerCase();
+
+            moduleTitle = moduleTitle.replace(/\s+/g, '_');
+
+            return '[' + moduleName + ' ' + moduleTitle + ']';
+        }
+
+        // Update the short code when the module title change
+        $('#content').on('keyup', '.ModuleTitle', function () {
+            $($(this).data('shortcode')).val(generateShortCode(moduleName, this.value));
+        });
+
+        // Select the shortcode when focus
+        $('#content').on('click', '.ModuleShortCode', function () {
+            this.select();
+        });
+
+        $('.ModuleTitle').trigger('keyup');
+    })();
+
+    /* Kuler Site Builder */
+    <?php if (isset($ksb_trigger_creation) && $ksb_trigger_creation) { ?>
+    (function () {
+        $('.add-element').trigger('click');
+    })();
+    <?php } ?>
+    //--></script>
+<?php echo $footer; ?>

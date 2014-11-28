@@ -1,0 +1,16 @@
+LessEngine 1.3
+	- Bug Fixes
+
+LessEngine 1.2	
+	- Removed licensing
+
+
+LessEngine 1.1	
+	- Removed common.js
+
+
+LessEngine 1.0	
+	- Initial release
+
+
+Please send your feature requests to http://isenselabs.com/users/support

@@ -1,0 +1,81 @@
+<?php
+
+/*--------------------------------------------------------------------------/
+* @Author		KulerThemes.com http://www.kulerthemes.com
+* @Copyright	Copyright (C) 2012 - 2013 KulerThemes.com. All rights reserved.
+* @License		KulerThemes.com Proprietary License
+/---------------------------------------------------------------------------*/
+
+?>
+
+<?php if(($block['info']['status'] == 1) || ($block['contact']['status'] == 1) || ($block['twitter']['status'] == 1) || ($block['facebook']['status'] == 1)): ?>
+<div id="bottom">
+	<span class="toggle"></span>
+	<div class="wrapper clearafter">
+	<?php if($block['info']['status'] == 1) : ?>
+		<div id="shop-info" class="col grid-<?php echo $count; ?>">
+			<h3><span><?php echo $block['info']['title']?></span></h3>
+			<p><?php echo $block['info']['description']?></p>
+		</div>
+	<?php endif; ?>
+	<?php if($block['contact']['status'] == 1): ?>
+        <div id="shop-contact" class="col grid-<?php echo $count; ?>">
+			<h3><span><?php echo $block['contact']['title']; ?></span></h3>
+			<ul>
+            <?php if (isset($block['contact']['phone']['status']) && $block['contact']['phone']['status'] == 1): ?>
+				<li class="contact-phone <?php echo ($block['contact']['phone']['name1'] && $block['contact']['phone']['name2']) ? 'multiple' : '' ?>">
+					<span><?php echo $block['contact']['phone']['name1']; ?></span>
+					<span><?php echo $block['contact']['phone']['name2']; ?></span>
+				</li>
+            <?php endif; ?>
+            <?php if (isset($block['contact']['mobile']['status']) && $block['contact']['mobile']['status'] == 1): ?>
+				<li class="contact-mobile <?php echo ($block['contact']['mobile']['name1'] && $block['contact']['mobile']['name2']) ? 'multiple' : '' ?>">
+					<span><?php echo $block['contact']['mobile']['name1']; ?></span>
+					<span><?php echo $block['contact']['mobile']['name2']; ?></span>
+				</li>
+			<?php endif; ?>
+            <?php if (isset($block['contact']['fax']['status']) && $block['contact']['fax']['status'] == 1): ?>
+				<li class="contact-fax <?php echo ($block['contact']['fax']['name1'] && $block['contact']['fax']['name2']) ? 'multiple' : '' ?>">
+					<span><?php echo $block['contact']['fax']['name1']; ?></span>
+					<span><?php echo $block['contact']['fax']['name2']; ?></span>
+				</li>
+            <?php endif; ?>
+            <?php if (isset($block['contact']['email']['status']) && $block['contact']['email']['status'] == 1): ?>
+				<li class="contact-email <?php echo ($block['contact']['email']['name1'] && $block['contact']['email']['name2']) ? 'multiple' : '' ?>">
+					<span><?php echo $block['contact']['email']['name1']; ?></span>
+					<span><?php echo $block['contact']['email']['name2']; ?></span>
+				</li>
+            <?php endif; ?>
+            <?php if (isset($block['contact']['skype']['status']) && $block['contact']['skype']['status'] == 1): ?>
+				<li class="contact-skype <?php echo ($block['contact']['skype']['name1'] && $block['contact']['skype']['name2']) ? 'multiple' : '' ?>">
+					<span><?php echo $block['contact']['skype']['name1']; ?></span>
+					<span><?php echo $block['contact']['skype']['name2']; ?></span>
+				</li>
+            <?php endif; ?>
+			</ul>
+        </div>
+	<?php endif; ?>
+	<?php if($block['twitter']['status'] == 1): ?>
+        <div id="shop-twitter" class="col grid-<?php echo $count; ?>">
+			<h3><span><?php echo $block['twitter']['title']; ?></span></h3>
+            <?php if (!empty($block['twitter']['embed_code'])) echo $block['twitter']['embed_code']; ?>
+        </div>
+	<?php endif; ?>
+	<?php if($block['facebook']['status'] == 1): ?>
+		<div id="shop-facebook" class="col grid-<?php echo $count; ?>">
+			<h3><span><?php echo $block['facebook']['title']; ?></span></h3>
+			<div id="fb-root"></div>
+			<script>(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+			</script>
+			<div class="fb-like-box" data-href="http://www.facebook.com/<?php echo $block['facebook']['page']; ?>" data-width="<?php echo $block['facebook']['width']; ?>" data-height="<?php echo $block['facebook']['height']; ?>" data-show-faces="true" data-colorscheme="<?php echo $block['facebook']['theme']; ?>" data-stream="false" data-show-border="false" data-header="false"></div>
+		</div>
+	<?php endif; ?>
+  </div>
+</div>
+<?php endif; ?>

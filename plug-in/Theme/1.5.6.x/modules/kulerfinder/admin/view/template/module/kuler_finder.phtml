@@ -1,0 +1,196 @@
+<?php echo $header; ?>
+<div id="content" class="kuler-module">
+  <div class="breadcrumb">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+    <?php } ?>
+  </div>
+  <?php if ($error_warning) { ?>
+  <div class="warning"><?php echo $error_warning; ?></div>
+  <?php } ?>
+  <div class="box">
+    <div class="heading clearafter">
+      <h1><img src="./view/kulercore/images/logos/kuler_finder.png" alt="Kuler Finder Module" /></h1>
+      <div class="buttons">
+          <a onclick="$('#form').submit();" class="button save-settings"><?php echo $button_save; ?></a>
+          <a onclick="$('#op').val('close'); $('#form').submit();" class="button cancel-settings"><?php echo $button_close; ?></a>
+          <a href="<?php echo $cancel; ?>" class="button cancel-settings"><?php echo $button_cancel; ?></a>
+      </div>
+    </div>
+    <div class="content">
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+        <input type="hidden" name="op" id="op" />
+          <div style="margin: 20px 0 0 30px;">
+              <label><?php echo $__['entry_store']; ?></label>
+              <select name="store_id" id="StoreSelector">
+                  <?php foreach ($stores as $store_id => $store_name) { ?>
+                      <option value="<?php echo $store_id; ?>"<?php if ($store_id == $selected_store_id) echo ' selected="selected"'; ?>><?php echo $store_name; ?></option>
+                  <?php } ?>
+              </select>
+          </div>
+		<ul class="vtabs">
+          <li>
+              <a><?php echo $text_default_search ?></a>
+          </li>
+		</ul>
+        <div class="vtabs-content">
+		  <table class="form">
+			<tr>
+              <td><?php echo $entry_status; ?></td>
+			  <td width="10">
+				  <div class="kuler-switch-btn">
+				    <input type='hidden' name='kuler_finder[status]' value='0' />
+				    <input type="checkbox" name="kuler_finder[status]"<?php echo $module['status'] ? ' checked="checked"' : '' ?>  value="1">
+				    <span class="kuler-switch-btn-holder"></span>
+				  </div>
+			  </td>
+            </tr>
+              <tr>
+                  <td><?php echo $entry_input_width; ?></td>
+                  <td>
+                      <input type="text" name="kuler_finder[search_input_width]" value="<?php echo $module['search_input_width']; ?>" size="5" /> px
+                  </td>
+              </tr>
+              <tr>
+                  <td><?php echo $entry_search_field_text; ?></td>
+                  <td>
+                      <?php foreach ($languages as $language) { ?>
+                          <p>
+                            <input type="text" name="kuler_finder[search_field_text][<?php echo $language['language_id']; ?>]" value="<?php echo $module['search_field_text'][$language['language_id']]; ?>" />
+                            <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />
+                          </p>
+                      <?php } ?>
+                  </td>
+              </tr>
+              <tr>
+                  <td><?php echo $entry_search_result_limit; ?></td>
+                  <td>
+                      <input type="text" name="kuler_finder[search_result_limit]" value="<?php if (isset($module['search_result_limit'])) echo $module['search_result_limit']; ?>" placeholder="<?php echo $defaults['search_result_limit']; ?>" size="5" />
+                  </td>
+              </tr>
+              <tr>
+                  <td><?php echo $entry_product_dimension; ?></td>
+                  <td>
+                      <input type="text" name="kuler_finder[image_width]" value="<?php echo $module['image_width']; ?>" size="5" placeholder="width" />
+                      <input type="text" name="kuler_finder[image_height]" value="<?php echo $module['image_height']; ?>" size="5" placeholder="height" />
+                      <?php if (!empty($error_dimension)) { ?>
+                          <span class="error"><?php echo $error_dimension; ?></span>
+                      <?php } ?>
+                  </td>
+              </tr>
+              <tr>
+                  <td><?php echo $entry_category; ?></td>
+                  <td width="10">
+                      <div class="kuler-switch-btn">
+                          <input type='hidden' name='kuler_finder[category]' value='0' />
+                          <input type="checkbox" name="kuler_finder[category]"<?php echo $module['category'] ? ' checked="checked"' : '' ?>  value="1">
+                          <span class="kuler-switch-btn-holder"></span>
+                      </div>
+                  </td>
+              </tr>
+			  <tr>
+				  <td><?php echo $entry_manufacturer_filter; ?></td>
+				  <td>
+					  <div class="kuler-switch-btn">
+						  <input type='hidden' name='kuler_finder[manufacturer_filter]' value='0' />
+						  <input type="checkbox" name="kuler_finder[manufacturer_filter]"<?php echo isset($module['manufacturer_filter']) && $module['manufacturer_filter'] ? ' checked="checked"' : '' ?>  value="1">
+						  <span class="kuler-switch-btn-holder"></span>
+					  </div>
+				  </td>
+			  </tr>
+			  <tr>
+				  <td><?php echo $entry_product_description_filter; ?></td>
+				  <td>
+					  <div class="kuler-switch-btn">
+						  <input type='hidden' name='kuler_finder[product_description_filter]' value='0' />
+						  <input type="checkbox" name="kuler_finder[product_description_filter]"<?php echo isset($module['product_description_filter']) && $module['product_description_filter'] ? ' checked="checked"' : '' ?>  value="1">
+						  <span class="kuler-switch-btn-holder"></span>
+					  </div>
+				  </td>
+			  </tr>
+			<tr>
+              <td><?php echo $entry_title; ?></td>
+			  <td width="10">
+				  <div class="kuler-switch-btn">
+				    <input type='hidden' name='kuler_finder[name]' value='0' />
+				    <input type="checkbox" name="kuler_finder[name]"<?php echo $module['name'] ? ' checked="checked"' : '' ?>  value="1">
+				    <span class="kuler-switch-btn-holder"></span>
+				  </div>
+			  </td>
+            </tr>
+              <tr>
+                  <td><?php echo $entry_price; ?></td>
+                  <td width="10">
+                      <div class="kuler-switch-btn">
+                          <input type='hidden' name='kuler_finder[price]' value='0' />
+                          <input type="checkbox" name="kuler_finder[price]"<?php echo $module['price'] ? ' checked="checked"' : '' ?>  value="1">
+                          <span class="kuler-switch-btn-holder"></span>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td><?php echo $entry_rating; ?></td>
+                  <td width="10">
+                      <div class="kuler-switch-btn">
+                          <input type='hidden' name='kuler_finder[rating]' value='0' />
+                          <input type="checkbox" name="kuler_finder[rating]"<?php echo $module['rating'] ? ' checked="checked"' : '' ?>  value="1">
+                          <span class="kuler-switch-btn-holder"></span>
+                      </div>
+                  </td>
+              </tr>
+			<tr>
+              <td><?php echo $entry_teaser; ?></td>
+			  <td width="10">
+				  <div class="kuler-switch-btn">
+				    <input type='hidden' name='kuler_finder[description]' value='0' />
+				    <input type="checkbox" name="kuler_finder[description]"<?php echo $module['description'] ? ' checked="checked"' : '' ?>  value="1">
+				    <span class="kuler-switch-btn-holder"></span>
+				  </div>
+			  </td>
+            </tr>
+			<tr>
+              <td><?php echo $entry_cart; ?></td>
+			  <td width="10">
+				  <div class="kuler-switch-btn">
+				    <input type='hidden' name='kuler_finder[add]' value='0' />
+				    <input type="checkbox" name="kuler_finder[add]"<?php echo $module['add'] ? ' checked="checked"' : '' ?>  value="1">
+				    <span class="kuler-switch-btn-holder"></span>
+				  </div>
+			  </td>
+            </tr>
+			<tr>
+              <td><?php echo $entry_wishlist; ?></td>
+			  <td width="10">
+				  <div class="kuler-switch-btn">
+				    <input type='hidden' name='kuler_finder[wishlist]' value='0' />
+				    <input type="checkbox" name="kuler_finder[wishlist]"<?php echo $module['wishlist'] ? ' checked="checked"' : '' ?>  value="1">
+				    <span class="kuler-switch-btn-holder"></span>
+				  </div>
+			  </td>
+            </tr>
+			<tr>
+              <td><?php echo $entry_compare; ?></td>
+			  <td width="10">
+				  <div class="kuler-switch-btn">
+				    <input type='hidden' name='kuler_finder[compare]' value='0' />
+				    <input type="checkbox" name="kuler_finder[compare]"<?php echo $module['compare'] ? ' checked="checked"' : '' ?>  value="1">
+				    <span class="kuler-switch-btn-holder"></span>
+				  </div>
+			  </td>
+            </tr>			
+		  </table>
+		</div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    var saveUrl = '<?php echo $action; ?>';
+    saveUrl = saveUrl.replace(new RegExp('&amp;', 'g'), '&');
+    $('#StoreSelector').on('change', function () {
+        window.location = saveUrl + '&store_id=' + $(this).val();
+    });
+
+    $('.vtabs a').tabs();
+</script>
+<?php echo $footer; ?>

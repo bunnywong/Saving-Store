@@ -1,0 +1,18 @@
+# Config and Htaccess Files
+www/.htaccess
+www/config.php
+www/admin/config.php
+
+# System Cache Files
+www/system/cache/*
+!/www/system/cache/index.html
+
+# Image Cache Files
+www/image/cache/*
+!/www/image/cache/index.html
+
+# Log Files
+www/system/logs/*
+!/www/system/logs/index.html
+
+www/vqmod/vqcache/

@@ -1,0 +1,61 @@
+.jcarousel {
+	padding-top: 30px;
+	margin-bottom: 30px;
+}
+.jcarousel .jcarousel-inner {
+	padding-bottom: 30px;
+}
+.jcarousel .jcarousel-container {
+	padding: 0 60px;
+}
+.jcarousel .jcarousel-clip {
+	width: 100%;
+	overflow: hidden;
+}
+.jcarousel .jcarousel-item {
+	margin: 0;
+	text-align: center;
+}
+.jcarousel .jcarousel-item img {
+	vertical-align: middle;
+}
+.jcarousel .jcarousel-direction-rtl {
+	direction: rtl;
+}
+.jcarousel .jcarousel-direction-rtl .jcarousel-item-horizontal {
+	margin-right: 0;
+	margin-left: 10px;
+}
+.jcarousel .jcarousel-item-placeholder {
+	color: #000;
+	background: #fff;
+}
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-container .jcarousel-next-horizontal,
+.jcarousel-container .jcarousel-prev-horizontal {
+	top: 50%;
+	width: 30px;
+	height: 30px;
+	opacity: 0.5;
+	cursor: pointer;
+	margin-top: -17px;
+	position: absolute;
+	border: 2px solid #ccc;
+	transition: 0.3s ease;
+	-moz-transition: 0.3s ease;
+	-webkit-transition: 0.3s ease;
+}
+.jcarousel-container .jcarousel-next-horizontal {
+	right: 0;
+	background: url(../image/icons/icon-nav-arrows.png) right center no-repeat;
+}
+.jcarousel-container .jcarousel-prev-horizontal {
+	left: 0;
+	background: url(../image/icons/icon-nav-arrows.png) left center no-repeat;
+}
+.jcarousel-container .jcarousel-next-horizontal:hover,
+.jcarousel-container .jcarousel-prev-horizontal:hover {
+	opacity: 1;
+}

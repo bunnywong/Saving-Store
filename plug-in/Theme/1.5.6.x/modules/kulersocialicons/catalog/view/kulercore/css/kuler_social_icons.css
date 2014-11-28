@@ -1,0 +1,97 @@
+/*--------------------------------------------------------------------------/
+* @Author		KulerThemes.com http://www.kulerthemes.com
+* @Copyright	Copyright (C) 2012 - 2013 KulerThemes.com. All rights reserved.
+* @License		KulerThemes.com Proprietary License
+/---------------------------------------------------------------------------*/
+
+.primary-define .kuler-social-icons .box-content {
+	padding: 0;
+}
+.primary-define .kuler-social-icons ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+.primary-define .kuler-social-icons ul li {
+	margin: 0;
+	display: inline-block;
+}
+.primary-define .kuler-social-icons ul li a {
+	display: block;
+	background-repeat: no-repeat;
+}
+.primary-define .kuler-social-icons .icon-style-1 li a {
+	background-image: url(../image/icons/icon-social-01.png);
+}
+.primary-define .kuler-social-icons .icon-style-2 li a {
+	background-image: url(../image/icons/icon-social-02.png);
+}
+.primary-define .kuler-social-icons .icon-style-3 li a {
+	background-image: url(../image/icons/icon-social-03.png);
+}
+.primary-define .kuler-social-icons .icon-size-24 li a {
+	width: 24px;
+	height: 24px;
+}
+.primary-define .kuler-social-icons .icon-size-32 li a {
+	width: 32px;
+	height: 32px;
+}
+.primary-define .kuler-social-icons .icon-size-48 li a {
+	width: 48px;
+	height: 48px;
+}
+.primary-define .kuler-social-icons .icon-size-24 li a.twitter {
+	background-position: 0 0;
+}
+.primary-define .kuler-social-icons .icon-size-24 li a.facebook {
+	background-position: -34px 0;
+}
+.primary-define .kuler-social-icons .icon-size-24 li a.google {
+	background-position: -68px 0;
+}
+.primary-define .kuler-social-icons .icon-size-24 li a.youtube {
+	background-position: -102px 0;
+}
+.primary-define .kuler-social-icons .icon-size-24 li a.pinterest {
+	background-position: -170px 0;
+}
+.primary-define .kuler-social-icons .icon-size-24 li a.rss {
+	background-position: -272px 0;
+}
+.primary-define .kuler-social-icons .icon-size-32 li a.twitter {
+	background-position: 0 -34px;
+}
+.primary-define .kuler-social-icons .icon-size-32 li a.facebook {
+	background-position: -42px -34px;
+}
+.primary-define .kuler-social-icons .icon-size-32 li a.google {
+	background-position: -84px -34px;
+}
+.primary-define .kuler-social-icons .icon-size-32 li a.youtube {
+	background-position: -126px -34px;
+}
+.primary-define .kuler-social-icons .icon-size-32 li a.pinterest {
+	background-position: -168px -34px;
+}
+.primary-define .kuler-social-icons .icon-size-32 li a.rss {
+	background-position: -210px -34px;
+}
+.primary-define .kuler-social-icons .icon-size-48 li a.twitter {
+	background-position: 0 -76px;
+}
+.primary-define .kuler-social-icons .icon-size-48 li a.facebook {
+	background-position: -58px -76px;
+}
+.primary-define .kuler-social-icons .icon-size-48 li a.google {
+	background-position: -116px -76px;
+}
+.primary-define .kuler-social-icons .icon-size-48 li a.youtube {
+	background-position: -174px -76px;
+}
+.primary-define .kuler-social-icons .icon-size-48 li a.pinterest {
+	background-position: -232px -76px;
+}
+.primary-define .kuler-social-icons .icon-size-48 li a.rss {
+	background-position: -290px -76px;
+}

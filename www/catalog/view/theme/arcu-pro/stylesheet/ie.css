@@ -1,0 +1,54 @@
+/*--------------------------------------------------------------------------/
+* @Author		KulerThemes.com http://www.kulerthemes.com
+* @Copyright	Copyright (C) 2012 - 2013 KulerThemes.com. All rights reserved.
+* @License		KulerThemes.com Proprietary License
+/---------------------------------------------------------------------------*/
+
+.is-ie {
+	overflow-x: hidden;
+}
+.is-ie input,
+.is-ie select,
+.is-ie textarea {
+	line-height: 120%;
+}
+/* input */
+.is-ie input {
+	position: static;
+	overflow: visible;
+}
+.is-ie input[type*="radio"],
+.is-ie input[type*="checkbox"] {
+	border: none;
+	outline: none;
+	background: none;
+	vertical-align: bottom;
+}
+.is-ie .tab-content {
+	width: 100%;
+}
+.is-ie table.list tbody td.quantity input {
+	vertical-align: top;
+}
+/* layout */
+.is-ie #content > .box {
+	border: 1px solid #eee;
+}
+.is-ie #content.home-page > .box,
+.is-ie #content.search-page > .box,
+.is-ie #content.category-page > .box,
+.is-ie #content.special-page > .box,
+.is-ie #content.manufacturer-page > .box {
+	border: none;
+}
+/* notifications */
+.is-ie .success,
+.is-ie .warning,
+.is-ie .attention,
+.is-ie .information {
+	border: 1px solid #eee;
+}
+/* box products */
+.is-ie .box-product > div {
+	border: 1px solid #eee;
+}
