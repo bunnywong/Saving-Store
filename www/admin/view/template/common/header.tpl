@@ -14,6 +14,7 @@
 <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
 <?php } ?>
 <link rel="stylesheet" type="text/css" href="view/stylesheet/stylesheet.css" />
+ <link rel="stylesheet" type="text/css" href="../catalog/view/theme/arcu-pro/stylesheet/my_style.css" />
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
@@ -50,7 +51,7 @@ $(document).ready(function(){
         });
     </script>
 </head>
-<body>
+<body class="backend">
 <div id="container">
     <div id="header">
   <div class="div1">
