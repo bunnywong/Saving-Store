@@ -23,7 +23,9 @@
 <?php } else { ?>
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/modules.css" />
+<!--
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/responsive.css" />
+-->
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/chosen.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/custom-scrollbar.css" />
 <?php if ($this->config->get('kuler_cp_settings') && $preset = $this->getChild('module/kulercp/usePreset')) { ?>
@@ -58,6 +60,7 @@
 <script type="text/javascript" src="catalog/view/theme/arcu-pro/js/masonry.js"></script>
 <script type="text/javascript" src="catalog/view/theme/arcu-pro/js/chosen.js"></script>
 <script type="text/javascript" src="catalog/view/theme/arcu-pro/js/custom-scrollbar.js"></script>
+<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/my_script.js"></script>
 <?php } ?>
 <?php foreach ($scripts as $script) { ?>
 <?php if($this->config->get('kuler_compress_script_type') == 'all' && strpos($script, 'catalog/view') === 0) { continue; } ?>
@@ -87,13 +90,13 @@ $(document).ready(function () {
 	  '.product-info select'	: {disable_search_threshold:1000},
 	  '.box-product select'		: {disable_search_threshold:1000}
 	}
-	
+
 	for (var selector in config) {
 	  $(selector).chosen(config[selector]).data('chosen');
 	}
 
 	if($('.kuler-finder select').length > 0) {
-		
+
 		var chosen = $(".kuler-finder select").chosen({disable_search_threshold: 100}).data('chosen');
 
 		if (chosen) {
@@ -201,7 +204,7 @@ Please donate via PayPal to donate@opencart.com
 			<?php if ($this->config->get('color') && $custom_copyright = $this->getChild('module/kulercp/getcustomcopyright')) { ?>
 			<?php echo $custom_copyright; ?>
 			<?php } else { ?>
-			<!-- <?php echo $powered; ?> --> 
+			<!-- <?php echo $powered; ?> -->
 			<!-- Please do not remove following code or we can not support you with this product ! -->
 			<p>Powered by <a href="http://www.opencart.com" title="Opencart" target="_blank">Opencart</a><br />
 				Opencart theme designed by <a href="http://www.kulerthemes.com" title="KulerThemes">KulerThemes.com</a></p>
@@ -220,7 +223,7 @@ Please donate via PayPal to donate@opencart.com
 		<!--
 OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
 Please donate via PayPal to donate@opencart.com
-//--> 
+//-->
 	</div>
 </div>
 <div id="container">

@@ -1,0 +1,118 @@
+// arcu-pro/stylesheet/less_engine/my_style.css
+// Version 1.5.6.4
+
+// --------------------------------------------------
+// Common
+
+	@yellow = #FBD606;
+	@black 	= #666;
+	@gray	= #ddd;
+	@title	= #333;
+	@btn_bg_hover = #444444;
+
+// --------------------------------------------------
+// Global
+
+	.center{text-align: center;}
+
+	.my_banner{	// Global
+		img{
+			min-width	: 665px!important;
+			width 		: auto!important;
+			height		: auto!important;
+		}
+	}
+
+	.primary-define .product-info .cart #button-cart:before,	// Detail view
+	.primary-define .button										// Account/Address
+	{
+		background-color: @yellow;
+	}
+
+	.primary-define .button:hover{
+		background-color: @btn_bg_hover;
+	}
+
+// --------------------------------------------------
+// Main content
+
+	.home .box-heading,	// Gap under banner
+	.home .rating,		// Items
+	.home .details,		// Items
+	.home .description	// Items
+		{display: none!important;}
+
+	body.home {
+		.my_banner{
+			padding		: 0px;
+			max-width	: 1115px;
+			margin-left	: 40px;
+		}
+
+		.box-content{
+			min-width: 800px;
+		}
+		.box-product{	// Main container
+
+			a{
+				color: transparent;
+			}
+			.price{
+				text-align: right;
+			}
+			.name{
+				color: @title;
+				font-size: 15px;
+				font-weight: bold;
+				letter-spacing: 0.5px
+			}
+			.name:hover{
+				text-decoration: none;
+			}
+		}
+	}// !.home
+
+// --------------------------------------------------
+// Import
+
+	@import "sidebar.less";
+	@import "detail_view.less";
+
+// --------------------------------------------------
+// Backend
+	.backend{
+		.div2 > img,	// logo
+		#footer
+			{display: none;}
+
+		#menu{
+			display: block!important;
+		}
+	}
+
+// --------------------------------------------------
+// Detail view
+	body.detail_view{
+		.review,
+		.cart > div:last-child,	// [add2wish][add2compare][shareThis]
+		#tabs > a:nth-child(2)	// [Reviews]
+			{display: none!important;}
+
+		// ----- ----- ----- ----- -----
+		.my_banner img{
+			display: block;
+			margin: 0px auto 0px auto;
+		}
+
+		// Product
+		h1{
+			font-weight: bold;
+			border-bottom: 3px solid @gray!important;
+			padding-bottom: 15px!important;
+		}
+		.description{}
+
+		.cart > div:first-child{	// Add to cart btn container
+			border-bottom: 0px!important;
+		}
+	}// !.detail_view
