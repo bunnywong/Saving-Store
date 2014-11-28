@@ -61,9 +61,9 @@
 <script type="text/javascript" src="catalog/view/theme/arcu-pro/js/chosen.js"></script>
 <script type="text/javascript" src="catalog/view/theme/arcu-pro/js/custom-scrollbar.js"></script>
 <script>
-var base = '<?= $base; ?>';
+var base = <?= $base; ?>;
 </script>
-<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/my_script.js"></script>
+<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/`ipt.js"></script>
 <?php } ?>
 <?php foreach ($scripts as $script) { ?>
 <?php if($this->config->get('kuler_compress_script_type') == 'all' && strpos($script, 'catalog/view') === 0) { continue; } ?>

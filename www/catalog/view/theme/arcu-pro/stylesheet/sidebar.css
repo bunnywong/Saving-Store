@@ -34,7 +34,7 @@
   float: left;
 }
 .member-title {
-  background: url("http://savingstore.com.hk/image/data/login/member-title.png");
+  background: url(image/data/login/member-title.png);
   background-repeat: no-repeat;
   background-size: contain;
   height: 35px;
@@ -42,7 +42,7 @@
   margin-bottom: 5px;
 }
 .log-in-title {
-  background: url("http://savingstore.com.hk/image/data/login/log-in-title.png");
+  background: url(image/data/login/log-in-title.png);
   background-repeat: no-repeat;
   background-size: contain;
   height: 35px;
@@ -133,34 +133,29 @@
   background-position: center;
   margin: 10px 0px 10px 0px;
 }
-.sidebar-banners #sidebar-login_form {
-  margin-top: 20px;
-  height: 220px;
-  background-image: url("/catalog/view/theme/arcu-pro/image/my_img/menu/temp_login.png");
-}
 .sidebar-banners #sidebar-member_offer {
   height: 70px;
-  background-image: url("/catalog/view/theme/arcu-pro/image/my_img/menu/promotion-sel.png");
+  background-image: url(catalog/view/theme/arcu-pro/image/my_img/menu/promotion-sel.png);
   height: 0px;
   display: none;
 }
 .sidebar-banners #sidebar-member_offer:hover {
-  background-image: url("/catalog/view/theme/arcu-pro/image/my_img/menu/promotion.png");
+  background-image: url(catalog/view/theme/arcu-pro/image/my_img/menu/promotion.png);
 }
 .sidebar-banners #sidebar-suzuran {
   height: 80px;
-  background-image: url("/catalog/view/theme/arcu-pro/image/my_img/menu/suzuran-sel.png");
+  background-image: url(catalog/view/theme/arcu-pro/image/my_img/menu/suzuran-sel.png);
 }
 .sidebar-banners #sidebar-suzuran:hover {
-  background-image: url("/catalog/view/theme/arcu-pro/image/my_img/menu/suzuran.png");
+  background-image: url(catalog/view/theme/arcu-pro/image/my_img/menu/suzuran.png);
 }
 .sidebar-banners #sidebar-goon {
   height: 80px;
-  background-image: url("/catalog/view/theme/arcu-pro/image/my_img/menu/goon-sel.png");
+  background-image: url(catalog/view/theme/arcu-pro/image/my_img/menu/goon-sel.png);
   background-position: 8px 0px;
 }
 .sidebar-banners #sidebar-goon:hover {
-  background-image: url("/catalog/view/theme/arcu-pro/image/my_img/menu/goon.png");
+  background-image: url(catalog/view/theme/arcu-pro/image/my_img/menu/goon.png);
   background-position: 8px 0px;
 }
 .fb_iframe_widget {
