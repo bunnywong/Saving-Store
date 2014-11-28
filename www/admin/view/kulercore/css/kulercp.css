@@ -1,0 +1,134 @@
+/*--------------------------------------------------------------------------/
+* @Author		KulerThemes.com http://www.kulerthemes.com
+* @Copyright	Copyright (C) 2012 - 2013 KulerThemes.com. All rights reserved.
+* @License		KulerThemes.com Proprietary License
+/---------------------------------------------------------------------------*/
+
+/* NAVIGATION PANEL */
+.vtabs li a.module-global {
+	background-image: url(../images/icons/icon-general.png);
+}
+.vtabs li a.module-footer {
+	background-image: url(../images/icons/icon-footer.png);
+}
+.vtabs li a.module-compression {
+	background-image: url(../images/icons/icon-compression.png);
+}
+.vtabs li a.module-theme {
+	background-image: url(../images/icons/icon-thememod.png);
+}
+.vtabs li a.module-global.selected {
+	background-image: url(../images/icons/icon-general-red.png);
+}
+.vtabs li a.module-footer.selected {
+	background-image: url(../images/icons/icon-footer-red.png);
+}
+.vtabs li a.module-compression.selected {
+	background-image: url(../images/icons/icon-compression-red.png);
+}
+.vtabs li a.module-theme.selected {
+	background-image: url(../images/icons/icon-thememod-red.png);
+}
+/* CONTENT PANEL */
+.vtabs-content {
+	margin: 0;
+	padding: 20px 20px 20px 320px;
+}
+#tab-module-theme input,
+#tab-module-theme select,
+#tab-module-theme textarea {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+#tab-module-theme #preview {
+	display: none;
+}
+#tab-module-theme iframe {
+	min-height: 400px;
+}
+#tab-module-theme a.toggle-fullscreen {
+	color: #444;
+	float: right;
+	padding: 13px;
+	margin: 0 7px;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+#tab-module-theme a.toggle-fullscreen:hover {
+	color: #DF3525;
+}
+#tab-module-theme .htabs a {
+	display: inline;
+}
+#tab-module-compression select {
+	width: 95%;
+	min-height: 150px;
+}
+#tab-module-footer table.form > tbody > tr > td:first-child {
+	width: 15%;
+}
+/* FULLSCREEN */
+#form.fullscreen .vtabs,
+#form.fullscreen #module,
+#form.fullscreen #kuler-panel {
+	display: none;
+}
+#form.fullscreen .vtabs-content {
+	padding-left: 20px;
+	background-color: #fff;
+}
+#form.fullscreen #preview iframe {
+	min-height: 550px;
+}
+#kulercp-mod-panel {
+	margin: 0;
+	z-index: 100;
+	padding: 10px 0;
+	overflow: hidden;
+}
+#kulercp-mod-panel li {
+	float : left;
+	margin: 0 20px 0 0;
+	list-style-type: none;
+}
+#kulercp-mod-panel li.first {
+	width: 100%;
+	padding: 10px 0;
+	margin: 0 0 20px 0;
+	background-color: #eee;
+}
+#kulercp-mod-panel li .left {
+	float: left;
+}
+#kulercp-mod-panel li .right {
+	float: right;
+}
+#kulercp-mod-panel li.first .left {
+	margin-left: 10px;
+}
+#kulercp-mod-panel li.first .right {
+	margin-right: 10px;
+}
+#kulercp-mod-panel li span {
+	float: left;
+	margin: 7px 0;
+	padding-right: 10px;
+}
+#kulercp-mod-panel .colorSelector {
+	width: 22px;
+	height: 22px;
+	margin: 3px 0;
+	cursor: pointer;
+	position: relative;
+	background: url(../images/color_select.png) 0 0 no-repeat;
+}
+#kulercp-mod-panel .colorSelector div {
+	top: 3px;
+	left: 3px;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	background: url(../images/color_select.png) -3px -3px no-repeat;
+}

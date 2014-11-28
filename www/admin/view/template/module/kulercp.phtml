@@ -1,0 +1,1700 @@
+<?php echo $header; ?>
+<style id="iframeStyle">
+    .hover {
+        box-shadow: 0 0 2px 2px #F30 !important;
+        -moz-box-shadow: 0 0 2px 2px #F30 !important;
+        -webkit-box-shadow: 0 0 2px 2px #F30 !important;
+    }
+    .editting {
+        box-shadow: 0 0 2px 2px #F30 !important;
+        -moz-box-shadow: 0 0 2px 2px #F30 !important;
+        -webkit-box-shadow: 0 0 2px 2px #F30 !important;
+    }
+</style>
+<div id="content" class="kuler-module">
+  <div class="breadcrumb">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+    <?php } ?>
+  </div>
+  <?php if ($error_warning) { ?>
+  <div class="warning"><?php echo $error_warning; ?></div>
+  <?php } ?>
+  <div class="box">
+    <div class="heading clearafter">
+      <h1><img src="./view/kulercore/images/logos/kuler_cp.png" alt="<?php echo $heading_title; ?>" /></h1>
+      <div class="buttons">
+          <a onclick="$('#form').submit();" class="button save-settings"><?php echo $button_save; ?></a>
+          <a onclick="$('#op').val('close'); $('#form').submit();" class="button cancel-settings"><?php echo $button_close; ?></a>
+          <a href="<?php echo $cancel; ?>" class="button cancel-settings"><?php echo $button_cancel; ?></a>
+      </div>
+    </div>
+	<div class="content">
+		<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="clearafter">
+            <input type="hidden" name="vtab" id="vtab" value="<?php echo $vtab ?>" />
+            <input type="hidden" name="htab" id="htab" value="<?php echo $htab ?>" />
+            <input type="hidden" name="op" id="op" />
+            <input id="task" type="hidden" name="t" value="" />
+
+            <div style="margin: 20px 0 0 30px;">
+                <label><?php echo $__['entry_store']; ?></label>
+                <select name="store_id" id="StoreSelector" style="width: 200px;">
+                    <?php foreach ($stores as $store_id => $store_name) { ?>
+                        <option value="<?php echo $store_id; ?>"<?php if ($store_id == $selected_store_id) echo ' selected="selected"'; ?>><?php echo $store_name; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+
+            <!-- tab: Header -->
+            <ul class="vtabs">
+                <li><a href="#tab-module-general" class="module-global"><?php echo $__['text_general']; ?></a></li>
+                <li><a href="#tab-module-design"><?php echo $__['text_design']; ?></a></li>
+                <li><a href="#tab-module-footer" class="module-footer"><?php echo $__['text_bottom']; ?></a></li>
+                <li><a href="#tab-module-seo" class="module-seo"><?php echo $__['text_utilities']; ?></a></li>
+            </ul>
+            <!-- tab: General -->
+			<div id="tab-module-general" class="vtabs-content clearafter">
+                <?php if ($sample_data_downloadable) { ?>
+                <?php if (isset($sample_data_error)) { ?>
+                    <div class="warning"><?php echo $sample_data_error; ?></div>
+                <?php } ?>
+
+                <?php if (isset($sample_data_success)) { ?>
+                    <div class="success"><?php echo $sample_data_success; ?></div>
+                <?php } ?>
+                <?php } ?>
+                <table class="form">
+                    <?php if ($sample_data_downloadable) { ?>
+                    <tr>
+                        <td><?php echo $entry_sample_data; ?></td>
+                        <td>
+	                        <button class="button" data-href="<?php echo $sample_data_download_url; ?>" id="sd-data-downloader"><?php echo $button_download_sample_data; ?></button>
+	                        <button class="button" id="sd-installer"><?php echo $button_install_sample_data; ?></button>
+	                        <button class="button" data-href="<?php echo $sample_data_download_url; ?>" id="sd-image-downloader"><?php echo _t('sd_button_download_sample_images'); ?></button>
+                            <iframe id="DownloadFrame" style="display: none;"></iframe>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                    <tr>
+                        <td><?php echo $entry_font_google_heading ?></td>
+                        <td width="10">
+                            <div class="kuler-switch-btn">
+                                <input type='hidden' name='font[heading][status]' value='0' />
+                                <input type="checkbox" name="font[heading][status]"<?php echo isset($font['heading']['status']) && $font['heading']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                <span class="kuler-switch-btn-holder"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $entry_font_google_body ?></td>
+                        <td width="10">
+                            <div class="kuler-switch-btn">
+                                <input type='hidden' name='font[body][status]' value='0' />
+                                <input type="checkbox" name="font[body][status]"<?php echo isset($font['body']['status']) && $font['body']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                <span class="kuler-switch-btn-holder"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $entry_font_heading ?></td>
+                        <td>
+                            <select name="font[heading][font-index]">
+                                <?php foreach($fonts as $k => $item) { ?>
+                                <option value="<?php echo $k ?>"<?php echo isset($font['heading']['font-index']) && $font['heading']['font-index'] == $k ? ' selected="selected"' : '' ?>><?php echo $item['font-name'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <input type="text" name="font[heading][font-weight]" value="<?php echo isset($font['heading']['font-weight']) ? $font['heading']['font-weight'] : '400,600,700' ?>" size="20" placeholder="400,600,700" />
+                            <a onclick="return fontUpdate();" class="button">Update lastest Fonts</a>
+                            <?php if(isset($error_font_heading_weight)) { ?>
+                            <span class="error"><?php echo $error_font_heading_weight; ?></span>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $entry_font_body ?></td>
+                        <td>
+                            <select name="font[body][font-index]">
+                                <?php foreach($fonts as $k => $item) { ?>
+                                <option value="<?php echo $k ?>"<?php echo isset($font['body']['font-index']) && $font['body']['font-index'] == $k ? ' selected="selected"' : '' ?>><?php echo $item['font-name'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <input type="text" name="font[body][font-weight]" value="<?php echo isset($font['body']['font-weight']) ? $font['body']['font-weight'] : '400,600,700' ?>" size="20" placeholder="400,600,700" />
+                            <a onclick="return fontUpdate();" class="button">Update lastest Fonts</a>
+                            <?php if(isset($error_font_body_weight)) { ?>
+                            <span class="error"><?php echo $error_font_body_weight; ?></span>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $entry_copyright_custom ?></td>
+                        <td width="10">
+                            <div class="kuler-switch-btn">
+                                <input type='hidden' name='block[copyright][status]' value='0' />
+                                <input type="checkbox" name="block[copyright][status]"<?php echo isset($block['copyright']['status']) && $block['copyright']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                <span class="kuler-switch-btn-holder"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $entry_copyright_content ?></td>
+                        <td><textarea class="editor" name="block[copyright][content]" cols="58" rows="10"><?php echo isset($block['copyright']['content']) ? $block['copyright']['content'] : '' ?></textarea></td>
+                    </tr>
+                </table>					
+            </div>
+            <!-- tab: Design -->
+            <div id="tab-module-design" class="vtabs-content clearafter">
+	            <table class="form">
+		            <?php if (!empty($preset_presets)) { ?>
+			            <tr>
+				            <td><?php echo _t('entry_preset_preset'); ?></td>
+				            <td>
+					            <select name="preset">
+						            <?php foreach ($preset_presets as $preset_file => $preset_name) { ?>
+							            <option value="<?php echo $preset_file; ?>"<?php if ($preset_preset == $preset_file) echo ' selected="selected"'; ?>><?php echo $preset_name; ?></option>
+						            <?php } ?>
+					            </select>
+				            </td>
+			            </tr>
+		            <?php } ?>
+		            <tr>
+			            <td><?php echo $entry_color_scheme ?></td>
+			            <td>
+				            <select name="theme_color" id="tc-selector">
+					            <?php foreach ($theme_color_options as $color_value => $color_name) { ?>
+						            <option value="<?php echo $color_value; ?>"<?php if ($theme_color == $color_value) echo ' selected="selected"'; ?>><?php echo $color_name; ?></option>
+					            <?php } ?>
+				            </select>
+			            </td>
+		            </tr>
+	            </table>
+
+                <div id="tab-design" class="htabs kulerhtabs">
+                    <a href="#tab-colors" class="selected"><?php echo $__['text_colors']; ?></a>
+                </div>
+
+                <div id="tab-colors">
+                    <table class="form">
+                        <tbody>
+                        <?php foreach ($cs_elements as $element_key => $element) { ?>
+	                        <tr>
+		                        <td><?php echo _t('cs_text_' . $element_key); ?></td>
+		                        <td>
+			                        <?php foreach ($element as $prop_key => $prop) { ?>
+				                        <?php if ($prop == 'color') { ?>
+					                        <div class="color-picker-container">
+						                        <div class="color-picker ColorPicker" data-background-color="#cs-<?php echo $element_key . '_' . $prop_key; ?>" data-default-color="">
+							                        <div></div>
+						                        </div>
+						                        <input type="text" class="cs-color" id="cs-<?php echo $element_key . '_' . $prop_key; ?>" name="color_scheme_custom[<?php echo $element_key . '_' . $prop_key; ?>]" size="7" />
+					                        </div>
+					                    <?php } ?>
+			                        <?php } ?>
+		                        </td>
+	                        </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- tab: SEO -->
+            <div id="tab-module-seo" class="vtabs-content clearafter">
+                <div id="tab-seo" class="htabs kulerhtabs">
+                    <a href="#tab-sitemap-generator" class="selected">Sitemap Generator</a>
+                    <a href="#tab-google-analytics" class="selected">Google Analytics</a>
+                    <a href="#tab-module-compression"><?php echo $__['text_compression']; ?></a>
+                    <a href="#tab-footer-payment"><?php echo $__['text_payment_icons']; ?></a>
+                    <a href="#tab-utilities-zoom-effect"><?php echo $__['text_zoom_effect']; ?></a>
+	                <a href="#tab-utilities-custom-css"><?php echo $__['text_custom_css']; ?></a>
+                </div>
+                <!-- tab: Sitemap Generator -->
+                <div id="tab-sitemap-generator">
+                    <!-- group: Sitemap generator -->
+                    <table id="form-sitemap-generator" class="form">
+                        <tr>
+                            <td><?php echo $entry_sitemap_file ?></td>
+                            <td>
+                                <select id="SiteMapType" name="seo[sitemap_filetype]">
+                                    <option value="xml"<?php echo isset($seo['sitemap_filetype']) && $seo['sitemap_filetype'] == 'xml' ? ' selected="selected"' : '' ?>><?php echo $text_xml_file ?></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_sitemap_notify_se ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='seo[sitemap_notify]' value='0' />
+                                    <input type="checkbox" name="seo[sitemap_notify]"<?php echo isset($seo['sitemap_notify']) && $seo['sitemap_notify'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_sitemap_robots ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='seo[sitemap_robots]' value='0' />
+                                    <input type="checkbox" name="seo[sitemap_robots]"<?php echo isset($seo['sitemap_robots']) && $seo['sitemap_robots'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_sitemap_modification ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='seo[sitemap_modification]' value='0' />
+                                    <input type="checkbox" name="seo[sitemap_modification]"<?php echo isset($seo['sitemap_modification']) && $seo['sitemap_modification'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_sitemap_stylesheet ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='seo[sitemap_stylesheet]' value='0' />
+                                    <input type="checkbox" name="seo[sitemap_stylesheet]"<?php echo isset($seo['sitemap_stylesheet']) && $seo['sitemap_stylesheet'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_sitemap_limit ?></td>
+                            <td>
+                                <input type="text" name="seo[sitemap_limit]" value="<?php echo isset($seo['sitemap_limit']) ? $seo['sitemap_limit'] : '30' ?>" placeholder="30" size="10" />
+                                <?php if (isset($error_sitemap_limit)) { ?>
+                                <span class="error"><?php echo $error_sitemap_limit; ?></span>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a onclick="sitemap.generate();" class="button">Generate</a>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- group: Sitemap location -->
+                    <div id="tab-seo-location" class="htabs kulerhtabs">
+                        <a href="#tab-sitemap-location" class="selected">Location</a>
+                    </div>
+                    <table id="form-seo-location" class="form">
+                        <tr>
+                            <td rowspan="3"><?php echo $entry_sitemap_detection ?></td>
+                            <td><em><?php echo $entry_sitemap_detect_filename ?></em></td>
+                            <td>
+                                <input type="text" id="SiteMapDetectFileName" disabled="disabled" value="<?php echo isset($seo['sitemap_detect_filename']) ? $seo['sitemap_detect_filename'] : '' ?>" size="60" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><em><?php echo $entry_sitemap_detect_path ?></em></td>
+                            <td>
+                                <input type="text" disabled = "disabled" value="<?php echo isset($seo['sitemap_detect_path']) ? $seo['sitemap_detect_path'] : '' ?>" size="60" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><em><?php echo $entry_sitemap_detect_url ?></em></td>
+                            <td>
+                                <input type="text" id="SiteMapDetectUrl" disabled="disabled" value="<?php echo isset($seo['sitemap_detect_url']) ? $seo['sitemap_detect_url'] : '' ?>" size="60" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2"><?php echo $entry_sitemap_custom_location ?></td>
+                            <td><em><?php echo $entry_sitemap_path; ?></em></td>
+                            <td>
+                                <input type="text" id="sitemap_filename" name="seo[sitemap_filename]" value="<?php echo isset($seo['sitemap_filename']) ? $seo['sitemap_filename'] : '' ?>" placeholder="sitemap_index.xml" size="60" />
+                                <a onclick="sitemap.generatePath();" class="button">Auto</a>
+                                <?php if (isset($error_sitemap_filename)) { ?>
+                                <span class="error"><?php echo $error_sitemap_filename; ?></span>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><em><?php echo $entry_sitemap_url ?></em></td>
+                            <td>
+                                <input type="text" id="SiteMapUrl" name="seo[sitemap_url]" value="<?php echo isset($seo['sitemap_url']) ? $seo['sitemap_url'] : '' ?>" placeholder="<?php echo $base ?>sitemap_index.xml" size="60" />
+                                <a onclick="sitemap.generateUrl();" class="button">Auto</a>
+                                <?php if (isset($error_sitemap_url)) { ?>
+                                <span class="error"><?php echo $error_sitemap_url; ?></span>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    </table>
+				</div>
+
+                <!-- tab: Google Analytics -->
+                <div id="tab-google-analytics">
+                    <table class="form">
+                        <tr>
+                            <td><?php echo $entry_ga_status ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='seo[status]' value='0' />
+                                    <input type="checkbox" name="seo[status]"<?php echo isset($seo['status']) && $seo['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_ga_position ?></td>
+                            <td>
+                                <select name="seo[position]">
+                                    <option value="head"<?php echo isset($seo['position']) && $seo['position'] == 'head' ? ' selected="selected"' : '' ?>>Inside head tag</option>
+                                    <option value="bottom"<?php echo isset($seo['position']) && $seo['position'] == 'bottom' ? ' selected="selected"' : '' ?>>At the bottom of page</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>                    
+				</div>
+
+                <!-- tab: Compression -->
+                <div id="tab-module-compression">
+                    <table class="form">
+                        <tr>
+                            <td><?php echo $entry_compress_style ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn" id="CSSCompressor">
+                                    <input type='hidden' name='optimal[style_theme]' value='0' />
+                                    <input type="checkbox" name="optimal[style_theme]"<?php echo isset($optimal['style_theme']) && $optimal['style_theme'] ? ' checked="checked"' : '' ?>  value="1" rel="style" class="Compressor" data-type="style" data-container="#CSSCompressor" />
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_compress_script ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn" id="JSCompressor">
+                                    <input type='hidden' name='optimal[script_theme]' value='0' />
+                                    <input type="checkbox" name="optimal[script_theme]"<?php echo isset($optimal['script_theme']) && $optimal['script_theme'] ? ' checked="checked"' : '' ?>  value="1"  class="Compressor" data-type="script" data-container="#JSCompressor" />
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- tab: Payment Icons -->
+                <div id="tab-footer-payment">
+                    <table class="form">
+                        <tr>
+                            <td><?php echo $entry_status ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[payment][status]' value='0' />
+                                    <input type="checkbox" name="block[payment][status]"<?php echo isset($block['payment']['status']) && $block['payment']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php foreach($payments as $item) { ?>
+                            <tr>
+                                <td><?php echo $item['name'] ?></td>
+                                <td width="10">
+                                    <div class="kuler-switch-btn">
+                                        <input type='hidden' name='block[payment][items][<?php echo $item['value'] ?>][status]' value='0' />
+                                        <input type="checkbox" name="block[payment][items][<?php echo $item['value'] ?>][status]"<?php echo isset($block['payment']['items'][$item['value']]['status']) && $block['payment']['items'][$item['value']]['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                        <span class="kuler-switch-btn-holder"></span>
+                                    </div>
+                                </td>
+                                <td class="center" width="100">
+                                    <div id="PaymentIconContainer_<?php echo $item['value'] ?>" style="float: left; margin-right: 20px;">
+                                        <?php if (empty($block['payment']['items'][$item['value']]['thumb'])) { ?>
+                                            <?php echo $item['link']; ?>
+                                        <?php } else { ?>
+                                            <img src="<?php echo $block['payment']['items'][$item['value']]['thumb']; ?>" />
+                                        <?php } ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="hidden" id="PaymentIcon_<?php echo $item['value'] ?>" name="block[payment][items][<?php echo $item['value'] ?>][image]" value="<?php if (isset($block['payment']['items'][$item['value']]['image'])) echo $block['payment']['items'][$item['value']]['image']; ?>" />
+                                    <a href="#" class="ImageManager button" data-clear="#PaymentImageManagerClear_<?php echo $item['value'] ?>" data-field="PaymentIcon_<?php echo $item['value'] ?>" data-image="#PaymentIconContainer_<?php echo $item['value'] ?>"><?php echo $__['button_choose_image']; ?></a> &nbsp;
+                                    <a href="#" class="button" id="PaymentImageManagerClear_<?php echo $item['value'] ?>"><?php echo $__['button_clear']; ?></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </div>
+
+                <!-- tab: Utilities Zoom Effect -->
+                <div id="tab-utilities-zoom-effect">
+                    <table class="form">
+                        <tr>
+                            <td><?php echo $__['entry_status']; ?></td>
+                            <td>
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[zoom_effect][status]' value='0' />
+                                    <input type="checkbox" name="block[zoom_effect][status]"<?php echo isset($block['zoom_effect']['status']) && $block['zoom_effect']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+	                    </tr>
+	                    <tr>
+		                    <td><?php echo $__['entry_zoom_window_width'] ?></td>
+		                    <td>
+			                    <input type="text" name="block[zoom_effect][zoom_window_width]" value="<?php echo isset($block['zoom_effect']['zoom_window_width']) ? $block['zoom_effect']['zoom_window_width'] : 300; ?>" size="5" />
+		                    </td>
+	                    </tr>
+	                    <tr>
+		                    <td><?php echo $__['entry_zoom_window_height']; ?></td>
+		                    <td><input type="text" name="block[zoom_effect][zoom_window_height]" value="<?php echo isset($block['zoom_effect']['zoom_window_height']) ? $block['zoom_effect']['zoom_window_height'] : 300; ?>" size="5" /></td>
+	                    </tr>
+                    </table>
+                </div>
+
+                <div id="tab-utilities-custom-css">
+	                <table class="form">
+		                <tr>
+			                <td><?php echo $__['entry_status']; ?></td>
+			                <td>
+				                <div class="kuler-switch-btn">
+					                <input type='hidden' name='custom_css[status]' value='0' />
+					                <input type="checkbox" name='custom_css[status]'<?php echo $custom_css['status'] ? ' checked="checked"' : '' ?>  value="1" />
+					                <span class="kuler-switch-btn-holder"></span>
+				                </div>
+			                </td>
+		                </tr>
+		                <tr>
+			                <td><?php echo $__['entry_custom_css']; ?></td>
+			                <td>
+				                <input type="hidden" name="custom_css[group]" value="<?php echo $custom_css['group']; ?>" id="custom-css-group" />
+				                <p><select id="custom-css-selector" name="custom_css[current_file]" style="width: 300px;"></select></p>
+				                <p class="custom-css-selector">
+					                <button id="custom-css-adder" class="button"><?php echo $__['button_add_new_custom_css']; ?></button>
+					                <button id="custom-css-rename" class="button"><?php echo $__['button_rename']; ?></button>
+					                <button id="custom-css-save" class="button"><?php echo $__['button_save']; ?></button>
+					                <button id="custom-css-remover" class="button"><?php echo $__['button_remove']; ?></button>
+				                </p>
+				                <textarea id="custom-css-code" cols="90" rows="10"></textarea>
+			                </td>
+		                </tr>
+	                </table>
+                </div>
+            </div>
+            <!-- tab: Footer -->
+            <div id="tab-module-footer" class="vtabs-content clearafter">
+                <!-- tab: Footer Header -->
+                <div id="tab-footer" class="htabs kulerhtabs">
+                    <a href="#tab-footer-info" class="selected">Information</a>
+                    <a href="#tab-footer-contact">Contact</a>
+                    <a href="#tab-footer-twitter">Twitter</a>
+                    <a href="#tab-footer-facebook">Facebook</a>
+                </div>
+                <!-- tab: Footer Information -->
+                <div id="tab-footer-info">
+                    <!-- block: Information settings -->
+                    <div id="tab-footer-info-lang" class="htabs">
+                        <?php foreach ($languages as $language) { ?>
+                        <a href="#tab-tab-footer-info-lang-<?php echo $language['language_id']; ?>">
+                            <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?>
+                        </a>
+                        <?php } ?>
+                    </div>
+                    <table class="form">
+                        <tr>
+                            <td><?php echo $entry_status ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[info][status]' value='0' />
+                                    <input type="checkbox" name="block[info][status]"<?php echo isset($block['info']['status']) && $block['info']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+					<?php foreach ($languages as $language) { ?>
+                    <div id="tab-tab-footer-info-lang-<?php echo $language['language_id']; ?>">
+                        <table class="form">
+                            <tr>
+                                <td><?php echo $entry_title ?></td>
+                                <td>
+                                    <input type="text" name="block[info][<?php echo $language['language_id']; ?>][title]" size="56" value="<?php echo isset($block['info'][$language['language_id']]['title']) ? $block['info'][$language['language_id']]['title'] : '' ?>" placeholder="Block Title">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo $entry_description ?></td>
+                                <td>
+                                    <textarea class="editor" name="block[info][<?php echo $language['language_id']; ?>][description]" cols="58" rows="10" placeholder="Block description"><?php echo isset($block['info'][$language['language_id']]['description']) ? $block['info'][$language['language_id']]['description'] : '' ?></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+					<?php } ?>							
+				</div>
+                <!-- tab: Footer Contact -->
+                <div id="tab-footer-contact">
+                    <table class="form">
+                        <tr>
+                            <td><?php echo $entry_status ?></td>
+                            <td colspan="2">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[contact][status]' value='0' />
+                                    <input type="checkbox" name="block[contact][status]"<?php echo isset($block['contact']['status']) && $block['contact']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_title; ?></td>
+                            <td colspan="2">
+                                <?php foreach ($languages as $language) { ?>
+                                    <input type="text" name="block[contact][title][<?php echo $language['language_id']; ?>]" value="<?php if (isset($block['contact']['title']) && isset($block['contact']['title'][$language['language_id']])) echo $block['contact']['title'][$language['language_id']]; ?>" />
+                                    <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br /><br />
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_skype ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[contact][skype][status]' value='0' />
+                                    <input type="checkbox" name="block[contact][skype][status]"<?php echo isset($block['contact']['skype']['status']) && $block['contact']['skype']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="inline" type="text" name="block[contact][skype][name1]" value="<?php echo isset($block['contact']['skype']['name1']) ? $block['contact']['skype']['name1'] : '' ?>" placeholder="Primary Username">
+                                <input class="inline" type="text" name="block[contact][skype][name2]" value="<?php echo isset($block['contact']['skype']['name2']) ? $block['contact']['skype']['name2'] : '' ?>" placeholder="Secondary Username">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_mail ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[contact][email][status]' value='0' />
+                                    <input type="checkbox" name="block[contact][email][status]"<?php echo isset($block['contact']['email']['status']) && $block['contact']['email']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="inline" type="text" name="block[contact][email][name1]" value="<?php echo isset($block['contact']['email']['name1']) ? $block['contact']['email']['name1'] : '' ?>" placeholder="Primary Email">
+                                <input class="inline" type="text" name="block[contact][email][name2]" value="<?php echo isset($block['contact']['email']['name2']) ? $block['contact']['email']['name2'] : '' ?>" placeholder="Secondary Email">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_mobile ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[contact][mobile][status]' value='0' />
+                                    <input type="checkbox" name="block[contact][mobile][status]"<?php echo isset($block['contact']['mobile']['status']) && $block['contact']['mobile']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="inline" type="text" name="block[contact][mobile][name1]" value="<?php echo isset($block['contact']['mobile']['name1']) ? $block['contact']['mobile']['name1'] : '' ?>" placeholder="Primary Mobile">
+                                <input class="inline" type="text" name="block[contact][mobile][name2]" value="<?php echo isset($block['contact']['mobile']['name2']) ? $block['contact']['mobile']['name2'] : '' ?>" placeholder="Secondary Mobile">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_phone ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[contact][phone][status]' value='0' />
+                                    <input type="checkbox" name="block[contact][phone][status]"<?php echo isset($block['contact']['phone']['status']) && $block['contact']['phone']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="inline" type="text" name="block[contact][phone][name1]" value="<?php echo isset($block['contact']['phone']['name1']) ? $block['contact']['phone']['name1'] : '' ?>" placeholder="Primary Phone">
+                                <input class="inline" type="text" name="block[contact][phone][name2]" value="<?php echo isset($block['contact']['phone']['name2']) ? $block['contact']['phone']['name2'] : '' ?>" placeholder="Secondary Phone">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_fax ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[contact][fax][status]' value='0' />
+                                    <input type="checkbox" name="block[contact][fax][status]"<?php echo isset($block['contact']['fax']['status']) && $block['contact']['fax']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="inline" type="text" name="block[contact][fax][name1]" value="<?php echo isset($block['contact']['fax']['name1']) ? $block['contact']['fax']['name1'] : '' ?>" placeholder="Primary Fax">
+                                <input class="inline" type="text" name="block[contact][fax][name2]" value="<?php echo isset($block['contact']['fax']['name2']) ? $block['contact']['fax']['name2'] : '' ?>" placeholder="Secondary Fax">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- tab: Footer Twitter -->
+                <div id="tab-footer-twitter">
+                    <!-- block: Twitter settings -->
+                    <table class="form">
+                        <tr>
+                            <td><?php echo $entry_status ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[twitter][status]' value='0' />
+                                    <input type="checkbox" name="block[twitter][status]"<?php echo isset($block['twitter']['status']) && $block['twitter']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_title; ?></td>
+                            <td colspan="2">
+                                <?php foreach ($languages as $language) { ?>
+                                    <input type="text" name="block[twitter][title][<?php echo $language['language_id']; ?>]" value="<?php if (isset($block['twitter']['title']) && isset($block['twitter']['title'][$language['language_id']])) echo $block['twitter']['title'][$language['language_id']]; ?>" />
+                                    <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br /><br />
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_embed_code ?>
+                            </td>
+                            <td>
+                                <textarea name="block[twitter][embed_code]" cols="80" rows="2"><?php if (isset($block['twitter']['embed_code'])) echo $block['twitter']['embed_code']; ?></textarea>
+                                <br />
+                                <span class="help"><a href="https://twitter.com/settings/widgets" target="_blank">Get Embed Timeline Code</a></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_theme; ?></td>
+                            <td>
+                                <label for="block_twitter_theme_light"><input type="radio" name="block[twitter][theme]" value="light" id="block_twitter_theme_light"<?php if (isset($block['twitter']['theme']) && $block['twitter']['theme'] == 'light') echo ' checked="checked"'; ?> /> Light</label> &nbsp;
+                                <label for="block_twitter_theme_dark"><input type="radio" name="block[twitter][theme]" value="dark" id="block_twitter_theme_dark"<?php if (isset($block['twitter']['theme']) && $block['twitter']['theme'] == 'dark') echo ' checked="checked"'; ?> /> Dark</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_dimension; ?>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Width" name="block[twitter][width]" value="<?php if (isset($block['twitter']['width'])) echo $block['twitter']['width']; ?>" size="5" />
+                                <input type="text" placeholder="Height" name="block[twitter][height]" value="<?php if (isset($block['twitter']['height'])) echo $block['twitter']['height']; ?>" size="5" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_link_color; ?></td>
+                            <td>
+                                <input type="text" name="block[twitter][link_color]" value="<?php if (isset($block['twitter']['link_color'])) echo $block['twitter']['link_color']; ?>" size="10" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_background; ?></td>
+                            <td>
+                                <div class="kuler-switch-btn">
+                                    <input type="hidden" name="block[twitter][background]" value="0" />
+                                    <input type="checkbox" name="block[twitter][background]"<?php echo isset($block['twitter']['background']) && $block['twitter']['background'] ? ' checked="checked"' : '' ?>  value="1" />
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_border; ?></td>
+                            <td>
+                                <div class="kuler-switch-btn">
+                                    <input type="hidden" name="block[twitter][border]" value="0" />
+                                    <input type="checkbox" name="block[twitter][border]"<?php if (isset($block['twitter']['border']) && $block['twitter']['border']) echo ' checked="checked"'; ?>  value="1" />
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_border_color; ?></td>
+                            <td>
+                                <input type="text" name="block[twitter][border_color]" value="<?php if (isset($block['twitter']['border_color'])) echo $block['twitter']['border_color']; ?>" size="10" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_header; ?></td>
+                            <td>
+                                <div class="kuler-switch-btn">
+                                    <input type="hidden" name="block[twitter][header]" value="0" />
+                                    <input type="checkbox" name="block[twitter][header]"<?php echo isset($block['twitter']['header']) && $block['twitter']['header'] ? ' checked="checked"' : '' ?>  value="1" />
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_footer; ?></td>
+                            <td>
+                                <div class="kuler-switch-btn">
+                                    <input type="hidden" name="block[twitter][footer]" value="0" />
+                                    <input type="checkbox" name="block[twitter][footer]"<?php echo isset($block['twitter']['footer']) && $block['twitter']['footer'] ? ' checked="checked"' : '' ?>  value="1" />
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_twitter_scrollbar; ?></td>
+                            <td>
+                                <div class="kuler-switch-btn">
+                                    <input type="hidden" name="block[twitter][scrollbar]" value="0" />
+                                    <input type="checkbox" name="block[twitter][scrollbar]"<?php echo isset($block['twitter']['scrollbar']) && $block['twitter']['scrollbar'] ? ' checked="checked"' : '' ?>  value="1" />
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_tweet_number ?></td>
+							<td>
+								<select name="block[twitter][number]">
+									<?php for($i=1;$i<5;$i++) : ?>
+									<?php if(isset($block['twitter']['number']) && $block['twitter']['number'] == $i) : ?>
+									<option value="<?php echo $i ?>" selected="selected"><?php echo $i ?></option>
+									<?php else : ?>
+									<option value="<?php echo $i ?>"><?php echo $i ?></option>
+									<?php endif ?>
+									<?php endfor ?>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- tab: Footer Facebook -->
+                <div id="tab-footer-facebook">
+                    <!-- block: Facebook settings -->
+                    <table class="form">
+                        <tr>
+                            <td><?php echo $entry_status ?></td>
+                            <td width="10">
+                                <div class="kuler-switch-btn">
+                                    <input type='hidden' name='block[facebook][status]' value='0' />
+                                    <input type="checkbox" name="block[facebook][status]"<?php echo isset($block['facebook']['status']) && $block['facebook']['status'] ? ' checked="checked"' : '' ?>  value="1">
+                                    <span class="kuler-switch-btn-holder"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_title; ?></td>
+                            <td colspan="2">
+                                <?php foreach ($languages as $language) { ?>
+                                    <input type="text" name="block[facebook][title][<?php echo $language['language_id']; ?>]" value="<?php if (isset($block['facebook']['title']) && isset($block['facebook']['title'][$language['language_id']])) echo $block['facebook']['title'][$language['language_id']]; ?>" />
+                                    <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br /><br />
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_facebook ?></td>
+                            <td>
+                                <input class="inline" type="text" name="block[facebook][page]" value="<?php echo isset($block['facebook']['page']) ? $block['facebook']['page'] : '' ?>" size="25" placeholder="Facebook Username" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_facebook_theme; ?></td>
+                            <td>
+                                <label for="block_facebook_theme_light"><input type="radio" name="block[facebook][theme]" value="light" id="block_facebook_theme_light"<?php if (isset($block['facebook']['theme']) && $block['facebook']['theme'] == 'light') echo ' checked="checked"'; ?> /> Light</label> &nbsp;
+                                <label for="block_twitter_theme_dark"><input type="radio" name="block[facebook][theme]" value="dark" id="block_facebook_theme_dark"<?php if (isset($block['facebook']['theme']) && $block['facebook']['theme'] == 'dark') echo ' checked="checked"'; ?> /> Dark</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_width ?></td>
+                            <td>
+                                <input class="inline" type="text" name="block[facebook][width]" value="<?php echo isset($block['facebook']['width']) ? $block['facebook']['width'] : '235' ?>" placeholder="235" size="3" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo $entry_height ?></td>
+                            <td>
+                                <input class="inline" type="text" name="block[facebook][height]" value="<?php echo isset($block['facebook']['height']) ? $block['facebook']['height'] : '265' ?>" placeholder="265" size="3" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </form>
+	</div>
+  </div>
+</div>
+
+<script id="ModuleCheckerTemplate" type="text/x-handlebars-template">
+    <div id="ModuleCheckerContainer">
+        {{#unless status}}
+            <div class="warning">{{message}}</div>
+        {{/unless}}
+        <table class="list">
+            <thead>
+            <tr>
+                <td class="left"><?php echo _t('entry_kuler_module', $__); ?></td>
+                <td class="left"><?php echo _t('entry_module_status', $__); ?></td>
+            </tr>
+            </thead>
+
+            <tbody>
+            {{#each modules}}
+            <tr>
+                <td class="left">{{title}}</td>
+                {{#if status}}
+                <td class="left installed"><?php echo _t('text_passed', $__); ?></td>
+                {{else}}
+                <td class="left missing"><?php echo _t('text_failed', $__); ?></td>
+                {{/if}}
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</script>
+
+<script id="SampleDataInstallerTemplate" type="text/x-handlebars-template">
+    <div id="InstallationUploader">
+        <form action="<?php echo $sample_data_upload_installation_url; ?>" enctype="multipart/form-data" method="post">
+            <p><?php echo _t('text_install_sample_data_hint', $__); ?></p>
+            <input name="installation" type="file" />
+            <button id="SampleDataInstaller" type="submit"><?php echo _t('button_upload', $__); ?></button>
+        </form>
+    </div>
+</script>
+
+<?php echo $footer; ?>
+<script type="text/javascript">
+var g_storeId = <?php echo $selected_store_id; ?>,
+    CONFIG_TEMPLATE = '<?php echo $config_template; ?>',
+    Texts = <?php echo json_encode($__); ?>;
+
+function _t(text) {
+    return text in Texts ? Texts[text] : text;
+}
+
+var saveUrl = '<?php echo $action; ?>';
+saveUrl = saveUrl.replace(new RegExp('&amp;', 'g'), '&');
+$('#StoreSelector').on('change', function () {
+    window.location = saveUrl + '&store_id=' + $(this).val();
+});
+
+var ImageManager = (function () {
+    return {
+        init: function (selector, context) {
+            var self = this;
+            self.$el = $(selector, context || document);
+
+            self.$el.bind('click', function (evt) {
+                evt.preventDefault();
+
+                self.showDialog($(this).data('field'), $(this).data('image'));
+            });
+
+            self.$el.each(function () {
+                var $this = $(this);
+
+                $($this.data('clear')).bind('click', function (evt) {
+                    evt.preventDefault();
+
+                    $('#' + $this.data('field')).val('');
+                    $($this.data('image')).html('');
+                });
+            });
+        },
+        showDialog: function (field, image) {
+            $('#dialog').remove();
+
+            $('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="index.php?route=common/filemanager&token=<?php echo $token; ?>&field=' + encodeURIComponent(field) + '" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
+
+            var val1 = $('#' + field).val();
+
+            $('#dialog').dialog({
+                title: 'Image Manager',
+                close: function (event, ui) {
+                    var val2 = $('#' + field).val();
+
+                    if (val1 != val2) {
+                        $('#' + field).val('image/' + val2).trigger('change');
+
+                        if (image !== undefined) {
+                            $(image).html($('<img />', {src: '<?php echo $base; ?>image/' + val2}));
+                        }
+                    }
+                },
+                bgiframe: false,
+                width: 700,
+                height: 400,
+                resizable: false,
+                modal: false
+            });
+        }
+    };
+})();
+
+ImageManager.init('.ImageManager');
+
+var ColorPicker = (function () {
+    return {
+        init: function (selector, context) {
+            var CP = this;
+            CP.$el = $(selector, context || document);
+
+            CP.$el.each(function () {
+                var $cpElement = $(this);
+                $(this).ColorPicker({
+                    color: CP.$el.data('defaultColor'),
+                    onShow: function (colpkr) {
+                        // recalculate position of the color picker
+                        var pos = $(this).offset();
+
+                        $(colpkr)
+                            .css({
+                                left: pos.left + 20,
+                                top: pos.top + 20
+                            })
+                            .fadeIn(500);
+
+                        return false;
+                    },
+                    onHide: function (colpkr) {
+                        $(colpkr).fadeOut(500);
+                        return false;
+                    },
+                    onChange: function (hsb, hex, rgb) {
+                        $cpElement.find('div').css('backgroundColor', '#' + hex);
+                        $($cpElement.data('backgroundColor')).val('#' + hex).trigger('change');
+                    }
+                });
+
+	            $($cpElement.data('backgroundColor')).on('change keyup', function () {
+		            $cpElement.find('div').css('backgroundColor', this.value);
+	            });
+            });
+        }
+    };
+})();
+
+$(function () {
+    ColorPicker.init('.ColorPicker');
+});
+
+$(document).ready(function(){
+	// Editor for footer information
+	CKEDITOR.replaceAll('editor', {
+		filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+		filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+		filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+		filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+		filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+		filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+	});
+
+    $('#tab-design > a').tabs();
+
+    $('#tab-seo > a').tabs();
+    $('#tab-seo-location a').tabs();
+    
+	$('#tab-footer a').tabs();
+	$('#tab-footer-info-lang a').tabs();
+	
+	/**
+	 * @todo Check Query Param
+	 */
+    
+    $('.vtabs a').click(function() {
+        $('#vtab').val($(this).attr('href'));
+    }).tabs();
+    
+    $('.htabs a').click(function() {
+        $('#htab').val($(this).attr('href'));
+    });
+    
+    var tab = getURLVar('tab');
+	if(typeof (tab) != 'undefined') {
+		$('.module-' + tab).click();
+	}
+    
+    <?php if ($vtab) { ?>
+        $('.vtabs a[href="<?php echo $vtab ?>"]').click();
+    <?php } ?>
+        
+    <?php if ($htab) { ?>
+        $('.htabs a[href="<?php echo $htab ?>"]').click();
+    <?php } ?>
+});
+
+
+var ResourceUrl = '<?php echo $resource_url; ?>';
+var StoreId = <?php echo $store_id; ?>;
+var Optimal = (function (ResourceUrl, StoreId) {
+    var that;
+
+    return {
+        data: {},
+        init: function () {
+            that = this;
+
+            that.styles = [];
+            that.scripts = [];
+
+            // Get styles and scripts
+            $.get(ResourceUrl, function (html) {
+                var cssReg = /<link([^>]+)>/gi, hrefReg = /href="([^"]+)"/i,
+                    jsReg = /<script([^>]+)>/gi, srcReg = /src="([^"]+)"/i;
+
+                while (true) {
+                    var matches = cssReg.exec(html), cssMatches;
+
+                    if (!matches) {
+                        break;
+                    }
+
+                    if ((cssMatches = hrefReg.exec(matches[1])) && matches[1].indexOf(CONFIG_TEMPLATE) > -1 && matches[1].indexOf('ie.css') === -1) {
+                        that.styles.push(cssMatches[1]);
+                    }
+                }
+
+                while (true) {
+                    var matches = jsReg.exec(html), jsMatches;
+
+                    if (!matches) {
+                        break;
+                    }
+
+                    if ((jsMatches = srcReg.exec(matches[1])) && matches[1].indexOf(CONFIG_TEMPLATE) > -1) {
+                        that.scripts.push(jsMatches[1]);
+                    }
+                }
+            }, 'html');
+
+            $('.Compressor').on('click', function () {
+                var data = $(this).data(), $container = $(data.container), $waiting, process;
+
+                $waiting = $('<div>'+ _t('text_processing') +'</div>');
+
+                $waiting.insertAfter($container);
+
+                process = that.compress(data.type);
+
+                process.always(function () {
+                    $waiting.remove();
+                });
+            });
+        },
+        compress: function (type) {
+            var items = type == 'script' ? that.scripts : that.styles;
+
+            for (var i = 0; i < items.length; i++) {
+                var itemData = {
+                    type: type,
+                    value: items[i]
+                };
+
+                if (type == 'script') {
+                    itemData.encode = 1;
+                    itemData.compress = 1;
+                }
+
+                that.data[items[i]] = itemData;
+            }
+
+            var param = {
+                't': 'optimalAdd',
+                'type': type,
+                'name': '',
+                'router': '',
+                'data': JSON.stringify(that.data),
+                'store_id': g_storeId
+            };
+
+            return $.post(window.location.href, param);
+        }
+    };
+})(ResourceUrl, StoreId);
+
+Optimal.init();
+
+var sitemap = {
+    generate: function() {
+        $('#task').val('sitemapGenerate');
+        $('form').submit();
+    },
+    generatePath: function () {
+        var siteMapType = $('#SiteMapType').val(),
+            detectFileName = $('#SiteMapDetectFileName').val();
+
+        siteMapType = siteMapType != 'gzip' ? siteMapType : 'gz';
+        detectFileName = detectFileName ? detectFileName : 'sitemap_index.' + siteMapType;
+
+        $('#sitemap_filename').val(detectFileName);
+    },
+    generateUrl: function () {
+        var detectUrl = $('#SiteMapDetectUrl').val();
+
+        detectUrl = detectUrl ? detectUrl : g_base + $('#sitemap_filename').val();
+
+        $('#SiteMapUrl').val(detectUrl);
+    }
+}
+
+var fontUpdate = function() {
+    $.post(window.location.href, {t: 'fontUpdate'}, function(data) {
+        var dialog = $('<div></div>').html(data).dialog({
+            modal: true,
+            height: 'auto',
+            width: 'auto',
+            title: 'Font update',
+            buttons: {
+                Ok: function() {
+                    $( this ).dialog( "close" );
+                    window.location.href = '<?php echo $moduleLink; ?>';
+                }
+            }
+        });
+        dialog.dialog('open'); return false;
+    })
+};
+
+// Loading Element Helper
+(function () {
+	'use strict';
+
+	/**
+	 * Toggle loading of element
+	 * @param el jQuery object or HTML element
+	 */
+	function toggleLoading($el) {
+		if (!$el instanceof jQuery) {
+			$el = $($el);
+		}
+
+		if (!$el.data('loading')) {
+			var $loading = $('<img />', {
+				src: 'view/image/loading.gif',
+				style: 'padding: 0 5px;'
+			});
+
+			$el
+				.prop('disabled', true)
+				.data('loading', $loading)
+				.before($loading);
+		} else {
+			$el.data('loading').remove();
+			$el
+				.prop('disabled', false)
+				.data('loading', null);
+		}
+	}
+
+	window.toggleLoading = toggleLoading;
+})();
+
+// Custom CSS Module
+var customCssSettings = {
+		files: JSON.parse('<?php echo json_encode($custom_css_files); ?>'),
+		presets: JSON.parse('<?php echo json_encode($custom_css_presets); ?>'),
+		customs: JSON.parse('<?php echo json_encode($custom_css_customs); ?>'),
+		currentFile: '<?php echo $custom_css_current_file; ?>',
+		url: {
+			save: '<?php echo $custom_css_save_url; ?>',
+			remove: '<?php echo $custom_css_remove_url; ?>',
+			load: '<?php echo $custom_css_load_url; ?>'
+		},
+		text: {
+			'default': '<?php echo _t('text_custom_css_default'); ?>',
+			'preset': '<?php echo _t('text_custom_css_preset'); ?>',
+			'custom': '<?php echo _t('text_custom_css_custom'); ?>',
+			enter_new_name_for_adding: '<?php echo _t('text_custom_css_enter_new_name_for_adding'); ?>',
+			enter_new_name_for_rename: '<?php echo _t('text_custom_css_enter_new_name_for_rename'); ?>',
+			removeConfirm: '<?php echo _t('text_custom_css_remove_confirm'); ?>'
+		}
+};
+
+var csData = {
+	schemes: JSON.parse('<?php echo json_encode($cs_schemes); ?>')
+};
+
+(function () {
+	'use strict';
+
+	function ThemeColor() {
+		this.$selector = $('#tc-selector');
+
+		this.bindUIActions();
+
+		this.$selector.trigger('change');
+	}
+
+	ThemeColor.prototype.bindUIActions = function () {
+		var self = this,
+			$document = $(document);
+
+		this.$selector.on('change', function () {
+			var event = $.Event('tc_change_color')
+			event.color = self.$selector.val();
+
+			$document.trigger(event);
+		});
+
+		$document.on('cs_change_element.tc', function (evt) {
+			self.$selector.val('custom');
+		});
+	};
+
+	window.ThemeColor = ThemeColor;
+})();
+
+(function () {
+	'use strict';
+
+	function ColorScheme(data) {
+		this.$color = $('.cs-color');
+		this.data = data;
+
+		this.bindUIActions();
+	}
+
+	ColorScheme.prototype.bindUIActions = function () {
+		var self = this,
+			$document = $(document);
+
+		this.$color.on('change', function () {
+			var $this = $(this);
+
+			if (!$this.data('changed')) {
+				$document.trigger('cs_change_element');
+			} else {
+				$this.data('changed', false);
+			}
+		});
+
+		$document.on('tc_change_color.cs', function (evt) {
+			if (typeof self.data.schemes[evt.color] != 'undefined') {
+				var scheme = self.data.schemes[evt.color];
+
+				for (var key in scheme) {
+					$('#cs-' + key)
+						.val(scheme[key])
+						.data('changed', true)
+						.trigger('change');
+				}
+			}
+		});
+	};
+
+	window.ColorScheme = ColorScheme;
+})();
+
+(function () {
+	'use strict';
+
+	var CustomCss = function () {
+	};
+
+	CustomCss.prototype.init = function (settings) {
+
+		this.settings = $.extend({}, settings);
+
+		this.$adder = $('#custom-css-adder');
+		this.$rename = $('#custom-css-rename');
+		this.$remover = $('#custom-css-remover');
+		this.$save = $('#custom-css-save');
+		this.$group = $('#custom-css-group');
+		this.$selector = $('#custom-css-selector');
+		this.$code = $('#custom-css-code');
+
+		this.rename = this.settings.currentFile;
+
+		this.bindUIActions();
+
+		this.updateFiles();
+		this.$selector.val(this.settings.currentFile);
+
+		this.loadFile();
+	};
+
+	CustomCss.prototype.bindUIActions = function () {
+		this.$adder.on('click', $.proxy(this.add, this));
+		this.$rename.on('click', $.proxy(this.rename_, this));
+		this.$save.on('click', $.proxy(this.save, this));
+		this.$remover.on('click', $.proxy(this.remove, this));
+
+		this.$selector.on('change', $.proxy(this.loadFile, this));
+	};
+
+	CustomCss.prototype.add = function (evt) {
+		evt.preventDefault();
+
+		var file = prompt(this.settings.text.enter_new_name_for_adding);
+
+		if (file) {
+			this.rename = '';
+
+			this._addFile(file);
+
+			this.$selector.val(file)
+			this.$code.val('');
+			this.$group.val($(this.$selector.prop('selectedOptions')).data('group'));
+		}
+	};
+
+	CustomCss.prototype.rename_ = function (evt) {
+		evt.preventDefault();
+
+		var file = prompt(this.settings.text.enter_new_name_for_rename);
+
+		if (file) {
+			var selectedFile = this.$selector.val();
+
+			this.rename = selectedFile;
+
+			this._renameFile($(this.$selector.prop('selectedOptions')).data('group'), selectedFile, file);
+
+			this.$selector.val(file);
+		}
+	};
+
+	CustomCss.prototype.save = function (evt) {
+		evt.preventDefault();
+
+		var self = this,
+			file = this.$selector.val(),
+			css = this.$code.val();
+
+		if (!file || !css) {
+			return false;
+		}
+
+		$.ajax({
+			url: this.settings.url.save,
+			type: 'post',
+			data: {
+				group: $(this.$selector.prop('selectedOptions')).data('group'),
+				file: file,
+				css: css,
+				rename: self.rename
+			},
+			dataType: 'json',
+			beforeSend: function () {
+				toggleLoading(self.$save);
+			},
+			success: function (response) {
+				if (response) {
+					alert(response.message);
+				}
+			},
+			complete: function () {
+				toggleLoading(self.$save);
+			}
+		});
+	};
+
+	CustomCss.prototype.remove = function (evt) {
+		evt.preventDefault();
+
+		var self = this,
+			group = $(this.$selector.prop('selectedOptions')).data('group'),
+			file = this.$selector.val();
+
+		if (file && confirm(this.settings.text.removeConfirm)) {
+			$.ajax({
+				url: this.settings.url.remove,
+				type: 'post',
+				data: {
+					file: file,
+					group: $(this.$selector.prop('selectedOptions')).data('group')
+				},
+				dataType: 'json',
+				beforeSend: function () {
+					toggleLoading(self.$remover);
+				},
+				success: function (response) {
+					if (response) {
+						alert(response.message);
+
+						if (response.status) {
+							self._removeFile(group, file);
+							self.$code.val('');
+							self.loadFile();
+						}
+					}
+				},
+				complete: function () {
+					toggleLoading(self.$remover);
+				}
+			});
+		}
+	};
+
+	CustomCss.prototype.loadFile = function () {
+		var self = this,
+			file = this.$selector.val(),
+			group;
+
+		if (file) {
+			group = $(this.$selector.prop('selectedOptions')).data('group');
+
+			$.ajax({
+				url: this.settings.url.load,
+				type: 'get',
+				data: {
+					group: group,
+					file: file
+				},
+				dataType: 'json',
+				beforeSend: function () {
+					toggleLoading(self.$selector);
+				},
+				success: function (response) {
+					if (response.status) {
+						self.$code.val(response.css);
+					}
+				},
+				complete: function () {
+					toggleLoading(self.$selector);
+				}
+			});
+
+			this.$group.val(group);
+		}
+	};
+
+	CustomCss.prototype._addFile = function (file) {
+		if (this.settings.customs.indexOf(file) === -1) {
+			this.settings.customs.push(file);
+			this.updateFiles();
+		}
+	};
+
+	CustomCss.prototype._renameFile = function (group, file1, file2) {
+		var groupKey = this._getGroupKey(group);
+
+		var fileIndex = this.settings[groupKey].indexOf(file1);
+
+		if (fileIndex !== -1) {
+			this.settings[groupKey][fileIndex] = file2;
+			this.updateFiles();
+		}
+	};
+
+	CustomCss.prototype._getGroupKey = function (group) {
+		var groupKey = '';
+
+		switch (group) {
+			case 'default':
+				groupKey = 'files';
+				break;
+			case 'preset':
+				groupKey = 'presets';
+				break;
+			case 'custom':
+			default:
+				groupKey = 'customs';
+		}
+
+		return groupKey;
+	};
+
+	CustomCss.prototype._removeFile = function (group, file) {
+		var groupKey = this._getGroupKey(group);
+		var fileIndex = this.settings[groupKey].indexOf(file);
+
+		if (fileIndex !== -1) {
+			this.settings[groupKey].splice(fileIndex, 1);
+			this.updateFiles();
+		}
+	};
+
+	CustomCss.prototype.updateFiles = function () {
+		this.settings.files.sort();
+		this.settings.presets.sort();
+		this.settings.customs.sort();
+
+		// Re-render file options
+		var html = this._getFileGroupHtml('custom', this.settings.text.custom, this.settings.customs)
+			+ this._getFileGroupHtml('preset', this.settings.text.preset, this.settings.presets)
+			+ this._getFileGroupHtml('default', this.settings.text.default, this.settings.files);
+
+		this.$selector
+			.empty()
+			.append(html);
+	};
+
+	CustomCss.prototype._getFileGroupHtml = function (group, groupText, files) {
+		if (!$.isArray(files) || !files.length) {
+			return '';
+		}
+
+		var html = [];
+
+		html.push('<optgroup label="'+ groupText +'" data-group="'+ group +'">');
+		for (var i = 0; i < files.length; i++) {
+			html.push('<option data-group="'+ group +'" value="'+ files[i] +'">'+ files[i] +'</option>');
+		}
+		html.push('</optgroup>');
+
+		return html.join('');
+	};
+
+	window.CustomCss = CustomCss;
+})();
+
+$(document).ready(function () {
+	'use strict';
+
+	var customCss = new CustomCss();
+	customCss.init(customCssSettings);
+
+	new ColorScheme(csData);
+	new ThemeColor();
+});
+
+<?php if ($sample_data_downloadable) { ?>
+var g_checkModulesUrl = '<?php echo $sample_data_check_modules_url; ?>',
+    g_entry_kuler_module = '<?php echo $entry_kuler_module; ?>',
+    g_entry_module_status = '<?php echo $entry_module_status; ?>',
+    g_text_passed = '<?php echo $text_passed; ?>',
+    g_text_failed = '<?php echo $text_failed; ?>',
+    g_text_module_checker = '<?php echo $text_module_checker; ?>',
+    g_button_install_sample_data = '<?php echo $button_install_sample_data; ?>',
+    g_button_close = '<?php echo $button_close; ?>',
+
+    g_sample_data_upload_installation_url = '<?php echo $sample_data_upload_installation_url; ?>',
+    g_button_upload = '<?php echo $button_upload; ?>',
+    g_text_sample_data_installer = '<?php echo $text_sample_data_installer; ?>',
+    g_text_install_sample_data_hint = '<?php echo $text_install_sample_data_hint; ?>',
+    g_text_sample_data_confirm_install = '<?php echo $text_sample_data_confirm_install; ?>',
+
+    g_text_installing = '<?php echo $text_sample_data_installing; ?>',
+    g_text_installed = '<?php echo $text_sample_data_installed; ?>';
+
+var SampleDataInstaller = (function () {
+    var that;
+
+    return {
+        init: function () {
+            that = this;
+
+	        this.$dataDownloader = $('#sd-data-downloader');
+	        this.$installer = $('#sd-installer');
+	        this.$imageDownloader = $('#sd-image-downloader');
+
+	        this.bindUIActions();
+        },
+	    bindUIActions: function () {
+		    var self = this;
+
+		    this.$dataDownloader.on('click', function (evt) {
+			    var $button = $(this);
+
+			    evt.preventDefault();
+
+			    toggleLoading(self.$dataDownloader);
+
+			    $.get($(this).data('href'), function (response) {
+				    if (response.status) {
+					    that.getDownloadUrl(response.download_url)
+						    .then(function () {
+							    toggleLoading(self.$dataDownloader);
+						    });
+				    } else {
+					    alert(response.message);
+				    }
+			    }, 'json');
+		    });
+
+		    this.$installer.on('click', function (evt) {
+			    evt.preventDefault();
+
+			    that.confirmInstallation();
+		    });
+
+		    this.$imageDownloader.on('click', function (evt) {
+			    evt.preventDefault();
+
+			    $.ajax({
+				    url: self.$imageDownloader.data('href'),
+				    type: 'GET',
+				    dataType: 'json',
+				    beforeSend: function () {
+					    toggleLoading(self.$imageDownloader);
+				    },
+				    success: function (response) {
+					    if (response.status) {
+						    that.getDownloadUrl(response.download_url, {
+							    type: 'image'
+						    })
+							    .then(function () {
+								    toggleLoading(self.$imageDownloader);
+							    });
+					    } else {
+						    alert(response.message);
+					    }
+				    }
+			    });
+		    });
+	    },
+        getDownloadUrl: function (fetchUrl, data) {
+	        data = data || {};
+
+            return $.ajax({
+                url: fetchUrl + '&callback=?',
+	            data: data,
+                dataType: 'jsonp',
+                method: 'get',
+                success: function (response) {
+                    if (response.status) {
+                        that.download(response.download_url);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+        },
+        download: function (downloadUrl) {
+            downloadUrl = downloadUrl.replace(/&amp;/g, '&');
+
+            $('#DownloadFrame').attr('src', downloadUrl);
+        },
+        confirmInstallation: function () {
+	        var self = this;
+
+	        toggleLoading(self.$installer);
+
+            $.get(g_checkModulesUrl, {}, function (response) {
+	            toggleLoading(self.$installer);
+
+                var template = Handlebars.compile($('#ModuleCheckerTemplate').html());
+
+                $('body').append(template(response));
+
+                var buttons = {};
+
+                if (response.status && response.installable) {
+                    buttons[g_button_install_sample_data] = function () {
+                        $(this).dialog('close');
+
+                        that.uploadInstallation();
+                    };
+                }
+
+                buttons[g_button_close] = function () {
+                    $( this ).dialog('close');
+                };
+
+                $('#ModuleCheckerContainer').dialog({
+                    title: g_text_module_checker,
+                    width: 900,
+                    modal: true,
+                    buttons: buttons,
+                    close: function () {
+                        $(this).remove();
+                    }
+                });
+            }, 'json');
+        },
+        uploadInstallation: function () {
+            var template = Handlebars.compile($('#SampleDataInstallerTemplate').html());
+
+            $('body').append(template());
+
+            $('#InstallationUploader').dialog({
+                title: g_text_sample_data_installer,
+                width: 300,
+                modal: true,
+                close: function () {
+                    $(this).remove();
+                }
+            });
+
+            $('#SampleDataInstaller').on('click', function (evt) {
+                evt.preventDefault();
+
+                if (confirm(g_text_sample_data_confirm_install)) {
+                    $('#InstallationUploader').find('form').submit();
+                }
+            });
+        }
+    };
+})();
+
+SampleDataInstaller.init();
+<?php } ?>
+</script>

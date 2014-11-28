@@ -1,0 +1,77 @@
+<div class="kuler-newsletter">
+	<div class="box kuler-module">
+		<?php if($show_title) { ?>
+			<div class="box-heading"><span><?php echo $module_title; ?></span></div>
+		<?php } ?>
+		<form method="post" class="clearafter" id="kuler-newsletter-form">
+			<?php if(isset($setting['pre_text']) && $setting['pre_text']) { ?>
+			<span><?php echo $setting['pre_text'] ?></span>
+			<?php } ?>
+			<input type="text" name="subscribe" id="kuler-newsletter-mail" placeholder="<?php echo isset($setting['email_text']) ? $setting['email_text'] : 'Your email address' ?>" class="customer-email"<?php echo isset($setting['email_width']) && (int) $setting['email_width'] > 0 ? ' style="width:' . $setting['email_width'] . 'px;"' : '' ?> />
+			<button type="submit" class="submit-button button highlight"><?php echo isset($setting['button_text']) ? $setting['button_text'] : 'Subscribe' ?></button>
+		</form>
+	</div>
+</div>
+<script>
+    $(function () {
+        var subscribeUrl = <?php echo json_encode($subscribe_url); ?>,
+            error_mail = <?php echo json_encode($text_error); ?>,
+            text_subscription_success_message = <?php echo json_encode($text_subscription_success_message); ?>,
+            shortcode = <?php echo json_encode($shortcode); ?>;
+
+        function kulerAlert(message, type) {
+            var notificationEl = document.getElementById('notification'),
+                $notification = $(notificationEl),
+                messageHtml = '<div class="'+ type +'">'+ message +'<img src="catalog/view/theme/default/image/close.png" alt="" class="close"></div>';
+
+            clearTimeout(notificationEl.alertTimeout);
+
+            notificationEl.innerHTML = messageHtml;
+
+            $notification
+                .addClass('active')
+                .find('.' + type)
+                    .fadeIn('slow', function () {
+                            notificationEl.alertTimeout = setTimeout(function () {
+                            $notification.removeClass('active');
+                        }, 2500);
+                    });
+        }
+
+        // Handle submit form
+        $('#kuler-newsletter-form').on('submit', function (evt) {
+            evt.preventDefault();
+
+            var mail = document.getElementById('kuler-newsletter-mail').value;
+
+            // Test mail
+            if (!mail.match(/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/)) {
+                alert(error_mail);
+                return false;
+            }
+
+            // Subscribe email
+            $.ajax({
+                url: subscribeUrl,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    subscribe: mail,
+                    shortcode: shortcode
+                },
+                beforeSend: function () {
+                    $('#kuler-newsletter-mail').before('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+                },
+                success: function (response) {
+                    $('#kuler-newsletter-form').find('.wait').remove();
+
+                    if (response.status) {
+                        kulerAlert(text_subscription_success_message, 'success');
+                    } else {
+	                    kulerAlert(response.message, 'warning');
+                    }
+                }
+            });
+        });
+    });
+</script>

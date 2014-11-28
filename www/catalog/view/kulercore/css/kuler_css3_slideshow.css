@@ -1,0 +1,168 @@
+/*--------------------------------------------------------------------------/
+* @Author		KulerThemes.com http://www.kulerthemes.com
+* @Copyright	Copyright (C) 2012 - 2013 KulerThemes.com. All rights reserved.
+* @License		KulerThemes.com Proprietary License
+/---------------------------------------------------------------------------*/
+
+.kuler-css3-slideshow {
+	text-align: center;
+}
+.kuler-css3-slideshow .slide {
+	margin: 0 auto;
+}
+.kuler-css3-slideshow .input {
+	display: none;
+}
+.kuler-css3-slideshow .slidenav {
+	z-index: 2;
+	width: 10px;
+	height: 10px;
+	margin: 0 2px;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	border: 2px solid white;
+	background-color: #fff;
+	border-radius: 100%;
+	-moz-border-radius: 100%;
+	-webkit-border-radius: 100%;
+	transition: 0.3s ease-in-out;
+	-moz-transition: 0.3s ease-in-out;
+	-webkit-transition: 0.3s ease-in-out;
+	box-shadow: 0 0 2px #ccc, 0 2px 0px #ccc inset, 0 -2px 0px #ccc inset, 2px 0px 0px #ccc inset, -2px 0 0px #ccc inset;
+	-moz-box-shadow: 0 0 2px #ccc, 0 2px 0px #ccc inset, 0 -2px 0px #ccc inset, 2px 0px 0px #ccc inset, -2px 0 0px #ccc inset;
+	-webkit-box-shadow: 0 0 2px #ccc, 0 2px 0px #ccc inset, 0 -2px 0px #ccc inset, 2px 0px 0px #ccc inset, -2px 0 0px #ccc inset;
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+}
+.kuler-css3-slideshow .slide_container {
+	margin: 0 auto;
+	max-width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.kuler-css3-slideshow.bullet .slide_container {
+	top: -23px;
+}
+.kuler-css3-slideshow .slide_container section {
+	height: 100%;
+	position: absolute;
+}
+.kuler-css3-slideshow .slide_container span {
+	top: 0;
+	left: 0;
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+    overflow: hidden;
+}
+.kuler-css3-slideshow .slide_container span img {
+    max-width: none;
+	image-rendering: optimizeQuality;  /* Firefox 3.6+; default behavior is identical, no need to specify */
+	-ms-interpolation-mode: bicubic;   /* Internet Explorer 7.0; default in IE8+ */
+}
+.kuler-css3-slideshow .input:checked ~ .slide_container span {
+	z-index: 1;
+}
+.kuler-css3-slideshow .jcarousel-container .jcarousel-prev-horizontal,
+.kuler-css3-slideshow .jcarousel-container .jcarousel-next-horizontal {
+	z-index: 2;
+	opacity: 0.3;
+}
+.kuler-css3-slideshow .jcarousel-container .jcarousel-prev-horizontal:hover,
+.kuler-css3-slideshow .jcarousel-container .jcarousel-next-horizontal:hover {
+	opacity: 1;
+}
+.kuler-css3-slideshow .jcarousel-container .jcarousel-prev-horizontal {
+	left: 20px;
+}
+.kuler-css3-slideshow .jcarousel-container .jcarousel-next-horizontal {
+	right: 20px;
+}
+/* STYLE 1 */
+.slide.style-1 .slide_container span {
+	top: 100%;
+	opacity: 1;
+	transition: top 0.8s ease-out, opacity 1s ease-in, box-shadow 1s ease;	
+	-moz-transition: top 0.8s ease-out, opacity 1s ease-in, box-shadow 1s ease;	
+	-webkit-transition: top 0.8s ease-out, opacity 1s ease-in, box-shadow 1s ease;
+}
+.slide.style-1 .input:checked ~ .slide_container span {
+	opacity: 0.5;
+	box-shadow: 0 0 1px rgba(0,0,0,0.5) inset;
+	-moz-box-shadow: 0 0 1px rgba(0,0,0,0.5) inset;
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0,0.5) inset;
+}
+/* STYLE 2 */
+.slide.style-2 .slide_container span {
+	transition: left 1s ease-in-out, opacity 1s ease-in;	
+	-moz-transition: left 1s ease-in-out, opacity 1s ease-in;	
+	-webkit-transition: left 1s ease-in-out, opacity 1s ease-in;
+}
+.slide.style-2 .input:checked ~ .slide_container span {
+	opacity: 0;
+}
+/* STYLE 3 */
+.slide.style-3 .slide_container span {
+	transition: top 1s ease-in-out, opacity 1s ease-in;
+	-moz-transition: top 1s ease-in-out, opacity 1s ease-in;
+	-webkit-transition: top 1s ease-in-out, opacity 1s ease-in;
+}	
+.slide.style-3 .input:checked ~ .slide_container section:nth-child(2n) span {
+	opacity: 0.5;
+}	
+.slide.style-3 .input:checked ~ .slide_container section:nth-child(2n+1) span {
+	opacity: 0.5;
+}
+/* STYLE 4 */
+.slide.style-4 .slide_container span {
+	transition: transform 0.6s ease-in-out, opacity 0.6s ease-in;
+	-moz-transition: -moz-transform 0.6s ease-in-out, opacity 0.6s ease-in;
+	-webkit-transition: -webkit-transform 0.6s ease-in-out, opacity 0.6s ease-in;
+}	
+.slide.style-4 .input:checked ~ .slide_container section:nth-child(2n) span {
+	opacity: 0;
+	transform: scale(0.5);
+	-moz-transform: scale(0.5);
+	-webkit-transform: scale(0.5);
+}	
+.slide.style-4 .input:checked ~ .slide_container section:nth-child(2n+1) span {
+	opacity: 0;
+	transform: scale(1.5);
+	-moz-transform: scale(1.5);
+	-webkit-transform: scale(1.5);
+}
+/* STYLE 5 */
+.slide.style-5 {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+.slide.style-5 .jcarousel-inner {
+	padding: 0;
+	border: none;
+	margin: 0 auto;
+}
+.slide.style-5 .jcarousel-container {
+	padding: 0;
+}
+.slide.style-5 .jcarousel-prev-horizontal,
+.slide.style-5 .jcarousel-next-horizontal {
+	opacity: 0.5;
+}
+.slide.style-5 .jcarousel-prev-horizontal {
+	left: 20px;
+}
+.slide.style-5 .jcarousel-next-horizontal {
+	right: 20px;
+}
+.slide.style-5 .jcarousel-prev-horizontal:hover,
+.slide.style-5 .jcarousel-next-horizontal:hover {
+	opacity: 1;
+}
+.slide.style-5 .jcarousel-item img {
+	width: 100%;
+}

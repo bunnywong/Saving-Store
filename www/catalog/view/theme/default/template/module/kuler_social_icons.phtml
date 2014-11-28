@@ -1,0 +1,29 @@
+<div class="kuler-social-icons">
+	<div class="box kuler-module">
+		<?php if($show_title) { ?>
+			<div class="box-heading"><span><?php echo $module_title; ?></span></div>
+		<?php } ?>
+		<div class="box-content">
+			<ul class="icon-style-<?php if (isset($setting['icon_style'])) { echo $setting['icon_style']; } else { echo '1'; } ?> icon-size-<?php if (isset($setting['icon_style'])) { echo $setting['icon_size']; } else { echo '24'; } ?> clearafter">
+			<?php if (isset($setting['facebook']['status']) && $setting['facebook']['status']) { ?>
+				<li><a href="<?php echo $setting['facebook']['link'] ?>" class="facebook" target="_blank"<?php if (!empty($setting['icon_color'])) echo ' style="background-color:'. $setting['icon_color'] .'"' ?>></a></li>
+			<?php } ?>
+			<?php if (isset($setting['twitter']['status']) && $setting['twitter']['status']) { ?>
+				<li><a href="<?php echo $setting['twitter']['link'] ?>" class="twitter" target="_blank"<?php if (!empty($setting['icon_color'])) echo ' style="background-color:'. $setting['icon_color'] .'"' ?>></a></li>
+			<?php } ?>
+			<?php if (isset($setting['google']['status']) && $setting['google']['status']) { ?>
+				<li><a href="<?php echo $setting['google']['link'] ?>" class="google" target="_blank"<?php if (!empty($setting['icon_color'])) echo ' style="background-color:'. $setting['icon_color'] .'"' ?>></a></li>
+			<?php } ?>
+			<?php if (isset($setting['youtube']['status']) && $setting['youtube']['status']) { ?>
+				<li><a href="<?php echo $setting['youtube']['link'] ?>" class="youtube" target="_blank"<?php if (!empty($setting['icon_color'])) echo ' style="background-color:'. $setting['icon_color'] .'"' ?>></a></li>
+			<?php } ?>
+			<?php if (isset($setting['pinterest']['status']) && $setting['pinterest']['status']) { ?>
+				<li><a href="<?php echo $setting['pinterest']['link'] ?>" class="pinterest" target="_blank"<?php if (!empty($setting['icon_color'])) echo ' style="background-color:'. $setting['icon_color'] .'"' ?>></a></li>
+			<?php } ?>
+			<?php if (isset($setting['rss']['status']) && $setting['rss']['status']) { ?>
+				<li><a href="<?php echo $setting['rss']['link'] ?>" class="rss" target="_blank"<?php if (!empty($setting['icon_color'])) echo ' style="background-color:'. $setting['icon_color'] .'"' ?>></a></li>
+			<?php } ?>
+			</ul>
+		</div>
+	</div>
+</div>
