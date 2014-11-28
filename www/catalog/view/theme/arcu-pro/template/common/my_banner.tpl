@@ -1,5 +1,6 @@
-<?php if( $this->customer->getEmail() == '' ): ?>
+
 <div class="frm_sidebar_login_wrapper">
+	<?php if( $this->customer->getEmail() == '' ): ?>
 	<form action="<?= $base; ?>index.php?route=account/login" method="post" enctype="multipart/form-data" class="frm_sidebar_login">
 		<div class="login-con">
 		    <div class="log-in-title"></div>
@@ -17,7 +18,7 @@
 
 <?php else: ?>
 
-	<div class="login-con" class="frm_sidebar_login">
+	<div class="login-con frm_sidebar_login">
 	    <div class="member-title"></div>
 	    <div class="user-row">
 	        <span class="user-mail-title">電郵 :</span>
@@ -45,9 +46,9 @@
 	    	<button class="half-btn-right">登出</button>
 	    </a>
 	</div>
+	<?php endif; ?>
+</div> <!-- frm_sidebar_login_wrapper -->
 
-<?php endif; ?>
-</div>
 
 
 <div class="sidebar-banners">
