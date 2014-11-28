@@ -1,5 +1,20 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
 
+<div class="my_banner">
+	<?php
+		$this->language->load('information/information');
+
+	    $this->load->model('catalog/information');
+
+	  	$information_id 	= 8;	// Hardcode :D
+		$information_info	= $this->model_catalog_information->getInformation($information_id);
+	//		$this->data['info_heading_title'] = $information_info['title'];
+		$this->data['info_description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+
+		echo $this->data['info_description'];
+?>
+</div>
+
 <div id="content"><?php echo $content_top; ?>
 	<div class="box">
 		<div class="breadcrumb">
@@ -84,6 +99,7 @@
 					<?php if ($minimum > 1) { ?>
 					<div class="minimum"><?php echo $text_minimum; ?></div>
 					<?php } ?>
+					<br /><span>產品簡介：</span><?php echo $meta_description; ?>
 				</div>
 				<?php if ($profiles): ?>
 				<div class="option">
@@ -240,6 +256,8 @@
 					<?php } ?>
 				</div>
 				<?php } ?>
+
+
 				<div class="cart">
 					<div>
 						<button class="button" id="button-cart" data-hover="<?php echo $button_cart; ?>"><span class="icon-basket-light"><?php echo $button_cart; ?></span></button>
@@ -247,8 +265,8 @@
 					<div> <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><span class="icon-wishlist-grey"><?php echo $button_wishlist; ?></span></a> <a class="button" onclick="addToCompare('<?php echo $product_id; ?>');"><span class="icon-compare-grey"><?php echo $button_compare; ?></span></a>
 						<div class="share clearafter"><!-- AddThis Button BEGIN -->
 							<div class="addthis_default_style"><a class="addthis_button_compact"><?php echo $text_share; ?></a> <a class="addthis_button_email"></a><a class="addthis_button_print"></a> <a class="addthis_button_facebook"></a> <a class="addthis_button_twitter"></a></div>
-							<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script> 
-							<!-- AddThis Button END --> 
+							<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
+							<!-- AddThis Button END -->
 						</div>
 					</div>
 				</div>
@@ -365,7 +383,7 @@
 	<?php } ?>
 	<?php echo $content_bottom; ?></div>
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/popup.css" />
-<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/popup.js"></script> 
+<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/popup.js"></script>
 <script type="text/javascript"><!--
 $('.colorbox').magnificPopup({
 	type: 'image',
@@ -378,19 +396,19 @@ $('.colorbox').magnificPopup({
 //--></script>
 <?php if (isset($zoom_effect)) { ?>
 <link rel="stylesheet" href="catalog/view/theme/arcu-pro/stylesheet/jqzoom.css" />
-<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/jqzoom.js"></script> 
+<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/jqzoom.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.jqzoom').jqzoom({
 				zoomType	: 'standard',
 				alwaysOn	: false,
 				lens		: true,
-				zoomWidth	: 350,  
+				zoomWidth	: 350,
 		   		zoomHeight	: 350,
 				showEffect	: 'fadein',
 				hideEffect	: 'fadeout'
 			});
-		
+
 	});
 </script>
 <?php } ?>
@@ -407,10 +425,10 @@ $('select[name="profile_id"], input[name="quantity"]').change(function(){
 		},
 		success: function(json) {
 			$('.success, .warning, .attention, information, .error').remove();
-			
+
 			if (json['success']) {
 				$('#profile-description').html(json['success']);
-			}	
+			}
 		}
 	});
 });
@@ -426,30 +444,30 @@ $('#button-cart').bind('click', function() {
 		dataType: 'json',
 		success: function(json) {
 			$('.success, .warning, .attention, information, .error').remove();
-			
+
 			if (json['error']) {
 				if (json['error']['option']) {
 					for (i in json['error']['option']) {
 						$('#option-' + i).after('<span class="error">' + json['error']['option'][i] + '</span>');
 					}
 				}
-				
+
 				if (json['error']['profile']) {
 					$('select[name="profile_id"]').after('<span class="error">' + json['error']['profile'] + '</span>');
 				}
-			} 
-			
+			}
+
 			if (json['success']) {
 				$('#notification')
 					.html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>')
 					.addClass('active');
-					
+
 				$('.success').fadeIn('slow', function () {
 					_productCartTimer = setTimeout(function () {
 						$('#notification').removeClass('active');
 					}, 2500);
 				});
-					
+
 				$('#cart-total').html(json['total']);
 			}
 		}
@@ -472,20 +490,20 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 	},
 	onComplete: function(file, json) {
 		$('#button-option-<?php echo $option['product_option_id']; ?>').attr('disabled', false);
-		
+
 		$('.error').remove();
-		
+
 		if (json['success']) {
 			alert(json['success']);
-			
+
 			$('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json['file']);
 		}
-		
+
 		if (json['error']) {
 			$('#option-<?php echo $option['product_option_id']; ?>').after('<span class="error">' + json['error'] + '</span>');
 		}
-		
-		$('.loading').remove();	
+
+		$('.loading').remove();
 	}
 });
 //--></script>
@@ -495,13 +513,13 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 <script type="text/javascript"><!--
 $('#review .pagination a').live('click', function() {
 	$('#review').fadeOut('slow');
-		
+
 	$('#review').load(this.href);
-	
+
 	$('#review').fadeIn('slow');
-	
+
 	return false;
-});			
+});
 
 $('#review').load('index.php?route=product/product/review&product_id=<?php echo $product_id; ?>');
 
@@ -524,10 +542,10 @@ $('#button-review').bind('click', function() {
 			if (data['error']) {
 				$('#review-title').after('<div class="warning">' + data['error'] + '</div>');
 			}
-			
+
 			if (data['success']) {
 				$('#review-title').after('<div class="success">' + data['success'] + '</div>');
-								
+
 				$('input[name=\'name\']').val('');
 				$('textarea[name=\'text\']').val('');
 				$('input[name=\'rating\']:checked').attr('checked', '');
@@ -536,11 +554,11 @@ $('#button-review').bind('click', function() {
 		}
 	});
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('#tabs a').tabs();
-//--></script> 
-<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
+//--></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript"><!--
 $(document).ready(function() {
 	if ($.browser.msie && $.browser.version == 6) {
@@ -553,6 +571,8 @@ $(document).ready(function() {
 		timeFormat: 'h:m'
 	});
 	$('.time').timepicker({timeFormat: 'h:m'});
+
+	$('body').addClass('detail_view');
 });
-//--></script> 
+//--></script>
 <?php echo $footer; ?>
