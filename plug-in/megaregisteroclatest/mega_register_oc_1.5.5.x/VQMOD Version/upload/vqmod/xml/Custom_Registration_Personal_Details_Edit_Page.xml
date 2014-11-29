@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Xtensions-Custom Registration Edit Page Customer</id>
+	<version>1.5.5.x-1.5.6</version>
+	<vqmver>2.X</vqmver>		
+	<author><![CDATA[<a href="http://xtensions.in" target = "_blank">www.xtensions.in</a><br />]]> <![CDATA[<a href="mailto:kwason@outlook.com">Email-Support</a><br />]]> <![CDATA[<a href="http://xtensions.in/support" target = "_blank">Ticket Support</a>]]></author>
+	<file name="catalog/controller/account/edit.php">
+		<operation>
+			<search position="replace"><![CDATA[public function index() {]]></search>
+			<add><![CDATA[public function index() {
+            $this->load->model('account/signup');
+            $isActive2 = $this->model_account_signup->isActiveMod();
+                $isActive1=$isActive2['enablemod'];
+            if($isActive1)$this->redirect($this->url->link('account/editaccount', '', 'SSL'));]]></add>
+		</operation>
+	</file>
+	
+	
+	
+</modification>

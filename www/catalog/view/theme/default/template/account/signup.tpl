@@ -545,7 +545,7 @@ $(document).ready(function() {
 // My Script
 // --------------------------------------------------
 
-  $('body').addClass('sign_up my_district');
+  $('body').addClass('sign_up my_district my_date_picker');
 
 });
 
@@ -558,5 +558,6 @@ $(document).ready(function() {
 <script type="text/javascript" src="catalog/view/javascript/jquery.timers.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.dropshadow.js"></script>
   <script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script>
+  <script type="text/javascript" src="catalog/view/theme/arcu-pro/js/jquery.mtz.monthpicker.js"></script>
   <link rel="stylesheet" type="text/css" href="catalog/view/javascript/mbTooltip.css" media="screen">
 <?php echo $footer; ?>

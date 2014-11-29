@@ -1,0 +1,30 @@
+
+
+To INSTALL
+>>>>>>>>>>>>
+
+Upload the files from upload folder  to your root directory.
+
+
+1) After uploading the files, go to admin and install module Xtensions-Unlimited Customer Options & Custom registrations!!.
+2) Select your preferences and save module 
+3) Changes starts reflecting on front office.
+>>>>>>>>>>>>
+
+To UN-INSTALL A specific page
+>>>>>>>>>>>>
+
+Remove 'custom_register.xmls' file from '\vqmod\xml' folder.
+
+To-UNinstall the complete module simply uncheck the option
+
+
+Support>>
+
+http://support.xtensions.in
+email: kwason@outlook.com
+
+
+We do custom service too, so let us know:-)
+
+

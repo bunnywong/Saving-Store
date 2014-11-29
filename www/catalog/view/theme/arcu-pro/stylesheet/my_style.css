@@ -1,6 +1,12 @@
 .center {
   text-align: center;
 }
+.border_top {
+  border-top: 1px solid #ddd;
+}
+input[type=checkbox] {
+  margin-right: 10px !important;
+}
 .my_banner img {
   min-width: 665px !important;
   width: auto !important;
@@ -243,6 +249,57 @@ body.detail_view h1 {
 }
 body.detail_view .cart > div:first-child {
   border-bottom: 0px !important;
+}
+.sign_up table tr td {
+  vertical-align: top;
+}
+.sign_up table tr > td:first-child {
+  max-width: 100px;
+}
+.sign_up table tr input[type=text],
+.sign_up table tr input[type=password],
+.sign_up table tr select {
+  max-width: 300px;
+}
+.sign_up table tr select {
+  min-height: 42px;
+}
+.sign_up table tr input[type=text],
+.sign_up table tr input[type=password] {
+  height: 20px;
+}
+.sign_up table tr div.edm_wrapper {
+  max-width: 500px;
+}
+.sign_up table tr input.mtz-monthpicker-widgetcontainer {
+  width: 200px !important;
+}
+.sign_up table tr span.act_clear {
+  height: 42px;
+  width: 90px;
+  margin-left: 5px;
+  background-color: #71bdf7;
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 1px 1px 2px 0px rgba(50,50,50,0.5);
+  -moz-box-shadow: 1px 1px 2px 0px rgba(50,50,50,0.5);
+  box-shadow: 1px 1px 2px 0px rgba(50,50,50,0.5);
+}
+.sign_up table tr span.act_clear > span {
+  display: block;
+  text-align: center;
+  top: 10px;
+  position: relative;
+}
+.sign_up table tr span.act_clear:hover {
+  background-color: #4199dd;
+}
+.sign_up table tr span.act_clear:active {
+  position: relative;
+  top: 2px;
 }
 #shipping-method table tr:nth-child(n+3) {
   display: none !important;

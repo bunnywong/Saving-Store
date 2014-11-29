@@ -79,11 +79,11 @@
   color: white;
   box-sizing: border-box;
   float: left;
-  background: #71bdf7;
+  background: ;
   margin: 5px 5px 5px 0px;
 }
 .half-btn-left:hover {
-  background: #4199dd;
+  background: ;
 }
 .half-btn-right {
   width: 120px;
@@ -92,11 +92,11 @@
   border: 1px white solid;
   color: white;
   box-sizing: border-box;
-  background: #71bdf7;
+  background: ;
   margin: 5px 0 5px 5px;
 }
 .half-btn-right:hover {
-  background: #4199dd;
+  background: ;
 }
 .full-btn {
   width: 100%;
@@ -105,7 +105,7 @@
   border: 1px white solid;
   color: white;
   box-sizing: border-box;
-  background: #71bdf7;
+  background: ;
   margin: 5px 0;
 }
 .user-mail-title,

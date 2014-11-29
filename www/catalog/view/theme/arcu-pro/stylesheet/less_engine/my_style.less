@@ -12,12 +12,21 @@
 	@gray	= #ddd;
 	@title	= #333;
 	@btn_bg_hover = #444444;
+	@btn_blue = #71bdf7;
+	@btn_blue_hover = #4199dd;
 
 // --------------------------------------------------
 // Global
 
-	.center{text-align: center;}
-
+	.center{
+		text-align: center;
+	}
+	.border_top{
+		border-top: 1px solid @gray;
+	}
+	input[type=checkbox]{
+		margin-right: 10px!important;
+	}
 	.my_banner{	// Global
 		img{
 			min-width	: 665px!important;
@@ -125,6 +134,63 @@
 // Sign Up
 
 .sign_up{
+	table{
+		tr{
+			td{
+				vertical-align: top;
+			}
+			> td:first-child{
+				max-width: 100px;
+			}
+			input[type=text],
+			input[type=password],
+			select{
+				max-width: 300px;
+			}
+			select{
+				min-height: 42px;
+			}
+			input[type=text],
+			input[type=password]{
+				height: 20px;
+			}// !td
+			div.edm_wrapper{
+				max-width: 500px;
+			}
+			input.mtz-monthpicker-widgetcontainer{
+				width: 200px!important;
+			}
+			span.act_clear{
+				height: 42px;
+				width: 90px;
+				margin-left: 5px;
+				background-color: @btn_blue;
+				color: white;
+				display: inline-block;
+				vertical-align: middle;
+				border-radius: 5px;
+				cursor: pointer;
+				-webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+				-moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+				box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+				> span{
+					display: block;
+					text-align: center;
+					top: 10px;
+					position: relative;
+				}
+			}
+			span.act_clear:hover{
+				background-color: @btn_blue_hover;
+			}
+			span.act_clear:active{
+				position: relative;
+				top: 2px;
+			}
+
+		}// !tr
+	}
+
 
 }
 
