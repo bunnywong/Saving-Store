@@ -14,9 +14,9 @@ $(document).ready(function(){
 		});
 
 		if( $(this).hasClass('forgot_pwd') ){
-			window.location = 'http://savingstore.com.hk/index.php?route=account/forgotten';
+			window.location = base + 'index.php?route=account/forgotten';
 		}else{
-			window.location = 'http://savingstore.com.hk/index.php?route=account/register';
+			window.location = base + 'index.php?route=account/register';
 		}
 	});
 	// ---------- ---------- ---------- ---------- ----------
