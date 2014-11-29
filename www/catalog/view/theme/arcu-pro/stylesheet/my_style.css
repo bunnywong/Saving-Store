@@ -244,6 +244,3 @@ body.detail_view h1 {
 body.detail_view .cart > div:first-child {
   border-bottom: 0px !important;
 }
-#shipping-method table tr:nth-child(n+3) {
-  display: none !important;
-}
