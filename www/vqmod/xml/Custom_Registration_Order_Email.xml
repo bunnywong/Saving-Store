@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Xtensions-Custom Registration Order Email Customer</id>
+	<version>1.5.5.x-1.5.6</version>
+	<vqmver>2.X</vqmver>		
+	<author><![CDATA[<a href="http://xtensions.in" target = "_blank">www.xtensions.in</a><br />]]> <![CDATA[<a href="mailto:kwason@outlook.com">Email-Support</a><br />]]> <![CDATA[<a href="http://xtensions.in/support" target = "_blank">Ticket Support</a>]]></author>
+	
+	<file name="catalog/model/checkout/order.php">
+		<operation>
+			<search position="after"><![CDATA[public function confirm($order_id, $order_status_id, $comment = '', $notify = false) {]]></search>
+			<add><![CDATA[
+			$this->load->model('checkout/xorder');
+			$this->model_checkout_xorder->confirm($order_id, $order_status_id, $comment, $notify);
+			return;
+            ]]></add>
+		</operation>
+	</file>
+	
+	
+	
+</modification>
