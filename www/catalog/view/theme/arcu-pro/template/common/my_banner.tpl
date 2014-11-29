@@ -50,7 +50,6 @@
 </div> <!-- frm_sidebar_login_wrapper -->
 
 
-
 <div class="sidebar-banners">
 <!--
 	<a href="#">
@@ -60,10 +59,12 @@
 	<a href="#">
 		<div id="sidebar-member_offer"></div>
 	</a>
-	<a href="http://savingstore.com.hk/index.php?route=product/manufacturer/info&manufacturer_id=8">
+	<?php // Hardcode ^_^ ?>
+	<a href="<?= $base; ?>index.php?route=product/manufacturer/info&manufacturer_id=11">
 		<div id="sidebar-suzuran"></div>
 	</a>
-	<a href="http://savingstore.com.hk/index.php?route=product/manufacturer/info&manufacturer_id=12">
+	<?php // Hardcode ^_^ ?>
+	<a href="<?= $base; ?>index.php?route=product/manufacturer/info&manufacturer_id=12">
 		<div id="sidebar-goon"></div>
 	</a>
 </div>
