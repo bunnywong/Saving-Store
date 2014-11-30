@@ -2,6 +2,7 @@
 www/.htaccess
 www/config.php
 www/admin/config.php
+www/catalog/view/theme/arcu-pro/stylesheet/less_engine/base_url.less
 
 # System Cache Files
 www/system/cache/*

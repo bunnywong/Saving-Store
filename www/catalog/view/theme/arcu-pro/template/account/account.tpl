@@ -34,8 +34,8 @@
 				<li class="my_hide"><a href="<?php echo $recurring; ?>"><?php echo $text_recurring; ?></a></li>
 			</ul>
 		</div>
-		<h2><?php echo $text_my_newsletter; ?></h2>
-		<div class="content">
+		<h2 class="my_hide"><?php echo $text_my_newsletter; ?></h2>
+		<div class="content my_hide">
 			<ul>
 				<li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
 			</ul>

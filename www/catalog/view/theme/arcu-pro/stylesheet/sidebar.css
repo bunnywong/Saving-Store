@@ -2,8 +2,10 @@
 #search,
 #topbar > .links,
 #menu,
-#topbar {
-  display: none;
+#topbar,
+#bottom > span.toggle,
+#footer > span.toggle {
+  display: none !important;
 }
 #header .mCustomScrollBox {
   background: white;
