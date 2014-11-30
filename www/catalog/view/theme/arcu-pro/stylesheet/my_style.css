@@ -1,6 +1,9 @@
 .center {
   text-align: center;
 }
+.my_hide {
+  display: none;
+}
 .border_top {
   border-top: 1px solid #ddd;
 }
@@ -303,6 +306,10 @@ body.detail_view .cart > div:first-child {
 .sign_up table tr span.act_clear:active {
   position: relative;
   top: 2px;
+}
+body.cart h2,
+body.cart #content > div.box > div.content {
+  display: none;
 }
 #shipping-method table tr:nth-child(n+3) {
   display: none !important;
