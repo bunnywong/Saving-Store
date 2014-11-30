@@ -2,9 +2,7 @@
 #search,
 #topbar > .links,
 #menu,
-#topbar,
-#bottom > span.toggle,
-#footer > span.toggle {
+#topbar {
   display: none !important;
 }
 #header .mCustomScrollBox {
