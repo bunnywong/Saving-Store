@@ -22,7 +22,7 @@ $(document).ready(function(){
 	// ---------- ---------- ---------- ---------- ----------
 
 	function refine_district(){
-		$('.my_district select[name="zone_id"] option:nth-child(n+2)')
+		$('body.sign_up .my_district select[name="zone_id"] option:nth-child(n+2), body.checkout .xaddress option:nth-child(n+2)')
 		.each(function(){
 			var str = $(this).text();
 				str = str.substring(5);
@@ -133,7 +133,7 @@ $(document).ready(function(){
 					    finalYear: this_year + 1,
 					    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 					};
-
+// todo: xdiv[sort="a60"] input
 			$('table tr[sort="a60"] input')	// [出生日期 / 預產期]
 				.after('<span class="act_clear"><span>清除</span></span>')
 				.monthpicker(options).end()
@@ -159,6 +159,12 @@ $(document).ready(function(){
 		}
 	}// !checkout_refine()
 
+	function captcha_ignore(){
+		if( $('body').hasClass('account') && $('body').hasClass('edit') ||
+			 $('body').hasClass('checkout') )
+			$('table tr[sort="a99"]').fadeOut('fast').children('td').children('input').val(' ');
+	}
+
 	// --------------------------------------------------
 
 
@@ -170,6 +176,7 @@ $(document).ready(function(){
 
 		checkout_refine();
 		redirect2child();	// List View
+		captcha_ignore();
 	}, 1000);
 
 	// ---------- ---------- ---------- ---------- ----------

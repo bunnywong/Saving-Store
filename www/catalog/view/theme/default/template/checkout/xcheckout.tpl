@@ -87,6 +87,7 @@ $(document).ready(function() {
 			$('#payment-address .checkout-content').html(html);
 
 			$('#payment-address .checkout-content').slideDown('slow');
+
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -121,6 +122,46 @@ $('#button-account').live('click', function() {
 			$('.checkout-heading a').remove();
 
 			$('#checkout .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+			// --------------------------------------------------
+			// My Script
+
+				function refine_district2(){
+					$('body.checkout .xaddress option:nth-child(n+2)')
+						.each(function(){
+							var str = $(this).text();
+								str = str.substring(5);
+
+						$(this).text(str);
+					});
+				}
+
+				function remove_captcha(){
+					$('#button-register').click(function(){
+						$('xdiv[sort="a99"] input').val(' ');
+					});
+					$('xdiv[sort="a99"]').fadeOut('fast');
+				}// !remove_captcha()
+
+				function append_kid_title(){
+					$('xdiv:[sort="a50"]')
+						.before('<tr><td colspan="2"><h2>子女資料</h3></td></tr>')
+						.slideDown('slow');
+				}
+
+				function pwd_section_append(){
+					$('div.xpassword').appendTo('#payment-address .checkout-content > .right');
+				}
+
+				setTimeout(function(){
+					refine_district2();
+					remove_captcha();
+					append_kid_title();
+					pwd_section_append();
+				}, 1000);
+
+
+
+			// --------------------------------------------------
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -1016,7 +1057,7 @@ function quickConfirm(module){
 // --------------------------------------------------
 
 $(document).ready(function() {
-	$('body').addClass('checkout');
+	$('body').addClass('checkout my_date_picker');
 });
 
 //--></script>

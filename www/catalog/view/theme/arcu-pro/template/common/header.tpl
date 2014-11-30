@@ -51,6 +51,7 @@
 <?php if(!$this->config->get('kuler_compress_scripts') || $this->config->get('kuler_compress_script_type') == 'theme') { ?>
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/my_script.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/common.js"></script>
 <?php } ?>
 <?php if($this->config->get('kuler_compress_scripts')) { ?>
@@ -63,7 +64,6 @@
 <script>
 var base = '<?= $base; ?>';
 </script>
-<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/my_script.js"></script>
 <?php } ?>
 <?php foreach ($scripts as $script) { ?>
 <?php if($this->config->get('kuler_compress_script_type') == 'all' && strpos($script, 'catalog/view') === 0) { continue; } ?>

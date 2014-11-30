@@ -68,7 +68,7 @@ $_['entry_address_2']                = '&nbsp;&nbsp;&nbsp;地址 2：';
 $_['entry_postcode']                 = '郵編：';
 $_['entry_city']                     = '城市：';
 $_['entry_country']                  = '國家：';
-$_['entry_zone']                     = '地區 / 省份：';
+$_['entry_zone']                     = '地區：';
 $_['entry_newsletter']               = '我希望訂閱 %s 咨詢。';
 $_['entry_shipping'] 	               = '我的貨運地址和運單地址相同。';
 
@@ -80,7 +80,7 @@ $_['error_exists']                   = '警告： 該郵箱地址已被註冊、
 $_['error_firstname']                = '名字必須在1到32字符之間！';
 $_['error_lastname']                 = '姓氏必須在1到32字符之間！';
 $_['error_email']                    = '無效的郵箱地址！';
-$_['error_telephone']                = '電話號碼必須為3到32字節！';
+$_['error_telephone']                = '電話號碼必須為8到13字節！';
 $_['error_password']                 = '密碼必須在3到20字符之間！';
 $_['error_confirm']                  = '確認密碼與輸入密碼不一致！';
 $_['error_company_id']     					 = '請填寫公司編碼！';

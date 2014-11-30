@@ -319,6 +319,17 @@ body.cart h2,
 body.cart #content > div.box > div.content {
   display: none;
 }
+body.checkout .xten input:checked +label {
+  background-color: transparent;
+  color: #666;
+}
+body.checkout .xten label:hover {
+  background-color: ;
+}
+body.checkout div.xpassword h2 {
+  position: relative;
+  top: 40px;
+}
 body.checkout #payment-address {
   clear: both;
 }

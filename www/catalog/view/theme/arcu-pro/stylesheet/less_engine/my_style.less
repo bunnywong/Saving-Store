@@ -223,6 +223,19 @@
 // --------------------------------------------------
 // Checkout
 	body.checkout{
+		// x tamplate over ride
+		.xten input:checked +label{
+			background-color: transparent;
+			color: @black;
+		}
+		.xten label:hover{
+			background-color: @blue;
+		}
+		div.xpassword h2{	// [My pwd]
+			position: relative;
+			top: 40px;
+		}
+
 		#payment-address{
 			clear: both;	// Fix step bar over lap
 		}
