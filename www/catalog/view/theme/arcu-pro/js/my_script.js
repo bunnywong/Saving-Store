@@ -144,10 +144,32 @@ $(document).ready(function(){
 		}// Lock: body class
 	}// !my_date_picker()
 
+	// --------------------------------------------------
+	// List View
+	function redirect2child(){
+		$('body.list_view .products').click(function(){
+		window.location = $(this).children('a').attr('href');
+		});
+	}// !redirect2child()
+
+	// Checkout
+	function checkout_refine(){
+		if( $('body').hasClass('checkout') ){
+			$('#payment-address .xpassword > br').remove();
+		}
+	}// !checkout_refine()
+
+	// --------------------------------------------------
+
+
+
 	setTimeout(function(){
 		refine_district();
 		sign_up_refine();
 		my_date_picker();
+
+		checkout_refine();
+		redirect2child();	// List View
 	}, 1000);
 
 	// ---------- ---------- ---------- ---------- ----------

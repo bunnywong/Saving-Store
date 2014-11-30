@@ -8,6 +8,7 @@
 
 // --------------------------------------------------
 	@import "base_url.less";	// GIT ignore
+	@base = 'http://greenmap.hk/';
 // --------------------------------------------------
 // Common
 
@@ -56,9 +57,9 @@
 // Main content
 
 	.home .box-heading,	// Gap under banner
-	.home .rating,		// Items
-	.home .details,		// Items
-	.home .description	// Items
+	.list_view .rating,		// Items
+	.list_view .details,		// Items
+	.list_view .description	// Items
 		{display: none!important;}
 
 	body.home {
@@ -67,12 +68,18 @@
 			max-width	: 1115px;
 			margin-left	: 40px;
 		}
-
+	}// !.home
+	body.list_view{
+		.category-info{	// Intro box
+			clear: both;
+		}
+		.products{
+			cursor: pointer;
+		}
 		.box-content{
 			min-width: 800px;
 		}
 		.box-product{	// Main container
-
 			a{
 				color: transparent;
 			}
@@ -89,7 +96,7 @@
 				text-decoration: none;
 			}
 		}
-	}// !.home
+	}// !body.list_view
 
 // --------------------------------------------------
 // Import
@@ -99,7 +106,7 @@
 
 // --------------------------------------------------
 // Backend
-	.backend{
+	body.backend{
 
 		.div2 > img,	// logo
 		#footer
@@ -108,7 +115,7 @@
 		#menu{
 			display: block!important;
 		}
-	}
+	}// !body.backend
 
 // --------------------------------------------------
 // Detail view
@@ -140,83 +147,100 @@
 // --------------------------------------------------
 // Sign Up
 
-.sign_up{
-	@this_width = 550px;
-	#content{
-		p{
-			max-width: @this_width;
-		}
-	}
-	table{
-		tr{
-			td{
-				vertical-align: top;
-			}
-			> td:first-child{
-				max-width: 100px;
-			}
-			input[type=text],
-			input[type=password],
-			select{
-				max-width: 300px;
-			}
-			select{
-				min-height: 42px;
-			}
-			input[type=text],
-			input[type=password]{
-				height: 20px;
-			}// !td
-			div.edm_wrapper{
+	.sign_up{
+		@this_width = 550px;
+		#content{
+			p{
 				max-width: @this_width;
 			}
-			input.mtz-monthpicker-widgetcontainer{
-				width: 200px!important;
-			}
-			span.act_clear{
-				height: 42px;
-				width: 90px;
-				margin-left: 5px;
-				background-color: @btn_blue;
-				color: white;
-				display: inline-block;
-				vertical-align: middle;
-				border-radius: 5px;
-				cursor: pointer;
-				-webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
-				-moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.5);
-				box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.5);
-				> span{
-					display: block;
-					text-align: center;
-					top: 10px;
-					position: relative;
+		}
+		table{
+			tr{
+				td{
+					vertical-align: top;
 				}
-			}
-			span.act_clear:hover{
-				background-color: @btn_blue_hover;
-			}
-			span.act_clear:active{
-				position: relative;
-				top: 2px;
-			}
+				> td:first-child{
+					max-width: 100px;
+				}
+				input[type=text],
+				input[type=password],
+				select{
+					max-width: 300px;
+				}
+				select{
+					min-height: 42px;
+				}
+				input[type=text],
+				input[type=password]{
+					height: 20px;
+				}// !td
+				div.edm_wrapper{
+					max-width: @this_width;
+				}
+				input.mtz-monthpicker-widgetcontainer{
+					width: 200px!important;
+				}
+				span.act_clear{
+					height: 42px;
+					width: 90px;
+					margin-left: 5px;
+					background-color: @btn_blue;
+					color: white;
+					display: inline-block;
+					vertical-align: middle;
+					border-radius: 5px;
+					cursor: pointer;
+					-webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+					-moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+					box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+					> span{
+						display: block;
+						text-align: center;
+						top: 10px;
+						position: relative;
+					}
+				}
+				span.act_clear:hover{
+					background-color: @btn_blue_hover;
+				}
+				span.act_clear:active{
+					position: relative;
+					top: 2px;
+				}
 
-		}// !tr
-	}
-
-
-}
+			}// !tr
+		}// !table
+	}// !body.sign_up
 
 // --------------------------------------------------
 // Cart
-body.cart{
-	h2,
-	#content > div.box > div.content
-		{display: none;}
-}
+	body.cart{
+		h2,
+		#content > div.box > div.content
+			{display: none;}
+	}// !body.cart
 
 // --------------------------------------------------
 // Checkout
-	#shipping-method table tr:nth-child(n+3){
-		display: none!important;	// Show free or charge shipping $ only
-	}
+	body.checkout{
+		#payment-address{
+			clear: both;	// Fix step bar over lap
+		}
+		#shipping-method table tr:nth-child(n+3){
+			display: none!important;	// Show free or charge shipping $ only
+		}
+
+		input[type=text],
+		input[type=password],
+		select{
+			min-width: 250px;
+		}
+		select{
+			min-height: 42px;
+		}
+		input[type=text],
+		input[type=password]{
+			height: 20px;
+		}// !td
+
+	}// !body.checkout

@@ -23,9 +23,9 @@ input[type=checkbox] {
   background-color: #444444;
 }
 .home .box-heading,
-.home .rating,
-.home .details,
-.home .description {
+.list_view .rating,
+.list_view .details,
+.list_view .description {
   display: none !important;
 }
 body.home .my_banner {
@@ -33,22 +33,28 @@ body.home .my_banner {
   max-width: 1115px;
   margin-left: 40px;
 }
-body.home .box-content {
+body.list_view .category-info {
+  clear: both;
+}
+body.list_view .products {
+  cursor: pointer;
+}
+body.list_view .box-content {
   min-width: 800px;
 }
-body.home .box-product a {
+body.list_view .box-product a {
   color: transparent;
 }
-body.home .box-product .price {
+body.list_view .box-product .price {
   text-align: right;
 }
-body.home .box-product .name {
+body.list_view .box-product .name {
   color: #333;
   font-size: 15px;
   font-weight: bold;
   letter-spacing: 0.5px;
 }
-body.home .box-product .name:hover {
+body.list_view .box-product .name:hover {
   text-decoration: none;
 }
 #welcome,
@@ -89,7 +95,7 @@ body.home .box-product .name:hover {
   float: left;
 }
 .member-title {
-  background: url('http://suzuran.com.hk/image/data/login/member-title.png');
+  background: url('http://greenmap.hk/image/data/login/member-title.png');
   background-repeat: no-repeat;
   background-size: contain;
   height: 35px;
@@ -97,7 +103,7 @@ body.home .box-product .name:hover {
   margin-bottom: 5px;
 }
 .log-in-title {
-  background: url('http://suzuran.com.hk/image/data/login/log-in-title.png');
+  background: url('http://greenmap.hk/image/data/login/log-in-title.png');
   background-repeat: no-repeat;
   background-size: contain;
   height: 35px;
@@ -190,27 +196,27 @@ body.home .box-product .name:hover {
 }
 .sidebar-banners #sidebar-member_offer {
   height: 70px;
-  background-image: url('http://suzuran.com.hk/catalog/view/theme/arcu-pro/image/my_img/menu/promotion-sel.png');
+  background-image: url('http://greenmap.hk/catalog/view/theme/arcu-pro/image/my_img/menu/promotion-sel.png');
   height: 0px;
   display: none;
 }
 .sidebar-banners #sidebar-member_offer:hover {
-  background-image: url('http://suzuran.com.hk/catalog/view/theme/arcu-pro/image/my_img/menu/promotion.png');
+  background-image: url('http://greenmap.hk/catalog/view/theme/arcu-pro/image/my_img/menu/promotion.png');
 }
 .sidebar-banners #sidebar-suzuran {
   height: 80px;
-  background-image: url('http://suzuran.com.hk/catalog/view/theme/arcu-pro/image/my_img/menu/suzuran-sel.png');
+  background-image: url('http://greenmap.hk/catalog/view/theme/arcu-pro/image/my_img/menu/suzuran-sel.png');
 }
 .sidebar-banners #sidebar-suzuran:hover {
-  background-image: url('http://suzuran.com.hk/catalog/view/theme/arcu-pro/image/my_img/menu/suzuran.png');
+  background-image: url('http://greenmap.hk/catalog/view/theme/arcu-pro/image/my_img/menu/suzuran.png');
 }
 .sidebar-banners #sidebar-goon {
   height: 80px;
-  background-image: url('http://suzuran.com.hk/catalog/view/theme/arcu-pro/image/my_img/menu/goon-sel.png');
+  background-image: url('http://greenmap.hk/catalog/view/theme/arcu-pro/image/my_img/menu/goon-sel.png');
   background-position: 8px 0px;
 }
 .sidebar-banners #sidebar-goon:hover {
-  background-image: url('http://suzuran.com.hk/catalog/view/theme/arcu-pro/image/my_img/menu/goon.png');
+  background-image: url('http://greenmap.hk/catalog/view/theme/arcu-pro/image/my_img/menu/goon.png');
   background-position: 8px 0px;
 }
 .fb_iframe_widget {

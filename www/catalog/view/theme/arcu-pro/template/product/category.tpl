@@ -49,9 +49,10 @@
 			</div>
 			<?php if ($products) { ?>
 			<?php foreach ($products as $product) { ?>
-			<div style="width: <?php echo $thumb_width + 52; ?>px">
+			<div class="products" style="width: <?php echo $thumb_width + 52; ?>px">
+				<a href="<?php echo $product['href']; ?>"></a>
 				<?php if ($product['thumb']) { ?>
-				<div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
+				<div class="image"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></div>
 				<?php } else { ?>
 				<div class="image"><span class="no-image"><img src="image/no_image.jpg" alt="<?php echo $product['name']; ?>" /></span></div>
 				<?php } ?>
@@ -64,18 +65,22 @@
 					<div class="special-price"><span class="price-fixed"><?php echo $product['special']; ?></span><span class="price-old"><?php echo $product['price']; ?></span></div>
 					<?php } ?>
 				</div>
+
 				<?php } ?>
+			<!--
 				<?php if ($product['rating']) { ?>
 				<div class="rating"><img src="catalog/view/theme/arcu-pro/image/icons/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
 				<?php } ?>
+
 				<div class="description"><?php echo $product['description']; ?></div>
 				<div class="cart"><a class="button" onclick="addToCart('<?php echo $product['product_id']; ?>');" data-hover="<?php echo $button_cart; ?>"><span class="icon-basket-light"><?php echo $button_cart; ?></span></a></div>
 				<div class="wishlist"><a class="button" onclick="addToWishList('<?php echo $product['product_id']; ?>');"><span class="icon-wishlist-grey"><?php echo $button_wishlist; ?></span></a></div>
 				<div class="compare"><a class="button" onclick="addToCompare('<?php echo $product['product_id']; ?>');"><span class="icon-compare-grey"><?php echo $button_compare; ?></span></a></div>
 				<div class="more-info"><a class="button" href="<?php echo $product['href']; ?>"><span class="icon-info-grey"><?php echo $button_compare; ?></span></a></div>
+			-->
 			</div>
-			<?php } ?>
-			<?php } ?>
+			<?php } // !foreach ?>
+			<?php } // !if ?>
 		</div>
 		<?php if ($products) { ?>
 		<div class="pagination"><?php echo $pagination; ?></div>
@@ -90,7 +95,7 @@
 		<?php } ?>
 	</div>
 	<?php echo $content_bottom; ?></div>
-<?php echo $footer; ?> 
+<?php echo $footer; ?>
 <script type="text/javascript">
 $(document).ready(function () {
 	$('.box-product').masonry({
@@ -98,5 +103,11 @@ $(document).ready(function () {
 		isFitWidth: true,
 		itemSelector: '.product-grid > div'
 	});
+
+// My Script
+// --------------------------------------------------
+
+   $('body').addClass('list_view');
+
 });
 </script>
