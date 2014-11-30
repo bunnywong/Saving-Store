@@ -134,6 +134,12 @@
 // Sign Up
 
 .sign_up{
+	@this_width = 550px;
+	#content{
+		p{
+			max-width: @this_width;
+		}
+	}
 	table{
 		tr{
 			td{
@@ -155,7 +161,7 @@
 				height: 20px;
 			}// !td
 			div.edm_wrapper{
-				max-width: 500px;
+				max-width: @this_width;
 			}
 			input.mtz-monthpicker-widgetcontainer{
 				width: 200px!important;

@@ -35,8 +35,8 @@ $(document).ready(function(){
 		if( $('body').hasClass('sign_up') ){
 			// add_title
 			$('table tr:[sort="a50"]')
-				.before('<tr><td colspan="2"><h2>子女資料</h3></td></tr>').
-				slideDown('slow').one();
+				.before('<tr><td colspan="2"><h2>子女資料</h3></td></tr>')
+				.slideDown('slow');
 
 			// Hospital
 				// Hide Hospital row

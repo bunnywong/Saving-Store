@@ -250,6 +250,9 @@ body.detail_view h1 {
 body.detail_view .cart > div:first-child {
   border-bottom: 0px !important;
 }
+.sign_up #content p {
+  max-width: 550px;
+}
 .sign_up table tr td {
   vertical-align: top;
 }
@@ -269,7 +272,7 @@ body.detail_view .cart > div:first-child {
   height: 20px;
 }
 .sign_up table tr div.edm_wrapper {
-  max-width: 500px;
+  max-width: 550px;
 }
 .sign_up table tr input.mtz-monthpicker-widgetcontainer {
   width: 200px !important;
