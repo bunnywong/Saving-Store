@@ -231,11 +231,11 @@ body.detail_view .my_banner img {
   display: block;
   margin: 0px auto 0px auto;
 }
-.backend .div2 > img,
-.backend #footer {
+body.backend .div2 > img,
+body.backend #footer {
   display: none;
 }
-.backend #menu {
+body.backend #menu {
   display: block !important;
 }
 body.detail_view .review,
@@ -313,6 +313,21 @@ body.cart h2,
 body.cart #content > div.box > div.content {
   display: none;
 }
-#shipping-method table tr:nth-child(n+3) {
+body.checkout #payment-address {
+  clear: both;
+}
+body.checkout #shipping-method table tr:nth-child(n+3) {
   display: none !important;
+}
+body.checkout input[type=text],
+body.checkout input[type=password],
+body.checkout select {
+  min-width: 250px;
+}
+body.checkout select {
+  min-height: 42px;
+}
+body.checkout input[type=text],
+body.checkout input[type=password] {
+  height: 20px;
 }
