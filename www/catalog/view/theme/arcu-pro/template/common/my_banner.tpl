@@ -60,11 +60,11 @@
 		<div id="sidebar-member_offer"></div>
 	</a>
 	<?php // Hardcode ^_^ ?>
-	<a href="<?= $base; ?>index.php?route=product/manufacturer/info&manufacturer_id=11">
+	<a href="<?= $base; ?>index.php?route=product/category&path=59">
 		<div id="sidebar-suzuran"></div>
 	</a>
 	<?php // Hardcode ^_^ ?>
-	<a href="<?= $base; ?>index.php?route=product/manufacturer/info&manufacturer_id=12">
+	<a href="<?= $base; ?>index.php?route=product/category&path=60">
 		<div id="sidebar-goon"></div>
 	</a>
 </div>
