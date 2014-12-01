@@ -56,7 +56,7 @@ $(document).ready(function(){
 
     var user = $('#header div.div3 span').text();
 
-    if( user != 'bunnywong' || user != 'suzuran02')   // Hardcord ^_^
+    if( user != 'bunnywong' && user != 'suzuran02')   // Hardcord ^_^
       $('body').addClass('owner');
 
   // --------------------------------------------------
