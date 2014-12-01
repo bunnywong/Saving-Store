@@ -1,4 +1,5 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/detail_view.css" />
 
 <div class="my_banner">
 	<?php

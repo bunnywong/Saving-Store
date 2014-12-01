@@ -1,0 +1,59 @@
+body.backend{
+
+	.div2 > img,	// logo
+	#footer
+		{display: none;}
+
+	#menu{
+		display: block!important;
+	}
+
+}// !body.backend
+
+// --------------------------------------------------
+	// Hide menu for nor developer
+	/*
+		#catalog
+		#extension
+		#sale
+		#system
+		#reports
+		#help
+	*/
+body.backend.owner{
+	#extension,
+ 	#system,
+	#reports,
+	#help{
+		display: none!important;
+	}
+
+	#catalog > ul{
+		> li:nth-child(3),	// 過濾
+		> li:nth-child(4),	// 分期
+		> li:nth-child(5),	// 屬性
+		> li:nth-child(6),	// 選項
+		> li:nth-child(6),	// 選項
+		> li:nth-child(8),	// 下載
+		> li:nth-child(9),	// 評論
+		{	// 選項
+			display: none!important;
+		}
+	}
+
+	#sale > ul{
+		> li:nth-child(2),	// 分期
+		> li:nth-child(3),	// 退換
+		> li:nth-child(5),	// 加盟
+		> li:nth-child(6),	// 優惠券
+		> li:nth-child(7),	// 禮品券
+		> li:nth-child(8),	// 郵件通知
+		{
+			display: none!important;
+		}
+		> li > ul > li:nth-child(2){	// 用戶群組
+			display: none!important;
+		}
+	}
+}// !body.backend.owner
+// --------------------------------------------------

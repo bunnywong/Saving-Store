@@ -14,6 +14,7 @@
 
 	@yellow = #FBD606;
 	@black 	= #666;
+	@white 	= #FFF;
 	@gray	= #ddd;
 	@title	= #333;
 	@btn_bg_hover = #444444;
@@ -101,8 +102,10 @@
 // --------------------------------------------------
 // Import
 
+
 	@import "sidebar.less";
-	@import "detail_view.less";
+//	@import "backend.less";
+//	@import "detail_view.less";	// Imported from product.tpl
 
 // --------------------------------------------------
 // Backend
@@ -223,19 +226,29 @@
 // --------------------------------------------------
 // Checkout
 	body.checkout{
+		// ----- ----- ----- ----- -----
 		// x tamplate over ride
-		.xten input:checked +label{
+		#payment-address > div.checkout-content > .xleft > .xten label:hover,
+		#payment-address > div.checkout-content > .xright > .xten label:hover{
+			background-color: @btn_blue_hover!important;
+			color: @white!important;
+		}
+
+		.xten input:checked +label{	// Checked item
 			background-color: transparent;
 			color: @black;
+			border: 1px solid @yellow;
 		}
 		.xten label:hover{
-			background-color: @blue;
+			background-color: @btn_blue_hover!important;
+			color: @white;
 		}
 		div.xpassword h2{	// [My pwd]
 			position: relative;
 			top: 40px;
 		}
 
+		// ----- ----- ----- ----- -----
 		#payment-address{
 			clear: both;	// Fix step bar over lap
 		}

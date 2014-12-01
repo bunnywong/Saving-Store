@@ -233,10 +233,6 @@ body.list_view .box-product .name:hover {
 #bottom .mCustomScrollBox {
   background-color: transparent;
 }
-body.detail_view .my_banner img {
-  display: block;
-  margin: 0px auto 0px auto;
-}
 body.backend .div2 > img,
 body.backend #footer {
   display: none;
@@ -319,12 +315,19 @@ body.cart h2,
 body.cart #content > div.box > div.content {
   display: none;
 }
+body.checkout #payment-address > div.checkout-content > .xleft > .xten label:hover,
+body.checkout #payment-address > div.checkout-content > .xright > .xten label:hover {
+  background-color: #4199dd !important;
+  color: #FFF !important;
+}
 body.checkout .xten input:checked +label {
   background-color: transparent;
   color: #666;
+  border: 1px solid #FBD606;
 }
 body.checkout .xten label:hover {
-  background-color: ;
+  background-color: #4199dd !important;
+  color: #FFF;
 }
 body.checkout div.xpassword h2 {
   position: relative;
