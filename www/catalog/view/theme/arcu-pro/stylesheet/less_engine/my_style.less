@@ -16,10 +16,12 @@
 	@black 	= #666;
 	@white 	= #FFF;
 	@gray	= #ddd;
+	@lightgray = lightgray;
 	@title	= #333;
 	@btn_bg_hover = #444444;
 	@btn_blue = #71bdf7;
 	@btn_blue_hover = #4199dd;
+
 
 // --------------------------------------------------
 // Global
@@ -57,7 +59,6 @@
 // --------------------------------------------------
 // Main content
 
-	.home .box-heading,	// Gap under banner
 	.list_view .rating,		// Items
 	.list_view .details,		// Items
 	.list_view .description	// Items
@@ -71,6 +72,12 @@
 		}
 	}// !.home
 	body.list_view{
+		.box-heading{
+			display: none!important;	// working
+			border-bottom: 1px solid @lightgray!important;
+			margin-left: 50px;
+		}
+
 		.category-info{	// Intro box
 			clear: both;
 		}
@@ -80,21 +87,24 @@
 		.box-content{
 			min-width: 800px;
 		}
-		.box-product{	// Main container
-			a{
-				color: transparent;
-			}
-			.price{
-				text-align: right;
-			}
-			.name{
-				color: @title;
-				font-size: 15px;
-				font-weight: bold;
-				letter-spacing: 0.5px
-			}
-			.name:hover{
-				text-decoration: none;
+		.box-product{	// Main (products)container
+			> div{		// Product wrapper
+				min-height: 312px;
+				a{
+					color: transparent;
+				}
+				.price{
+					text-align: right;
+				}
+				.name{
+					color: @title;
+					font-size: 15px;
+					font-weight: bold;
+					letter-spacing: 0.5px
+				}
+				.name:hover{
+					text-decoration: none;
+				}
 			}
 		}
 	}// !body.list_view

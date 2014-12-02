@@ -1,8 +1,8 @@
-body.backend .div2 > img,
-body.backend #footer {
+body.backend.owner .div2 > img,
+body.backend.owner #footer {
   display: none;
 }
-body.backend #menu {
+body.backend.owner #menu {
   display: block !important;
 }
 body.backend.owner #extension,

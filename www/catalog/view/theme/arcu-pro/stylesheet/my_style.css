@@ -22,7 +22,6 @@ input[type=checkbox] {
 .primary-define .button:hover {
   background-color: #444444;
 }
-.home .box-heading,
 .list_view .rating,
 .list_view .details,
 .list_view .description {
@@ -33,6 +32,11 @@ body.home .my_banner {
   max-width: 1115px;
   margin-left: 40px;
 }
+body.list_view .box-heading {
+  display: none !important;
+  border-bottom: 1px solid lightgray !important;
+  margin-left: 50px;
+}
 body.list_view .category-info {
   clear: both;
 }
@@ -42,19 +46,22 @@ body.list_view .products {
 body.list_view .box-content {
   min-width: 800px;
 }
-body.list_view .box-product a {
+body.list_view .box-product > div {
+  min-height: 312px;
+}
+body.list_view .box-product > div a {
   color: transparent;
 }
-body.list_view .box-product .price {
+body.list_view .box-product > div .price {
   text-align: right;
 }
-body.list_view .box-product .name {
+body.list_view .box-product > div .name {
   color: #333;
   font-size: 15px;
   font-weight: bold;
   letter-spacing: 0.5px;
 }
-body.list_view .box-product .name:hover {
+body.list_view .box-product > div .name:hover {
   text-decoration: none;
 }
 #welcome,
@@ -108,7 +115,7 @@ body.list_view .box-product .name:hover {
   background-size: contain;
   height: 35px;
   width: 100%;
-  margin-bottom: 5px;
+  margin: 10px auto;
 }
 .username {
   width: 100%;
