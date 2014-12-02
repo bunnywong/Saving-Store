@@ -46,9 +46,6 @@ body.list_view .products {
 body.list_view .box-content {
   min-width: 800px;
 }
-body.list_view .box-product > div {
-  min-height: 312px;
-}
 body.list_view .box-product > div a {
   color: transparent;
 }
