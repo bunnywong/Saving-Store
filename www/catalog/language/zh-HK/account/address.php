@@ -1,5 +1,5 @@
 <?php
-// Heading
+// Heading 
 $_['heading_title']     = '地址簿';
 
 // Text
@@ -11,7 +11,7 @@ $_['text_update']       = '您的地址已更新';
 $_['text_delete']       = '您的地址已註銷';
 
 // Entry
-$_['entry_firstname']   = '姓名：';
+$_['entry_firstname']   = '您的名字：';
 $_['entry_lastname']    = '您的姓氏：';
 $_['entry_company']     = '&nbsp;&nbsp;&nbsp;公司名稱：';
 $_['entry_company_id']  = '公司編碼:';

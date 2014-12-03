@@ -1,5 +1,5 @@
 <?php
-// Heading
+// Heading 
 $_['heading_title']             = '加盟計劃';
 
 // Text
@@ -17,7 +17,7 @@ $_['text_bank']                 = '銀行轉賬';
 $_['text_agree']                = '我已經閱讀並同意 <a class="colorbox" href="%s" alt="%s"><b>%s</b></a>條款';
 
 // Entry
-$_['entry_firstname']           = '姓名：';
+$_['entry_firstname']           = '您的名字：';
 $_['entry_lastname']            = '您的姓氏：';
 $_['entry_email']               = '電子郵箱：';
 $_['entry_telephone']           = '聯繫電話：';

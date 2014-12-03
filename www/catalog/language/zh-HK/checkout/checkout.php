@@ -1,5 +1,5 @@
 <?php
-// Heading
+// Heading 
 $_['heading_title']                  = '結賬';
 
 // Text
@@ -54,7 +54,7 @@ $_['entry_email_address']            = '郵件地址：';
 $_['entry_email']                    = 'E-Mail：';
 $_['entry_password']                 = '密碼：';
 $_['entry_confirm']                  = '確認密碼：';
-$_['entry_firstname']                = '姓名：';
+$_['entry_firstname']                = '您的名字：';
 $_['entry_lastname']                 = '您的姓氏：';
 $_['entry_telephone']                = '電話：';
 $_['entry_fax']                      = '傳真：';
@@ -75,7 +75,7 @@ $_['entry_shipping'] 	               = '我的貨運地址和運單地址相同�
 // Error
 $_['error_warning']                  = '在結算時出現了問題！ 如果此問題繼續存在請使用其它支付方式或<a href="%s">聯繫我們</a>。';
 $_['error_login']                    = '警告： 郵件地址或是密碼不符。';
-$_['error_approved']                 = '警告：您的帳戶需要審核，才可以登錄。';
+$_['error_approved']                 = '警告：您的帳戶需要審核，才可以登錄。'; 
 $_['error_exists']                   = '警告： 該郵箱地址已被註冊、請換一個電子郵箱！';
 $_['error_firstname']                = '名字必須在1到32字符之間！';
 $_['error_lastname']                 = '姓氏必須在1到32字符之間！';
