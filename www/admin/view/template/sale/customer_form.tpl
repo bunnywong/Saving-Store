@@ -62,6 +62,103 @@
                 <td><?php echo $entry_fax; ?></td>
                 <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
               </tr>
+                       <?php if ($options) { ?>
+         
+        
+        <?php foreach ($options as $option) { ?>
+        <?php if ($option['type'] == 'select') { ?>
+       <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <select name="option<?php echo $option['option_id']; ?>">
+            <option value=""><?php echo $text_select; ?></option>
+            <?php foreach ($option['option_value'] as $option_value) { ?>
+            <option <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'selected ="selected"' ; ?> value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
+            
+            </option>
+            <?php } ?>
+          </select>
+         <?php if (${"optionVE" . $option['option_id']}) { ?>
+            <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
+            <?php } ?></td></tr>
+        
+        <?php } ?>
+        <?php if ($option['type'] == 'radio') { ?>
+        <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <?php foreach ($option['option_value'] as $option_value) { ?>
+          <input type="radio" name="option<?php echo $option['option_id']; ?>" <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
+          <label for="option-value-<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
+            
+          </label>
+        </br>
+          <?php } ?>
+          <?php if (${"optionVE" . $option['option_id']}) { ?>
+            <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
+            <?php } ?></td>
+        </tr>
+        
+        <?php } ?>
+        <?php if ($option['type'] == 'checkbox') { ?>
+        <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <?php foreach ($option['option_value'] as $option_value) { ?>
+          <input type="checkbox" <?php if( ${"optionV_O" . $option['option_id']."C".$option_value['option_value_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> name="optionV<?php echo $option['option_id']; ?>C<?php echo $option_value['option_value_id']; ?>" value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
+          <label for="option-value-<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
+            
+          </label>
+        </br>
+          <?php } ?>
+         <?php if (${"optionVE" . $option['option_id']}) { ?>
+            <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
+            <?php } ?></td></tr>
+        <?php } ?>
+        
+        <?php if ($option['type'] == 'text') { ?>
+        <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <input type="text" name="option<?php echo $option['option_id']; ?>"  value="<?php echo ${"optionV" . $option['option_id']} ; ?>" />
+        <?php if (${"optionVE" . $option['option_id']}) { ?>
+            <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
+            <?php } ?></td></tr>
+        <?php } ?>
+        <?php if ($option['type'] == 'textarea') { ?>
+       <tr> <td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <textarea name="option<?php echo $option['option_id']; ?>" cols="40" rows="5"><?php echo ${"optionV" . $option['option_id']} ; ?></textarea>
+        <?php if (${"optionVE" . $option['option_id']}) { ?>
+            <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
+            <?php } ?></td></tr>
+        <?php } ?>        
+        <?php if ($option['type'] == 'date') { ?>
+        <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <input type="text"  name="option<?php echo $option['option_id']; ?>"  value="<?php echo ${"optionV" . $option['option_id']} ; ?>"  class="date" />
+        <?php if (${"optionVE" . $option['option_id']}) { ?>
+            <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
+            <?php } ?></td></tr>
+        
+        <?php } ?>
+       
+        <?php } ?>
+        <?php } ?>
               <tr>
                 <td><?php echo $entry_password; ?></td>
                 <td><input type="password" name="password" value="<?php echo $password; ?>"  />
@@ -159,6 +256,110 @@
                 <td><?php echo $entry_address_2; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][address_2]" value="<?php echo $address['address_2']; ?>" /></td>
               </tr>
+               <?php if ($optionsAddress) { ?>
+         
+        
+        <?php foreach ($optionsAddress as $option) { ?>
+        <?php if ($option['type'] == 'select') { ?>
+       <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <select name="address[<?php echo $address_row; ?>][<?php echo $option['identifier']; ?>]">
+            <option value=""><?php echo $text_select; ?></option>
+            <?php foreach ($option['option_value'] as $option_value) { ?>
+            <option <?php if(isset($address[$option['identifier']])&& $address[$option['identifier']] ==$option_value['option_value_id']) echo 'selected ="selected"' ; ?> value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
+            
+            </option>
+            <?php } ?>
+          </select>
+          <?php if (isset(${'error_'.$option['identifier']}[$address_row])) { ?>
+                  <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
+                  <?php } ?>
+         </td></tr>
+        
+        <?php } ?>
+        <?php if ($option['type'] == 'radio') { ?>
+        <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <?php foreach ($option['option_value'] as $option_value) { ?>
+          <input type="radio" name="address[<?php echo $address_row; ?>][<?php echo $option['identifier']; ?>]" <?php if(isset($address[$option['identifier']]) && $address[$option['identifier']] ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
+          <label for="option-value-<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
+            
+          </label>
+        </br>
+          <?php } ?>
+           <?php if (isset(${'error_'.$option['identifier']}[$address_row])) { ?>
+                  <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
+                  <?php } ?>
+         </td>
+        </tr>
+        
+        <?php } ?>
+        <?php if ($option['type'] == 'checkbox') { ?>
+        <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <?php foreach ($option['option_value'] as $option_value) { ?>
+          <input type="checkbox" 
+          <?php if( isset($address[$option['identifier'].$option_value['option_value_id']]) && $address[$option['identifier'].$option_value['option_value_id']] ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> 
+          name="address[<?php echo $address_row; ?>][<?php echo $option['identifier'].$option_value['option_value_id']; ?>]" value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
+          <label for="option-value-<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
+            
+          </label>
+        </br>
+          <?php } ?>
+           <?php if (isset(${'error_'.$option['identifier']}[$address_row])) { ?>
+                  <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
+                  <?php } ?>
+        </td></tr>
+        <?php } ?>
+        
+        <?php if ($option['type'] == 'text') { ?>
+        <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <input type="text" name="address[<?php echo $address_row; ?>][<?php echo $option['identifier']; ?>]"  <?php if(isset($address[$option['identifier']])) echo 'value="'.$address[$option['identifier']].'"';  ?> />
+        <?php if (isset(${'error_'.$option['identifier']}[$address_row])) { ?>
+                  <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
+                  <?php } ?>
+        </td></tr>
+        <?php } ?>
+        <?php if ($option['type'] == 'textarea') { ?>
+       <tr> <td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <textarea name="address[<?php echo $address_row; ?>][<?php echo $option['identifier']; ?>]" cols="40" rows="5"><?php if(isset($address[$option['identifier']])) echo $address[$option['identifier']];  ?></textarea>
+        <?php if (isset(${'error_'.$option['identifier']}[$address_row])) { ?>
+                  <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
+                  <?php } ?>
+        </td></tr>
+        <?php } ?>        
+        <?php if ($option['type'] == 'date') { ?>
+        <tr><td>
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <?php echo $option['name']; ?>:</td><td>
+          <input type="text"  name="address[<?php echo $address_row; ?>][<?php echo $option['identifier']; ?>]"  <?php if(isset($address[$option['identifier']])) echo 'value="'.$address[$option['identifier']].'"';  ?>  class="date" />
+      <?php if (isset(${'error_'.$option['identifier']}[$address_row])) { ?>
+                  <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
+                  <?php } ?>
+      </td></tr>        
+        <?php } ?>
+       
+        <?php } ?>
+        <?php } ?>
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_city; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][city]" value="<?php echo $address['city']; ?>" />
@@ -611,4 +812,17 @@ function removeBanIP(ip) {
 $('.htabs a').tabs();
 $('.vtabs a').tabs();
 //--></script> 
+ <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
+<script type="text/javascript"><!--
+$(document).ready(function() {
+	if ($.browser.msie && $.browser.version == 6) {
+		$('.date').bgIframe();
+	}
+	$('.date').datepicker({
+		dateFormat: 'yy-mm-dd',
+		changeMonth: true,
+	    changeYear: true,
+	    yearRange: "-100:+5"});	
+});
+</script>
 <?php echo $footer; ?>

@@ -14,7 +14,7 @@
     <tr>
       <td><?php echo $order['store_name']; ?><br />
         <?php echo $order['store_address']; ?><br />
-        <?php echo $text_telephone; ?> <?php echo $order['store_telephone']; ?><br />
+        <?php echo $text_telephone; ?> <?php echo $order['store_telephone']; ?><br />         
         <?php if ($order['store_fax']) { ?>
         <?php echo $text_fax; ?> <?php echo $order['store_fax']; ?><br />
         <?php } ?>
@@ -54,11 +54,15 @@
       <td width="50%"><b><?php echo $text_ship_to; ?></b></td>
     </tr>
     <tr>
-      <td><?php echo $order['payment_address']; ?><br/>
+      <td><?php echo $order['payment_address']; ?><br/><br/>
         <?php echo $order['email']; ?><br/>
-        <?php echo $order['telephone']; ?>
-        <?php if ($order['payment_company_id']) { ?>
-        <br/>
+        <?php echo $order['telephone']; ?><br />
+		
+         <?php if($order['custom_personal']) {?>         
+         
+         <?php echo $order['custom_personal'];?><br/>
+         <?php }?>
+        <?php if ($order['payment_company_id']) { ?>        
         <br/>
         <?php echo $text_company_id; ?> <?php echo $order['payment_company_id']; ?>
         <?php } ?>
@@ -66,7 +70,9 @@
         <br/>
         <?php echo $text_tax_id; ?> <?php echo $order['payment_tax_id']; ?>
         <?php } ?></td>
-      <td><?php echo $order['shipping_address']; ?></td>
+      <td><?php echo $order['shipping_address']; ?>
+	 
+		 </td>
     </tr>
   </table>
   <table class="product">

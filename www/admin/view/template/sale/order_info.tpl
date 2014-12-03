@@ -81,6 +81,14 @@
             <td><?php echo $fax; ?></td>
           </tr>
           <?php } ?>
+          <?php if(!empty($personal_custom)){?>
+          <?php foreach ($personal_custom as $option) {?>
+          <tr>
+          <td><?php echo $option['name'];?>:</td>
+          <td><?php echo $option['value'];?></td>
+          </tr>	
+          <?php }?>
+          <?php }?>
           <tr>
             <td><?php echo $text_total; ?></td>
             <td><?php echo $total; ?>
@@ -202,6 +210,14 @@
             <td><?php echo $payment_address_2; ?></td>
           </tr>
           <?php } ?>
+          <?php if(!empty($payment_custom)){?>
+          <?php foreach ($payment_custom as $option) {?>
+          <tr>
+          <td><?php echo $option['name'];?>:</td>
+          <td><?php echo $option['value'];?></td>
+          </tr>	
+          <?php }?>
+          <?php }?>
           <tr>
             <td><?php echo $text_city; ?></td>
             <td><?php echo $payment_city; ?></td>
@@ -271,6 +287,14 @@
             <td><?php echo $shipping_address_2; ?></td>
           </tr>
           <?php } ?>
+           <?php if(!empty($shipping_custom)){?>
+          <?php foreach ($shipping_custom as $option) {?>
+          <tr>
+          <td><?php echo $option['name'];?>:</td>
+          <td><?php echo $option['value'];?></td>
+          </tr>	
+          <?php }?>
+          <?php }?>
           <tr>
             <td><?php echo $text_city; ?></td>
             <td><?php echo $shipping_city; ?></td>

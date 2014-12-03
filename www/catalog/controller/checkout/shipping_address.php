@@ -2,6 +2,18 @@
 class ControllerCheckoutShippingAddress extends Controller {
 	public function index() {
 		$this->language->load('checkout/checkout');
+                $this->load->model('account/signup');
+                $this->data['isActive']=  $this->model_account_signup->isActiveMod();
+                $this->data['modData']=  $this->model_account_signup->getModData();
+                $modData1 = $this->model_account_signup->getModData();
+		$isActive2 = $this->model_account_signup->isActiveMod();
+                $isActive1=$isActive2['enablemod'];
+				$this->data['cfname']= "";
+                $this->data['clname']= "";              
+                if ($this->customer->isLogged()){       	
+                	$this->data['cfname']= $this->customer->getFirstName();
+                	$this->data['clname']= $this->customer->getLastName();
+                }
 		
 		$this->data['text_address_existing'] = $this->language->get('text_address_existing');
 		$this->data['text_address_new'] = $this->language->get('text_address_new');
@@ -17,7 +29,16 @@ class ControllerCheckoutShippingAddress extends Controller {
 		$this->data['entry_city'] = $this->language->get('entry_city');
 		$this->data['entry_country'] = $this->language->get('entry_country');
 		$this->data['entry_zone'] = $this->language->get('entry_zone');
-	
+		
+		$this->language->load('account/xtensions');
+    	$this->data['title_firstname'] = $this->language->get('title_firstname');
+    	$this->data['title_lastname'] = $this->language->get('title_lastname');
+    	$this->data['title_company'] = $this->language->get('title_company');			
+    	$this->data['title_address_1'] = $this->language->get('title_address_1');
+    	$this->data['title_address_2'] = $this->language->get('title_address_2');
+    	$this->data['title_postcode'] = $this->language->get('title_postcode');
+    	$this->data['title_city'] = $this->language->get('title_city');		
+    	
 		$this->data['button_continue'] = $this->language->get('button_continue');
 			
 		if (isset($this->session->data['shipping_address_id'])) {
@@ -28,7 +49,57 @@ class ControllerCheckoutShippingAddress extends Controller {
 
 		$this->load->model('account/address');
 
-		$this->data['addresses'] = $this->model_account_address->getAddresses();
+	$this->load->model('account/address');
+		$results = $this->model_account_address->getAddresses();
+  		$this->load->model('account/customer');
+		$stringP = '';
+		foreach ($this->model_account_customer->getCustomOptions(2) as $option){
+			if($option['list_display'])$stringP .= '{'.$option['identifier'].'}'."\n";
+		}
+    	foreach ($results as $result) {
+    		
+			if ($result['address_format']) {
+      			$format = $result['address_format'];
+    		} else {
+				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" .$stringP. '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+			}
+		
+    		$find = array(
+	  			'{firstname}',
+	  			'{lastname}',
+	  			'{company}',
+      			'{address_1}',
+      			'{address_2}',
+     			'{city}',
+      			'{postcode}',
+      			'{zone}',
+				'{zone_code}',
+      			'{country}'
+			);
+    		foreach ($this->model_account_customer->getCustomOptions(2) as $option){
+				if($option['list_display'])array_push($find, '{'.$option['identifier'].'}');
+			}
+			$replace = array(
+	  			'firstname' => $result['firstname'],
+	  			'lastname'  => $result['lastname'],
+	  			'company'   => $result['company'],
+      			'address_1' => $result['address_1'],
+      			'address_2' => $result['address_2'],
+      			'city'      => $result['city'],
+      			'postcode'  => $result['postcode'],
+      			'zone'      => $result['zone'],
+				'zone_code' => $result['zone_code'],
+      			'country'   => $result['country']  
+			);
+    		foreach ($this->model_account_customer->getCustomOptions(2) as $option){
+				if($option['list_display']){$value = $this->model_account_customer->getCustomerOptionsA((int)$this->customer->getId(),$option['option_id'],$option['type'],$result['address_id']);			
+				$replace= array_merge($replace, array($option['identifier'] => $value));}
+			}
+      		$this->data['addresses'][] = array(
+        		'address_id' => $result['address_id'],
+        		'address'    => str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format)))),      		
+			);
+    	}
 
 		if (isset($this->session->data['shipping_postcode'])) {
 			$this->data['postcode'] = $this->session->data['shipping_postcode'];		
@@ -36,13 +107,17 @@ class ControllerCheckoutShippingAddress extends Controller {
 			$this->data['postcode'] = '';
 		}
 				
-		if (isset($this->session->data['shipping_country_id'])) {
+		if (!$modData1['country_show_checkout'] && $modData1['def_country']) {
+			$this->data['country_id'] = $modData1['def_country'];		
+		} elseif (isset($this->session->data['shipping_country_id'])) {
 			$this->data['country_id'] = $this->session->data['shipping_country_id'];		
 		} else {
 			$this->data['country_id'] = $this->config->get('config_country_id');
 		}
 				
-		if (isset($this->session->data['shipping_zone_id'])) {
+		if (!$modData1['state_show_checkout'] && $modData1['def_state']) {
+			$this->data['zone_id'] = $modData1['def_state'];		
+		} elseif (isset($this->session->data['shipping_zone_id'])) {
 			$this->data['zone_id'] = $this->session->data['shipping_zone_id'];		
 		} else {
 			$this->data['zone_id'] = '';
@@ -51,7 +126,28 @@ class ControllerCheckoutShippingAddress extends Controller {
 		$this->load->model('localisation/country');
 		
 		$this->data['countries'] = $this->model_localisation_country->getCountries();
-
+	$this->load->model('account/customer');
+  	$this->model_account_customer->customInstall();
+  	foreach ($this->model_account_customer->getCustomOptions(2) as $option) {
+			if ($option['type'] != 'checkbox' && isset($this->request->post['option'.$option['option_id']])) {
+				$this->data['optionV'.$option['option_id']] = $this->request->post['option'.$option['option_id']];
+			}
+			else if($option['type'] != 'checkbox' ) {
+				$this->data['optionV'.$option['option_id']] = '';
+			}
+			if($option['type'] == 'checkbox'){
+			foreach ($option['option_value'] as $option_value) {
+			if (isset($this->request->post['optionV'.$option['option_id'].'C'.$option_value['option_value_id']])) {
+				$this->data['optionV_O'.$option['option_id'].'C'.$option_value['option_value_id']] = $this->request->post['optionV'.$option['option_id'].'C'.$option_value['option_value_id']];
+			}else{
+				$this->data['optionV_O'.$option['option_id'].'C'.$option_value['option_value_id']]='';
+			}
+					}
+			}
+		}
+		$this->data['text_select'] = $this->language->get('text_select');
+		$this->data['options'] = $this->model_account_customer->getCustomOptions(2);
+				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/shipping_address.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/checkout/shipping_address.tpl';
 		} else {
@@ -59,11 +155,14 @@ class ControllerCheckoutShippingAddress extends Controller {
 		}
 				
 		$this->response->setOutput($this->render());
-	}
+  	}	
 	
 	public function validate() {
 		$this->language->load('checkout/checkout');
-		
+		$this->load->model('account/signup');
+                $modData = $this->model_account_signup->getModData();
+		$isActive2 = $this->model_account_signup->isActiveMod();
+                $isActive=$isActive2['enablemod'];
 		$json = array();
 		
 		// Validate if customer is logged in.
@@ -104,19 +203,19 @@ class ControllerCheckoutShippingAddress extends Controller {
 			if (isset($this->request->post['shipping_address']) && $this->request->post['shipping_address'] == 'existing') {
 				$this->load->model('account/address');
 				
-				if (empty($this->request->post['address_id'])) {
+				if (empty($this->request->post['saddress_id'])) {
 					$json['error']['warning'] = $this->language->get('error_address');
-				} elseif (!in_array($this->request->post['address_id'], array_keys($this->model_account_address->getAddresses()))) {
+				} elseif (!in_array($this->request->post['saddress_id'], array_keys($this->model_account_address->getAddresses()))) {
 					$json['error']['warning'] = $this->language->get('error_address');
 				}
 						
 				if (!$json) {			
-					$this->session->data['shipping_address_id'] = $this->request->post['address_id'];
+					$this->session->data['shipping_address_id'] = $this->request->post['saddress_id'];
 					
 					// Default Shipping Address
 					$this->load->model('account/address');
 
-					$address_info = $this->model_account_address->getAddress($this->request->post['address_id']);
+					$address_info = $this->model_account_address->getAddress($this->request->post['saddress_id']);
 					
 					if ($address_info) {
 						$this->session->data['shipping_country_id'] = $address_info['country_id'];
@@ -134,37 +233,67 @@ class ControllerCheckoutShippingAddress extends Controller {
 			} 
 			
 			if ($this->request->post['shipping_address'] == 'new') {
-				if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-					$json['error']['firstname'] = $this->language->get('error_firstname');
+				$this->load->model('account/customer');
+				$this->model_account_customer->customInstall();
+  		foreach ($this->model_account_customer->getCustomOptions(2) as $option) {
+			if($option['required']){if (($option['type'] == 'date' || $option['type'] == 'radio' || $option['type'] == 'select')  && (!isset($this->request->post['option'.$option['option_id']]) || empty($this->request->post['option'.$option['option_id']]))) {
+				$json['error']['optionVE'.$option['option_id']]  = $option['error'];
+			}
+  			if (( $option['type'] == 'text' || $option['type'] == 'textarea')  && (!isset($this->request->post['option'.$option['option_id']]) || 
+  			empty($this->request->post['option'.$option['option_id']]))) {
+				$json['error']['optionVE'.$option['option_id']]  = $option['error'];
+			}
+			if (( $option['type'] == 'text' || $option['type'] == 'textarea')  && $option['max'] && $option['min'] && (utf8_strlen($this->request->post['option'.$option['option_id']]) < $option['min']
+  			|| utf8_strlen($this->request->post['option'.$option['option_id']]) > $option['max']
+  			)) {
+				$json['error']['optionVE'.$option['option_id']]  = $option['error'];
+			}
+			if ($option['type'] == 'checkbox' ){
+				$flag=true;
+				foreach ($option['option_value'] as $option_value) {
+			   		if(isset( $this->request->post['optionV'.$option['option_id'].'C'.$option_value['option_value_id']]) && !empty( $this->request->post['optionV'.$option['option_id'].'C'.$option_value['option_value_id']])) {
+						$flag=false;
+					}
 				}
+				if($flag){
+					$json['error']['optionVE'.$option['option_id']]  = $option['error'];
+				}			
+			}		
+		}}	
+			if ((!$isActive || ($isActive && $modData['f_name_req_checkout'] && $modData['f_name_show_checkout']))  && ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32))) {
+				$json['error']['firstname'] = $this->language->get('error_firstname');
+			}
 		
-				if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-					$json['error']['lastname'] = $this->language->get('error_lastname');
-				}
-		
-				if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
-					$json['error']['address_1'] = $this->language->get('error_address_1');
-				}
-		
-				if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
-					$json['error']['city'] = $this->language->get('error_city');
-				}
-				
-				$this->load->model('localisation/country');
-				
-				$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-				
-				if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
+			if ((!$isActive || ($isActive && $modData['l_name_req_checkout'] && $modData['l_name_show_checkout'])) && ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32))) {
+				$json['error']['lastname'] = $this->language->get('error_lastname');
+			}
+			
+			if ((!$isActive || ($isActive && $modData['address1_req_checkout'] && $modData['address1_show_checkout'])) && ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128))) {
+				$json['error']['address_1'] = $this->language->get('error_address_1');
+			}
+	
+			if ((!$isActive || ($isActive && $modData['city_req_checkout'] && $modData['city_show_checkout'])) && ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128))) {
+				$json['error']['city'] = $this->language->get('error_city');
+			}
+			
+			$this->load->model('localisation/country');
+			
+			if(!$isActive || ($isActive && $modData['pin_req_checkout'] && $modData['pin_show_checkout']))
+			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
+			
+			if ((!$isActive || ($isActive && $modData['pin_req_checkout'] && $modData['pin_show_checkout'] )) && $country_info) {
+				if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 					$json['error']['postcode'] = $this->language->get('error_postcode');
 				}
-				
-				if ($this->request->post['country_id'] == '') {
-					$json['error']['country'] = $this->language->get('error_country');
-				}
-				
-				if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
-					$json['error']['zone'] = $this->language->get('error_zone');
-				}
+			}
+	
+			if ((!$isActive || ($isActive && $modData['country_req_checkout'] && $modData['country_show_checkout'])) && $this->request->post['country_id'] == '') {
+				$json['error']['country'] = $this->language->get('error_country');
+			}
+			
+			if ((!$isActive || ($isActive && $modData['state_req_checkout'] && $modData['state_show_checkout'] )) && (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '')) {
+				$json['error']['zone'] = $this->language->get('error_zone');
+			}
 				
 				if (!$json) {						
 					// Default Shipping Address
@@ -174,6 +303,11 @@ class ControllerCheckoutShippingAddress extends Controller {
 					$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
 					$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
 					$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
+					$this->load->model('account/customer');
+					foreach ($this->model_account_customer->getCustomOptions(2) as $option) {				
+					if($option['section']==1)						
+						$this->session->data['xtensions']['shipping'][$option['identifier']]=$this->model_account_customer->getCustomerOptionsA($this->customer->getId(),$option['option_id'],$option['type'],$this->session->data['shipping_address_id']);
+					}
 									
 					unset($this->session->data['shipping_method']);						
 					unset($this->session->data['shipping_methods']);

@@ -1,7 +1,7 @@
 <?php
 class ModelAccountAddress extends Model {
 	public function addAddress($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$this->customer->getId() . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', company_id = '" . $this->db->escape(isset($data['company_id']) ? $data['company_id'] : '') . "', tax_id = '" . $this->db->escape(isset($data['tax_id']) ? $data['tax_id'] : '') . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', city = '" . $this->db->escape($data['city']) . "', zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$this->customer->getId() . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape(isset($data['company'])?$data['company']:'') . "', company_id = '" . $this->db->escape(isset($data['company_id']) ? $data['company_id'] : '') . "', tax_id = '" . $this->db->escape(isset($data['tax_id']) ? $data['tax_id'] : '') . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape(isset($data['address_2'])?$data['address_2']:'') . "', postcode = '" . $this->db->escape($data['postcode']) . "', city = '" . $this->db->escape($data['city']) . "', zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "'");
 		
 		$address_id = $this->db->getLastId();
 		
@@ -9,6 +9,8 @@ class ModelAccountAddress extends Model {
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 		}
 		
+		$this->load->model('account/customer');
+		$this->model_account_customer->addCustomerOptionData($data,(int)$this->customer->getId(),$address_id,2);
 		return $address_id;
 	}
 	
@@ -18,10 +20,14 @@ class ModelAccountAddress extends Model {
 		if (!empty($data['default'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 		}
+		
+		$this->load->model('account/customer');
+		$this->model_account_customer->addCustomerOptionData($data,(int)$this->customer->getId(),$address_id,2);
 	}
 	
 	public function deleteAddress($address_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "address WHERE address_id = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");
+		$this->db->query("delete from " . DB_PREFIX . "xcustom_customer_option where customer_id = ".(int)$this->customer->getId() . " AND address_id = ".(int)$address_id );
 	}	
 	
 	public function getAddress($address_id) {
@@ -107,7 +113,7 @@ class ModelAccountAddress extends Model {
 				$zone = '';
 				$zone_code = '';
 			}		
-		
+			//if($result['firstname'] && $result['lastname'] && $result['city']  && $result['zone_id'] && $result['country_id'])
 			$address_data[$result['address_id']] = array(
 				'address_id'     => $result['address_id'],
 				'firstname'      => $result['firstname'],

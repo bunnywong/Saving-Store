@@ -11,7 +11,7 @@
   </div>
   <h1><?php echo $heading_title; ?></h1>
   <p><?php echo $text_account_already; ?></p>
-   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <h2><?php echo $text_your_details; ?></h2>
     <div class="content">
       <table class="form xpersonal">

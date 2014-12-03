@@ -10,39 +10,45 @@ class ControllerAccountEdit extends Controller {
 		}
 
 		$this->language->load('account/edit');
-
+		
 		$this->document->setTitle($this->language->get('heading_title'));
-
+                $this->load->model('account/signup');
+                $this->data['isActive']=  $this->model_account_signup->isActiveMod();
+                $this->data['modData']=  $this->model_account_signup->getModData();
+                $modData1 = $this->model_account_signup->getModData();
+		$isActive2 = $this->model_account_signup->isActiveMod();
+                $isActive1=$isActive2['enablemod'];
+		
 		$this->load->model('account/customer');
-
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+		
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate($modData1,$isActive1)) {
 			$this->model_account_customer->editCustomer($this->request->post);
-
+			
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->redirect($this->url->link('account/account', '', 'SSL'));
 		}
 
-		$this->data['breadcrumbs'] = array();
+      	$this->data['breadcrumbs'] = array();
 
-		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_home'),
+      	$this->data['breadcrumbs'][] = array(
+        	'text'      => $this->language->get('text_home'),
 			'href'      => $this->url->link('common/home'),     	
-			'separator' => false
-		);
+        	'separator' => false
+      	); 
 
-		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_account'),
+      	$this->data['breadcrumbs'][] = array(
+        	'text'      => $this->language->get('text_account'),
 			'href'      => $this->url->link('account/account', '', 'SSL'),        	
-			'separator' => $this->language->get('text_separator')
-		);
+        	'separator' => $this->language->get('text_separator')
+      	);
 
-		$this->data['breadcrumbs'][] = array(
-			'text'      => $this->language->get('text_edit'),
+      	$this->data['breadcrumbs'][] = array(
+        	'text'      => $this->language->get('text_edit'),
 			'href'      => $this->url->link('account/edit', '', 'SSL'),       	
-			'separator' => $this->language->get('text_separator')
-		);
-
+        	'separator' => $this->language->get('text_separator')
+      	);
+		
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
@@ -52,7 +58,14 @@ class ControllerAccountEdit extends Controller {
 		$this->data['entry_email'] = $this->language->get('entry_email');
 		$this->data['entry_telephone'] = $this->language->get('entry_telephone');
 		$this->data['entry_fax'] = $this->language->get('entry_fax');
-
+		
+		$this->language->load('account/xtensions');
+    	$this->data['title_firstname'] = $this->language->get('title_firstname');
+    	$this->data['title_lastname'] = $this->language->get('title_lastname');
+    	$this->data['title_email'] = $this->language->get('title_email');
+    	$this->data['title_telephone'] = $this->language->get('title_telephone');
+    	$this->data['title_fax'] = $this->language->get('title_fax');		
+		
 		$this->data['button_continue'] = $this->language->get('button_continue');
 		$this->data['button_back'] = $this->language->get('button_back');
 
@@ -73,13 +86,13 @@ class ControllerAccountEdit extends Controller {
 		} else {
 			$this->data['error_lastname'] = '';
 		}
-
+		
 		if (isset($this->error['email'])) {
 			$this->data['error_email'] = $this->error['email'];
 		} else {
 			$this->data['error_email'] = '';
 		}	
-
+		
 		if (isset($this->error['telephone'])) {
 			$this->data['error_telephone'] = $this->error['telephone'];
 		} else {
@@ -131,6 +144,39 @@ class ControllerAccountEdit extends Controller {
 		} else {
 			$this->data['fax'] = '';
 		}
+		$this->model_account_customer->customInstall();	
+	foreach ($this->model_account_customer->getCustomOptions(1) as $option) {
+		if ( isset($this->error['optionVE'.$option['option_id']])) {
+			$this->data['optionVE'.$option['option_id']] = $this->error['optionVE'.$option['option_id']];
+		} else {
+			$this->data['optionVE'.$option['option_id']] = '';
+		}
+		}
+  	foreach ($this->model_account_customer->getCustomOptions(1) as $option) {
+			if ($option['type'] != 'checkbox' && isset($this->request->post['option'.$option['option_id']])) {
+				$this->data['optionV'.$option['option_id']] = $this->request->post['option'.$option['option_id']];
+			}
+  			elseif ($option['type'] != 'checkbox' && $this->request->server['REQUEST_METHOD'] != 'POST') {
+				$this->data['optionV'.$option['option_id']] = $this->model_account_customer->getCustomerOptions($this->customer->getId(),$option['option_id'],null);
+			}
+			else if($option['type'] != 'checkbox' ) {
+				$this->data['optionV'.$option['option_id']] = '';
+			}
+			if($option['type'] == 'checkbox'){
+			foreach ($option['option_value'] as $option_value) {
+			if (isset($this->request->post['optionV'.$option['option_id'].'C'.$option_value['option_value_id']])) {
+				$this->data['optionV_O'.$option['option_id'].'C'.$option_value['option_value_id']] = $this->request->post['optionV'.$option['option_id'].'C'.$option_value['option_value_id']];
+			}elseif ($this->request->server['REQUEST_METHOD'] != 'POST') {
+				$this->data['optionV_O'.$option['option_id'].'C'.$option_value['option_value_id']] = $this->model_account_customer->getCustomerOptions($this->customer->getId(),$option['option_id'],$option_value['option_value_id']);
+			}
+			else{
+				$this->data['optionV_O'.$option['option_id'].'C'.$option_value['option_value_id']]='';
+			}
+					}
+			}
+		}
+		$this->data['text_select'] = $this->language->get('text_select');			
+		$this->data['options']=$this->model_account_customer->getCustomOptions(1);
 
 		$this->data['back'] = $this->url->link('account/account', '', 'SSL');
 
@@ -139,7 +185,7 @@ class ControllerAccountEdit extends Controller {
 		} else {
 			$this->template = 'default/template/account/edit.tpl';
 		}
-
+		
 		$this->children = array(
 			'common/column_left',
 			'common/column_right',
@@ -148,30 +194,61 @@ class ControllerAccountEdit extends Controller {
 			'common/footer',
 			'common/header'	
 		);
-
+						
 		$this->response->setOutput($this->render());	
 	}
 
-	protected function validate() {
-		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-			$this->error['firstname'] = $this->language->get('error_firstname');
-		}
+	protected function validate($modData,$isActive) {
+	foreach ($this->model_account_customer->getCustomOptions(1) as $option) {
+			if($option['required']){if (($option['type'] == 'date' || $option['type'] == 'radio' || $option['type'] == 'select')  && (!isset($this->request->post['option'.$option['option_id']]) || empty($this->request->post['option'.$option['option_id']]))) {
+				$this->error['optionVE'.$option['option_id']]  = $option['error'];
+			}
+  			if (( $option['type'] == 'text' || $option['type'] == 'textarea')  && (!isset($this->request->post['option'.$option['option_id']]) || 
+  			empty($this->request->post['option'.$option['option_id']]))) {
+				$this->error['optionVE'.$option['option_id']]  = $option['error'];
+			}
+			if (( $option['type'] == 'text' || $option['type'] == 'textarea')  && $option['max'] && $option['min'] && (utf8_strlen($this->request->post['option'.$option['option_id']]) < $option['min']
+  			|| utf8_strlen($this->request->post['option'.$option['option_id']]) > $option['max']
+  			)) {
+				$this->error['optionVE'.$option['option_id']]  = $option['error'];
+			}
+			if ($option['type'] == 'checkbox' ){
+				$flag=true;
+				foreach ($option['option_value'] as $option_value) {
+			   		if(isset( $this->request->post['optionV'.$option['option_id'].'C'.$option_value['option_value_id']]) && !empty( $this->request->post['optionV'.$option['option_id'].'C'.$option_value['option_value_id']])) {
+						$flag=false;
+					}
+				}
+				if($flag){
+					$this->error['optionVE'.$option['option_id']]  = $option['error'];
+				}			
+			}		
+		}}
+	if ((!$isActive || ($isActive && $modData['f_name_req_edit'] && $modData['f_name_show_edit']))  && ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32))) {
+      		$this->error['firstname'] = $this->language->get('error_firstname');
+    	}
 
-		if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-			$this->error['lastname'] = $this->language->get('error_lastname');
-		}
+	if ((!$isActive || ($isActive && $modData['l_name_req_edit'] && $modData['l_name_show_edit'])) && ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32))) {
+      		$this->error['lastname'] = $this->language->get('error_lastname');
+    	}
 
 		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
 			$this->error['email'] = $this->language->get('error_email');
 		}
-
+		
 		if (($this->customer->getEmail() != $this->request->post['email']) && $this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_exists');
 		}
 
-		if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
-			$this->error['telephone'] = $this->language->get('error_telephone');
-		}
+		if ( $isActive && $modData['mob_req_edit'] && $modData['mob_show_edit'] && $modData['mob_fix'] && ((utf8_strlen($this->request->post['telephone']) != $modData['mob_fix']))){
+            $this->error['telephone'] = $this->language->get('error_telephone');
+        }else if ( $isActive && $modData['mob_req_edit'] && $modData['mob_show_edit'] && !$modData['mob_fix'] && $modData['mob_min'] && $modData['mob_max'] && ((utf8_strlen($this->request->post['telephone']) < $modData['mob_min']) || (utf8_strlen($this->request->post['telephone']) > $modData['mob_max']))){
+            $this->error['telephone'] = $this->language->get('error_telephone');
+        }else if ($isActive && $modData['mob_req_edit'] && $modData['mob_show_edit'] && !$modData['mob_max'] && !$modData['mob_fix'] && !$modData['mob_min'] && ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32))) {
+      		$this->error['telephone'] = $this->language->get('error_telephone');
+        }else if (!$isActive &&  ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32))) {
+      		$this->error['telephone'] = $this->language->get('error_telephone');
+    	}
 
 		if (!$this->error) {
 			return true;
