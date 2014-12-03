@@ -21,7 +21,8 @@
 			}
 			div:nth-child(2) > span.user-mail{/* email*/}
 
-		    width: 270px;
+		    width: 260px;
+            margin: 10px auto;
 		    box-sizing:border-box;
 		    padding: 10px;
 		    border-radius: 10px;
@@ -74,7 +75,7 @@
 		    margin: 5px 0;
 		}
 		.half-btn-left{
-		    width: 120px;
+		    width: 115px;
 		    height: 25px;
 		    border-radius: 4px;
 		    border: 1px white solid;
@@ -88,7 +89,7 @@
 		    background: @btn_blue_hover;
 		}
 		.half-btn-right{
-		    width: 120px;
+		    width: 115px;
 		    height: 25px;
 		    border-radius: 4px;
 		    border: 1px white solid;
@@ -190,5 +191,14 @@
 		background-color: transparent;
 	}
 
+// hide items icon
+    .primary-define #header #cart .heading > a span:before{
+        display: none;
+    }
 
+// change cart widget item qty color
+    .primary-define .mini-cart-info .cart-item-details{
+        color: #fff !important;
+        opacity: 0.6;
+    }
 
