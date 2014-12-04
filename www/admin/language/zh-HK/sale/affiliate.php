@@ -24,7 +24,7 @@ $_['column_amount']             = '合計';
 $_['column_action']             = '管理';
 
 // Entry
-$_['entry_firstname']           = '您的名字：';
+$_['entry_firstname']           = '姓名：';
 $_['entry_lastname']            = '您的姓氏：';
 $_['entry_email']               = 'E-Mail：';
 $_['entry_telephone']           = '電話：';

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Xtensions-Custom Registration Checkout Page</id>
+	<version>1.5.5.x-1.5.6</version>
+	<vqmver>2.X</vqmver>		
+	<author><![CDATA[<a href="http://xtensions.in" target = "_blank">www.xtensions.in</a><br />]]> <![CDATA[<a href="mailto:kwason@outlook.com">Email-Support</a><br />]]> <![CDATA[<a href="http://xtensions.in/support" target = "_blank">Ticket Support</a>]]></author>
+	<file name="catalog/controller/checkout/checkout.php">
+		<operation>
+			<search position="replace"><![CDATA[if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/checkout.tpl')) {]]></search>
+			<add><![CDATA[$this->load->model('account/signup');                
+		$isActive2 = $this->model_account_signup->isActiveMod();
+                $isActive=$isActive2['enablemod'];
+                if($isActive){
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/xcheckout.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/checkout/xcheckout.tpl';
+		} else {
+			$this->template = 'default/template/checkout/xcheckout.tpl';
+		}
+		}else if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/checkout.tpl')) {]]></add>
+		</operation>
+		
+		<operation>
+			<search position="replace"><![CDATA[$this->data['shipping_required'] = $this->cart->hasShipping();]]></search>
+			<add><![CDATA[
+			$this->data['shipping_required'] = $this->cart->hasShipping();	
+		$this->load->model('account/xcustomer');
+		$this->model_account_xcustomer->customInstall();
+		$this->data['options'] = $this->model_account_xcustomer->getCustomOptions();			
+		
+			]]></add>
+		</operation>
+		
+		
+	</file>
+	
+	
+	
+</modification>

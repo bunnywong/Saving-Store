@@ -1,5 +1,5 @@
 <?php
-// Heading 
+// Heading
 $_['heading_title']      = '商品退換';
 
 // Text
@@ -36,7 +36,7 @@ $_['column_status']      = '狀態';
 // Entry
 $_['entry_order_id']     = '訂單號：';
 $_['entry_date_ordered'] = '訂單日期：';
-$_['entry_firstname']    = '您的名字：';
+$_['entry_firstname']    = '姓名：';
 $_['entry_lastname']     = '您的姓氏：';
 $_['entry_email']        = '電子郵箱：';
 $_['entry_telephone']    = '電話：';

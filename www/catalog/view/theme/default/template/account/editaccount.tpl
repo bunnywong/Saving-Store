@@ -46,7 +46,7 @@
         <?php  if(!$isActive['enablemod'] || $isActive['enablemod'] && $modData['mob_show_edit']) {?>
         <tr sort="a<?php echo $modData['mob_sort']; ?>">
           <td>
-           <?php  if(!$isActive['enablemod'] || $isActive['enablemod'] && $modData['mob_req_edit']) echo '<span class="required">*</span>'; ?> 
+           <?php  if(!$isActive['enablemod'] || $isActive['enablemod'] && $modData['mob_req_edit']) echo '<span class="required">*</span>'; ?>
           <?php echo $entry_telephone; ?></td>
           <td><input type="text" <?php if($title_telephone) echo "xtitle ='".$title_telephone."'";?> name="telephone" value="<?php echo $telephone; ?>" class="<?php echo ($modData['mob_numeric']?"numeric":""); ?> <?php echo ($modData['mob_masking']?"mask telephone":""); ?>" />
             <?php if ($error_telephone) { ?>
@@ -66,8 +66,8 @@
         <input type="hidden" name="fax" value="<?php echo $fax; ?>" />
         <?php }?>
          <?php if ($options) { ?>
-         
-        
+
+
         <?php foreach ($options as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
        <tr sort="a<?php echo $option['sort_order']; ?>"><td>
@@ -79,36 +79,36 @@
             <option value=""><?php echo $text_select; ?></option>
             <?php foreach ($option['option_value'] as $option_value) { ?>
             <option <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'selected ="selected"' ; ?> value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
             </option>
             <?php } ?>
           </select>
          <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        
+
         <?php } ?>
         <?php if ($option['type'] == 'radio') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
-        
+
           <?php if ($option['required']) { ?>
           <span class="required">*</span>
           <?php } ?>
           <?php echo $option['name']; ?>:</td><td>
           <?php foreach ($option['option_value'] as $option_value) { ?>
-          
+
           <label <?php if($option['tips'])echo "xtitle='".$option['tips']."'"?> for="option-value-<?php echo $option_value['option_value_id']; ?>">
 		  <input type="radio" name="option<?php echo $option['option_id']; ?>" <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
 		  <?php echo $option_value['name']; ?>
-            
+
           </label>
           <br/>
-        
+
           <?php } ?>
           <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td>
-        </tr>        
+        </tr>
         <?php } ?>
         <?php if ($option['type'] == 'checkbox') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
@@ -117,20 +117,20 @@
           <?php } ?>
           <?php echo $option['name']; ?>:</td><td>
           <?php foreach ($option['option_value'] as $option_value) { ?>
-         
+
           <label <?php if($option['tips'])echo "xtitle='".$option['tips']."'"?> for="option-value-<?php echo $option_value['option_value_id']; ?>">
 		   <input type="checkbox" <?php if( ${"optionV_O" . $option['option_id']."C".$option_value['option_value_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> name="optionV<?php echo $option['option_id']; ?>C<?php echo $option_value['option_value_id']; ?>" value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
 		  <?php echo $option_value['name']; ?>
-            
+
           </label>
           <br/>
-        
+
           <?php } ?>
          <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
         <?php } ?>
-        
+
         <?php if ($option['type'] == 'text') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
           <?php if ($option['required']) { ?>
@@ -152,7 +152,7 @@
         <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        <?php } ?>        
+        <?php } ?>
         <?php if ($option['type'] == 'date') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
           <?php if ($option['required']) { ?>
@@ -163,9 +163,9 @@
         <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        
+
         <?php } ?>
-       
+
         <?php } ?>
         <?php } ?>
       </table>
@@ -178,11 +178,20 @@
     </div>
   </form>
   <?php echo $content_bottom; ?></div>
-  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
+  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.maskedinput.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/xcustom.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.timers.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery.dropshadow.js"></script>  
-  <script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script> 
+<script type="text/javascript" src="catalog/view/javascript/jquery.dropshadow.js"></script>
+  <!--
+  <script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script>
+  -->
   <link rel="stylesheet" type="text/css" href="catalog/view/javascript/mbTooltip.css" media="screen">
+
+<script>
+// My Script
+// --------------------------------------------------
+
+  $('body').addClass('account edit');
+</script>
 <?php echo $footer; ?>
