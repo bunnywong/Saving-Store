@@ -24,15 +24,15 @@
         <table class="form">
           <tr>
             <td><?php echo $text_order_id; ?></td>
-            <td>#<?php echo $order_id; ?></td>
+            <td><?php echo ORDER_PREFIX.$order_id; ?></td>
           </tr>
           <?php if (!empty($amazon_order_id)) { ?>
-          
+
           <tr>
             <td><?php echo $text_amazon_order_id; ?></td>
             <td><?php echo $amazon_order_id; ?></td>
           </tr>
-          
+
           <?php } ?>
           <tr>
             <td><?php echo $text_invoice_no; ?></td>
@@ -86,7 +86,7 @@
           <tr>
           <td><?php echo $option['name'];?>:</td>
           <td><?php echo $option['value'];?></td>
-          </tr>	
+          </tr>
           <?php }?>
           <?php }?>
           <tr>
