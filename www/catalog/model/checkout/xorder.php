@@ -532,6 +532,7 @@ class ModelCheckoutXOrder extends Model {
 
 				$text .= $language->get('text_new_footer') . "\n\n";
 
+				// Bun: Main customer email ?
 				$mail = new Mail();
 				$mail->protocol = $this->config->get('config_mail_protocol');
 				$mail->parameter = $this->config->get('config_mail_parameter');
@@ -541,6 +542,7 @@ class ModelCheckoutXOrder extends Model {
 				$mail->port = $this->config->get('config_smtp_port');
 				$mail->timeout = $this->config->get('config_smtp_timeout');
 				$mail->setTo($order_info['email']);
+				$mail->setTo($this->config->get('config_email'));
 				$mail->setFrom($this->config->get('config_email'));
 				$mail->setSender($order_info['store_name']);
 				$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
@@ -595,6 +597,7 @@ class ModelCheckoutXOrder extends Model {
 						$text .= $order_info['comment'] . "\n\n";
 					}
 
+					// Bun: Admin email ?
 					$mail = new Mail();
 					$mail->protocol = $this->config->get('config_mail_protocol');
 					$mail->parameter = $this->config->get('config_mail_parameter');
@@ -702,6 +705,7 @@ class ModelCheckoutXOrder extends Model {
 
 				$message .= $language->get('text_update_footer');
 
+				// Bun: if ($notify)
 				$mail = new Mail();
 				$mail->protocol = $this->config->get('config_mail_protocol');
 				$mail->parameter = $this->config->get('config_mail_parameter');
