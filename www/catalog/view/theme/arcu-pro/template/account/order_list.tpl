@@ -24,7 +24,7 @@
 				<tbody>
 					<?php foreach ($orders as $order) { ?>
 					<tr>
-						<td><?= ORDER_PREFIX; ?><?php echo $order['order_id']; ?></td>
+						<td><?php echo ORDER_PREFIX.year_perfix($order['date_added']).str_pad($order['order_id'],ORDER_DIGI,'0',STR_PAD_LEFT); ?></td>
 						<td><?php echo $order['name']; ?></td>
 						<td><?php echo $order['date_added']; ?></td>
 						<td><?php echo $order['products']; ?></td>

@@ -24,7 +24,7 @@
         <table class="form">
           <tr>
             <td><?php echo $text_order_id; ?></td>
-            <td><?php echo ORDER_PREFIX.$order_id; ?></td>
+            <td><?php echo ORDER_PREFIX.year_perfix($date_added).str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT); ?></td>
           </tr>
           <?php if (!empty($amazon_order_id)) { ?>
 
