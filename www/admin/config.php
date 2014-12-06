@@ -13,7 +13,6 @@
 	define('HTTPS_CATALOG', base_url2());
 
 	// DIR
-	// MUST use direct path
 	define('DIR_APPLICATION', '../admin/');
 	define('DIR_SYSTEM', '../system/');
 	define('DIR_DATABASE', '../system/database/');
@@ -36,5 +35,10 @@
 
 	define('DB_PREFIX', 'oc_');
 	define('ORDER_PREFIX', 'DS');
+	define('ORDER_DIGI', 4);
+
+	function year_perfix($date){
+		return substr($date,2,2).substr($date,5,2);
+	}
 
 ?>

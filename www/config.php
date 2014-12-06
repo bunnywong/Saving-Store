@@ -25,6 +25,7 @@
 	// DB
 	define('DB_DRIVER', 'mysqli');
 
+	// Fill in the blank
 	define('DB_HOSTNAME', '');
 	define('DB_USERNAME', '');
 	define('DB_PASSWORD', '');
@@ -32,5 +33,10 @@
 
 	define('DB_PREFIX', 'oc_');
 	define('ORDER_PREFIX', 'DS');
+	define('ORDER_DIGI', 4);
+
+	function year_perfix($date){
+		return substr($date,2,2).substr($date,5,2);
+	}
 
 ?>
