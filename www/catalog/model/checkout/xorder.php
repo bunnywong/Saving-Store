@@ -543,8 +543,7 @@ class ModelCheckoutXOrder extends Model {
 				$mail->timeout = $this->config->get('config_smtp_timeout');
 
 				// My Script
-				$mail->setTo($order_info['email']);
-				$mail->setBCC($this->config->get('config_email'));
+				$mail->setTo($order_info['email'].', '.$this->config->get('config_email'));
 
 				$mail->setFrom($this->config->get('config_email'));
 				$mail->setSender($order_info['store_name']);

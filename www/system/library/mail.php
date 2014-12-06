@@ -1,7 +1,6 @@
 <?php
 class Mail {
 	protected $to;
-	protected $bcc;
 	protected $from;
 	protected $sender;
 	protected $subject;
@@ -21,11 +20,6 @@ class Mail {
 
 	public function setTo($to) {
 		$this->to = $to;
-	}
-
-	// My Script
-	public function setBCC($bcc) {
-		$this->bcc = $bcc;
 	}
 
 	public function setFrom($from) {
@@ -84,13 +78,6 @@ class Mail {
 			$to = $this->to;
 		}
 
-		// My Script
-		if (is_array($this->bcc)) {
-			$bcc = implode(',', $this->bcc);
-		} else {
-			$bcc = $this->bcc;
-		}
-
 		$boundary = '----=_NextPart_' . md5(time());
 
 		$header = '';
@@ -99,7 +86,6 @@ class Mail {
 
 		if ($this->protocol != 'mail') {
 			$header .= 'To: ' . $to . $this->newline;
-			$header .= 'Bcc: ' . $bcc . $this->newline;
 			$header .= 'Subject: ' . $this->subject . $this->newline;
 		}
 
