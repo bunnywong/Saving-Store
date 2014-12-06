@@ -26,6 +26,10 @@
 // --------------------------------------------------
 // Global
 
+    .primary-define #toppanel #logo img{ // logo size
+        max-width:90%;
+    }
+
 	.center{
 		text-align: center;
 	}
@@ -60,8 +64,34 @@
     .primary-define .box-product > div {
         min-height: 312px;
     }
+
+    .primary-define {
+        .wrapper{
+            margin: 0 20px 0 290px;
+        }
+        a{
+            color: #000;
+        }
+        .box-product{
+            .category-info{
+                .image{
+                    height: 160px;
+                }
+                h1{
+                    display: none;
+                }
+                .primary-define{
+                    margin-top: 65px;
+                }
+            }
+        }
+    }
 // --------------------------------------------------
 // Main content
+
+    body{
+        color: #000; // Global font color
+    }
 
 	.list_view .rating,		// Items
 	.list_view .details,		// Items
@@ -151,6 +181,7 @@
 		// Product
 		h1{
 			font-weight: bold;
+            color: #000 !important;
 			border-bottom: 3px solid @gray!important;
 			padding-bottom: 15px!important;
 		}
