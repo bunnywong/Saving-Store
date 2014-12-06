@@ -1,6 +1,7 @@
 <?php
 class Mail {
 	protected $to;
+	protected $bcc;
 	protected $from;
 	protected $sender;
 	protected $subject;
