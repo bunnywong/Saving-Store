@@ -23,7 +23,7 @@ class Mail {
 	}
 
 	// My Script
-	public function setBCC($to) {
+	public function setBCC($bcc) {
 		$this->bcc = $bcc;
 	}
 
