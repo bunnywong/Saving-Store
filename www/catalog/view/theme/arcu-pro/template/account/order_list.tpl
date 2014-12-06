@@ -24,7 +24,7 @@
 				<tbody>
 					<?php foreach ($orders as $order) { ?>
 					<tr>
-						<td>#<?php echo $order['order_id']; ?></td>
+						<td><?= ORDER_PREFIX; ?><?php echo $order['order_id']; ?></td>
 						<td><?php echo $order['name']; ?></td>
 						<td><?php echo $order['date_added']; ?></td>
 						<td><?php echo $order['products']; ?></td>

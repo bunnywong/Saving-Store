@@ -13,6 +13,7 @@
 	define('HTTPS_CATALOG', base_url2());
 
 	// DIR
+	// MUST use direct path
 	define('DIR_APPLICATION', '../admin/');
 	define('DIR_SYSTEM', '../system/');
 	define('DIR_DATABASE', '../system/database/');
@@ -28,10 +29,12 @@
 	// DB
 	define('DB_DRIVER', 'mysqli');
 
-	define('DB_HOSTNAME', 'localhost');
-	define('DB_USERNAME', '');	// Edit this
-	define('DB_PASSWORD', '');	// Edit this
-	define('DB_DATABASE', '');	// Edit this
+	define('DB_HOSTNAME', '');
+	define('DB_USERNAME', '');
+	define('DB_PASSWORD', '');
+	define('DB_DATABASE', '');
 
 	define('DB_PREFIX', 'oc_');
+	define('ORDER_PREFIX', 'DS');
+
 ?>
