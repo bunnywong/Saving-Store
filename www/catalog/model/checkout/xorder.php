@@ -263,7 +263,7 @@ class ModelCheckoutXOrder extends Model {
 				$order_status = '';
 			}
 
-			$subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], ORDER_PREFIX.year_perfix($date_added).str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
+			$subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], ORDER_PREFIX.date("ym").str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
 
 			// HTML Mail
 			$template = new Template();
@@ -551,7 +551,7 @@ class ModelCheckoutXOrder extends Model {
 
 				// Admin Alert Mail
 				if ($this->config->get('config_alert_mail')) {
-					$subject = sprintf($language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), ORDER_PREFIX.year_perfix($date_added).str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
+					$subject = sprintf($language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), ORDER_PREFIX.date("ym").str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
 
 					// Text
 					$text  = $language->get('text_new_received') . "\n\n";
@@ -678,7 +678,7 @@ class ModelCheckoutXOrder extends Model {
 				$language->load($order_info['language_filename']);
 				$language->load('mail/order');
 
-				$subject = sprintf($language->get('text_update_subject'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'), ORDER_PREFIX.year_perfix($date_added).str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
+				$subject = sprintf($language->get('text_update_subject'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'), ORDER_PREFIX.date("ym").str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
 
 				$message  = $language->get('text_update_order') . ' ' . $order_id . "\n";
 				$message .= $language->get('text_update_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n\n";
