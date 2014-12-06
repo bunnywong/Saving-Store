@@ -27,7 +27,7 @@ class ModelCheckoutXOrder extends Model {
 		foreach ($data['vouchers'] as $voucher) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_voucher SET order_id = '" . (int)$order_id . "', description = '" . $this->db->escape($voucher['description']) . "', code = '" . $this->db->escape($voucher['code']) . "', from_name = '" . $this->db->escape($voucher['from_name']) . "', from_email = '" . $this->db->escape($voucher['from_email']) . "', to_name = '" . $this->db->escape($voucher['to_name']) . "', to_email = '" . $this->db->escape($voucher['to_email']) . "', voucher_theme_id = '" . (int)$voucher['voucher_theme_id'] . "', message = '" . $this->db->escape($voucher['message']) . "', amount = '" . (float)$voucher['amount'] . "'");
 		}
-			
+
 		foreach ($data['totals'] as $total) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_total SET order_id = '" . (int)$order_id . "', code = '" . $this->db->escape($total['code']) . "', title = '" . $this->db->escape($total['title']) . "', text = '" . $this->db->escape($total['text']) . "', `value` = '" . (float)$total['value'] . "', sort_order = '" . (int)$total['sort_order'] . "'");
 		}
@@ -37,10 +37,10 @@ class ModelCheckoutXOrder extends Model {
 
 	public function getOrder($order_id) {
 		$order_query = $this->db->query("SELECT *, (SELECT os.name FROM `" . DB_PREFIX . "order_status` os WHERE os.order_status_id = o.order_status_id AND os.language_id = o.language_id) AS order_status FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" . (int)$order_id . "'");
-			
+
 		if ($order_query->num_rows) {
 			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$order_query->row['payment_country_id'] . "'");
-				
+
 			if ($country_query->num_rows) {
 				$payment_iso_code_2 = $country_query->row['iso_code_2'];
 				$payment_iso_code_3 = $country_query->row['iso_code_3'];
@@ -48,17 +48,17 @@ class ModelCheckoutXOrder extends Model {
 				$payment_iso_code_2 = '';
 				$payment_iso_code_3 = '';
 			}
-				
+
 			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$order_query->row['payment_zone_id'] . "'");
-				
+
 			if ($zone_query->num_rows) {
 				$payment_zone_code = $zone_query->row['code'];
 			} else {
 				$payment_zone_code = '';
 			}
-				
+
 			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$order_query->row['shipping_country_id'] . "'");
-				
+
 			if ($country_query->num_rows) {
 				$shipping_iso_code_2 = $country_query->row['iso_code_2'];
 				$shipping_iso_code_3 = $country_query->row['iso_code_3'];
@@ -66,19 +66,19 @@ class ModelCheckoutXOrder extends Model {
 				$shipping_iso_code_2 = '';
 				$shipping_iso_code_3 = '';
 			}
-				
+
 			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$order_query->row['shipping_zone_id'] . "'");
-				
+
 			if ($zone_query->num_rows) {
 				$shipping_zone_code = $zone_query->row['code'];
 			} else {
 				$shipping_zone_code = '';
 			}
-				
+
 			$this->load->model('localisation/language');
-				
+
 			$language_info = $this->model_localisation_language->getLanguage($order_query->row['language_id']);
-				
+
 			if ($language_info) {
 				$language_code = $language_info['code'];
 				$language_filename = $language_info['filename'];
@@ -95,7 +95,7 @@ class ModelCheckoutXOrder extends Model {
 				'invoice_prefix'          => $order_query->row['invoice_prefix'],
 				'store_id'                => $order_query->row['store_id'],
 				'store_name'              => $order_query->row['store_name'],
-				'store_url'               => $order_query->row['store_url'],				
+				'store_url'               => $order_query->row['store_url'],
 				'customer_id'             => $order_query->row['customer_id'],
 				'firstname'               => $order_query->row['firstname'],
 				'lastname'                => $order_query->row['lastname'],
@@ -103,7 +103,7 @@ class ModelCheckoutXOrder extends Model {
 				'fax'                     => $order_query->row['fax'],
 				'email'                   => $order_query->row['email'],
 				'payment_firstname'       => $order_query->row['payment_firstname'],
-				'payment_lastname'        => $order_query->row['payment_lastname'],				
+				'payment_lastname'        => $order_query->row['payment_lastname'],
 				'payment_company'         => $order_query->row['payment_company'],
 				'payment_company_id'      => $order_query->row['payment_company_id'],
 				'payment_tax_id'          => $order_query->row['payment_tax_id'],
@@ -115,14 +115,14 @@ class ModelCheckoutXOrder extends Model {
 				'payment_zone'            => $order_query->row['payment_zone'],
 				'payment_zone_code'       => $payment_zone_code,
 				'payment_country_id'      => $order_query->row['payment_country_id'],
-				'payment_country'         => $order_query->row['payment_country'],	
+				'payment_country'         => $order_query->row['payment_country'],
 				'payment_iso_code_2'      => $payment_iso_code_2,
 				'payment_iso_code_3'      => $payment_iso_code_3,
 				'payment_address_format'  => $order_query->row['payment_address_format'],
 				'payment_method'          => $order_query->row['payment_method'],
 				'payment_code'            => $order_query->row['payment_code'],
 				'shipping_firstname'      => $order_query->row['shipping_firstname'],
-				'shipping_lastname'       => $order_query->row['shipping_lastname'],				
+				'shipping_lastname'       => $order_query->row['shipping_lastname'],
 				'shipping_company'        => $order_query->row['shipping_company'],
 				'shipping_address_1'      => $order_query->row['shipping_address_1'],
 				'shipping_address_2'      => $order_query->row['shipping_address_2'],
@@ -132,7 +132,7 @@ class ModelCheckoutXOrder extends Model {
 				'shipping_zone'           => $order_query->row['shipping_zone'],
 				'shipping_zone_code'      => $shipping_zone_code,
 				'shipping_country_id'     => $order_query->row['shipping_country_id'],
-				'shipping_country'        => $order_query->row['shipping_country'],	
+				'shipping_country'        => $order_query->row['shipping_country'],
 				'shipping_iso_code_2'     => $shipping_iso_code_2,
 				'shipping_iso_code_3'     => $shipping_iso_code_3,
 				'shipping_address_format' => $order_query->row['shipping_address_format'],
@@ -150,9 +150,9 @@ class ModelCheckoutXOrder extends Model {
 				'currency_code'           => $order_query->row['currency_code'],
 				'currency_value'          => $order_query->row['currency_value'],
 				'ip'                      => $order_query->row['ip'],
-				'forwarded_ip'            => $order_query->row['forwarded_ip'], 
-				'user_agent'              => $order_query->row['user_agent'],	
-				'accept_language'         => $order_query->row['accept_language'],				
+				'forwarded_ip'            => $order_query->row['forwarded_ip'],
+				'user_agent'              => $order_query->row['user_agent'],
+				'accept_language'         => $order_query->row['accept_language'],
 				'date_modified'           => $order_query->row['date_modified'],
 				'date_added'              => $order_query->row['date_added']
 			);
@@ -163,7 +163,7 @@ class ModelCheckoutXOrder extends Model {
 
 	public function confirm($order_id, $order_status_id, $comment = '', $notify = false) {
 		$order_info = $this->getOrder($order_id);
-			
+
 		if ($order_info && !$order_info['order_status_id']) {
 			// Fraud Detection
 			if ($this->config->get('config_fraud_detection')) {
@@ -178,9 +178,9 @@ class ModelCheckoutXOrder extends Model {
 
 			// Ban IP
 			$status = false;
-				
+
 			$this->load->model('account/xcustomer');
-				
+
 			if ($order_info['customer_id']) {
 				$results = $this->model_account_xcustomer->getIps($order_info['customer_id']);
 
@@ -194,7 +194,7 @@ class ModelCheckoutXOrder extends Model {
 			} else {
 				$status = $this->model_account_xcustomer->isBanIp($order_info['ip']);
 			}
-				
+
 			if ($status) {
 				$order_status_id = $this->config->get('config_order_status_id');
 			}
@@ -204,12 +204,12 @@ class ModelCheckoutXOrder extends Model {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '1', comment = '" . $this->db->escape(($comment && $notify) ? $comment : '') . "', date_added = NOW()");
 
 			$order_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
-				
+
 			foreach ($order_product_query->rows as $order_product) {
 				$this->db->query("UPDATE " . DB_PREFIX . "product SET quantity = (quantity - " . (int)$order_product['quantity'] . ") WHERE product_id = '" . (int)$order_product['product_id'] . "' AND subtract = '1'");
 
 				$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product['order_product_id'] . "'");
-					
+
 				foreach ($order_option_query->rows as $option) {
 					$this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET quantity = (quantity - " . (int)$order_product['quantity'] . ") WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "' AND subtract = '1'");
 				}
@@ -217,31 +217,31 @@ class ModelCheckoutXOrder extends Model {
 
 			if(!isset($passArray) || empty($passArray)){ $passArray = null; }
             $this->openbay->orderNew((int)$order_id);
-			
+
 			$this->cache->delete('product');
-				
+
 			// Downloads
 			$order_download_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_download WHERE order_id = '" . (int)$order_id . "'");
-				
+
 			// Gift Voucher
 			$this->load->model('checkout/voucher');
-				
+
 			$order_voucher_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_voucher WHERE order_id = '" . (int)$order_id . "'");
-				
+
 			foreach ($order_voucher_query->rows as $order_voucher) {
 				$voucher_id = $this->model_checkout_voucher->addVoucher($order_id, $order_voucher);
 
 				$this->db->query("UPDATE " . DB_PREFIX . "order_voucher SET voucher_id = '" . (int)$voucher_id . "' WHERE order_voucher_id = '" . (int)$order_voucher['order_voucher_id'] . "'");
 			}
-				
+
 			// Send out any gift voucher mails
 			if ($this->config->get('config_complete_status_id') == $order_status_id) {
 				$this->model_checkout_voucher->confirm($order_id);
 			}
-				
+
 			// Order Totals
 			$order_total_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_total` WHERE order_id = '" . (int)$order_id . "' ORDER BY sort_order ASC");
-				
+
 			foreach ($order_total_query->rows as $order_total) {
 				$this->load->model('total/' . $order_total['code']);
 
@@ -249,27 +249,27 @@ class ModelCheckoutXOrder extends Model {
 					$this->{'model_total_' . $order_total['code']}->confirm($order_info, $order_total);
 				}
 			}
-				
+
 			// Send out order confirmation mail
 			$language = new Language($order_info['language_directory']);
 			$language->load($order_info['language_filename']);
 			$language->load('mail/order');
-				
+
 			$order_status_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_status WHERE order_status_id = '" . (int)$order_status_id . "' AND language_id = '" . (int)$order_info['language_id'] . "'");
-				
+
 			if ($order_status_query->num_rows) {
 				$order_status = $order_status_query->row['name'];
 			} else {
 				$order_status = '';
 			}
-				
-			$subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
+
+			$subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], ORDER_PREFIX.year_perfix($date_added).str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
 
 			// HTML Mail
 			$template = new Template();
-				
+
 			$template->data['title'] = sprintf($language->get('text_new_subject'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'), $order_id);
-				
+
 			$template->data['text_greeting'] = sprintf($language->get('text_new_greeting'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 			$template->data['text_link'] = $language->get('text_new_link');
 			$template->data['text_download'] = $language->get('text_new_download');
@@ -291,19 +291,19 @@ class ModelCheckoutXOrder extends Model {
 			$template->data['text_total'] = $language->get('text_new_total');
 			$template->data['text_footer'] = $language->get('text_new_footer');
 			$template->data['text_powered'] = $language->get('text_new_powered');
-				
+
 			$template->data['logo'] = $this->config->get('config_url') . 'image/' . $this->config->get('config_logo');
 			$template->data['store_name'] = $order_info['store_name'];
 			$template->data['store_url'] = $order_info['store_url'];
 			$template->data['customer_id'] = $order_info['customer_id'];
 			$template->data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id;
-				
+
 			if ($order_download_query->num_rows) {
 				$template->data['download'] = $order_info['store_url'] . 'index.php?route=account/download';
 			} else {
 				$template->data['download'] = '';
 			}
-				
+
 			$template->data['order_id'] = $order_id;
 			$template->data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));
 			$template->data['payment_method'] = $order_info['payment_method'];
@@ -311,7 +311,7 @@ class ModelCheckoutXOrder extends Model {
 			$template->data['email'] = $order_info['email'];
 			$template->data['telephone'] = $order_info['telephone'];
 			$template->data['ip'] = $order_info['ip'];
-				
+
 			if ($comment && $notify) {
 				$template->data['comment'] = nl2br($comment);
 			} else {
@@ -335,7 +335,7 @@ class ModelCheckoutXOrder extends Model {
 					$replace= array_merge($replace, array($option['identifier'] => $value));}
 			}
 			$template->data['custom_personal'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $stringP))));
-				
+
 			$stringP = '';
 			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
 				if($option['email_display'])
@@ -346,7 +346,7 @@ class ModelCheckoutXOrder extends Model {
 			} else {
 				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' .$stringP. "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
 			}
-				
+
 			$find = array(
 				'{firstname}',
 				'{lastname}',
@@ -372,7 +372,7 @@ class ModelCheckoutXOrder extends Model {
 				'postcode'  => $order_info['payment_postcode'],
 				'zone'      => $order_info['payment_zone'],
 				'zone_code' => $order_info['payment_zone_code'],
-				'country'   => $order_info['payment_country']  
+				'country'   => $order_info['payment_country']
 				);
 				foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
 					if($option['email_display']){
@@ -381,13 +381,13 @@ class ModelCheckoutXOrder extends Model {
 						else $replace= array_merge($replace, array($option['identifier'] => ''));
 				}
 				$template->data['payment_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
-					
+
 				if ($order_info['shipping_address_format']) {
 					$format = $order_info['shipping_address_format'];
 				} else {
 					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" .$stringP. '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
 				}
-					
+
 				$find = array(
 				'{firstname}',
 				'{lastname}',
@@ -413,7 +413,7 @@ class ModelCheckoutXOrder extends Model {
 				'postcode'  => $order_info['shipping_postcode'],
 				'zone'      => $order_info['shipping_zone'],
 				'zone_code' => $order_info['shipping_zone_code'],
-				'country'   => $order_info['shipping_country']  
+				'country'   => $order_info['shipping_country']
 				);
 				foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
 					if($option['email_display']){
@@ -422,7 +422,7 @@ class ModelCheckoutXOrder extends Model {
 						else $replace= array_merge($replace, array($option['identifier'] => ''));
 				}
 				$template->data['shipping_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
-					
+
 				// Products
 				$template->data['products'] = array();
 
@@ -437,13 +437,13 @@ class ModelCheckoutXOrder extends Model {
 						} else {
 							$value = utf8_substr($option['value'], 0, utf8_strrpos($option['value'], '.'));
 						}
-							
+
 						$option_data[] = array(
 						'name'  => $option['name'],
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 						);
 					}
-						
+
 					$template->data['products'][] = array(
 					'name'     => $product['name'],
 					'model'    => $product['model'],
@@ -456,7 +456,7 @@ class ModelCheckoutXOrder extends Model {
 
 				// Vouchers
 				$template->data['vouchers'] = array();
-					
+
 				foreach ($order_voucher_query->rows as $voucher) {
 					$template->data['vouchers'][] = array(
 					'description' => $voucher['description'],
@@ -465,14 +465,14 @@ class ModelCheckoutXOrder extends Model {
 				}
 
 				$template->data['totals'] = $order_total_query->rows;
-					
+
 				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/xorder.tpl')) {
 					$html = $template->fetch($this->config->get('config_template') . '/template/mail/xorder.tpl');
 				} else {
 					$html = $template->fetch('default/template/mail/xorder.tpl');
 				}
-				
-				
+
+
             // Can not send confirmation emails for CBA orders as email is unknown
             $this->load->model('payment/amazon_checkout');
             if (!$this->model_payment_amazon_checkout->isAmazonOrder($order_info['order_id'])) {
@@ -551,7 +551,7 @@ class ModelCheckoutXOrder extends Model {
 
 				// Admin Alert Mail
 				if ($this->config->get('config_alert_mail')) {
-					$subject = sprintf($language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), $order_id);
+					$subject = sprintf($language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), ORDER_PREFIX.year_perfix($date_added).str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
 
 					// Text
 					$text  = $language->get('text_new_received') . "\n\n";
@@ -562,16 +562,16 @@ class ModelCheckoutXOrder extends Model {
 
 					foreach ($order_product_query->rows as $product) {
 						$text .= $product['quantity'] . 'x ' . $product['name'] . ' (' . $product['model'] . ') ' . html_entity_decode($this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']), ENT_NOQUOTES, 'UTF-8') . "\n";
-							
+
 						$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . $product['order_product_id'] . "'");
-							
+
 						foreach ($order_option_query->rows as $option) {
 							if ($option['type'] != 'file') {
 								$value = $option['value'];
 							} else {
 								$value = utf8_substr($option['value'], 0, utf8_strrpos($option['value'], '.'));
 							}
-								
+
 							$text .= chr(9) . '-' . $option['name'] . ' ' . (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value) . "\n";
 						}
 					}
@@ -579,7 +579,7 @@ class ModelCheckoutXOrder extends Model {
 					foreach ($order_voucher_query->rows as $voucher) {
 						$text .= '1x ' . $voucher['description'] . ' ' . $this->currency->format($voucher['amount'], $order_info['currency_code'], $order_info['currency_value']);
 					}
-						
+
 					$text .= "\n";
 
 					$text .= $language->get('text_new_order_total') . "\n";
@@ -594,7 +594,7 @@ class ModelCheckoutXOrder extends Model {
 						$text .= $language->get('text_new_comment') . "\n\n";
 						$text .= $order_info['comment'] . "\n\n";
 					}
-						
+
 					$mail = new Mail();
 					$mail->protocol = $this->config->get('config_mail_protocol');
 					$mail->parameter = $this->config->get('config_mail_parameter');
@@ -640,9 +640,9 @@ class ModelCheckoutXOrder extends Model {
 
 			// Ban IP
 			$status = false;
-				
+
 			$this->load->model('account/xcustomer');
-				
+
 			if ($order_info['customer_id']) {
 
 				$results = $this->model_account_xcustomer->getIps($order_info['customer_id']);
@@ -657,7 +657,7 @@ class ModelCheckoutXOrder extends Model {
 			} else {
 				$status = $this->model_account_xcustomer->isBanIp($order_info['ip']);
 			}
-				
+
 			if ($status) {
 				$order_status_id = $this->config->get('config_order_status_id');
 			}
@@ -677,8 +677,8 @@ class ModelCheckoutXOrder extends Model {
 				$language = new Language($order_info['language_directory']);
 				$language->load($order_info['language_filename']);
 				$language->load('mail/order');
-					
-				$subject = sprintf($language->get('text_update_subject'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'), $order_id);
+
+				$subject = sprintf($language->get('text_update_subject'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'), ORDER_PREFIX.year_perfix($date_added).str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT));
 
 				$message  = $language->get('text_update_order') . ' ' . $order_id . "\n";
 				$message .= $language->get('text_update_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n\n";
@@ -699,7 +699,7 @@ class ModelCheckoutXOrder extends Model {
 					$message .= $language->get('text_update_comment') . "\n\n";
 					$message .= $comment . "\n\n";
 				}
-					
+
 				$message .= $language->get('text_update_footer');
 
 				$mail = new Mail();
@@ -727,13 +727,13 @@ class ModelCheckoutXOrder extends Model {
 				set order_id = ".(int)$order_id." ,
 				customer_id = ".(int)$customer_id." ,
 				data_in = '".($option['section']==1?'personal':'payment')."' ,
-				section = ".$option['section']." , 
+				section = ".$option['section']." ,
 				option_id = ".(int)$option['option_id']." ,
 				option_value_id = ".(int)$option['option_id']." ,
 				name = '".$option['name']."' ,
-				value = '".$this->db->escape($data['optionx']['option'.$option['option_id']])."' ,				
+				value = '".$this->db->escape($data['optionx']['option'.$option['option_id']])."' ,
 				type = '".$option['type']."'
-			");		
+			");
 		}
 		if($hasShipping){
 			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
@@ -741,13 +741,13 @@ class ModelCheckoutXOrder extends Model {
 				set order_id = ".(int)$order_id." ,
 				customer_id = ".(int)$customer_id." ,
 				data_in = 'shipping' ,
-				section = ".$option['section']." , 
+				section = ".$option['section']." ,
 				option_id = ".(int)$option['option_id']." ,
 				option_value_id = ".(int)$option['option_id']." ,
 				name = '".$option['name']."' ,
-				value = '".$this->db->escape($data['optionx']['shipping']['option'.$option['option_id']])."' ,				
+				value = '".$this->db->escape($data['optionx']['shipping']['option'.$option['option_id']])."' ,
 				type = '".$option['type']."'
-			");		
+			");
 			}}
 	}
 }
