@@ -5,6 +5,11 @@
 */
 
 $(document).ready(function(){
+
+	$('#header #cart').click(function(){
+		window.location = base + 'index.php?route=checkout/cart';
+	});
+
 	// ---------- ---------- ---------- ---------- ----------
 	// Redirect to Forget pwd & Register
 
