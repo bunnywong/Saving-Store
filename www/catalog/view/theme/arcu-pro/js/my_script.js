@@ -103,7 +103,7 @@ $(document).ready(function(){
 			rand = Math.floor((Math.random() * 10000) + 1);
 
 				// Tip
-			$('table tr[sort="a99"] td:first-child')
+			$('table tr[sort="a9"] td:first-child')
 				.html('<span class="required">*</span> 驗証碼 (請輪入數字：' + rand + ')');
 				// Clear field for error return
 			$('table tr[sort="a99"] td:last-child input').val('');
@@ -180,7 +180,50 @@ $(document).ready(function(){
 	}, 1000);
 
 	// ---------- ---------- ---------- ---------- ----------
+
+	$(document).ready(function(){
+		function isInt(x) {
+			return Math.floor(x) === x;
+		}
+
+		if ( $('body).hasClass(detail_view') ) {
+			function isInt(x) {
+				return Math.floor(x) === x;
+			}
+
+			// qty add +
+			$('.btn.add').click(function(){
+				$('#qty_box').val(function(){
+					var qty = $(this).val();
+						qty = parseInt(qty) + 1;
+					return qty;
+				})
+			});
+
+			// qty less -
+			$('.btn.less').click(function(){
+				$('#qty_box').val(function(){
+					var qty = $(this).val();
+					if( qty == 1 ) return 1;
+
+						qty = parseInt(qty) - 1;
+					return qty;
+				})
+			});
+
+			$('#qty_box').change(function(){
+				var qty = $(this).val();
+				if( isInt(qty) == false)
+					$(this).val(1);
+			});
+		}
+	});
+
+	// ---------- ---------- ---------- ---------- ----------
 	// Global
+
+
+
 
 	// Random
 	var rand = '';

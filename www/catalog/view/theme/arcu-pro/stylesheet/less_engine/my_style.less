@@ -190,9 +190,36 @@
 		.cart > div:first-child{	// Add to cart btn container
 			border-bottom: 0px!important;
 		}
+		.btn_qty_wrapper{
+			width: 50px;
+			display: inline-block;
+			text-align: center;
+			position: relative;
+			top: 15px;
+			.btn{
+				display: inline-block;
+				font-size: 20px;
+				cursor: pointer;
+				border: 1px solid @white;
+				color: @white;
+				background-color: @gray;
+				margin: 0px!important;
+				max-width: 10px!important;
+				border-radius: 5px;
+			}
+			.btn:hover{
+				color: @black;
+				background-color: @yellow;
+			}
+			.btn:active{
+				position: relative;
+				top: 2px;
+			}
+		}
+
 	}// !.detail_view
 
-// --------------------------------------------------
+// ------------------	--------------------------------
 // Sign Up
 
 	.sign_up{

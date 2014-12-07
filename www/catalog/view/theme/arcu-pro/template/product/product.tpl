@@ -1,6 +1,8 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/detail_view.css" />
+<?php echo $header; ?>
+<script>$('body').addClass('detail_view');</script>
+<?php echo $column_left; ?><?php echo $column_right; ?>
 
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/detail_view.css" />
 <div class="my_banner">
 	<?php
 		$this->language->load('information/information');
@@ -96,7 +98,12 @@
 					<?php } ?>
 					<span><?php echo $text_stock; ?></span> <?php echo $stock; ?><br />
 					<span><?php echo $text_qty; ?></span>
-					<input type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
+					<input id="qty_box" type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
+					<div class="btn_qty_wrapper">
+						<span class="btn add">+</span>
+						<span class="btn less">-</span>
+					</div>
+
 					<input type="hidden" name="product_id" size="4" value="<?php echo $product_id; ?>" />
 					<?php if ($minimum > 1) { ?>
 					<div class="minimum"><?php echo $text_minimum; ?></div>
@@ -574,7 +581,6 @@ $(document).ready(function() {
 	});
 	$('.time').timepicker({timeFormat: 'h:m'});
 
-	$('body').addClass('detail_view');
 });
 //--></script>
 <?php echo $footer; ?>

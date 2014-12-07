@@ -18,7 +18,8 @@
   background: transparent;
 }
 .login-con {
-  width: 270px;
+  width: 260px;
+  margin: 10px auto;
   box-sizing: border-box;
   padding: 10px;
   border-radius: 10px;
@@ -74,7 +75,7 @@
   margin: 5px 0;
 }
 .half-btn-left {
-  width: 120px;
+  width: 115px;
   height: 25px;
   border-radius: 4px;
   border: 1px white solid;
@@ -88,7 +89,7 @@
   background: ;
 }
 .half-btn-right {
-  width: 120px;
+  width: 115px;
   height: 25px;
   border-radius: 4px;
   border: 1px white solid;
@@ -173,4 +174,11 @@
 }
 #bottom .mCustomScrollBox {
   background-color: transparent;
+}
+.primary-define #header #cart .heading > a span:before {
+  display: none;
+}
+.primary-define .mini-cart-info .cart-item-details {
+  color: #fff !important;
+  opacity: 0.6;
 }
