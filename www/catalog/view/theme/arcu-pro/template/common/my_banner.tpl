@@ -7,7 +7,7 @@
 		    <input type="email" name="email" class="username" placeholder="電郵">
 		    <input type="password" name="password" class="password" placeholder="密碼" >
 		    <a href="<?= $base; ?>index.php?route=account/forgotten">
-		    	<button class="half-btn-left btn_not_submit forgot_pwd">忘記密碼</button>
+		    	<span class="half-btn-left btn_not_submit forgot_pwd">忘記密碼</span>
 		    </a>
 		    <button class="half-btn-right" type="submit">登入</button>
 		    <a href="<?= $base; ?>index.php?route=account/register">
