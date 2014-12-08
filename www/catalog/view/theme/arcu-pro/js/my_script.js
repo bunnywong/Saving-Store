@@ -232,11 +232,45 @@ $(document).ready(function(){
 		}
 	});
 
-	// ---------- ---------- ---------- ---------- ----------
+	// --------------------------------------------------
+	// jQuery Fn.
+
+	(function ( $ ) {
+
+		$.fn.g2redeem = function() {
+
+			var is_visited_cart = localStorage.getItem('visited_cart');
+			if( is_visited_cart ){
+				localStorage.removeItem("visited_cart");
+				$('.btn_continue').attr('href', 'index.php?route=checkout/checkout');	// edit
+			}
+
+		}// !success()
+
+		// ---------- ---------- ---------- ---------- ----------
+
+	}( jQuery ));
+
+	// --------------------------------------------------
 	// Global
 
+	$(function () {
+
+		if( $('body').hasClass('success') )
+			$('body').g2redeem();
+
+	});
+
+		// ---------- ---------- ---------- ---------- ----------
 
 
+
+
+/*(function($) {
+	$.fn.success = function() {
+		alert();
+	};
+})(this.jQuery);*/
 
 	// Random
 	var rand = '';

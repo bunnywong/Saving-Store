@@ -99,7 +99,9 @@ $(document).ready(function() {
 
 // Checkout
 $('#button-account').live('click', function() {
-	$.ajax({
+	localStorage.setItem('visited_cart', true);
+	window.location = 'index.php?route=account/signup';
+/*	$.ajax({
 		url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').attr('value'),
 		dataType: 'html',
 		beforeSend: function() {
@@ -166,7 +168,7 @@ $('#button-account').live('click', function() {
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
-	});
+	}); // !aJax*/
 });
 
 // Login
@@ -1057,7 +1059,7 @@ function quickConfirm(module){
 // --------------------------------------------------
 
 $(document).ready(function() {
-	$('body').addClass('checkout my_date_picker');
+	$('body').addClass('checkout');
 });
 
 //--></script>
