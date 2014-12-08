@@ -542,11 +542,6 @@ $(document).ready(function() {
 		height: 480
 	});
 
-  // --------------------------------------------------
-  // My Script
-
-  $('body').addClass('sign_up');
-
 });
 
 
