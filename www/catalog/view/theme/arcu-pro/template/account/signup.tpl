@@ -1,7 +1,7 @@
 <?php echo $header; ?>
 <script>
 jQuery(document).ready(function($){
-  $('body').addClass('sign_up');
+  $('body').addClass('signup');
 });
 </script>
 <?php if ($error_warning) { ?>

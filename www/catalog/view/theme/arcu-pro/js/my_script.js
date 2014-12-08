@@ -27,7 +27,7 @@ $(document).ready(function(){
 	// ---------- ---------- ---------- ---------- ----------
 
 	function refine_district(){
-		$('body.sign_up .my_district select[name="zone_id"] option:nth-child(n+2), body.checkout .xaddress option:nth-child(n+2)')
+		$('body.signup .my_district select[name="zone_id"] option:nth-child(n+2), body.checkout .xaddress option:nth-child(n+2)')
 		.each(function(){
 			var str = $(this).text();
 				str = str.substring(5);
@@ -36,8 +36,8 @@ $(document).ready(function(){
 		});
 	}// !refine_district()
 
-	function sign_up_refine(){
-		if( $('body').hasClass('sign_up') ){
+	function signup_refine(){
+		if( $('body').hasClass('signup') ){
 			// add_title
 			$('table tr:[sort="a50"]')
 				.before('<tr><td colspan="2"><h2>子女資料</h3></td></tr>')
@@ -121,7 +121,7 @@ $(document).ready(function(){
 					$('table tr[sort="a99"] td:last-child input').val('');
 			});
 		}// !Lock: body class
-	}// !sign_up_refine()
+	}// !signup_refine()
 
 	function my_date_picker(){
 		if( $('body').hasClass('my_date_picker') ){
@@ -175,8 +175,8 @@ $(document).ready(function(){
 
 
 	setTimeout(function(){
-		refine_district();
-		sign_up_refine();
+//		refine_district();
+		signup_refine();
 		my_date_picker();
 
 		checkout_refine();
