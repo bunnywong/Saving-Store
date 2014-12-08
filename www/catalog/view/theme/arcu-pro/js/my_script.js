@@ -38,6 +38,9 @@ $(document).ready(function(){
 
 	function signup_refine(){
 		if( $('body').hasClass('signup') ){
+
+
+
 			// add_title
 			$('table tr:[sort="a50"]')
 				.before('<tr><td colspan="2"><h2>子女資料</h3></td></tr>')
@@ -119,6 +122,11 @@ $(document).ready(function(){
 				var user_captcha = $('table tr[sort="a99"] td:last-child input').val();
 				if( user_captcha != rand )
 					$('table tr[sort="a99"] td:last-child input').val('');
+
+				var email 			= $('table tr:[sort="a20"] input').val();
+				var confirm_email 	= $('table tr:[sort="a21"] input').val();
+				if( email != confirm_email )
+						$('table tr:[sort="a21"] input').val('');
 			});
 		}// !Lock: body class
 	}// !signup_refine()
