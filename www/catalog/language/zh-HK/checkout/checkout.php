@@ -18,7 +18,8 @@ $_['text_checkout']                  = '結賬選項：';
 $_['text_i_am_returning_customer']   = '我已註冊賬戶';
 $_['text_register']                  = '註冊賬戶';
 $_['text_guest']                     = '直接結賬';
-$_['text_register_account']          = '註冊一個賬戶以便您更快捷地購物， 查看訂單狀態， 查看採購的歷史記錄， 和更多的管理項目。';
+//$_['text_register_account']          = '註冊一個賬戶以便您更快捷地購物， 查看訂單狀態， 查看採購的歷史記錄， 和更多的管理項目。';
+$_['text_register_account']          = '註冊一個賬戶以便您更快捷地購物， 查看訂單狀態， 查看採購的歷史記錄， 和更多的管理項目，如已成為會員，請先登入';
 $_['text_forgotten']                 = '忘了密碼';
 $_['text_items']                     = '%s 件商品 - %s';
 $_['text_your_details']              = '我的個人信息';
@@ -43,10 +44,10 @@ $_['text_month']                     = '月';
 $_['text_year']                      = '年';
 
 // Column
-$_['column_name']                    = '品名';
+$_['column_name']                    = '產品名';
 $_['column_model']                   = '型號';
 $_['column_quantity']                = '數量';
-$_['column_price']                   = '價格';
+$_['column_price']                   = '價錢';
 $_['column_total']                   = '合計';
 
 // Entry

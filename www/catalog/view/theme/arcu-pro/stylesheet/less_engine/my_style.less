@@ -66,7 +66,7 @@
             margin: 0 20px 0 290px;
         }
         a{
-            color: #000;
+            color: @black;
         }
         .box-product{
             .category-info{
@@ -86,7 +86,7 @@
 // Main content
 
     body{
-        color: #000; // Global font color
+        color: @black; // Global font color
     }
 
 	.list_view .rating,		// Items
@@ -177,7 +177,7 @@
 		// Product
 		h1{
 			font-weight: bold;
-            color: #000 !important;
+            color: @black !important;
 			border-bottom: 3px solid @gray!important;
 			padding-bottom: 15px!important;
 		}
@@ -200,7 +200,6 @@
 				color: @white;
 				background-color: @gray;
 				margin: 0px!important;
-				max-width: 10px!important;
 				border-radius: 5px;
                 min-width: 50px;
 			}
@@ -299,6 +298,9 @@
 	body.checkout{
 		// ----- ----- ----- ----- -----
 		// x tamplate over ride
+		#login{
+			display: none;
+		}
 		#payment-address > div.checkout-content > .xleft > .xten label:hover,
 		#payment-address > div.checkout-content > .xright > .xten label:hover{
 			background-color: @btn_blue_hover!important;
