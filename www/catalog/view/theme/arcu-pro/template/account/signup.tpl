@@ -1,7 +1,7 @@
 <?php echo $header; ?>
 <script>
 jQuery(document).ready(function($){
-  $('body').addClass('signup');
+  $('body').addClass('signup  my_district my_date_picker');
 });
 </script>
 <?php if ($error_warning) { ?>
@@ -556,6 +556,11 @@ $(document).ready(function() {
 <script type="text/javascript" src="catalog/view/javascript/xcustom.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.timers.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.dropshadow.js"></script>
-  <script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script>
+<!--
+<script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script>
+-->
+
+<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/jquery.mtz.monthpicker.js"></script>
+
   <link rel="stylesheet" type="text/css" href="catalog/view/javascript/mbTooltip.css" media="screen">
 <?php echo $footer; ?>
