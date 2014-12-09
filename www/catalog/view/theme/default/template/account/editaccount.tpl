@@ -1,4 +1,11 @@
 <?php echo $header; ?>
+
+<script>
+  jQuery(document).ready(function(){
+    $('body').addClass('editaccount');
+  });
+</script>
+
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
@@ -173,7 +180,7 @@
     <div class="buttons">
       <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
       <div class="right">
-        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
+        <input type="submit" value="<?php echo $button_save; ?>" class="button" />
       </div>
     </div>
   </form>
@@ -188,10 +195,4 @@
   -->
   <link rel="stylesheet" type="text/css" href="catalog/view/javascript/mbTooltip.css" media="screen">
 
-<script>
-// My Script
-// --------------------------------------------------
-
-  $('body').addClass('account edit');
-</script>
 <?php echo $footer; ?>

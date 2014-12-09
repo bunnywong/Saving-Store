@@ -26,6 +26,7 @@ $_['text_separator']        = ' &raquo; ';
 $_['button_add_address']    = '添加地址';
 $_['button_back']           = '返回';
 $_['button_continue']       = '繼續';
+$_['button_save'] 		    = '儲存';	// My Script
 $_['button_cart']           = '加入購物車';
 $_['button_compare']        = '對比';
 $_['button_wishlist']       = '收藏';

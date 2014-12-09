@@ -23,7 +23,7 @@ class ControllerAccountEditAccount extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate($modData1,$isActive1)) {
 			$this->model_account_xcustomer->editCustomer($this->request->post);
-				
+
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->redirect($this->url->link('account/account', '', 'SSL'));
@@ -33,19 +33,19 @@ class ControllerAccountEditAccount extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),     	
+			'href'      => $this->url->link('common/home'),
         	'separator' => false
 		);
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', 'SSL'),        	
+			'href'      => $this->url->link('account/account', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
 		);
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_edit'),
-			'href'      => $this->url->link('account/edit', '', 'SSL'),       	
+			'href'      => $this->url->link('account/edit', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
 		);
 
@@ -67,6 +67,7 @@ class ControllerAccountEditAccount extends Controller {
 		$this->data['title_fax'] = $this->language->get('title_fax');
 
 		$this->data['button_continue'] = $this->language->get('button_continue');
+		$this->data['button_save'] = $this->language->get('button_save');	// My Script
 		$this->data['button_back'] = $this->language->get('button_back');
 
 		if (isset($this->error['warning'])) {
@@ -192,7 +193,7 @@ class ControllerAccountEditAccount extends Controller {
 			'common/content_top',
 			'common/content_bottom',
 			'common/footer',
-			'common/header'	
+			'common/header'
 			);
 
 			$this->response->setOutput($this->render());
