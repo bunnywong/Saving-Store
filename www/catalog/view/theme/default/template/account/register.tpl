@@ -33,7 +33,7 @@
             <?php } ?></td>
         </tr>
         <?php } ?>
-        
+
         <tr sort="a<?php echo $modData['email_sort']; ?>">
           <td><span class="required">*</span> <?php echo $entry_email; ?></td>
           <td><input type="text" name="email" value="<?php echo $email; ?>" <?php if($title_email) echo "xtitle ='".$title_email."'";?> />
@@ -41,7 +41,7 @@
             <span class="error"><?php echo $error_email; ?></span>
             <?php } ?></td>
         </tr>
-        
+
          <?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['mob_show']) { ?>
         <tr sort="a<?php echo $modData['mob_sort']; ?>">
           <td><?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['mob_req'])  echo "<span class = required >*</span>" ; ?> <?php echo $entry_telephone; ?></td>
@@ -58,8 +58,8 @@
         </tr>
         <?php } ?>
          <?php if ($optionsP) { ?>
-         
-        
+
+
         <?php foreach ($optionsP as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
        <tr sort="a<?php echo $option['sort_order']; ?>"><td>
@@ -71,35 +71,35 @@
             <option value=""><?php echo $text_select; ?></option>
             <?php foreach ($option['option_value'] as $option_value) { ?>
             <option <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'selected ="selected"' ; ?> value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
             </option>
             <?php } ?>
           </select>
          <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        
+
         <?php } ?>
         <?php if ($option['type'] == 'radio') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
-        
+
           <?php if ($option['required']) { ?>
           <span class="required">*</span>
           <?php } ?>
           <?php echo $option['name']; ?>:</td><td>
           <?php foreach ($option['option_value'] as $option_value) { ?>
-          
+
           <label <?php if($option['tips'])echo "xtitle='".$option['tips']."'"?> for="option-value-<?php echo $option_value['option_value_id']; ?>">
 		  <input type="radio" name="option<?php echo $option['option_id']; ?>" <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
 		  <?php echo $option_value['name']; ?>
-            
+
           </label>
         	<br/>
           <?php } ?>
           <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td>
-        </tr>        
+        </tr>
         <?php } ?>
         <?php if ($option['type'] == 'checkbox') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
@@ -108,11 +108,11 @@
           <?php } ?>
           <?php echo $option['name']; ?>:</td><td>
           <?php foreach ($option['option_value'] as $option_value) { ?>
-         
+
           <label <?php if($option['tips'])echo "xtitle='".$option['tips']."'"?> for="option-value-<?php echo $option_value['option_value_id']; ?>">
 		   <input type="checkbox" <?php if( ${"optionV_O" . $option['option_id']."C".$option_value['option_value_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> name="optionV<?php echo $option['option_id']; ?>C<?php echo $option_value['option_value_id']; ?>" value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
 		  <?php echo $option_value['name']; ?>
-            
+
           </label>
         	<br/>
           <?php } ?>
@@ -120,7 +120,7 @@
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
         <?php } ?>
-        
+
         <?php if ($option['type'] == 'text') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
           <?php if ($option['required']) { ?>
@@ -142,7 +142,7 @@
         <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        <?php } ?>        
+        <?php } ?>
         <?php if ($option['type'] == 'date') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
           <?php if ($option['required']) { ?>
@@ -153,11 +153,11 @@
         <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        
+
         <?php } ?>
-       
+
         <?php } ?>
-      
+
       <?php } ?>
          <?php if (($isActive['enablemod'] && $isActive['single_box']) || ($isActive['enablemod'] && $modData['show_address']))
           { }else{?>
@@ -167,14 +167,14 @@
     <div class="content">
       <table class="form xaddress">
         <?php } ?>
-        <?php if(!$modData['show_address']){?> 
+        <?php if(!$modData['show_address']){?>
         <?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['company_show']) { ?>
         <tr sort="a<?php echo $modData['company_sort']; ?>">
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" <?php if($title_company) echo "xtitle ='".$title_company."'";?> name="company" value="<?php echo $company; ?>" /></td>
         </tr>
         <?php } ?>
-        
+
         <tr sort="a<?php echo $modData['cgroup_sort']; ?>" style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
           <td><?php echo $entry_customer_group; ?></td>
           <td><?php foreach ($customer_groups as $customer_group) { ?>
@@ -188,8 +188,8 @@
             <br />
             <?php } ?>
             <?php } ?></td>
-        </tr> 
-       
+        </tr>
+
         <?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['companyId_show']) { ?>
         <tr sort="a<?php echo $modData['companyId_sort']; ?>" id="company-id-display">
           <td><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?></td>
@@ -207,7 +207,7 @@
             <span class="error"><?php echo $error_tax_id; ?></span>
             <?php } ?></td>
         </tr>
-        
+
         <?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['address1_show']) { ?>
         <tr sort="a<?php echo $modData['address1_sort']; ?>">
           <td><?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['address1_req'])  echo "<span class = required >*</span>" ; ?> <?php echo $entry_address_1; ?></td>
@@ -224,8 +224,8 @@
         </tr>
         <?php } ?>
         <?php if($optionsA){  ?>
-         
-        
+
+
         <?php foreach ($optionsA as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
        <tr sort="a<?php echo $option['sort_order']; ?>"><td>
@@ -237,35 +237,35 @@
             <option value=""><?php echo $text_select; ?></option>
             <?php foreach ($option['option_value'] as $option_value) { ?>
             <option <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'selected ="selected"' ; ?> value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
             </option>
             <?php } ?>
           </select>
          <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        
+
         <?php } ?>
         <?php if ($option['type'] == 'radio') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
-        
+
           <?php if ($option['required']) { ?>
           <span class="required">*</span>
           <?php } ?>
           <?php echo $option['name']; ?>:</td><td>
           <?php foreach ($option['option_value'] as $option_value) { ?>
-          
+
           <label <?php if($option['tips'])echo "xtitle='".$option['tips']."'"?> for="option-value-<?php echo $option_value['option_value_id']; ?>">
 		  <input type="radio" name="option<?php echo $option['option_id']; ?>" <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
 		  <?php echo $option_value['name']; ?>
-            
+
           </label>
         	<br/>
           <?php } ?>
           <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td>
-        </tr>        
+        </tr>
         <?php } ?>
         <?php if ($option['type'] == 'checkbox') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
@@ -274,11 +274,11 @@
           <?php } ?>
           <?php echo $option['name']; ?>:</td><td>
           <?php foreach ($option['option_value'] as $option_value) { ?>
-         
+
           <label <?php if($option['tips'])echo "xtitle='".$option['tips']."'"?> for="option-value-<?php echo $option_value['option_value_id']; ?>">
 		   <input type="checkbox" <?php if( ${"optionV_O" . $option['option_id']."C".$option_value['option_value_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> name="optionV<?php echo $option['option_id']; ?>C<?php echo $option_value['option_value_id']; ?>" value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
 		  <?php echo $option_value['name']; ?>
-            
+
           </label>
         	<br/>
           <?php } ?>
@@ -286,7 +286,7 @@
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
         <?php } ?>
-        
+
         <?php if ($option['type'] == 'text') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
           <?php if ($option['required']) { ?>
@@ -308,7 +308,7 @@
         <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        <?php } ?>        
+        <?php } ?>
         <?php if ($option['type'] == 'date') { ?>
         <tr sort="a<?php echo $option['sort_order']; ?>"><td>
           <?php if ($option['required']) { ?>
@@ -319,13 +319,13 @@
         <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        
+
         <?php } ?>
-       
+
         <?php } ?>
-      
-      <?php } ?> 
-        
+
+      <?php } ?>
+
         <?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['city_show']) { ?>
         <tr sort="a<?php echo $modData['city_sort']; ?>">
           <td><?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['city_req'])  echo "<span class = required >*</span>" ; ?> <?php echo $entry_city; ?></td>
@@ -379,9 +379,9 @@
         <?php } ?>
         <?php if (!$isActive['enablemod'] || $isActive['enablemod'] && !$isActive['single_box']) { ?>
       </table>
-    </div>    
-    <h2><?php echo $text_your_password; ?></h2>    
-    <div class="content">        
+    </div>
+    <h2><?php echo $text_your_password; ?></h2>
+    <div class="content">
       <table class="form xpassword">
          <?php } ?>
         <tr sort="a<?php echo $modData['pass_sort']; ?>">
@@ -391,7 +391,7 @@
             <span class="error"><?php echo $error_password; ?></span>
             <?php } ?></td>
         </tr>
-        
+
          <?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['passconf_show']) { ?>
         <tr sort="a<?php echo $modData['passconf_sort']; ?>">
           <td><span class = required >*</span> <?php echo $entry_confirm; ?></td>
@@ -402,15 +402,15 @@
         </tr>
         <?php } ?>
     <?php if (!$isActive['enablemod'] || (!$isActive['single_box'] && $modData['subsribe_show'] && $isActive['enablemod'] )) { ?>
-    
+
       </table>
     </div>
-    
-    
+
+
     <h2><?php echo $text_newsletter; ?></h2>
     <div class="content">
       <table class="form">
-        
+
         <?php } ?>
         <?php if (!$isActive['enablemod'] || $isActive['enablemod'] && $modData['subsribe_show']) { ?>
         <tr sort="a<?php echo $modData['subscribe_sort']; ?>">
@@ -453,14 +453,14 @@
 <script type="text/javascript"><!--
 $('input[name=\'customer_group_id\']:checked').live('change', function() {
 	var customer_group = [];
-	
+
 <?php foreach ($customer_groups as $customer_group) { ?>
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_required'] = '<?php echo $customer_group['company_id_required']; ?>';
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_required'] = '<?php echo $customer_group['tax_id_required']; ?>';
-<?php } ?>	
+<?php } ?>
 
 	if (customer_group[this.value]) {
 		if (customer_group[this.value]['company_id_display'] == '1') {
@@ -468,29 +468,29 @@ $('input[name=\'customer_group_id\']:checked').live('change', function() {
 		} else {
 			$('#company-id-display').hide();
 		}
-		
+
 		if (customer_group[this.value]['company_id_required'] == '1') {
 			$('#company-id-required').show();
 		} else {
 			$('#company-id-required').hide();
 		}
-		
+
 		if (customer_group[this.value]['tax_id_display'] == '1') {
 			$('#tax-id-display').show();
 		} else {
 			$('#tax-id-display').hide();
 		}
-		
+
 		if (customer_group[this.value]['tax_id_required'] == '1') {
 			$('#tax-id-required').show();
 		} else {
 			$('#tax-id-required').hide();
-		}	
+		}
 	}
 });
 
 $('input[name=\'customer_group_id\']:checked').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('<?php ((!$isActive['enablemod'] || $isActive['enablemod'] && $modData['country_show'])?'select':'input');?>[name=\'country_id\']').bind('change', function() {
 	$.ajax({
@@ -501,30 +501,30 @@ $('<?php ((!$isActive['enablemod'] || $isActive['enablemod'] && $modData['countr
 		},
 		complete: function() {
 			$('.wait').remove();
-		},			
+		},
 		success: function(json) {
 			if (json['postcode_required'] == '1') {
 				$('#postcode-required').show();
 			} else {
 				$('#postcode-required').hide();
 			}
-			
+
 			html = '<option value=""><?php echo $text_select; ?></option>';
-			
+
 			if (json['zone'] != '') {
 				for (i = 0; i < json['zone'].length; i++) {
         			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-	    			
+
 					if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
 	      				html += ' selected="selected"';
 	    			}
-	
+
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
 				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
-			
+
 			$('select[name=\'zone_id\']').html(html);
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
@@ -534,7 +534,7 @@ $('<?php ((!$isActive['enablemod'] || $isActive['enablemod'] && $modData['countr
 });
 
 $('<?php ((!$isActive['enablemod'] || $isActive['enablemod'] && $modData['country_show'])?'select':'input');?>[name=\'country_id\']').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $(document).ready(function() {
 	$('.colorbox').colorbox({
@@ -545,12 +545,14 @@ $(document).ready(function() {
 
 
 
-//--></script> 
-<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
+//--></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.maskedinput.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/xcustom.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.timers.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/jquery.dropshadow.js"></script>     
-  <script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script> 
+<script type="text/javascript" src="catalog/view/javascript/jquery.dropshadow.js"></script>
+<!--
+  <script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script>
   <link rel="stylesheet" type="text/css" href="catalog/view/javascript/mbTooltip.css" media="screen">
+-->
 <?php echo $footer; ?>

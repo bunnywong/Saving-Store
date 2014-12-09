@@ -316,8 +316,8 @@ $('<?php ((!$isActive['enablemod'] || $isActive['enablemod'] && $modData['countr
 <script type="text/javascript" src="catalog/view/javascript/xcustom.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.timers.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.dropshadow.js"></script>
-  <!--
+<!--
   <script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script>
-  -->
   <link rel="stylesheet" type="text/css" href="catalog/view/javascript/mbTooltip.css" media="screen">
+-->
 <?php echo $footer; ?>

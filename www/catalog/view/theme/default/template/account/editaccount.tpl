@@ -192,7 +192,6 @@
 <script type="text/javascript" src="catalog/view/javascript/jquery.dropshadow.js"></script>
   <!--
   <script type="text/javascript" src="catalog/view/javascript/mbTooltip.js"></script>
-  -->
   <link rel="stylesheet" type="text/css" href="catalog/view/javascript/mbTooltip.css" media="screen">
-
+-->
 <?php echo $footer; ?>

@@ -56,7 +56,7 @@ $(document).ready(function() {
 		dateFormat: 'yy-mm-dd',
 		changeMonth: true,
 	    changeYear: true,
-	    yearRange: "-100:+5"});	
+	    yearRange: "-100:+5"});
 });
 
 $(document).ready(function() {
@@ -68,8 +68,8 @@ $(document).ready(function() {
 		else {
 			// Ensure that it is a number and stop the keypress
 			if (event.keyCode < 48 || event.keyCode > 57 ) {
-				event.preventDefault();	
-			}	
+				event.preventDefault();
+			}
 		}
 	});
 });
@@ -78,7 +78,7 @@ $(function() {
     $( "#radio1-xtensions" ).buttonset();
     $( "#radio-shipping" ).buttonset();
     $( "#radio2" ).buttonset();
-    
+
   });
 
 
@@ -86,12 +86,13 @@ jQuery(function($) {
     $(".telephone").mask("(99)9999-9999");
     $(".mobile").mask("(99)999999999");
     $(".cpf").mask("999.999.999-99");
-    $(".cep").mask("99999-999");    
+    $(".cep").mask("99999-999");
     $(".cnpj").mask("99.999.999/9999-99");
     $(".postcode").mask("99999-999");
  });
 $(function(){
-    $("[xtitle]").mbTooltip({ // also $([domElement]).mbTooltip
+  // My Script
+   /* $("[xtitle]").mbTooltip({ // also $([domElement]).mbTooltip
       opacity : 1,       //opacity
       wait:400,           //before show
       cssClass:"default",  // default = default
@@ -102,7 +103,7 @@ $(function(){
       anchor:"parent", //or "parent" you can ancor the tooltip to the mouse  or to the element
       shadowColor:"black", //the color of the shadow
       mb_fade:200 //the time to fade-in
-    });
+    });*/
 });
 
 
