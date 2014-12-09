@@ -19,14 +19,14 @@ class ControllerAccountMyPassword extends Controller {
 		$this->data['isActive']=  $this->model_account_signup->isActiveMod();
 		$this->data['modData']=  $this->model_account_signup->getModData();
 		$modData1 = $this->model_account_signup->getModData();
-			
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate($modData1,$isActive1)) {
 			$this->load->model('account/customer');
-				
+
 			$this->model_account_customer->editPassword($this->customer->getEmail(), $this->request->post['password']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
-			 
+
 			$this->redirect($this->url->link('account/account', '', 'SSL'));
 		}
 
@@ -34,7 +34,7 @@ class ControllerAccountMyPassword extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),       	
+			'href'      => $this->url->link('common/home'),
         	'separator' => false
 		);
 
@@ -49,7 +49,7 @@ class ControllerAccountMyPassword extends Controller {
 			'href'      => $this->url->link('account/mypassword', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
 		);
-			
+
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_password'] = $this->language->get('text_password');
@@ -57,9 +57,10 @@ class ControllerAccountMyPassword extends Controller {
 		$this->data['entry_password'] = $this->language->get('entry_password');
 		$this->data['entry_confirm'] = $this->language->get('entry_confirm');
 
-		$this->data['button_continue'] = $this->language->get('button_continue');
+//		$this->data['button_continue'] = $this->language->get('button_continue');
+		$this->data['button_save'] = $this->language->get('button_save');	// My Script
 		$this->data['button_back'] = $this->language->get('button_back');
-		 
+
 		if (isset($this->error['password'])) {
 			$this->data['error_password'] = $this->error['password'];
 		} else {
@@ -100,7 +101,7 @@ class ControllerAccountMyPassword extends Controller {
 			'common/content_top',
 			'common/content_bottom',
 			'common/footer',
-			'common/header'	
+			'common/header'
 			);
 
 			$this->response->setOutput($this->render());

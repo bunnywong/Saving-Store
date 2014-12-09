@@ -31,7 +31,7 @@
 			<div class="buttons">
 				<div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
 				<div class="right">
-					<button type="submit" class="button"><?php echo $button_continue; ?></button>
+					<button type="submit" class="button"><?php echo $button_save; ?></button>
 				</div>
 			</div>
 		</form>
