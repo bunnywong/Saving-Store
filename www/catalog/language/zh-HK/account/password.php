@@ -8,8 +8,8 @@ $_['text_password']  = '您的賬戶密碼';
 $_['text_success']   = '成功： 您的密碼已更新。';
 
 // Entry
-$_['entry_password'] = '輸入密碼：';
-$_['entry_confirm']  = '確認密碼：';
+$_['entry_password'] = '輸入新密碼：';
+$_['entry_confirm']  = '確認新密碼：';
 
 // Error
 $_['error_password'] = '密碼必須在4到20字符之間！';
