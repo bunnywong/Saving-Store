@@ -22,77 +22,87 @@
 // --------------------------------------------------
 // Global
 
-    .primary-define #toppanel #logo img{ // logo size
-        max-width:90%;
-    }
-
-	.center{
-		text-align: center;
-	}
-	.my_hide{
-		display: none;
-	}
-	.border_top{
-		border-top: 1px solid @gray;
-	}
-	input[type=checkbox]{
-		margin-right: 10px!important;
-	}
-	.my_banner{	// Global
-		img{
-			min-width	: 665px!important;
-			width 		: auto!important;
-			height		: auto!important;
-		}
-	}
-
-	.primary-define .product-info .cart #button-cart:before,	// Detail view
-	.primary-define .button										// Account/Address
-	{
-		background-color: @yellow;
-	}
-
-	.primary-define .button:hover{
-		background-color: @btn_bg_hover;
-	}
-
-    // change product containner height
-    .primary-define .box-product > div {
-        min-height: 312px;
-    }
-
-    .primary-define {
-        .wrapper{
-            margin: 0 20px 0 290px;
-        }
-        a{
-            color: @black;
-        }
-        .box-product{
-            .category-info{
-                .image{
-                    height: 160px;
-                }
-                h1{
-                    display: none;
-                }
-                .product-filter{
-                    margin-top: 45px;
-                }
-            }
-        }
-    }
-// --------------------------------------------------
-// Main content
-
-    body{
+  	body{
         color: @black; // Global font color
-    }
 
-	.list_view .rating,		// Items
-	.list_view .details,		// Items
-	.list_view .description	// Items
-		{display: none!important;}
+	    // ----- ----- ----- ----- -----
+	    // My class
+
+		.center{
+			text-align: center;
+		}
+		.my_hide{
+			display: none;
+		}
+		.border_top{
+			border-top: 1px solid @gray;
+		}
+		// ----- ----- ----- ----- -----
+		// Regular element
+
+		input[type=checkbox]{
+			margin-right: 10px!important;
+		}
+
+		// ----- ----- ----- ----- -----
+
+ 		.primary-define #toppanel #logo img{ // logo size
+        	max-width:90%;
+	    }
+
+
+		.my_banner{	// Global
+			img{
+				min-width	: 665px!important;
+				width 		: auto!important;
+				height		: auto!important;
+			}
+		}
+
+		.primary-define .product-info .cart #button-cart:before,	// Detail view
+		.primary-define .button										// Account/Address
+		{
+			background-color: @yellow;
+		}
+
+	    .primary-define {
+	        .wrapper{
+	            margin: 0 20px 0 290px;
+	        }
+	        a{
+	            color: @black;
+	        }
+	        .button:hover{
+				background-color: @btn_bg_hover;
+			}
+	        .box-product{
+	        	// change product containner height
+	        	div {
+			        min-height: 312px;
+			    }
+	            .category-info{
+	                .image{
+	                    height: 160px;
+	                }
+	                h1{
+	                    display: none;
+	                }
+	                .product-filter{
+	                    margin-top: 45px;
+	                }
+	            }
+	        }
+	    }
+    }// !body
+
+
+// --------------------------------------------------
+// Global
+
+
+
+    // --------------------------------------------------
+    // Home
 
 	body.home {
 		.my_banner{
@@ -101,7 +111,16 @@
 			margin-left	: 40px;
 		}
 	}// !.home
+
+	// --------------------------------------------------
+	// list_view
+
 	body.list_view{
+		.rating,		// Items
+		.details,		// Items
+		.description	// Items
+			{display: none!important;}
+
 		.box-heading{
 			display: none!important;	// working
 			border-bottom: 1px solid @lightgray!important;
@@ -142,10 +161,7 @@
 // --------------------------------------------------
 // Import
 
-
 	@import "sidebar.less";
-//	@import "backend.less";
-//	@import "detail_view.less";	// Imported from product.tpl
 
 // --------------------------------------------------
 // Backend
@@ -215,11 +231,12 @@
 
 	}// !.detail_view
 
-// ------------------	--------------------------------
+// --------------------------------------------------
 // Sign Up
 
 	.signup{
 		@this_width : 550px;
+
 		#content{
 			p{
 				max-width: 80%;
@@ -231,55 +248,67 @@
 			tr{
 				td{
 					vertical-align: top;
+
+					// ----- ----- ----- ----- -----
+
+					div.edm_wrapper{
+						max-width: @this_width;
+					}
+					// ----- ----- ----- ----- -----
+					// select & input
+
+					input[type=text],
+					input[type=password],
+					select{
+						max-width: 300px;
+					}
+					select{
+						min-height: 42px;
+					}
+					input[type=text],
+					input[type=password]{
+						height: 20px;
+					}
+
+					input.mtz-monthpicker-widgetcontainer{
+						width: 200px!important;
+					}
+					// ----- ----- ----- ----- -----
+					// span
+
+					span.act_clear{
+						height: 42px;
+						width: 90px;
+						margin-left: 5px;
+						background-color: @btn_blue;
+						color: white;
+						display: inline-block;
+						vertical-align: middle;
+						border-radius: 5px;
+						cursor: pointer;
+						-webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+						-moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+						box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+						> span{
+							display: block;
+							text-align: center;
+							top: 10px;
+							position: relative;
+						}
+					}
+					span.act_clear:hover{
+						background-color: @btn_blue_hover;
+					}
+					span.act_clear:active{
+						position: relative;
+						top: 2px;
+					}
 				}
 				> td:first-child{
 					max-width: 140px;
 				}
-				input[type=text],
-				input[type=password],
-				select{
-					max-width: 300px;
-				}
-				select{
-					min-height: 42px;
-				}
-				input[type=text],
-				input[type=password]{
-					height: 20px;
-				}// !td
-				div.edm_wrapper{
-					max-width: @this_width;
-				}
-				input.mtz-monthpicker-widgetcontainer{
-					width: 200px!important;
-				}
-				span.act_clear{
-					height: 42px;
-					width: 90px;
-					margin-left: 5px;
-					background-color: @btn_blue;
-					color: white;
-					display: inline-block;
-					vertical-align: middle;
-					border-radius: 5px;
-					cursor: pointer;
-					-webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
-					-moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.5);
-					box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.5);
-					> span{
-						display: block;
-						text-align: center;
-						top: 10px;
-						position: relative;
-					}
-				}
-				span.act_clear:hover{
-					background-color: @btn_blue_hover;
-				}
-				span.act_clear:active{
-					position: relative;
-					top: 2px;
-				}
+
+
 
 			}// !tr
 		}// !table
@@ -287,6 +316,7 @@
 
 // --------------------------------------------------
 // Cart
+
 	body.cart{
 		h2,
 		#content > div.box > div.content
@@ -295,6 +325,7 @@
 
 // --------------------------------------------------
 // Checkout
+
 	body.checkout{
 		// ----- ----- ----- ----- -----
 		// x tamplate over ride
@@ -343,3 +374,15 @@
 		}// !td
 
 	}// !body.checkout
+
+	body.account_address{
+		.option{
+			a{
+				background-color: @yellow;
+			}
+			a:hover{
+				background-color: @black;
+				color: @white;
+			}
+		}
+	}
