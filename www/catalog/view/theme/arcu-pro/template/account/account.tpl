@@ -12,7 +12,9 @@
 			<?php } ?>
 		</div>
 		<h1><?php echo $heading_title; ?></h1>
+<!--
 		<h2><?php echo $text_my_account; ?></h2>
+-->
 		<div class="content">
 			<ul>
 				<li><a href="<?php echo $edit; ?>"><?php echo $text_edit; ?></a></li>
