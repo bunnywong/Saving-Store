@@ -237,6 +237,7 @@ $(document).ready(function(){
 
 	(function ( $ ) {
 
+		// ---------- ---------- ---------- ---------- ----------
 		$.fn.g2redeem = function() {
 
 			var is_visited_cart = localStorage.getItem('visited_cart');
@@ -248,17 +249,39 @@ $(document).ready(function(){
 		}// !success()
 
 		// ---------- ---------- ---------- ---------- ----------
+		$.fn.editaccount = function() {
+
+			$('table tbody')
+				.children('tr:[sort="a9"], tr:[sort="a21"]')	// Captcha, Confirm email
+				.hide().end()
+				.find('tr:[sort="a20"] input')
+					.prop('disabled', 'disabled')
+					.addClass('disabled');
+
+		}// !editaccount()
 
 	}( jQuery ));
 
 	// --------------------------------------------------
-	// Global
 
 	$(function () {
+		$(document).ready(function(){
+		// ----- ----- ----- ----- -----
+		// User / Guest
 
 		if( $('body').hasClass('success') )
 			$('body').g2redeem();
 
+		// ----- ----- ----- ----- -----
+		// Account
+
+
+		if( $('body').hasClass('success') )
+			$('body').g2redeem();
+
+		if( $('body').hasClass('editaccount') )
+			$('body').editaccount();
+});
 	});
 
 		// ---------- ---------- ---------- ---------- ----------

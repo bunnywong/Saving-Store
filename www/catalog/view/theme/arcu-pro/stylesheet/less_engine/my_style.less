@@ -18,6 +18,7 @@
 	@btn_bg_hover : #444444;
 	@btn_blue : #71bdf7;
 	@btn_blue_hover : #4199dd;
+	@disabled : #EEE;
 
 // --------------------------------------------------
 // Global
@@ -31,17 +32,27 @@
         a{
             color: @black;
         }
-
+        // ----- ----- ----- ----- -----
+        // My Class
         .center{
 			text-align: center;
 		}
 		.my_hide{
 			display: none;
 		}
+		.disabled{
+			background-color: @disabled;
+		}
 
 		input[type=checkbox]{
 			margin-right: 10px!important;
 		}
+		input[type=text],
+		input[type=password],
+		select{
+			max-width: 300px!important;
+		}
+
         // ----- ----- ----- ----- -----
         // Side Bar
 
@@ -250,11 +261,7 @@
 					// ----- ----- ----- ----- -----
 					// select & input
 
-					input[type=text],
-					input[type=password],
-					select{
-						max-width: 300px;
-					}
+
 					select{
 						min-height: 42px;
 					}
