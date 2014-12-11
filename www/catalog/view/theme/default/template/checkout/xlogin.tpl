@@ -26,17 +26,24 @@
   <br />
 </div>
 <div id="login" class="right">
-  <h2><?php echo $text_returning_customer; ?></h2>
-  <p><?php echo $text_i_am_returning_customer; ?></p>
-  <b><?php echo $entry_email; ?></b><br />
-  <input type="text" name="email" value="" />
-  <br />
-  <br />
-  <b><?php echo $entry_password; ?></b><br />
-  <input type="password" name="password" value="" />
-  <br />
-  <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
-  <br />
-  <input type="button" value="<?php echo $button_login; ?>" id="button-login" class="button" /><br />
-  <br />
+  <div>
+    <span>GOON 或 Suzuran 註冊用戶首次到訪？
+      <br />請<a href="#"><strong>按此</strong></a>設定新密碼</span>
+  </div>
+
+  <div class="hidden">
+    <h2><?php echo $text_returning_customer; ?></h2>
+    <p><?php echo $text_i_am_returning_customer; ?></p>
+    <b><?php echo $entry_email; ?></b><br />
+    <input type="text" name="email" value="" />
+    <br />
+    <br />
+    <b><?php echo $entry_password; ?></b><br />
+    <input type="password" name="password" value="" />
+    <br />
+    <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
+    <br />
+    <input type="button" value="<?php echo $button_login; ?>" id="button-login" class="button" /><br />
+    <br />
+  </div>
 </div>
