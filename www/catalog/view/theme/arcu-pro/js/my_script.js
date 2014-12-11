@@ -114,6 +114,16 @@
 			if( isInt(qty) == false)
 				$(this).val(1);
 		});
+		// ----- ----- ----- ----- -----
+		// Click to buy + checkout
+
+		$('#buy_and_checkout').click(function(){
+			$('#button-cart').trigger('click');
+			setTimeout(function(){
+				window.location = 'index.php?route=checkout/checkout';
+			},  1000)
+		});
+
 	}// !$.fn.detail_view
 
 	// ---------- ---------- ---------- ---------- ----------
