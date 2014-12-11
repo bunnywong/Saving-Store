@@ -41,7 +41,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 		$this->data['title_address_2'] = $this->language->get('title_address_2');
 		$this->data['title_postcode'] = $this->language->get('title_postcode');
 		$this->data['title_city'] = $this->language->get('title_city');
-		 
+
 		$this->data['button_continue'] = $this->language->get('button_continue');
 
 		if (isset($this->session->data['payment_address_id'])) {
@@ -90,9 +90,9 @@ class ControllerCheckoutXPaymentAddress extends Controller {
       			'address_2' => $result['address_2'],
       			'city'      => $result['city'],
       			'postcode'  => $result['postcode'],
-      			'zone'      => $result['zone'],
+      			'zone'      => substr($result['zone'], 5),
 				'zone_code' => $result['zone_code'],
-      			'country'   => $result['country']  
+      			'country'   => $result['country']
       			);
       			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
       				if($option['list_display']){$value = $this->model_account_xcustomer->getCustomerOptionsA((int)$this->customer->getId(),$option['option_id'],$option['type'],$result['address_id']);
@@ -100,7 +100,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
       			}
       			$this->data['addresses'][] = array(
         		'address_id' => $result['address_id'],
-        		'address'    => str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format)))),      		
+        		'address'    => str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format)))),
       			);
 		}
 
@@ -216,7 +216,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 					$product_total += $product_2['quantity'];
 				}
 			}
-				
+
 			if ($product['minimum'] > $product_total) {
 				$json['redirect'] = $this->url->link('checkout/cart');
 
@@ -242,7 +242,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 						$this->load->model('account/customer_group');
 
 						$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->customer->getCustomerGroupId());
-							
+
 						// Company ID
 						if ($customer_group_info['company_id_display'] && $customer_group_info['company_id_required'] && !$address_info['company_id']) {
 							$json['error']['warning'] = $this->language->get('error_company_id');
@@ -254,10 +254,10 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 						}
 					}
 				}
-					
+
 				if (!$json) {
 					$this->session->data['payment_address_id'] = $this->request->post['paddress_id'];
-						
+
 					if ($address_info) {
 						$this->session->data['payment_country_id'] = $address_info['country_id'];
 						$this->session->data['payment_zone_id'] = $address_info['zone_id'];
@@ -309,19 +309,19 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 					$this->load->model('account/customer_group');
 
 					$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->customer->getCustomerGroupId());
-						
+
 					if ($customer_group_info) {
 						// Company ID
 						if ($customer_group_info['company_id_display'] && $customer_group_info['company_id_required'] && empty($this->request->post['company_id'])) {
 							$json['error']['company_id'] = $this->language->get('error_company_id');
 						}
-							
+
 						// Tax ID
 						if ($customer_group_info['tax_id_display'] && $customer_group_info['tax_id_required'] && empty($this->request->post['tax_id'])) {
 							$json['error']['tax_id'] = $this->language->get('error_tax_id');
 						}
 					}
-						
+
 					if ((!$isActive || ($isActive && $modData['address1_req_checkout'] && $modData['address1_show_checkout'])) && ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128))) {
 						$json['error']['address_1'] = $this->language->get('error_address_1');
 					}
@@ -334,7 +334,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 
 					if(!$isActive || ($isActive && $modData['pin_req_checkout'] && $modData['pin_show_checkout']))
 					$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-						
+
 					if ((!$isActive || ($isActive && $modData['pin_req_checkout'] && $modData['pin_show_checkout'])) && $country_info) {
 						if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 							$json['error']['postcode'] = $this->language->get('error_postcode');
@@ -342,7 +342,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 
 						// VAT Validation
 						$this->load->helper('vat');
-							
+
 						if ($this->config->get('config_vat') && !empty($this->request->post['tax_id']) && (vat_validation($country_info['iso_code_2'], $this->request->post['tax_id']) == 'invalid')) {
 							$json['error']['tax_id'] = $this->language->get('error_vat');
 						}
@@ -351,7 +351,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 					if ((!$isActive || ($isActive && $modData['country_req_checkout'] && $modData['country_show_checkout'])) && $this->request->post['country_id'] == '') {
 						$json['error']['country'] = $this->language->get('error_country');
 					}
-						
+
 					if ((!$isActive || ($isActive && $modData['state_req_checkout'] && $modData['state_show_checkout'] )) && (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '')) {
 						$json['error']['zone'] = $this->language->get('error_zone');
 					}
@@ -359,7 +359,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 					if (!$json) {
 						// Default Payment Address
 						$this->load->model('account/xaddress');
-							
+
 						$this->session->data['payment_address_id'] = $this->model_account_xaddress->addAddress($this->request->post);
 						$this->session->data['payment_country_id'] = $this->request->post['country_id'];
 						$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];
@@ -370,7 +370,7 @@ class ControllerCheckoutXPaymentAddress extends Controller {
 							else if($option['section']==2)
 							$this->session->data['xtensions']['payment'][$option['identifier']]=$this->model_account_xcustomer->getCustomerOptionsA($this->customer->getId(),$option['option_id'],$option['type'],$this->session->data['payment_address_id']);
 						}
-							
+
 						unset($this->session->data['payment_method']);
 						unset($this->session->data['payment_methods']);
 					}
