@@ -249,17 +249,17 @@
 
 	}// $.fn.editaccount
 
-	$.fn.account_address = function() {
+	$.fn.account_address_update = function() {
 		setTimeout(function(){
 			$('select[name="zone_id"').district();
 		}, 1000);
-	}// $.fn.account_address
+	}// $.fn.account_address_update
 
-	$.fn.my_district = function() {
+	$.fn.address_myaddress_update = function() {
 		setTimeout(function(){
 			$('select[name="zone_id"').district();
 		}, 1000);
-	}// $.fn.my_district
+	}// $.fn.address_myaddress_update
 
 }( jQuery ));
 
@@ -301,11 +301,11 @@ $(function () {
 		if( $('body').hasClass('editaccount') )
 			$('body').editaccount();
 
-		if( $('body').hasClass('account_address') )
-			$('body').account_address();
+		if( $('body').hasClass('account_address_update') )
+			$('body').account_address_update();
 
-			if( $('body').hasClass('my_district') )
-				$('body').my_district();
+			if( $('body').hasClass('address_myaddress_update') )
+				$('body').address_myaddress_update();
 
 	}); // !$(document).ready
 

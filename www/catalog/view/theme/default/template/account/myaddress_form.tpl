@@ -1,4 +1,7 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
+<script>
+  $('body').addClass('address_myaddress_update');
+ </script>
 <div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -304,12 +307,6 @@ $('<?php ((!$isActive['enablemod'] || $isActive['enablemod'] && $modData['countr
 });
 
 $('<?php ((!$isActive['enablemod'] || $isActive['enablemod'] && $modData['country_show_edit'])?'select':'input');?>[name=\'country_id\']').trigger('change');
-
-// My Script
-// --------------------------------------------------
-
-  $('body').addClass('my_district');
-
 //--></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery.maskedinput.min.js"></script>
