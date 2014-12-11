@@ -14,6 +14,31 @@ jQuery(document).ready(function($){
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
+
+<div class="top_img_wrapper">
+  <?php
+    $this->language->load('information/information');
+
+      $this->load->model('catalog/information');
+
+      $information_id   = 11; // Hardcode :D
+      $information_info = $this->model_catalog_information->getInformation($information_id);
+  //    $this->data['info_heading_title'] = $information_info['title'];
+      if( count($information_info) > 0 ){
+        $my_banner = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+        echo '<div>'.$my_banner.'</div>';
+      }
+
+      $information_id   = 12; // Hardcode :D
+      $information_info = $this->model_catalog_information->getInformation($information_id);
+  //    $this->data['info_heading_title'] = $information_info['title'];
+      if( count($information_info) > 0 ){
+        $my_banner = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+        echo '<div>'.$my_banner.'</div>';
+      }
+  ?>
+</div>
+
   <h1><?php echo $heading_title; ?></h1>
   <p><?php echo $text_account_already; ?></p>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
