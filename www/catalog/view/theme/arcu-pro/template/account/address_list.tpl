@@ -27,7 +27,7 @@
 		<div class="content">
 			<table style="width: 100%;">
 				<tr>
-					<td><?php echo $result['address']; ?></td>
+					<td class="my_address"><?php echo $result['address']; ?></td>
 					<td style="text-align: right;" class="option">
 						<a href="<?php echo $result['update']; ?>" class="button"><?php echo $button_edit; ?></a> &nbsp;
 						<a href="<?php echo $result['delete']; ?>" class="button"><?php echo $button_delete; ?></a>
