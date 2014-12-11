@@ -87,6 +87,7 @@ $(document).ready(function() {
 	<?php if(isset($quickconfirm)) { ?>
 		quickConfirm();
 	<?php }else{ ?>
+	// Step 2
 	$.ajax({
 		url: 'index.php?route=checkout/xpayment_address',
 		dataType: 'html',
@@ -467,6 +468,7 @@ $('#button-payment-address').live('click', function() {
 						$('#payment-method .checkout-heading a').remove();
 
 						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+						$('#button-shipping-address').trigger('click');	// My Script: Skip step 3
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -933,6 +935,7 @@ $('#button-shipping-method').live('click', function() {
 						$('#payment-method .checkout-heading a').remove();
 
 						$('#shipping-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+						$('#button-payment-method').trigger('click');	// My Script: Skip step 5
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

@@ -394,12 +394,8 @@
 			border: 1px solid @yellow;
 		}
 		.xten label:hover{
-			background-color: @btn_blue_hover!important;
-			color: @white;
-		}
-		div.xpassword h2{	// [My pwd]
-			position: relative;
-			top: 40px;
+			/*background-color: @btn_blue_hover!important;
+			color: @white;*/
 		}
 
 		// ----- ----- ----- ----- -----
@@ -410,18 +406,9 @@
 			display: none!important;	// Show free or charge shipping $ only
 		}
 
-		input[type=text],
-		input[type=password],
-		select{
-			min-width: 250px;
-		}
-		select{
-			min-height: 42px;
-		}
-		input[type=text],
-		input[type=password]{
-			height: 20px;
-		}// !td
+		#shipping-address,
+		#payment-method
+			{display:none!important;}
 
 	}// !body.checkout
 
