@@ -243,15 +243,41 @@
 
 			}
 		}// !.btn_qty_wrapper
-
-		#buy_and_checkout{
-			min-width: 145px;
-			min-height: 40px;
-			span{
-				background: url("http://savingstore.com.hk/catalog/view/theme/arcu-pro/image/icons/icon-cart.png") left 1px no-repeat!important;
-				opacity: 1;
+		// ----- ----- ----- ----- -----
+		#buy_and_checkout {
+			overflow: hidden;
+			padding: 10px 30px;
+			position: relative;
+			background-color: rgba(68, 68, 68, 0.4);
+			transition: background-color 0.3s linear;
+			-moz-transition: background-color 0.3s linear;
+			-webkit-transition: background-color 0.3s linear;
+			span {
+				position: relative;
+				top: -1px;
 			}
 		}
+		#buy_and_checkout:before {
+			top: 0;
+			left: 0;
+			position: absolute;
+			white-space: nowrap;
+			content: attr(data-hover);
+			padding: 12px 30px 11px 52px;
+			background: url(../image/icons/icon-basket-dark.png) 30px 11px no-repeat;
+			transition: 0.3s ease;
+			-moz-transition: 0.3s ease;
+			-webkit-transition: 0.3s ease;
+		}
+		#buy_and_checkout:hover {
+			background-color: rgba(68, 68, 68, 1);
+			opacity: 1;
+		}
+		#buy_and_checkout:hover:before {
+			left: 100%;
+		}
+
+
 	}// !.detail_view
 
 // --------------------------------------------------

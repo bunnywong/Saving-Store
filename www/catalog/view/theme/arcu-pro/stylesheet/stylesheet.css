@@ -51,13 +51,13 @@ small {
 	color: #777;
 }
 :-moz-placeholder { /* Firefox 18- */
-	color: #ccc;  
+	color: #ccc;
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-	color: #ccc;  
+	color: #ccc;
 }
-:-ms-input-placeholder {  
-	color: #777;  
+:-ms-input-placeholder {
+	color: #777;
 }
 .primary-define textarea {
 	padding: 5px;

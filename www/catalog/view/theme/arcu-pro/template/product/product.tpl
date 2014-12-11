@@ -269,8 +269,11 @@
 
 				<div class="cart">
 					<div>
-						<button class="button" id="button-cart" data-hover="<?php echo $button_cart; ?>"><span class="icon-basket-light"><?php echo $button_cart; ?></span></button>
-						<button class="button" id="buy_and_checkout" data-hover="直接結帳"><span class="icon-basket-light">直接結帳</span>
+						<button class="button" id="button-cart" data-hover="<?php echo $button_cart; ?>">
+							<span class="icon-basket-light"><?php echo $button_cart; ?></span>
+						</button>
+						<button class="button" id="buy_and_checkout" data-hover="直接結帳">
+							<span class="icon-basket-light">直接結帳</span>
 						</button>
 					</div>
 					<div> <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><span class="icon-wishlist-grey"><?php echo $button_wishlist; ?></span></a> <a class="button" onclick="addToCompare('<?php echo $product_id; ?>');"><span class="icon-compare-grey"><?php echo $button_compare; ?></span></a>

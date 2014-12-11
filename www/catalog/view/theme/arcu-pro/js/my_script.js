@@ -124,6 +124,10 @@
 			},  1000)
 		});
 
+		$('#buy_and_checkout').mouseover(function(){
+//			$(this).children('span').trigger('');
+		});
+
 	}// !$.fn.detail_view
 
 	// ---------- ---------- ---------- ---------- ----------
