@@ -100,8 +100,8 @@
 					<span><?php echo $text_qty; ?></span>
 					<input id="qty_box" type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
 					<div class="btn_qty_wrapper">
-						<span class="btn add">+</span>
-						<span class="btn less">-</span>
+						<button class="btn add">+</button>
+						<button class="btn less">-</button>
 					</div>
 
 					<input type="hidden" name="product_id" size="4" value="<?php echo $product_id; ?>" />
