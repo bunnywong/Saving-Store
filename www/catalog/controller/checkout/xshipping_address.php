@@ -38,9 +38,9 @@ class ControllerCheckoutXShippingAddress extends Controller {
 		$this->data['title_address_2'] = $this->language->get('title_address_2');
 		$this->data['title_postcode'] = $this->language->get('title_postcode');
 		$this->data['title_city'] = $this->language->get('title_city');
-		 
+
 		$this->data['button_continue'] = $this->language->get('button_continue');
-			
+
 		if (isset($this->session->data['shipping_address_id'])) {
 			$this->data['address_id'] = $this->session->data['shipping_address_id'];
 		} else {
@@ -87,9 +87,9 @@ class ControllerCheckoutXShippingAddress extends Controller {
       			'address_2' => $result['address_2'],
       			'city'      => $result['city'],
       			'postcode'  => $result['postcode'],
-      			'zone'      => $result['zone'],
+      			'zone'      => substr($result['zone'], 5),
 				'zone_code' => $result['zone_code'],
-      			'country'   => $result['country']  
+      			'country'   => $result['country']
       			);
       			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
       				if($option['list_display']){$value = $this->model_account_xcustomer->getCustomerOptionsA((int)$this->customer->getId(),$option['option_id'],$option['type'],$result['address_id']);
@@ -97,7 +97,7 @@ class ControllerCheckoutXShippingAddress extends Controller {
       			}
       			$this->data['addresses'][] = array(
         		'address_id' => $result['address_id'],
-        		'address'    => str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format)))),      		
+        		'address'    => str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format)))),
       			);
 		}
 
@@ -191,7 +191,7 @@ class ControllerCheckoutXShippingAddress extends Controller {
 					$product_total += $product_2['quantity'];
 				}
 			}
-				
+
 			if ($product['minimum'] > $product_total) {
 				$json['redirect'] = $this->url->link('checkout/cart');
 
@@ -211,12 +211,12 @@ class ControllerCheckoutXShippingAddress extends Controller {
 
 				if (!$json) {
 					$this->session->data['shipping_address_id'] = $this->request->post['saddress_id'];
-						
+
 					// Default Shipping Address
 					$this->load->model('account/xaddress');
 
 					$address_info = $this->model_account_xaddress->getAddress($this->request->post['saddress_id']);
-						
+
 					if ($address_info) {
 						$this->session->data['shipping_country_id'] = $address_info['country_id'];
 						$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
@@ -226,12 +226,12 @@ class ControllerCheckoutXShippingAddress extends Controller {
 						unset($this->session->data['shipping_zone_id']);
 						unset($this->session->data['shipping_postcode']);
 					}
-						
+
 					unset($this->session->data['shipping_method']);
 					unset($this->session->data['shipping_methods']);
 				}
 			}
-				
+
 			if ($this->request->post['shipping_address'] == 'new') {
 				$this->load->model('account/xcustomer');
 				$this->model_account_xcustomer->customInstall();
@@ -267,7 +267,7 @@ class ControllerCheckoutXShippingAddress extends Controller {
 					if ((!$isActive || ($isActive && $modData['l_name_req_checkout'] && $modData['l_name_show_checkout'])) && ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32))) {
 						$json['error']['lastname'] = $this->language->get('error_lastname');
 					}
-						
+
 					if ((!$isActive || ($isActive && $modData['address1_req_checkout'] && $modData['address1_show_checkout'])) && ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128))) {
 						$json['error']['address_1'] = $this->language->get('error_address_1');
 					}
@@ -275,12 +275,12 @@ class ControllerCheckoutXShippingAddress extends Controller {
 					if ((!$isActive || ($isActive && $modData['city_req_checkout'] && $modData['city_show_checkout'])) && ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128))) {
 						$json['error']['city'] = $this->language->get('error_city');
 					}
-						
+
 					$this->load->model('localisation/country');
-						
+
 					if(!$isActive || ($isActive && $modData['pin_req_checkout'] && $modData['pin_show_checkout']))
 					$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-						
+
 					if ((!$isActive || ($isActive && $modData['pin_req_checkout'] && $modData['pin_show_checkout'] )) && $country_info) {
 						if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 							$json['error']['postcode'] = $this->language->get('error_postcode');
@@ -290,7 +290,7 @@ class ControllerCheckoutXShippingAddress extends Controller {
 					if ((!$isActive || ($isActive && $modData['country_req_checkout'] && $modData['country_show_checkout'])) && $this->request->post['country_id'] == '') {
 						$json['error']['country'] = $this->language->get('error_country');
 					}
-						
+
 					if ((!$isActive || ($isActive && $modData['state_req_checkout'] && $modData['state_show_checkout'] )) && (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '')) {
 						$json['error']['zone'] = $this->language->get('error_zone');
 					}
@@ -298,7 +298,7 @@ class ControllerCheckoutXShippingAddress extends Controller {
 					if (!$json) {
 						// Default Shipping Address
 						$this->load->model('account/xaddress');
-							
+
 						$this->session->data['shipping_address_id'] = $this->model_account_xaddress->addAddress($this->request->post);
 						$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
 						$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
@@ -308,7 +308,7 @@ class ControllerCheckoutXShippingAddress extends Controller {
 							if($option['section']==1)
 							$this->session->data['xtensions']['shipping'][$option['identifier']]=$this->model_account_xcustomer->getCustomerOptionsA($this->customer->getId(),$option['option_id'],$option['type'],$this->session->data['shipping_address_id']);
 						}
-							
+
 						unset($this->session->data['shipping_method']);
 						unset($this->session->data['shipping_methods']);
 					}
