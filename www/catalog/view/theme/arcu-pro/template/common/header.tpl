@@ -51,7 +51,6 @@
 <?php if(!$this->config->get('kuler_compress_scripts') || $this->config->get('kuler_compress_script_type') == 'theme') { ?>
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/my_script.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/common.js"></script>
 <?php } ?>
 <?php if($this->config->get('kuler_compress_scripts')) { ?>
@@ -82,6 +81,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 //--></script>
 <?php } ?>
 <?php if($this->config->get('kuler_analytics_position') == 'head') echo $this->config->get('kuler_analytics_code'); ?>
+
 <script type="text/javascript">
 $(document).ready(function () {
 	// Active the home item if there is no active item

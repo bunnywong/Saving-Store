@@ -37,4 +37,5 @@
 	</div>
 </div>
 <?php if($this->config->get('kuler_analytics_position') == 'bottom') echo $this->config->get('kuler_analytics_code'); ?>
+<script type="text/javascript" src="catalog/view/theme/arcu-pro/js/my_script.js"></script>
 </body></html>
