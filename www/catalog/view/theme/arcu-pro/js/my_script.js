@@ -255,6 +255,12 @@
 		}, 1000);
 	}// $.fn.account_address
 
+	$.fn.my_district = function() {
+		setTimeout(function(){
+			$('select[name="zone_id"').district();
+		}, 1000);
+	}// $.fn.my_district
+
 }( jQuery ));
 
 // --------------------------------------------------
@@ -297,6 +303,9 @@ $(function () {
 
 		if( $('body').hasClass('account_address') )
 			$('body').account_address();
+
+			if( $('body').hasClass('my_district') )
+				$('body').my_district();
 
 	}); // !$(document).ready
 
