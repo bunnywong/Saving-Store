@@ -63,8 +63,8 @@
                 <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
               </tr>
                        <?php if ($options) { ?>
-         
-        
+
+
         <?php foreach ($options as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
        <tr><td>
@@ -76,14 +76,14 @@
             <option value=""><?php echo $text_select; ?></option>
             <?php foreach ($option['option_value'] as $option_value) { ?>
             <option <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'selected ="selected"' ; ?> value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
             </option>
             <?php } ?>
           </select>
          <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        
+
         <?php } ?>
         <?php if ($option['type'] == 'radio') { ?>
         <tr><td>
@@ -94,7 +94,7 @@
           <?php foreach ($option['option_value'] as $option_value) { ?>
           <input type="radio" name="option<?php echo $option['option_id']; ?>" <?php if( ${"optionV" . $option['option_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
           <label for="option-value-<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
           </label>
         </br>
           <?php } ?>
@@ -102,7 +102,7 @@
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td>
         </tr>
-        
+
         <?php } ?>
         <?php if ($option['type'] == 'checkbox') { ?>
         <tr><td>
@@ -113,7 +113,7 @@
           <?php foreach ($option['option_value'] as $option_value) { ?>
           <input type="checkbox" <?php if( ${"optionV_O" . $option['option_id']."C".$option_value['option_value_id']} ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> name="optionV<?php echo $option['option_id']; ?>C<?php echo $option_value['option_value_id']; ?>" value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
           <label for="option-value-<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
           </label>
         </br>
           <?php } ?>
@@ -121,7 +121,7 @@
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
         <?php } ?>
-        
+
         <?php if ($option['type'] == 'text') { ?>
         <tr><td>
           <?php if ($option['required']) { ?>
@@ -143,7 +143,7 @@
         <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        <?php } ?>        
+        <?php } ?>
         <?php if ($option['type'] == 'date') { ?>
         <tr><td>
           <?php if ($option['required']) { ?>
@@ -154,9 +154,9 @@
         <?php if (${"optionVE" . $option['option_id']}) { ?>
             <span class="error"><?php echo ${"optionVE" . $option['option_id']}; ?></span>
             <?php } ?></td></tr>
-        
+
         <?php } ?>
-       
+
         <?php } ?>
         <?php } ?>
               <tr>
@@ -257,8 +257,8 @@
                 <td><input type="text" name="address[<?php echo $address_row; ?>][address_2]" value="<?php echo $address['address_2']; ?>" /></td>
               </tr>
                <?php if ($optionsAddress) { ?>
-         
-        
+
+
         <?php foreach ($optionsAddress as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
        <tr><td>
@@ -270,7 +270,7 @@
             <option value=""><?php echo $text_select; ?></option>
             <?php foreach ($option['option_value'] as $option_value) { ?>
             <option <?php if(isset($address[$option['identifier']])&& $address[$option['identifier']] ==$option_value['option_value_id']) echo 'selected ="selected"' ; ?> value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
             </option>
             <?php } ?>
           </select>
@@ -278,7 +278,7 @@
                   <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
                   <?php } ?>
          </td></tr>
-        
+
         <?php } ?>
         <?php if ($option['type'] == 'radio') { ?>
         <tr><td>
@@ -289,7 +289,7 @@
           <?php foreach ($option['option_value'] as $option_value) { ?>
           <input type="radio" name="address[<?php echo $address_row; ?>][<?php echo $option['identifier']; ?>]" <?php if(isset($address[$option['identifier']]) && $address[$option['identifier']] ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
           <label for="option-value-<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
           </label>
         </br>
           <?php } ?>
@@ -298,7 +298,7 @@
                   <?php } ?>
          </td>
         </tr>
-        
+
         <?php } ?>
         <?php if ($option['type'] == 'checkbox') { ?>
         <tr><td>
@@ -307,11 +307,11 @@
           <?php } ?>
           <?php echo $option['name']; ?>:</td><td>
           <?php foreach ($option['option_value'] as $option_value) { ?>
-          <input type="checkbox" 
-          <?php if( isset($address[$option['identifier'].$option_value['option_value_id']]) && $address[$option['identifier'].$option_value['option_value_id']] ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?> 
+          <input type="checkbox"
+          <?php if( isset($address[$option['identifier'].$option_value['option_value_id']]) && $address[$option['identifier'].$option_value['option_value_id']] ==$option_value['option_value_id']) echo 'checked ="checked"' ; ?>
           name="address[<?php echo $address_row; ?>][<?php echo $option['identifier'].$option_value['option_value_id']; ?>]" value="<?php echo $option_value['option_value_id']; ?>" id="option-value-<?php echo $option_value['option_value_id']; ?>" />
           <label for="option-value-<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?>
-            
+
           </label>
         </br>
           <?php } ?>
@@ -320,7 +320,7 @@
                   <?php } ?>
         </td></tr>
         <?php } ?>
-        
+
         <?php if ($option['type'] == 'text') { ?>
         <tr><td>
           <?php if ($option['required']) { ?>
@@ -344,7 +344,7 @@
                   <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
                   <?php } ?>
         </td></tr>
-        <?php } ?>        
+        <?php } ?>
         <?php if ($option['type'] == 'date') { ?>
         <tr><td>
           <?php if ($option['required']) { ?>
@@ -355,9 +355,9 @@
       <?php if (isset(${'error_'.$option['identifier']}[$address_row])) { ?>
                   <span class="error"><?php echo  ${'error_'.$option['identifier']}[$address_row]; ?></span>
                   <?php } ?>
-      </td></tr>        
+      </td></tr>
         <?php } ?>
-       
+
         <?php } ?>
         <?php } ?>
               <tr>
@@ -494,12 +494,12 @@
 <script type="text/javascript"><!--
 $('select[name=\'customer_group_id\']').live('change', function() {
 	var customer_group = [];
-	
+
 <?php foreach ($customer_groups as $customer_group) { ?>
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
-<?php } ?>	
+<?php } ?>
 
 	if (customer_group[this.value]) {
 		if (customer_group[this.value]['company_id_display'] == '1') {
@@ -507,7 +507,7 @@ $('select[name=\'customer_group_id\']').live('change', function() {
 		} else {
 			$('.company-id-display').hide();
 		}
-		
+
 		if (customer_group[this.value]['tax_id_display'] == '1') {
 			$('.tax-id-display').show();
 		} else {
@@ -517,7 +517,7 @@ $('select[name=\'customer_group_id\']').live('change', function() {
 });
 
 $('select[name=\'customer_group_id\']').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 function country(element, index, zone_id) {
   if (element.value != '') {
@@ -529,30 +529,30 @@ function country(element, index, zone_id) {
 			},
 			complete: function() {
 				$('.wait').remove();
-			},			
+			},
 			success: function(json) {
 				if (json['postcode_required'] == '1') {
 					$('#postcode-required' + index).show();
 				} else {
 					$('#postcode-required' + index).hide();
 				}
-				
+
 				html = '<option value=""><?php echo $text_select; ?></option>';
-				
+
 				if (json['zone'] != '') {
 					for (i = 0; i < json['zone'].length; i++) {
 						html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-						
+
 						if (json['zone'][i]['zone_id'] == zone_id) {
 							html += ' selected="selected"';
 						}
-		
+
 						html += '>' + json['zone'][i]['name'] + '</option>';
 					}
 				} else {
 					html += '<option value="0"><?php echo $text_none; ?></option>';
 				}
-				
+
 				$('select[name=\'address[' + index + '][zone_id]\']').html(html);
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
@@ -563,14 +563,14 @@ function country(element, index, zone_id) {
 }
 
 $('select[name$=\'[country_id]\']').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 var address_row = <?php echo $address_row; ?>;
 
-function addAddress() {	
+function addAddress() {
 	html  = '<div id="tab-address-' + address_row + '" class="vtabs-content" style="display: none;">';
 	html += '  <input type="hidden" name="address[' + address_row + '][address_id]" value="" />';
-	html += '  <table class="form">'; 
+	html += '  <table class="form">';
 	html += '    <tr>';
     html += '	   <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>';
     html += '	   <td><input type="text" name="address[' + address_row + '][firstname]" value="" /></td>';
@@ -582,7 +582,7 @@ function addAddress() {
     html += '    <tr>';
     html += '      <td><?php echo $entry_company; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][company]" value="" /></td>';
-    html += '    </tr>';	
+    html += '    </tr>';
     html += '    <tr class="company-id-display">';
     html += '      <td><?php echo $entry_company_id; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][company_id]" value="" /></td>';
@@ -590,7 +590,7 @@ function addAddress() {
     html += '    <tr class="tax-id-display">';
     html += '      <td><?php echo $entry_tax_id; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][tax_id]" value="" /></td>';
-    html += '    </tr>';			
+    html += '    </tr>';
     html += '    <tr>';
     html += '      <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][address_1]" value="" /></td>';
@@ -626,26 +626,26 @@ function addAddress() {
     html += '    </tr>';
     html += '  </table>';
     html += '</div>';
-	
+
 	$('#tab-general').append(html);
-	
-	$('select[name=\'address[' + address_row + '][country_id]\']').trigger('change');	
-	
+
+	$('select[name=\'address[' + address_row + '][country_id]\']').trigger('change');
+
 	$('#address-add').before('<a href="#tab-address-' + address_row + '" id="address-' + address_row + '"><?php echo $tab_address; ?> ' + address_row + '&nbsp;<img src="view/image/delete.png" alt="" onclick="$(\'#vtabs a:first\').trigger(\'click\'); $(\'#address-' + address_row + '\').remove(); $(\'#tab-address-' + address_row + '\').remove(); return false;" /></a>');
-		 
+
 	$('.vtabs a').tabs();
-	
+
 	$('#address-' + address_row).trigger('click');
-	
+
 	address_row++;
 }
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('#history .pagination a').live('click', function() {
 	$('#history').load(this.href);
-	
+
 	return false;
-});			
+});
 
 $('#history').load('index.php?route=sale/customer/history&token=<?php echo $token; ?>&customer_id=<?php echo $customer_id; ?>');
 
@@ -667,18 +667,18 @@ $('#button-history').bind('click', function() {
 		},
 		success: function(html) {
 			$('#history').html(html);
-			
+
 			$('#tab-history input[name=\'comment\']').val('');
 		}
 	});
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('#transaction .pagination a').live('click', function() {
 	$('#transaction').load(this.href);
-	
+
 	return false;
-});			
+});
 
 $('#transaction').load('index.php?route=sale/customer/transaction&token=<?php echo $token; ?>&customer_id=<?php echo $customer_id; ?>');
 
@@ -699,19 +699,19 @@ $('#button-transaction').bind('click', function() {
 		},
 		success: function(html) {
 			$('#transaction').html(html);
-			
+
 			$('#tab-transaction input[name=\'amount\']').val('');
 			$('#tab-transaction input[name=\'description\']').val('');
 		}
 	});
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('#reward .pagination a').live('click', function() {
 	$('#reward').load(this.href);
-	
+
 	return false;
-});			
+});
 
 $('#reward').load('index.php?route=sale/customer/reward&token=<?php echo $token; ?>&customer_id=<?php echo $customer_id; ?>');
 
@@ -732,7 +732,7 @@ function addRewardPoints() {
 		},
 		success: function(html) {
 			$('#reward').html(html);
-								
+
 			$('#tab-reward input[name=\'points\']').val('');
 			$('#tab-reward input[name=\'description\']').val('');
 		}
@@ -741,7 +741,7 @@ function addRewardPoints() {
 
 function addBanIP(ip) {
 	var id = ip.replace(/\./g, '-');
-	
+
 	$.ajax({
 		url: 'index.php?route=sale/customer/addbanip&token=<?php echo $token; ?>',
 		type: 'post',
@@ -749,35 +749,35 @@ function addBanIP(ip) {
 		data: 'ip=' + encodeURIComponent(ip),
 		beforeSend: function() {
 			$('.success, .warning').remove();
-			
-			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');		
+
+			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
 		},
 		complete: function() {
-			
-		},			
+
+		},
 		success: function(json) {
 			$('.attention').remove();
-			
+
 			if (json['error']) {
 				 $('.box').before('<div class="warning" style="display: none;">' + json['error'] + '</div>');
-				
+
 				$('.warning').fadeIn('slow');
 			}
-						
+
 			if (json['success']) {
                 $('.box').before('<div class="success" style="display: none;">' + json['success'] + '</div>');
-				
+
 				$('.success').fadeIn('slow');
-				
+
 				$('#' + id).replaceWith('<a id="' + id + '" onclick="removeBanIP(\'' + ip + '\');"><?php echo $text_remove_ban_ip; ?></a>');
 			}
 		}
-	});	
+	});
 }
 
 function removeBanIP(ip) {
 	var id = ip.replace(/\./g, '-');
-	
+
 	$.ajax({
 		url: 'index.php?route=sale/customer/removebanip&token=<?php echo $token; ?>',
 		type: 'post',
@@ -785,34 +785,36 @@ function removeBanIP(ip) {
 		data: 'ip=' + encodeURIComponent(ip),
 		beforeSend: function() {
 			$('.success, .warning').remove();
-			
-			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');					
-		},	
+
+			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
+		},
 		success: function(json) {
 			$('.attention').remove();
-			
+
 			if (json['error']) {
 				 $('.box').before('<div class="warning" style="display: none;">' + json['error'] + '</div>');
-				
+
 				$('.warning').fadeIn('slow');
 			}
-			
+
 			if (json['success']) {
 				 $('.box').before('<div class="success" style="display: none;">' + json['success'] + '</div>');
-				
+
 				$('.success').fadeIn('slow');
-				
+
 				$('#' + id).replaceWith('<a id="' + id + '" onclick="addBanIP(\'' + ip + '\');"><?php echo $text_add_ban_ip; ?></a>');
 			}
 		}
-	});	
+	});
 };
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('.htabs a').tabs();
 $('.vtabs a').tabs();
-//--></script> 
- <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
+//--></script>
+<!-- // My Script
+ <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+-->
 <script type="text/javascript"><!--
 $(document).ready(function() {
 	if ($.browser.msie && $.browser.version == 6) {
@@ -822,7 +824,7 @@ $(document).ready(function() {
 		dateFormat: 'yy-mm-dd',
 		changeMonth: true,
 	    changeYear: true,
-	    yearRange: "-100:+5"});	
+	    yearRange: "-100:+5"});
 });
 </script>
 <?php echo $footer; ?>
