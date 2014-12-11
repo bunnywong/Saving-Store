@@ -10,7 +10,13 @@
 	@btn_bg_hover : #444444;
 	@btn_blue : #71bdf7;
 	@btn_blue_hover : #4199dd;
+// --------------------------------------------------
+// Global class
 
+.center-block{
+	margin: 0px auto 0px auto;
+	display: block;
+}
 // --------------------------------------------------
 // Sidebar
 
@@ -30,11 +36,18 @@
 		background: transparent;
 	}
 
+		.top_img_wrapper{
+			line-height: 0px;
+			img{
+				max-width: 95%;
+				height: auto!important;// over ride backend setting
+				.center-block;
+			}
+		}
 		.login-con{
 			.user-row span{	// After login
 				float: left;
 			}
-			div:nth-child(2) > span.user-mail{/* email*/}
 		    width: 260px;
             margin: 10px auto;
 		    box-sizing:border-box;
@@ -196,8 +209,6 @@
 	// ----- ----- ----- ----- -----
 	// Tag btn
 
-
-
 //	#footer .mCustomScrollBox,	// Second div
 	#footer > span.toggle
 		{background-color: @yellow!important;}
@@ -215,4 +226,3 @@
         color: #fff !important;
         opacity: 0.6;
     }
-

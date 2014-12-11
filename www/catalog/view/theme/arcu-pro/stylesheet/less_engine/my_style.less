@@ -21,6 +21,13 @@
 	@disabled : #EEE;
 
 // --------------------------------------------------
+// Global class
+
+.center-block{
+	margin: 0px auto 0px auto;
+	display: block;
+}
+// --------------------------------------------------
 // Global
 
   	body{
@@ -228,8 +235,12 @@
 				background-color: @yellow;
 			}
 			.btn:active{
+				border: 1px solid transparent;
 				position: relative;
 				top: 2px;
+			}
+			.btn:visited{
+
 			}
 		}
 
@@ -376,3 +387,7 @@
 	}// !body.checkout
 
 // --------------------------------------------------
+	// Address list view
+	body.account_address{
+		.my_address{line-height: 30px;}
+	}// !body.account_address
