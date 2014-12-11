@@ -230,7 +230,7 @@
           <?php } ?>
           <tr>
             <td><?php echo $text_zone; ?></td>
-            <td><?php echo $payment_zone; ?></td>
+            <td><?php echo substr($payment_zone, 5); ?></td>
           </tr>
           <?php if ($payment_zone_code) { ?>
           <tr>
@@ -307,7 +307,7 @@
           <?php } ?>
           <tr>
             <td><?php echo $text_zone; ?></td>
-            <td><?php echo $shipping_zone; ?></td>
+            <td><?php echo substr($shipping_zone, 5); ?></td>
           </tr>
           <?php if ($shipping_zone_code) { ?>
           <tr>
