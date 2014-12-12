@@ -564,7 +564,8 @@ class ModelCheckoutXOrder extends Model {
 					$text .= $language->get('text_new_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n";
 					$text .= $language->get('text_new_order_status') . ' ' . $order_status . "\n\n";
 					// My Script
-					$text .= "客戶電郵: ".$order_info['email']. "\n";
+					$text .= "客戶電話: ".$order_info['telephone']. "\n\n";
+					$text .= "客戶電郵: ".$order_info['email']. "\n\n";
 
 					$text .= $language->get('text_new_products') . "\n";
 
