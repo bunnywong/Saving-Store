@@ -45,6 +45,15 @@
 		setTimeout(function(){
 			$('table tbody tr td select[name="address[1][zone_id]"').district();
 		}, 1000);
+		$(this).hasClass('owner')
+			$(this).owner();
+	}
+
+	$.fn.owner = function(){
+		$('#sale > ul > li:nth-child(4)').click(function(){
+			var url = $(this).find('ul > li:first-child > a').attr('href');
+			window.location = url;
+		});
 	}
 
 	$.fn.sidebar = function() {

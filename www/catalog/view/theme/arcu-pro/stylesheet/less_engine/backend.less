@@ -1,3 +1,8 @@
+// Hide menu for nor developer
+
+// #catalog, #extension, #sale, #system, #reports, #help
+
+
 body.backend.owner{
 
 	.div2 > img,	// logo
@@ -8,17 +13,9 @@ body.backend.owner{
 		display: block!important;
 	}
 
-	// Hide menu for nor developer
-	/*
-		#catalog
-		#extension
-		#sale
-		#system
-		#reports
-		#help
-	*/
+
 	#extension,
- 	#system,
+		#system,
 	#reports,
 	#help{
 		display: none!important;
@@ -40,6 +37,7 @@ body.backend.owner{
 	#sale > ul{
 		> li:nth-child(2),	// 分期
 		> li:nth-child(3),	// 退換
+		> li:nth-child(4) > ul > li, // 客戶列表(Redirected by JS), 客戶群組, 禁止 IP
 		> li:nth-child(5),	// 加盟
 		> li:nth-child(6),	// 優惠券
 		> li:nth-child(7),	// 禮品券
@@ -49,6 +47,9 @@ body.backend.owner{
 		}
 		> li > ul > li:nth-child(2){	// 用戶群組
 			display: none!important;
+		}
+		> li:nth-child(4) > a{
+			background: none;	// Sub menu arrow (客戶列表)
 		}
 	}
 }// !body.backend.owner
