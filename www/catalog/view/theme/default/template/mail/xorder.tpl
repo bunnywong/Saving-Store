@@ -31,7 +31,7 @@
           <?php } ?></td>
         <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b><?php echo $text_email; ?></b> <?php echo $email; ?><br />
           <b><?php echo $text_telephone; ?></b> <?php echo $telephone; ?><br />
-          <b><?php echo $text_ip; ?></b> <?php echo $ip; ?><br />
+          <b><?php //echo $text_ip; // My Script ?></b> <?php //echo $ip;  // My Script ?> <!-- <br /> -->
           <?php echo $custom_personal; ?></td>
       </tr>
     </tbody>
