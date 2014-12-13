@@ -79,28 +79,21 @@ class ModelAccountCustomer extends Model {
 
 		$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
 
-		// My Script
-		$message =  $this->db->escape($data['firstname']).':';
+		$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
 
-		$message. = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";	// [ 歡迎您註冊成為 %s 會員，迎新禮品將於一個月內郵寄到你登記地址! ]
-
-		// My Script
-		$message .= 'before'. "\n";
-		$message .= '登入電郵：' . $data['email']. "\n";
-		$message .= 'after'. "\n";
+		// My Script // todo
+		$message .= '登入電郵：'. "\n";
 
 		if (!$customer_group_info['approval']) {
-			$message .= $this->language->get('text_login') . "\n";	// [ 請進入以下網址啟用您的賬戶，以獲取更多會員資訊及享受網上購物平台樂趣 ]
+			$message .= $this->language->get('text_login') . "\n";
 		} else {
 			$message .= $this->language->get('text_approval') . "\n";
 		}
 
-		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n"; // [ 請進入以下網址啟用您的賬戶，以獲取更多會員資訊及享受網上購物平台樂趣： ]
-
-//		$message .= $this->language->get('text_services') . "\n\n";
+		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
+		$message .= $this->language->get('text_services') . "\n\n";
 		$message .= $this->language->get('text_thanks') . "\n";
-		$message .= $this->config->get('config_name') . "\n";
-		$message .= '<img src="http://greenmap.hk/image/data/logo.png" style="max-width:200px" alt="SavingStore.com.hk" class="CToWUd">';
+		$message .= $this->config->get('config_name');
 
 		$mail = new Mail();
 		$mail->protocol = $this->config->get('config_mail_protocol');
