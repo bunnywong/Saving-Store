@@ -567,7 +567,7 @@ class ModelCheckoutXOrder extends Model {
 					$text .= "客戶名稱: ".$order_info['payment_firstname']. "\n";
 					$text .= "客戶電話: ".$order_info['telephone']. "\n";
 					$text .= "客戶電郵: ".$order_info['email']. "\n";
-					$text .= "客戶地址: ".$order_info['shipping_address_1'].'（'.$order_info['shipping_zone'].'）'. "\n\n";
+					$text .= "客戶地址: ".$order_info['shipping_address_1'].'（'.substr($order_info['shipping_zone'], 5).'）'. "\n\n";
 
 					$text .= $language->get('text_new_products') . "\n";
 
