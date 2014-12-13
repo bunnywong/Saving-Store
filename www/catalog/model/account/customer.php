@@ -78,26 +78,27 @@ class ModelAccountCustomer extends Model {
 		$this->language->load('account/register');
 
 		$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+
 		// My Script
-		$message = $data['firstname'];
+		$message =  $this->db->escape($data['firstname']).':';
 
 		$message. = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";	// [ 歡迎您註冊成為 %s 會員，迎新禮品將於一個月內郵寄到你登記地址! ]
 
+		// My Script
+		$message .= '登入電郵：' . $this->db->escape($data['email']);
+
 		if (!$customer_group_info['approval']) {
-			$message .= $this->language->get('text_login') . "\n";
+			$message .= $this->language->get('text_login') . "\n";	// [ 請進入以下網址啟用您的賬戶，以獲取更多會員資訊及享受網上購物平台樂趣 ]
 		} else {
 			$message .= $this->language->get('text_approval') . "\n";
 		}
-
-		// My Script
-		$message .= '登入電郵：' . $data['email'];
 
 		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n"; // [ 請進入以下網址啟用您的賬戶，以獲取更多會員資訊及享受網上購物平台樂趣： ]
 
 //		$message .= $this->language->get('text_services') . "\n\n";
 		$message .= $this->language->get('text_thanks') . "\n";
 		$message .= $this->config->get('config_name') . "\n";
-		$message .= '<img src="'. $logo.'" style="max-width: 200px;" alt="<?php echo $store_name; ?>" style="margin-bottom: 20px; border: none;" />'
+		$message .= '<img src="'. $logo.'" style="max-width: 200px;" alt="'. $store_name;.'" style="margin-bottom: 20px; border: none;" />';
 
 		$mail = new Mail();
 		$mail->protocol = $this->config->get('config_mail_protocol');
