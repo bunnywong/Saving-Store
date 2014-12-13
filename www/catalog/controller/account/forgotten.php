@@ -23,8 +23,8 @@ class ControllerAccountForgotten extends Controller {
 			$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
 
 
-			$message  = $username.':';
-			$message  .= '登入電郵：'.$setTo;
+			$message  = '';	// todo: client name
+			$message  .= '登入電郵：'.$this->request->post['email'];
 			$message  .= sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
 //			$message .= $this->language->get('text_password') . "\n\n";
 			$message .= $this->language->get('text_password') . $password . "\n\n";	// [您的新密碼: xxx ]
