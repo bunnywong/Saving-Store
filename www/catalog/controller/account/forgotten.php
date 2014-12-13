@@ -24,15 +24,17 @@ class ControllerAccountForgotten extends Controller {
 
 
 			$message  = '';	// todo: client name
-			$message  .= '登入電郵：'.$this->request->post['email'];
+
 			$message  .= sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
+
+			$message  .= '登入電郵：'.$this->request->post['email']. "\n";
 //			$message .= $this->language->get('text_password') . "\n\n";
 			$message .= $this->language->get('text_password') . $password . "\n\n";	// [您的新密碼: xxx ]
 //			$message .= $password;
 
 			$message .= '謝謝!'."\n";
 			$message .= 'SavingStore.com.hk'."\n";
-			$message .= '<img src="http://greenmap.hk/image/data/logo.png" style="max-width: 180px; height: auto;">';
+//			$message .= '<img src="http://greenmap.hk/image/data/logo.png" style="max-width: 180px; height: auto;">';	// todo IMG
 
 
 
