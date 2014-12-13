@@ -22,12 +22,19 @@ class ControllerAccountForgotten extends Controller {
 
 			$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
 
-			$message  = sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
+
+			$message  = $username.':';
+			$message  .= '登入電郵：'.$setTo;
+			$message  .= sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
 //			$message .= $this->language->get('text_password') . "\n\n";
-			$message .= $this->language->get('text_password') . $password;
+			$message .= $this->language->get('text_password') . $password . "\n\n";	// [您的新密碼: xxx ]
 //			$message .= $password;
-			$message .= ' %s '."\n";
+
+			$message .= '謝謝!'."\n";
+			$message .= 'SavingStore.com.hk'."\n";
 			$message .= '<img src="http://greenmap.hk/image/data/logo.png" style="max-width: 180px; height: auto;">';
+
+
 
 			$mail = new Mail();
 			$mail->protocol = $this->config->get('config_mail_protocol');
