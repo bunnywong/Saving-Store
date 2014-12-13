@@ -220,20 +220,21 @@
 		rand = Math.floor((Math.random() * 10000) + 1);
 
 			// Tip
-		$('table tr[sort="a9"] td:first-child')
+		$('table tr[sort="a27"] td:first-child')
 			.html('<span class="required">*</span> 驗証碼 (請輪入數字：' + rand + ')');
 			// Clear field for error return
-		$('table tr[sort="a99"] td:last-child input').val('');
+		$('table tr[sort="a27"] td:last-child input').val('');
 
 		// ----- -----  ----- -----  ----- -----  ----- -----  ----- -----
 		// Form handle
 
 		$('form').submit(function(){
 			// Check is same captcha
-			var user_captcha = $('table tr[sort="a99"] td:last-child input').val();
+			var user_captcha = $('table tr[sort="a27"] td:last-child input').val();
 			if( user_captcha != rand )
-				$('table tr[sort="a99"] td:last-child input').val('');
+				$('table tr[sort="a27"] td:last-child input').val('');
 
+			// Check confirm email
 			var email 			= $('table tr:[sort="a20"] input').val();
 			var confirm_email 	= $('table tr:[sort="a21"] input').val();
 			if( email != confirm_email )
