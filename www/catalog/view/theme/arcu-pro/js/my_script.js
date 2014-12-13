@@ -47,6 +47,33 @@
 		}, 1000);
 		$(this).hasClass('owner')
 			$(this).owner();
+
+		if( $('input[name="lastname"').val() != undefined){	// Work in custom form only
+
+			if( $('input[name="firstname"').val() == '' )	// DEBUG
+				$('input[name="firstname"').val('   ');
+			if( $('input[name="telephone"').val() == '' )	// DEBUG
+				$('input[name="telephone"').val('   ');
+
+			// ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+			if( $('input[name="lastname"').val() == '' )
+				$('input[name="lastname"').val('   ');
+
+			if( $('input[name="address[1][firstname]"').val() == '' )
+				$('input[name="address[1][firstname]"').val('   ');
+
+			if( $('input[name="address[1][lastname]"').val() == '' )
+				$('input[name="address[1][lastname]"').val('   ');
+
+			if( $('input[name="address[1][address_1]"').val() == '' )
+				$('input[name="address[1][address_1]"').val('   ');
+
+			if( $('input[name="address[1][city]"').val() == '' )
+				$('input[name="address[1][city]"').val('   ');
+
+//			if( $('select[name="address[1][zone_id]"').val() == '' )
+		}
 	}
 
 	$.fn.owner = function(){
@@ -266,10 +293,7 @@
 
 		$('table tbody')
 			.children('tr:[sort="a27"], tr:[sort="a21"]')	// Captcha, Confirm email
-				.hide().end()
-			.find('tr:[sort="a20"] input')
-				.prop('disabled', 'disabled')
-				.addClass('disabled');
+				.hide().end();
 
 	}// $.fn.editaccount
 

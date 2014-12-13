@@ -45,7 +45,7 @@
         <?php }?>
         <tr sort="a<?php echo $modData['email_sort']; ?>">
           <td><span class="required">*</span> <?php echo $entry_email; ?></td>
-          <td><input type="text" <?php if($title_email) echo "xtitle ='".$title_email."'";?> name="email" value="<?php echo $email; ?>" />
+          <td><?= $email; ?><input type="hidden" <?php if($title_email) echo "xtitle ='".$title_email."'";?> name="email" value="<?php echo $email; ?>" />
             <?php if ($error_email) { ?>
             <span class="error"><?php echo $error_email; ?></span>
             <?php } ?></td>
