@@ -5,16 +5,30 @@
 <title><?php echo $title; ?></title>
 </head>
 <body style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000;">
-<div style="width: 680px;"><a href="<?php echo $store_url; ?>" title="<?php echo $store_name; ?>"><img src="<?php echo $logo; ?>" alt="<?php echo $store_name; ?>" style="margin-bottom: 20px; border: none;" /></a>
-  <p style="margin-top: 0px; margin-bottom: 20px;"><?php echo $text_greeting; ?></p>
-  <?php if ($customer_id) { ?>
-  <p style="margin-top: 0px; margin-bottom: 20px;"><?php echo $text_link; ?></p>
-  <p style="margin-top: 0px; margin-bottom: 20px;"><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
-  <?php } ?>
-  <?php if ($download) { ?>
-  <p style="margin-top: 0px; margin-bottom: 20px;"><?php echo $text_download; ?></p>
-  <p style="margin-top: 0px; margin-bottom: 20px;"><a href="<?php echo $download; ?>"><?php echo $download; ?></a></p>
-  <?php } ?>
+<div style="width: 680px;">
+  <table>
+    <tr>
+      <td style="width: 70%;">
+
+        <p style="margin-top: 0px; margin-bottom: 20px;"><?php echo $text_greeting; ?></p>
+        <?php if ($customer_id) { ?>
+        <p style="margin-top: 0px; margin-bottom: 20px;"><?php echo $text_link; ?></p>
+        <p style="margin-top: 0px; margin-bottom: 20px;"><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
+        <?php } ?>
+        <?php if ($download) { ?>
+        <p style="margin-top: 0px; margin-bottom: 20px;"><?php echo $text_download; ?></p>
+        <p style="margin-top: 0px; margin-bottom: 20px;"><a href="<?php echo $download; ?>"><?php echo $download; ?></a></p>
+        <?php } ?>
+
+      </td>
+      <td style="width: 30%;">
+
+        <a href="<?php echo $store_url; ?>" title="<?php echo $store_name; ?>"><img src="<?php echo $logo; ?>" alt="<?php echo $store_name; ?>" style="margin-bottom: 20px; border: none;" /></a>
+
+      </td>
+    </tr>
+  </table>
+
   <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
     <thead>
       <tr>
