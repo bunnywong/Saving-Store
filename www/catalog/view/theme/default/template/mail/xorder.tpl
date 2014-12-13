@@ -128,7 +128,14 @@
     <tfoot>
       <?php foreach ($totals as $total) { ?>
       <tr>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b><?php echo $total['title']; ?>:</b></td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>
+          <?php
+            if( $total['text'] == '$00.00' ){
+              echo '免運費';
+            }else{
+              echo $total['title'];
+            }
+          ?>:</b></td>
         <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?php echo $total['text']; ?></td>
       </tr>
       <?php } ?>
