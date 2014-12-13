@@ -26,8 +26,8 @@ class ControllerAccountForgotten extends Controller {
 //			$message .= $this->language->get('text_password') . "\n\n";
 			$message .= $this->language->get('text_password') . $password;
 //			$message .= $password;
-			$message .= '%s'."\n";
-			$message .= '<img src="http://greenmap.hk/image/data/logo.png" title="%s" alt="SavingStore.com.hk" style="max-width: 180px; height: auto;">';
+			$message .= ' %s '."\n";
+			$message .= '<img src="http://greenmap.hk/image/data/logo.png" style="max-width: 180px; height: auto;">';
 
 			$mail = new Mail();
 			$mail->protocol = $this->config->get('config_mail_protocol');
