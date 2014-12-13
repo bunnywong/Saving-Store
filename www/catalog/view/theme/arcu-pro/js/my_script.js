@@ -265,7 +265,7 @@
 	$.fn.editaccount = function() {
 
 		$('table tbody')
-			.children('tr:[sort="a9"], tr:[sort="a21"]')	// Captcha, Confirm email
+			.children('tr:[sort="a27"], tr:[sort="a21"]')	// Captcha, Confirm email
 				.hide().end()
 			.find('tr:[sort="a20"] input')
 				.prop('disabled', 'disabled')
