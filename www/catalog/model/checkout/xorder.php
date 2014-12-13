@@ -370,7 +370,7 @@ class ModelCheckoutXOrder extends Model {
 				'address_2' => $order_info['payment_address_2'],
 				'city'      => $order_info['payment_city'],
 				'postcode'  => $order_info['payment_postcode'],
-				'zone'      => $order_info['payment_zone'],
+				'zone'      => substr($order_info['payment_zone'], 5),
 				'zone_code' => $order_info['payment_zone_code'],
 				'country'   => $order_info['payment_country']
 				);
@@ -411,7 +411,7 @@ class ModelCheckoutXOrder extends Model {
 				'address_2' => $order_info['shipping_address_2'],
 				'city'      => $order_info['shipping_city'],
 				'postcode'  => $order_info['shipping_postcode'],
-				'zone'      => $order_info['shipping_zone'],
+				'zone'      => substr($order_info['shipping_zone'], 5),
 				'zone_code' => $order_info['shipping_zone_code'],
 				'country'   => $order_info['shipping_country']
 				);
