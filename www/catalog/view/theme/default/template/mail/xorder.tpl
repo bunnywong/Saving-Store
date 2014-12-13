@@ -23,7 +23,9 @@
       </td>
       <td style="width: 30%;">
 
-        <a href="<?php echo $store_url; ?>" style="max-width: 280px;" title="<?php echo $store_name; ?>"><img src="<?php echo $logo; ?>" alt="<?php echo $store_name; ?>" style="margin-bottom: 20px; border: none;" /></a>
+        <a href="<?php echo $store_url; ?>" title="<?php echo $store_name; ?>">
+          <img src="<?php echo $logo; ?>" style="max-width: 200px; left: 30px; position: relative;" alt="<?php echo $store_name; ?>" style="margin-bottom: 20px; border: none;" />
+        </a>
 
       </td>
     </tr>
