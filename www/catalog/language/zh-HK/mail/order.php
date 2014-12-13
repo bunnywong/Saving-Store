@@ -1,9 +1,11 @@
 <?php
 // Text
 $_['text_new_subject']          = '%s - 訂單號 %s';
-$_['text_new_greeting']         = '感謝您對 %s 商品感興趣。您的訂單已經接納，我們將在收到您的付款後，盡快處理您的訂單。';
+// $_['text_new_greeting']         = '感謝您對 %s 商品感興趣。您的訂單已經接納，我們將在收到您的付款後，盡快處理您的訂單。';
+$_['text_new_greeting']         = '恭喜您已成功下訂單，我們將於7個工作天內送到，並於送貨前一天致電約送貨。';
 $_['text_new_received']         = '您已接收一份訂單。';
-$_['text_new_link']             = '點擊此聯結查看您的訂單：';
+// $_['text_new_link']             = '點擊此聯結查看您的訂單：';
+$_['text_new_link']             = '以下為訂單資訊，或點擊以下連結查看您的訂單：';
 $_['text_new_order_detail']     = '訂單明細';
 $_['text_new_instruction']      = '發票號：';
 $_['text_new_order_id']         = '訂單編號：';
