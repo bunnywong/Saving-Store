@@ -1,4 +1,10 @@
 <?php echo $header; ?>
+<script src="http://savingstore.com.hk/catalog/view/theme/arcu-pro/js/jquery_cookie/src/jquery.cookie.js"></script>
+
+<script>
+  $('body').addClass('account_login');
+</script>
+
 <?php if ($success) { ?>
 
 <div class="success"><?php echo $success; ?></div>
@@ -57,5 +63,5 @@ $('#login input').keydown(function(e) {
 		$('#login').submit();
 	}
 });
-//--></script> 
+//--></script>
 <?php echo $footer; ?>

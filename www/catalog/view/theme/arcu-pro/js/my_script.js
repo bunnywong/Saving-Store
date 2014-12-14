@@ -106,6 +106,42 @@
 	}
 	// ---------- ---------- ---------- ---------- ----------
 
+	$.fn.account_login = function() {
+		var iframe_url = $.cookie('iframe_url');
+
+		if( iframe_url != null ){
+			$.removeCookie('iframe_url', { path: '/' });
+			window.location = iframe_url+'&error=1';
+		}
+	}
+
+	$.fn.account_logout = function() {
+		// Cookie ref: https://github.com/carhartl/jquery-cookie
+
+		// iframe_url = localStorage.getItem('iframe_url');
+		var iframe_url = $.cookie('iframe_url');
+
+		if( iframe_url != null ){
+			$.removeCookie('iframe_url', { path: '/' });
+			window.location = iframe_url;
+		}
+	}
+
+	$.fn.account_account = function() {
+
+		// iframe_url = localStorage.getItem('iframe_url');
+		var iframe_url = $.cookie('iframe_url');
+
+		if( iframe_url != null ){
+			// todo: clear cookie
+			$.removeCookie('iframe_url', { path: '/' });
+			window.location = iframe_url;
+		}
+
+	}// !$.fn.account_account
+
+	// ---------- ---------- ---------- ---------- ----------
+
 	$.fn.list_view = function() {
 
 		// Added URL wrapper to whole item
@@ -342,6 +378,15 @@ $(function () {
 
 		// ----- ----- ----- ----- -----
 		// My Account
+
+		if( $('body').hasClass('account_login') )
+			$(this).account_login();
+
+		if( $('body').hasClass('account_account') )
+			$('body').account_account();
+
+		if( $('body').hasClass('account_logout') )
+			$('body').account_logout();
 
 		if( $('body').hasClass('success') )
 			$('body').g2redeem();
