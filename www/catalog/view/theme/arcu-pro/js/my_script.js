@@ -183,8 +183,11 @@
 
 		$('#qty_box').change(function(){
 			var qty = $(this).val();
-			if( isInt(qty) == false)
+
+			if( qty != parseInt(qty, 10) ){
 				$(this).val(1);
+			}
+
 		});
 		// ----- ----- ----- ----- -----
 		// Click to buy + checkout
@@ -338,7 +341,7 @@
 
 	$.fn.account_myaddress_update = function() {
 		setTimeout(function(){
-			$('select[name="zone_id"').district();
+			$('select[name="zone_id"]').district();
 		}, 1000);
 	}// $.fn.account_myaddress_update
 
