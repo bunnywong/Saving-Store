@@ -226,7 +226,7 @@
     <td>
     <?php if(!$isActive['enablemod'] || $isActive['enablemod'] && $modData['country_req_checkout']) echo '<span class="required">*</span>';  ?>
     <?php echo $entry_country; ?></td>
-    <td><select  name="country_id" class="large-field">
+    <td><select  name="country_id" class="large-field disabled" disabled >
         <option value=""><?php echo $text_select; ?></option>
         <?php foreach ($countries as $country) { ?>
         <?php if ($country['country_id'] == $country_id) { ?>
