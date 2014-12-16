@@ -9,8 +9,10 @@
 // --------------------------------------------------
 // Common
 
+	@blue 	: #5bc0de;
 	@yellow : #FBD606;
 	@black 	: #666;
+	@green 	: #5cb85c;
 	@white 	: #FFF;
 	@gray	: #ddd;
 	@lightgray : lightgray;
@@ -388,22 +390,29 @@
 			color: @white!important;
 		}
 
-		.xten input:checked +label{	// Checked item
-			background-color: transparent;
-			color: @black;
+		.title_wrapper{
+			border-bottom: 1px solid @gray;
+			height: 36px;
+		}
+		.xten input:checked +label{		// Checked item
+			background-color: @green;
+			color: @white;
 			border: 1px solid @yellow;
 		}
-		.xten label:hover{
-			/*background-color: @btn_blue_hover!important;
-			color: @white;*/
+		.xten label{
+			background-color: transparent;
 		}
+		.xten label:hover{
+			color: @black;
+		}
+
 
 		// ----- ----- ----- ----- -----
 		#payment-address{
-			clear: both;	// Fix step bar over lap
-			.disabled{
+			//clear: both;	// Fix step bar over lap [ old issue ? ]
+			select[name="country_id"]{
 				background: lightgray;
-				cursor: not-allowed;
+				//cursor: not-allowed;
 			}
 		}
 		#shipping-method table tr:nth-child(n+3){
