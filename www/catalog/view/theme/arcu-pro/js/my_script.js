@@ -211,6 +211,9 @@
 			$('table tr:[sort="a19"] td select[name="zone_id"]').district();
 		}, 1000);
 
+		// Delivery tel issue
+		$('table tr:[sort="a12"]').hide();
+
 		// Add title
 		$('table tr:[sort="a50"]')
 			.before('<tr><td colspan="2"><h2>子女資料</h3></td></tr>')
