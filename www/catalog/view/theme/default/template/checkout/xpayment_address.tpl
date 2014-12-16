@@ -1,4 +1,5 @@
 <?php if ($addresses) { ?>
+<div class="title_wrapper">
  <div class="xleft"><table class="xten" width="100%">
   <tr><td >
   <input type="radio" name="payment_address" value="existing" id="payment-address-existing" checked="checked" />
@@ -17,6 +18,7 @@
   </label>
   </td></tr>
   </table>
+</div>
 </div>
 <div class="xleft"><div id="payment-existing">
 <table class="xten" width="100%">
@@ -226,7 +228,7 @@
     <td>
     <?php if(!$isActive['enablemod'] || $isActive['enablemod'] && $modData['country_req_checkout']) echo '<span class="required">*</span>';  ?>
     <?php echo $entry_country; ?></td>
-    <td><select  name="country_id" class="large-field disabled" disabled >
+    <td><select  name="country_id" class="large-field" disabled >
         <option value=""><?php echo $text_select; ?></option>
         <?php foreach ($countries as $country) { ?>
         <?php if ($country['country_id'] == $country_id) { ?>
