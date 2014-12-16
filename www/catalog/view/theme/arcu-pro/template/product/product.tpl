@@ -90,12 +90,14 @@
 				<?php } ?>
 				<div class="description">
 					<?php if ($manufacturer) { ?>
-					<span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a><br />
+					<span><?php echo $text_manufacturer; ?></span><?php echo $manufacturer; ?><br />
 					<?php } ?>
 					<span><?php echo $text_model; ?></span> <?php echo $model; ?><br />
+<!--
 					<?php if ($reward) { ?>
 					<span><?php echo $text_reward; ?></span> <?php echo $reward; ?><br />
 					<?php } ?>
+-->
 					<span><?php echo $text_stock; ?></span> <?php echo $stock; ?><br />
 					<span><?php echo $text_qty; ?></span>
 					<input id="qty_box" type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
