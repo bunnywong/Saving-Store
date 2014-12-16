@@ -208,7 +208,7 @@
 
 		setTimeout(function(){
 			// District ( May be JS yet by default Fn. )
-			$('table tr:[sort="a18"] td select[name="zone_id"]').district();
+			$('table tr:[sort="a19"] td select[name="zone_id"]').district();
 		}, 1000);
 
 		// Add title
@@ -333,17 +333,11 @@
 
 	}// $.fn.editaccount
 
-	$.fn.account_address_update = function() {
+	$.fn.account_myaddress_update = function() {
 		setTimeout(function(){
 			$('select[name="zone_id"').district();
 		}, 1000);
-	}// $.fn.account_address_update
-
-	$.fn.address_myaddress_update = function() {
-		setTimeout(function(){
-			$('select[name="zone_id"').district();
-		}, 1000);
-	}// $.fn.address_myaddress_update
+	}// $.fn.account_myaddress_update
 
 }( jQuery ));
 
@@ -394,8 +388,8 @@ $(function () {
 		if( $('body').hasClass('editaccount') )
 			$('body').editaccount();
 
-		if( $('body').hasClass('account_address_update') )
-			$('body').account_address_update();
+		if( $('body').hasClass('account_myaddress_update') )
+			$('body').account_myaddress_update();
 
 			if( $('body').hasClass('address_myaddress_update') )
 				$('body').address_myaddress_update();

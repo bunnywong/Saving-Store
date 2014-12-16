@@ -1,11 +1,5 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
 
-<script>
-jQuery(document).ready(function($){
-  $('body').addClass('account_address_update');
-});
-</script>
-
 <div id="content"><?php echo $content_top; ?>
 	<div class="box">
 		<div class="breadcrumb">
