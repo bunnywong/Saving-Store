@@ -46,7 +46,7 @@ $_['text_month']                     = '月';
 $_['text_year']                      = '年';
 
 // Column
-$_['column_name']                    = '產品名';
+$_['column_name']                    = '產品名稱';
 $_['column_model']                   = '型號';
 $_['column_quantity']                = '數量';
 $_['column_price']                   = '價錢';
