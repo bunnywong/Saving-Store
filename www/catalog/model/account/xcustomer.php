@@ -88,7 +88,7 @@ class ModelAccountXCustomer extends Model {
 		}
 
 		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
-		$message .= $this->language->get('text_services') . "\n\n";
+//		$message .= $this->language->get('text_services') . "\n\n";	// [登錄後， 您將能夠享受其他服務包括訪問歷史訂單記錄， 打印發票和編輯您的賬戶信息。]
 		$message .= $this->language->get('text_thanks') . "\n";
 		$message .= $this->config->get('config_name');
 
@@ -124,9 +124,9 @@ class ModelAccountXCustomer extends Model {
 				$message .= $option['name'] . ' : '  . $this->getCustomerOptionsA($customer_id, $option['option_id'], $option['type'], 0) . "\n";
 
 			}
-			
+
 			$message .= "\n\n Address: \n\n\n";
-			
+
 			if(!$modData['show_address']){
 				if(isset($data['company'])){
 					$message .= $this->language->get('entry_company') . '  '  . $data['company'] . "\n";
@@ -152,12 +152,12 @@ class ModelAccountXCustomer extends Model {
 				}
 				if(isset($data['city'])){
 					$message .= $this->language->get('entry_city') . '  '  . $data['city'] . "\n";
-				}				
+				}
 				if(isset( $data['country_id'])){
 					$this->load->model('localisation/country');
 					$id=  $this->model_localisation_country->getCountry( $data['country_id']);
 					$message .= $this->language->get('entry_country') . '  '  . $id['name'] . "\n";
-				}				
+				}
 				if(isset($data['zone_id'])){
 					$this->load->model('localisation/zone');
 					$id=  $this->model_localisation_zone->getZone( $data['zone_id']);
@@ -165,8 +165,8 @@ class ModelAccountXCustomer extends Model {
 				}
 				if(isset($data['newsletter'])){
 					$message .= $this->language->get('entry_newsletter') . '  '  . ($data['newsletter']==1?'Yes':'No') . "\n";
-				}	
-				
+				}
+
 			}
 			$mail->setTo($this->config->get('config_email'));
 			$mail->setSubject(html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8'));
@@ -243,7 +243,7 @@ class ModelAccountXCustomer extends Model {
 		if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
 			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
 		}
-			
+
 		if (isset($data['filter_ip']) && !is_null($data['filter_ip'])) {
 			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
 		}
@@ -285,7 +285,7 @@ class ModelAccountXCustomer extends Model {
 				if ($data['limit'] < 1) {
 					$data['limit'] = 20;
 				}
-					
+
 				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 			}
 
@@ -319,26 +319,26 @@ class ModelAccountXCustomer extends Model {
 			if($option['type']!='checkbox'){
 				$this->db->query("INSERT INTO " . DB_PREFIX . "xcustom_customer_option
 				set customer_id = ".(int)$customer_id." ,
-				address_id = ".(int)$address_id." , 
+				address_id = ".(int)$address_id." ,
 				option_id = ".(int)$option['option_id']." ,
 				option_value_id = ".(int)$option['option_id']." ,
 				name = '".$this->db->escape($option['name'])."' ,
-				value = '".$this->db->escape($data['option'.$option['option_id']])."' ,				
+				value = '".$this->db->escape($data['option'.$option['option_id']])."' ,
 				type = '".$option['type']."'
-			"); 
+			");
 			}
 			if($option['type']=='checkbox'){
 				foreach ($option['option_value'] as $option_value) {
 					$value=isset($data['optionV'.$option['option_id'].'C'.$option_value['option_value_id']])?$this->db->escape($data['optionV'.$option['option_id'].'C'.$option_value['option_value_id']]):"";
 					$this->db->query("INSERT INTO " . DB_PREFIX . "xcustom_customer_option
 				set customer_id = ".(int)$customer_id." ,
-				address_id = ".(int)$address_id." , 
+				address_id = ".(int)$address_id." ,
 				option_id = ".(int)$option['option_id']." ,
 				option_value_id = ".(int)$option_value['option_value_id']." ,
 				name = '".$this->db->escape($option['name'])."' ,
-				value = '".$value."' ,				
+				value = '".$value."' ,
 				type = '".$option['type']."'
-			"); 
+			");
 				}
 			}
 		}
@@ -347,9 +347,9 @@ class ModelAccountXCustomer extends Model {
 	public function getGuestOptionsA($option_id,$type,$value) {
 		$query = $this->db->query("
 					select  cv.name
-					from " . DB_PREFIX . "xcustom c left join " . DB_PREFIX . "xcustom_value_description cv on c.option_id = cv.option_id										
+					from " . DB_PREFIX . "xcustom c left join " . DB_PREFIX . "xcustom_value_description cv on c.option_id = cv.option_id
 					where  c.option_id = ".(int)$option_id.
-					' and cv.language_id = ' . (int)$this->config->get('config_language_id').					
+					' and cv.language_id = ' . (int)$this->config->get('config_language_id').
 		($value?" and cv.option_value_id in (".$value.")":" ")
 		);
 		if($type=='checkbox' ){
@@ -377,7 +377,7 @@ class ModelAccountXCustomer extends Model {
 		if($type=='select' || $type=='radio' || $type=='checkbox'){
 			$selectable =1;}
 			$query = $this->db->query("
-					select  cco.value ".		
+					select  cco.value ".
 			(($selectable) ?", cvd.name ":"")
 			."from " . DB_PREFIX . "xcustom c left join " . DB_PREFIX . "xcustom_value cv on c.option_id = cv.option_id
 					left join " . DB_PREFIX . "xcustom_value_description cvd on cvd.option_value_id = cv.option_value_id
@@ -419,7 +419,7 @@ class ModelAccountXCustomer extends Model {
 					select  cco.value from " . DB_PREFIX . "xcustom c left join " . DB_PREFIX . "xcustom_value cv on c.option_id = cv.option_id
 					left join " . DB_PREFIX . "xcustom_customer_option cco on c.option_id = cco.option_id
 					where cco.customer_id = ".(int)$customer_id."
-					and c.option_id = ".(int)$option_id. " ".  
+					and c.option_id = ".(int)$option_id. " ".
 		($option_value_id !=null ? " and cco.option_value_id = cv.option_value_id and cco.option_value_id =".(int)$option_value_id : "")
 		);
 		if(empty( $query->row["value"]))
@@ -441,7 +441,7 @@ class ModelAccountXCustomer extends Model {
 					left join " . DB_PREFIX . "xcustom_customer_option cco on c.option_id = cco.option_id
 					where cco.customer_id = ".(int)$customer_id."
 					and cco.address_id = ".(int)$address_id."
-					and c.option_id = ".(int)$option_id. " ".  
+					and c.option_id = ".(int)$option_id. " ".
 		($option_value_id !=null ? " and cco.option_value_id = cv.option_value_id and cco.option_value_id =".(int)$option_value_id : "")
 		);
 		if(empty( $query->row["value"]))
@@ -452,19 +452,19 @@ class ModelAccountXCustomer extends Model {
 	public function getCustomOptions($section=0) {
 		$product_option_data = array();
 		$product_option_query = $this->db->query("SELECT * FROM
-										" . DB_PREFIX . "xcustom o  LEFT JOIN 
-										" . DB_PREFIX . "xcustom_description od ON (o.option_id = od.option_id) 
-										WHERE o.isenable = 1 and 
-  										od.language_id = '" . (int)$this->config->get('config_language_id') ."' ". 
+										" . DB_PREFIX . "xcustom o  LEFT JOIN
+										" . DB_PREFIX . "xcustom_description od ON (o.option_id = od.option_id)
+										WHERE o.isenable = 1 and
+  										od.language_id = '" . (int)$this->config->get('config_language_id') ."' ".
 		(($section>0)?"AND o.section = ".$section : "")
 		. " ORDER BY 3") ;
 		foreach ($product_option_query->rows as $product_option) {
 			if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
 				$product_option_value_data = array();
 				$product_option_value_query = $this->db->query(
-				"SELECT * FROM 
-				" . DB_PREFIX . "xcustom_value ov LEFT JOIN 
- 				" . DB_PREFIX . "xcustom_value_description ovd ON (ov.option_value_id = ovd.option_value_id) 
+				"SELECT * FROM
+				" . DB_PREFIX . "xcustom_value ov LEFT JOIN
+ 				" . DB_PREFIX . "xcustom_value_description ovd ON (ov.option_value_id = ovd.option_value_id)
  				WHERE
  				ov.option_id = '" . (int)$product_option['option_id'] . "'  and
   				ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'
@@ -539,7 +539,7 @@ CREATE TABLE IF NOT EXISTS " . DB_PREFIX . "xcustom (
   email_display tinyint(4) NOT NULL DEFAULT '0' ,
 order_display tinyint(4) NOT NULL DEFAULT '0' ,
 list_display tinyint(4) NOT NULL DEFAULT '0' ,
-isenable tinyint(4) NOT NULL DEFAULT '1', 
+isenable tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (option_id)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ");
 
@@ -551,7 +551,7 @@ CREATE TABLE IF NOT EXISTS " . DB_PREFIX . "xcustom_customer_option (
   address_id int(11) NOT NULL DEFAULT '0',
   name varchar(255) NOT NULL,
   value text,
-  type varchar(32) NOT NULL, 
+  type varchar(32) NOT NULL,
   PRIMARY KEY (customer_id,address_id,option_id,option_value_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
@@ -582,7 +582,7 @@ CREATE TABLE IF NOT EXISTS " . DB_PREFIX . "xcustom_customer_order_option (
   value text,
   type varchar(32) NOT NULL,
   PRIMARY KEY (order_id,customer_id,data_in,section,option_id,option_value_id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8");		
+) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
 
 		$this->db->query("
