@@ -21,7 +21,9 @@ $_['text_i_am_returning_customer']   = '我已註冊賬戶';
 $_['text_register']                  = '註冊賬戶';
 $_['text_guest']                     = '直接結賬';
 //$_['text_register_account']          = '註冊一個賬戶以便您更快捷地購物， 查看訂單狀態， 查看採購的歷史記錄， 和更多的管理項目。';
-$_['text_register_account']          = '註冊一個賬戶以便您更快捷地購物， 查看訂單狀態， 查看採購的歷史記錄， 和更多的管理項目，如已成為會員，請先登入';
+// $_['text_register_account']          = '註冊一個賬戶以便您更快捷地購物， 查看訂單狀態， 查看採購的歷史記錄， 和更多的管理項目，如已成為會員，請先登入';
+$_['text_register_account']          = '多謝選購有關產品，請先<a href="index.php?route=account/signup"><strong>註冊</strong></a>成為會員，享用網上購物平台。
+<br>如果已經成為會員，請先登入。';
 $_['text_forgotten']                 = '忘了密碼';
 $_['text_items']                     = '%s 件商品 - %s';
 $_['text_your_details']              = '我的個人信息';
