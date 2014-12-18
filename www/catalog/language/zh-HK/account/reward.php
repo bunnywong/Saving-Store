@@ -1,6 +1,6 @@
 <?php
-// Heading 
-$_['heading_title']      = '我的獎勵積分';
+// Heading
+$_['heading_title']      = '我的獎勵積分（現時正在試用當中，換禮品暫停）';
 
 // Column
 $_['column_date_added']  = '獲取日期';
