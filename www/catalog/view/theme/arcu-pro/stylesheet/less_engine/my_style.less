@@ -389,6 +389,11 @@
 // Checkout
 
 	body.checkout{
+		#payment-address,	// Step 2
+//		#shipping-address,	// Step 3
+		#payment-method
+			{display:none!important;}
+
 		// ----- ----- ----- ----- -----
 		// x tamplate over ride
 		#payment-address > div.checkout-content > .xleft > .xten label:hover,
@@ -397,38 +402,44 @@
 			color: @white!important;
 		}
 
-		.title_wrapper{
-			border-bottom: 1px solid @gray;
-			height: 36px;
-		}
-		.xten input:checked +label{		// Checked item
-			background-color: @green;
-			color: @white;
-			border: 1px solid @yellow;
-		}
-		.xten label{
-			background-color: transparent;
-		}
-		.xten label:hover{
-			color: @black;
-		}
+
 
 
 		// ----- ----- ----- ----- -----
 		#payment-address{
 			clear: both;	// Fix step bar over lap [ old issue ? ]
+
+		}
+		#shipping-method table tr:nth-child(n+3){
+			display: none!important;	// Show free or charge shipping $ only
+		}
+		// ----- ----- ----- ----- -----
+		// Step 2
+
+		#shipping-address{
+			clear: both;
+
+			.title_wrapper{
+				border-bottom: 1px solid @gray;
+				height: 36px;
+			}
+			.xten input:checked +label{		// Checked item
+				background-color: @green;
+				color: @white;
+				border: 1px solid @yellow;
+			}
+			.xten label{
+				background-color: transparent;
+			}
+			.xten label:hover{
+				color: @black;
+			}
+
 			select[name="country_id"]{
 				background: lightgray;
 				cursor: not-allowed;
 			}
 		}
-		#shipping-method table tr:nth-child(n+3){
-			display: none!important;	// Show free or charge shipping $ only
-		}
-
-		#shipping-address,
-		#payment-method
-			{display:none!important;}
 
 	}// !body.checkout
 

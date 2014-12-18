@@ -96,6 +96,7 @@ $(document).ready(function() {
 
 			$('#payment-address .checkout-content').slideDown('slow');
 
+			$('#button-payment-address').trigger('click');	// My Script: Skip step 2
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -468,7 +469,7 @@ $('#button-payment-address').live('click', function() {
 						$('#payment-method .checkout-heading a').remove();
 
 						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
-						$('#button-shipping-address').trigger('click');	// My Script: Skip step 3
+//						$('#button-shipping-address').trigger('click');	// My Script: Skip step 3
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
