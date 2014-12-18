@@ -78,8 +78,11 @@ class ModelAccountXCustomer extends Model {
 		$this->language->load('mail/customer');
 
 		$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+		$message = $data['firstname']. ' :'."\n\n";
 
-		$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
+		$message .= sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n";	// [ 歡迎您註冊成為... ]
+
+		$message .= '登入電郵：'.$data['email']. "\n\n";
 
 		if (!$customer_group_info['approval']) {
 			$message .= $this->language->get('text_login') . "\n";
@@ -88,7 +91,7 @@ class ModelAccountXCustomer extends Model {
 		}
 
 		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
-//		$message .= $this->language->get('text_services') . "\n\n";	// [登錄後， 您將能夠享受其他服務包括訪問歷史訂單記錄， 打印發票和編輯您的賬戶信息。]
+//		$message .= $this->language->get('text_services') . "\n\n";	// [登錄後， 您將能夠享受其他服務... ]
 		$message .= $this->language->get('text_thanks') . "\n";
 		$message .= $this->config->get('config_name');
 

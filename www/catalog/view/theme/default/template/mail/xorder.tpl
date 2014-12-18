@@ -1,3 +1,11 @@
+<?php
+  //  This Model:
+  //  catalog\model\account\xcustomer.php
+
+  // This lang:
+  //  D:\xampp\htdocs\_my_site\1_existing_project\www.savingstore.com.hk\www\catalog\language\zh- HK\mail\customer.php
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
 <html>
 <head>
