@@ -1,5 +1,10 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
 
+<script>
+	$('body').addClass('account_myorder');
+</script>
+
+
 <div id="content"><?php echo $content_top; ?>
 	<div class="box">
 		<div class="breadcrumb">
@@ -10,13 +15,17 @@
 		<h1><?php echo $heading_title; ?></h1>
 		<?php if ($orders) { ?>
 		<div class="order-list">
-			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_view">
 				<thead>
 					<tr>
 						<td><?php echo $text_order_id; ?></td>
+					<!--
 						<td><?php echo $text_customer; ?></td>
+					-->
 						<td><?php echo $text_date_added; ?></td>
+					<!--
 						<td><?php echo $text_products; ?></td>
+					-->
 						<td><?php echo $text_status; ?></td>
 						<td><?php echo $text_total; ?></td>
 					</tr>
@@ -25,10 +34,20 @@
 					<?php foreach ($orders as $order) { ?>
 					<tr>
 						<td><?php echo ORDER_PREFIX.year_perfix($order['date_added']).str_pad($order['order_id'],ORDER_DIGI,'0',STR_PAD_LEFT); ?></td>
+					<!--
 						<td><?php echo $order['name']; ?></td>
+					-->
 						<td><?php echo $order['date_added']; ?></td>
+					<!--
 						<td><?php echo $order['products']; ?></td>
-						<td class="order-status"><?php echo $order['status']; ?> <a href="<?php echo $order['href']; ?>"><img src="catalog/view/theme/arcu-pro/image/icons/info.png" alt="<?php echo $button_view; ?>" title="<?php echo $button_view; ?>" /></a> <a href="<?php echo $order['reorder']; ?>"><img src="catalog/view/theme/arcu-pro/image/icons/reorder.png" alt="<?php echo $button_reorder; ?>" title="<?php echo $button_reorder; ?>" /></a></td>
+					-->
+						<td class="order-status"><?php echo $order['status']; ?> <a href="<?php echo $order['href']; ?>"><img src="catalog/view/theme/arcu-pro/image/icons/info.png" alt="<?php echo $button_view; ?>" title="<?php echo $button_view; ?>" /></a>
+						<!--
+							<a href="<?php echo $order['reorder']; ?>">
+								<img src="catalog/view/theme/arcu-pro/image/icons/reorder.png" alt="<?php echo $button_reorder; ?>" title="<?php echo $button_reorder; ?>" />
+							</a>
+						-->
+						</td>
 						<td class="order-total"><?php echo $order['total']; ?></td>
 					</tr>
 					<?php } ?>
