@@ -2,7 +2,7 @@
 
 <script>
   jQuery(document).ready(function(){
-    $('body').addClass('editaccount');
+    $('body').addClass('account_editaccount');
   });
 </script>
 

@@ -331,13 +331,33 @@
 	// ---------- ---------- ---------- ---------- ----------
 	// Account Pages
 
-	$.fn.editaccount = function() {
+	$.fn.account_editaccount = function() {
 
-		$('table tbody')
-			.children('tr:[sort="a27"], tr:[sort="a21"]')	// Captcha, Confirm email
-				.hide().end();
+		$('table.xpersonal tbody')
+			// Age, 地域, Confirm email, Captcha, 別名+
+			.children('tr:[sort="a15"], tr:[sort="a17"], tr:[sort="a21"], tr:[sort="a27"], tr:nth-child(n+11)')
+				.hide()
+				.end()
 
-	}// $.fn.editaccount
+			.find('tr:[sort="a1"] select')		// [ 稱謂 ]
+				.hide()
+				.before(function(){
+					return  $(this).children('option:selected').text();
+				}).end()
+
+			.find('tr:[sort="a10"] input')		// [ 姓名 ]
+				.hide()
+				.before(function(){
+					return $(this).val();
+				}).end()
+
+			.find('tr:[sort="a16"] .required')	// [  聯繫電話 ]
+				.show().end()
+
+			.find('tr:[sort="a16"] input')
+				.focus();
+
+	}// $.fn.account_editaccount
 
 	$.fn.account_myaddress_update = function() {
 		setTimeout(function(){
@@ -391,8 +411,8 @@ $(function () {
 		if( $('body').hasClass('success') )
 			$('body').g2redeem();
 
-		if( $('body').hasClass('editaccount') )
-			$('body').editaccount();
+		if( $('body').hasClass('account_editaccount') )
+			$('body').account_editaccount();
 
 		if( $('body').hasClass('account_myaddress_update') )
 			$('body').account_myaddress_update();

@@ -442,12 +442,24 @@
 		}
 
 	}// !body.checkout
-
 // --------------------------------------------------
-	// Address list view
+// 1. Account EditAccount
+
+	body.account_editaccount{
+		// Required (*)
+	  .required{
+	    display: none;	// [ Tel ] over write(show) by js
+	  }
+	}
+// --------------------------------------------------
+// 3. Address list view
+
 	body.account_address{
 		.my_address{line-height: 30px;}
 	}// !body.account_address
+
+// --------------------------------------------------
+// 4. Account MyOrder
 
 	body.account_myorder{
 		table.list_view{}
