@@ -1,7 +1,7 @@
 <div id="cart">
 	<div class="heading">
 		<h4><?php echo $heading_title; ?></h4>
-		<a><span id="cart-total"><?php echo $text_items; ?></span></a></div>
+		<a><span id="cart-total"><img class="cart" src="catalog/view/theme/arcu-pro/image/icons/icon-cart.png"><?php echo $text_items; ?></span></a></div>
 	<div class="content">
 		<div class="inner">
 			<?php if ($products || $vouchers) { ?>
