@@ -44,8 +44,7 @@
           <b><?php echo $text_date_added; ?></b> <?php echo $date_added; ?><br />
           <b><?php echo $text_payment_method; ?></b> <?php echo $payment_method; ?><br />
           <?php if ($shipping_method) { ?>
-          <b><?php echo $text_email; ?></b> <?php echo $email; ?><br />
-          <b><?php echo $text_telephone; ?></b> <?php echo $telephone; ?>
+          <b><?php echo $text_email; ?></b> <?php echo $email; ?>
           <?php } ?>
         </td>
       </tr>
