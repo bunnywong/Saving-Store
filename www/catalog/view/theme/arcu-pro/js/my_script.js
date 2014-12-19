@@ -1,3 +1,5 @@
+// $('.scrollbox:first-child').eq(0).height(1000);
+
 // ---------- ---------- ---------- ---------- ----------
 // jQuery Fn.
 
@@ -42,39 +44,24 @@
 	// Fn. By page
 
 	$.fn.backend = function(){
+
 		setTimeout(function(){
 			$('table tbody tr td select[name="address[1][zone_id]"').district();
 		}, 1000);
 		$(this).hasClass('owner')
 			$(this).owner();
 
-		if( $('input[name="lastname"').val() != undefined){	// Work in custom form only
+	}// !$.fn.backend
 
-			if( $('input[name="firstname"').val() == '' )	// DEBUG
-				$('input[name="firstname"').val('   ');
-			if( $('input[name="telephone"').val() == '' )	// DEBUG
-				$('input[name="telephone"').val('   ');
+	$.fn.admin_order_detail = function(){
 
-			// ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+		// Default <select> of Hong Kong
+		if( $('select[name="payment_country_id"] option:selected').text() != 'Hong Kong' )
+			$('select[name="payment_country_id"] option:contains("Hong Kong")').prop('selected', 'selected');
+		if( $('select[name="shipping_country_id"] option:selected').text() != 'Hong Kong' )
+			$('select[name="shipping_country_id"] option:contains("Hong Kong")').prop('selected', 'selected');
 
-			if( $('input[name="lastname"').val() == '' )
-				$('input[name="lastname"').val('   ');
-
-			if( $('input[name="address[1][firstname]"').val() == '' )
-				$('input[name="address[1][firstname]"').val('   ');
-
-			if( $('input[name="address[1][lastname]"').val() == '' )
-				$('input[name="address[1][lastname]"').val('   ');
-
-			if( $('input[name="address[1][address_1]"').val() == '' )
-				$('input[name="address[1][address_1]"').val('   ');
-
-			if( $('input[name="address[1][city]"').val() == '' )
-				$('input[name="address[1][city]"').val('   ');
-
-//			if( $('select[name="address[1][zone_id]"').val() == '' )
-		}
-	}
+	}// !$.fn.admin_order_detail
 
 	$.fn.owner = function(){
 		$('#sale > ul > li:nth-child(4)').click(function(){
@@ -376,6 +363,9 @@ $(function () {
 		if( $('body').hasClass('backend') )
 			$(this).backend();
 
+		if( $('body').hasClass('admin_order_detail') )
+			$(this).admin_order_detail();
+
 		// ----- ----- ----- ----- -----
 		// Public
 
@@ -428,3 +418,4 @@ $(function () {
 	var rand = '';
 
 });
+
