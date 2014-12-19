@@ -2,7 +2,7 @@
 // Global Class
 
 	.admin_io{
-		//background: pink;
+		//background: @red;
 		display: none!important;
 	}
 	.admin_io_release{
@@ -17,52 +17,35 @@
 // #catalog, #extension, #sale, #system, #reports, #help
 
 body.backend.owner{
-
-	.div2 > img,	// logo
-	#footer
-		{display: none;}
-
-	#menu{
-		display: block!important;
+	#sale > ul > li:nth-child(4) > a{	// 客戶列表 arrow
+		background: none;
 	}
+	// ----- ----- ----- ----- -----
+
+	.div2 > img,	// Logo
+	#footer,
 
 	#extension,
 	#system,
 	#reports,
-	#help{
-		display: none!important;
-	}
+	#help,
 
-	#catalog > ul{
-		> li:nth-child(3),	// 過濾
-		> li:nth-child(4),	// 分期
-		> li:nth-child(5),	// 屬性
-		> li:nth-child(6),	// 選項
-		> li:nth-child(6),	// 選項
-		> li:nth-child(8),	// 下載
-		> li:nth-child(9),	// 評論
-		{	// 選項
-			display: none!important;
-		}
-	}
+	#catalog > ul > li:nth-child(3),	// 過濾
+	#catalog > ul > li:nth-child(4),	// 分期
+	#catalog > ul > li:nth-child(5),	// 屬性
+	#catalog > ul > li:nth-child(6),	// 選項
+	#catalog > ul > li:nth-child(8),	// 下載
+	#catalog > ul > li:nth-child(9),	// 評論
 
-	#sale > ul{
-		> li:nth-child(2),	// 分期
-		> li:nth-child(3),	// 退換
-		> li:nth-child(4) > ul > li, // 客戶列表(Redirected by JS), 客戶群組, 禁止 IP
-		> li:nth-child(5),	// 加盟
-		> li:nth-child(6),	// 優惠券
-		> li:nth-child(7),	// 禮品券
-		> li:nth-child(8),	// 郵件通知
-		{
-			display: none!important;
-		}
-		> li > ul > li:nth-child(2){	// 用戶群組
-			display: none!important;
-		}
-		> li:nth-child(4) > a{
-			background: none;	// Sub menu arrow (客戶列表)
-		}
+	#sale > ul > li:nth-child(2),			// 分期
+	#sale > ul > li:nth-child(3),			// 退換
+	#sale > ul > li:nth-child(4) > ul > li, // 客戶列表(Redirected by JS), 客戶群組, 禁止 IP
+	#sale > ul > li:nth-child(5),			// 加盟
+	#sale > ul > li:nth-child(6),			// 優惠券
+	#sale > ul > li:nth-child(7),			// 禮品券
+	#sale > ul > li:nth-child(8),			// 郵件通知
+	#sale > ul > li > ul > li:nth-child(2){	// 用戶群組
+		.admin_io;
 	}
 }// !body.backend.owner
 
@@ -188,15 +171,16 @@ body.backend.owner{
 	body.owner.admin_sale_order_info{
 		#tab-order > table > tbody > tr:nth-child(2),		// 發票號
 		#tab-order > table > tbody > tr:nth-child(6),		// 客戶組
-		#tab-order > table > tbody > tr:nth-child(12),	// 電郵地址（確認輸入）
-		#tab-order > table > tbody > tr:nth-child(13),	// 驗証碼
-		#tab-order > table > tbody > tr:nth-child(24),	// Checkbox
+		#tab-order > table > tbody > tr:nth-child(12),		// 電郵地址（確認輸入）
+		#tab-order > table > tbody > tr:nth-child(13),		// 驗証碼
+		#tab-order > table > tbody > tr:nth-child(24),		// Checkbox
 
 		.vtabs > a:nth-child(2),
 
 		#tab-shipping > table > tbody > tr:nth-child(2),	// Last name
 
-		// Fix for duplicate [ Cache BUG ]
+
+		// b) Fix for duplicate [ Cache BUG ]
 		#tab-order > table > tbody > tr:nth-child(n+25),	// Tab 1 訂單詳情
 		#tab-shipping > table > tbody > tr:nth-child(5),	// Tab 3 配送地址 > 收貨電話
 		{

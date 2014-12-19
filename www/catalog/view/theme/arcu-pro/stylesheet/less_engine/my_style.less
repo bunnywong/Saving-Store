@@ -4,6 +4,7 @@
 // --------------------------------------------------
 // Common
 
+	@red 	: lightcoral;
 	@blue 	: #5bc0de;
 	@yellow : #FBD606;
 	@black 	: #666;
@@ -20,44 +21,44 @@
 // --------------------------------------------------
 // Global class
 
-.center-block{
-	margin: 0px auto 0px auto;
-	display: block;
-}
-.hidden{
-	display: none;
-}
+	.center-block{
+		margin: 0px auto 0px auto;
+		display: block;
+	}
+	.hidden{
+		display: none;
+	}
 
-.admin_io{
-	background: pink;
-	border: 2px solid pink;
-	// display: none;
-}
-.admin_io_release{
-	background: transparent;
-	border: none;
-	// display: table-row;
-}
+	.admin_io{
+		background: @red;
+		border: 2px solid @red;
+		// display: none;
+	}
+	.admin_io_release{
+		background: transparent;
+		border: none;
+		// display: table-row;
+	}
 
-.input{
-	width: 200px;
-	height: 30px;
-	text-indent: 5px;
-}
-.select{
-	width: 210px;
-	height: 40px;
-	text-indent: 20px;
-}
-.textarea{
-	width: 205px;
-}
+	.input{
+		width: 200px;
+		height: 30px;
+		text-indent: 5px;
+	}
+	.select{
+		width: 210px;
+		height: 40px;
+		text-indent: 10px;
+	}
+	.textarea{
+		width: 205px;
+	}
 
 // --------------------------------------------------
 // Global
 
   	body{
-  		// ----- ----- ----- ----- -----
+  		// --------------------------------------------------
   		// Global
 
         color: @black; // Global font color
@@ -65,8 +66,9 @@
         a{
             color: @black;
         }
-        // ----- ----- ----- ----- -----
+        // --------------------------------------------------
         // My Class
+
         .center{
 			text-align: center;
 		}
@@ -86,7 +88,7 @@
 			max-width: 300px!important;
 		}
 
-        // ----- ----- ----- ----- -----
+        // --------------------------------------------------
         // Side Bar
 
         div#header{
@@ -206,18 +208,38 @@
 	@import "sidebar.less";
 
 // --------------------------------------------------
-// Backend
-	// ----- ----- ----- ----- -----
+	// Backend
+
 	body.backend{
-
-		.div2 > img,	// logo
-		#footer
-			{display: none;}
-
 		#menu{
 			display: block!important;
 		}
+		// ----- ----- ----- ----- -----
+		.div2 > img,	// Logo
+		#footer,
 
+		#extension,
+		#system,
+		#reports,
+		#help,
+
+		#catalog > ul > li:nth-child(3),	// 過濾
+		#catalog > ul > li:nth-child(4),	// 分期
+		#catalog > ul > li:nth-child(5),	// 屬性
+		#catalog > ul > li:nth-child(6),	// 選項
+		#catalog > ul > li:nth-child(8),	// 下載
+		#catalog > ul > li:nth-child(9),	// 評論
+
+		#sale > ul > li:nth-child(2),			// 分期
+		#sale > ul > li:nth-child(3),			// 退換
+		#sale > ul > li:nth-child(4) > ul > li, // 客戶列表(Redirected by JS), 客戶群組, 禁止 IP
+		#sale > ul > li:nth-child(5),			// 加盟
+		#sale > ul > li:nth-child(6),			// 優惠券
+		#sale > ul > li:nth-child(7),			// 禮品券
+		#sale > ul > li:nth-child(8),			// 郵件通知
+		#sale > ul > li > ul > li:nth-child(2){	// 用戶群組
+			.admin_io;
+		}
 	}// !body.backend
 
 	// ----- ----- ----- ----- -----
@@ -381,8 +403,8 @@
 	// Tab 2.1b 訂單管理 (View)	[ Cache BUG ]
 
 	body.admin_sale_order_info{
-		#tab-order > table > tbody > tr:nth-child(2),		// 發票號
-		#tab-order > table > tbody > tr:nth-child(6),		// 客戶組
+		#tab-order > table > tbody > tr:nth-child(2),	// 發票號
+		#tab-order > table > tbody > tr:nth-child(6),	// 客戶組
 		#tab-order > table > tbody > tr:nth-child(12),	// 電郵地址（確認輸入）
 		#tab-order > table > tbody > tr:nth-child(13),	// 驗証碼
 		#tab-order > table > tbody > tr:nth-child(24),	// Checkbox
@@ -390,15 +412,18 @@
 		.vtabs > a:nth-child(2),
 
 		#tab-shipping > table > tbody > tr:nth-child(2),	// Last name
+		#tab-shipping > table > tbody > tr:nth-child(6),	// Tab 3 配送地址 > 城市
+		#tab-shipping > table > tbody > tr:nth-child(8),	// Tab 3 配送地址 > 地區 / 省份代碼
+		#tab-shipping > table > tbody > tr:nth-child(10),	// Tab 3 配送地址 > 貨運方式
 
-		// Fix for duplicate [ Cache BUG ]
-		#tab-order > table > tbody > tr:nth-child(n+25),	// Tab 1 訂單詳情
-		#tab-shipping > table > tbody > tr:nth-child(5),	// Tab 3 配送地址 > 收貨電話
+		// b) Fix for duplicate [ Cache BUG ]
+		 #tab-order > table > tbody > tr:nth-child(n+25),	// Tab 1 訂單詳情 [ Cache BUG ]
+		 #tab-shipping > table > tbody > tr:nth-child(5),	// Tab 3 配送地址 > 收貨電話 [ Cache BUG ]
 		{
 			.admin_io;
 		}
 
-		#tab-order table > tbody > tr:nth-child(n+41)	// Checkbox
+		#tab-order table > tbody > tr:nth-child(n+41)		// Checkbox [ Cache BUG ]
 		{
 			.admin_io_release;
 		}
@@ -435,8 +460,15 @@
 		}
 	}// !admin_sale_customer_form | Tab 2.2 客戶設置
 
+	// --------------------------------------------------
+	// Backend - List view
+
+	body.admin_sale_customer_list{
+
+	}// !body.admin_sale_customer_list
+
 // --------------------------------------------------
-// Detail view
+	// Detail view
 
 	body.detail_view{
 		.review,
@@ -445,6 +477,7 @@
 			{display: none!important;}
 
 		// ----- ----- ----- ----- -----
+
 		.my_banner img{
 			display: block;
 			margin: 0px auto 0px auto;
@@ -492,7 +525,9 @@
 
 			}
 		}// !.btn_qty_wrapper
+
 		// ----- ----- ----- ----- -----
+
 		#buy_and_checkout {
 			overflow: hidden;
 			padding: 10px 30px;
@@ -530,7 +565,7 @@
 	}// !.detail_view
 
 // --------------------------------------------------
-// Sign Up
+	// Sign Up
 
 	.signup{
 		@this_width : 550px;
@@ -604,16 +639,12 @@
 				> td:first-child{
 					max-width: 140px;
 				}
-
-
-
 			}// !tr
 		}// !table
-
 	}// !body.signup
 
 // --------------------------------------------------
-// Cart
+	// Cart
 
 	body.cart{
 		h2,
@@ -622,7 +653,7 @@
 	}// !body.cart
 
 // --------------------------------------------------
-// Checkout
+	// Checkout
 
 	body.checkout{
 		#payment-address,	// Step 2
@@ -632,19 +663,17 @@
 
 		// ----- ----- ----- ----- -----
 		// x tamplate over ride
+
 		#payment-address > div.checkout-content > .xleft > .xten label:hover,
 		#payment-address > div.checkout-content > .xright > .xten label:hover{
 			background-color: @btn_blue_hover!important;
 			color: @white!important;
 		}
 
-
-
-
 		// ----- ----- ----- ----- -----
-		#payment-address{
-			clear: both;	// Fix step bar over lap [ old issue ? ]
 
+		#payment-address{
+			clear: both;	// Fix step bar over lap
 		}
 		#shipping-method table tr:nth-child(n+3){
 			display: none!important;	// Show free or charge shipping $ only
@@ -678,6 +707,7 @@
 		}
 
 	}// !body.checkout
+
 // --------------------------------------------------
 // 1. Account EditAccount
 
@@ -686,7 +716,8 @@
 	  .required{
 	    display: none;	// [ Tel ] over write(show) by js
 	  }
-	}
+	}// !body.account_editaccount
+
 // --------------------------------------------------
 // 3. Address list view
 
@@ -699,4 +730,4 @@
 
 	body.account_myorder{
 		table.list_view{}
-	}
+	}// !body.account_myorder
