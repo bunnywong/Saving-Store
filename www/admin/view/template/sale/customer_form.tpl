@@ -450,7 +450,7 @@
               <td><input type="text" name="description" value="" /></td>
             </tr>
             <tr>
-              <td><?php echo $entry_points; ?></td>
+              <td>積分：<?php //echo  $entry_points; ?></td>
               <td><input type="text" name="points" value="" /></td>
             </tr>
             <tr>

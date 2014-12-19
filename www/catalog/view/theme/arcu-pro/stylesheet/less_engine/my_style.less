@@ -1,11 +1,6 @@
 // arcu-pro/stylesheet/less_engine/my_style.css
 // Version 1.5.6.4
 
-// My Script
-// --------------------------------------------------
-
-  // $('body').addClass('my_district');
-
 // --------------------------------------------------
 // Common
 
@@ -42,6 +37,20 @@
 	background: transparent;
 	border: none;
 	// display: table-row;
+}
+
+.input{
+	width: 200px;
+	height: 30px;
+	text-indent: 5px;
+}
+.select{
+	width: 210px;
+	height: 40px;
+	text-indent: 20px;
+}
+.textarea{
+	width: 205px;
 }
 
 // --------------------------------------------------
@@ -226,30 +235,34 @@
 		#tabs > a:last-child{					// tab 規劃設計
 			.admin_io;
 		}
+
+		input{
+			.input;
+		}
+		select{
+			.select;
+		}
+		textarea{
+			.textarea;
+		}
 	}// !body.admin_catalog_category_form | Tab 1.1 商品分類
 
 	// ----- ----- ----- ----- -----
 	//  Tab 1.2 商品管理
 
 	body.admin_catalog_product_form{
-		#tabs a:nth-child(4),	// 屬性
+		#tabs a:nth-child(4),	// tab > 屬性
 		#tabs a:nth-child(5),	// 選項設定
 		#tabs a:nth-child(6),	// 分期付款
 		#tabs a:nth-child(7),	// 促銷活動
 		#tabs a:nth-child(8),	// 優惠價格
 		#tabs a:nth-child(9),	// 圖片參數
 		#tabs a:nth-child(11),	// 規劃設計
-		#tabs a:nth-child(12)	// 營銷推廣鏈接
-		{
-			.admin_io;
-		}
+		#tabs a:nth-child(12),	// 營銷推廣鏈接
 
-		// ----- ----- ----- ----- -----
-		// tab 常規項
-		#language2 > table > tbody > tr:last-child,		// 產品標籤
+		#language2 > table > tbody > tr:last-child,		// tab 常規項 > 產品標籤
 
-		// tab 基本信息
-		#tab-data > table > tbody > tr:nth-child(2),	// SKU
+		#tab-data > table > tbody > tr:nth-child(2),	// tab 基本信息 > SKU
 		#tab-data > table > tbody > tr:nth-child(3),	// UPC
 		#tab-data > table > tbody > tr:nth-child(4),	// EAN
 		#tab-data > table > tbody > tr:nth-child(5),	// JAN
@@ -267,12 +280,20 @@
 		#tab-data > table > tbody > tr:nth-child(21),	// 重  量
 		#tab-data > table > tbody > tr:nth-child(22),	// 重量單位
 
-		// tab 鏈接
-		#tab-links > table > tbody > tr:nth-child(n+3)
+		#tab-links > table > tbody > tr:nth-child(n+3)	// tab 鏈接
 		{
 			.admin_io;
 		}
 
+		input{
+			.input;
+		}
+		select{
+			.select;
+		}
+		textarea{
+			.textarea;
+		}
 	}// !admin_catalog_product_form	| Tab 1.2 商品管理
 
 	// ----- ----- ----- ----- -----
@@ -281,6 +302,10 @@
 	body.admin_catalog_manufacturer_form{
 		table > tbody > tr:nth-child(2){
 			.admin_io;
+		}
+
+		input{
+			.input;
 		}
 
 	}// !admin_catalog_manufacturer_form | Tab 1.3 品牌管理
@@ -295,6 +320,13 @@
 		#tabs > a:last-child						// 規劃設計
 		{
 			.admin_io;
+		}
+
+		input{
+			.input;
+		}
+		select{
+			.select;
 		}
 
 	}// !body.admin_catalog_information_form | Tab 1.4 文章管理
@@ -334,17 +366,14 @@
 		}
 
 		input{
-			width: 200px;
-			height: 30px;
-			text-indent: 5px;
+			.input;
 		}
 		select{
-			width: 210px;
-			height: 40px;
-			text-indent: 20px;
+			.select;
 		}
 		textarea{
-			width: 205px;
+			.textarea;
+
 		}
 	}// !body.admin_sale_order_form | Tab 2.1 訂單管理
 
@@ -380,6 +409,8 @@
 	// Tab 2.2 客戶設置
 
 	body.admin_sale_customer_form{
+		#htabs > a:nth-child(3),	// 交易
+
 		#tab-customer > table > tbody > tr:nth-child(2),	// Last name
 		#tab-customer > table > tbody > tr:nth-child(5),	// 傳真
 		#tab-customer > table > tbody > tr:nth-child(9),	// 電郵地址（確認輸入）
@@ -394,6 +425,13 @@
 		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(10),	// 郵編
 		{
 			.admin_io;
+		}
+
+		input[type='text'], input[type='password']{
+			.input;
+		}
+		select{
+			.select;
 		}
 	}// !admin_sale_customer_form | Tab 2.2 客戶設置
 

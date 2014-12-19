@@ -14,7 +14,6 @@
 // --------------------------------------------------
 
 // Hide menu for nor developer
-
 // #catalog, #extension, #sale, #system, #reports, #help
 
 body.backend.owner{
@@ -27,9 +26,8 @@ body.backend.owner{
 		display: block!important;
 	}
 
-
 	#extension,
-		#system,
+	#system,
 	#reports,
 	#help{
 		display: none!important;
@@ -88,25 +86,19 @@ body.backend.owner{
 // ----- ----- ----- ----- -----
 //  Tab 1.2 商品管理
 
-	body.admin_catalog_product_form{
-		#tabs a:nth-child(4),	// 屬性
+	body.owner.admin_catalog_product_form{
+		#tabs a:nth-child(4),	// tab > 屬性
 		#tabs a:nth-child(5),	// 選項設定
 		#tabs a:nth-child(6),	// 分期付款
 		#tabs a:nth-child(7),	// 促銷活動
 		#tabs a:nth-child(8),	// 優惠價格
 		#tabs a:nth-child(9),	// 圖片參數
 		#tabs a:nth-child(11),	// 規劃設計
-		#tabs a:nth-child(12)	// 營銷推廣鏈接
-		{
-			.admin_io;
-		}
+		#tabs a:nth-child(12),	// 營銷推廣鏈接
 
-		// ----- ----- ----- ----- -----
-		// tab 常規項
-		#language2 > table > tbody > tr:last-child,		// 產品標籤
+		#language2 > table > tbody > tr:last-child,		// tab 常規項 > 產品標籤
 
-		// tab 基本信息
-		#tab-data > table > tbody > tr:nth-child(2),	// SKU
+		#tab-data > table > tbody > tr:nth-child(2),	// tab 基本信息 > SKU
 		#tab-data > table > tbody > tr:nth-child(3),	// UPC
 		#tab-data > table > tbody > tr:nth-child(4),	// EAN
 		#tab-data > table > tbody > tr:nth-child(5),	// JAN
@@ -124,8 +116,7 @@ body.backend.owner{
 		#tab-data > table > tbody > tr:nth-child(21),	// 重  量
 		#tab-data > table > tbody > tr:nth-child(22),	// 重量單位
 
-		// tab 鏈接
-		#tab-links > table > tbody > tr:nth-child(n+3)
+		#tab-links > table > tbody > tr:nth-child(n+3)	// tab 鏈接
 		{
 			.admin_io;
 		}
@@ -135,7 +126,7 @@ body.backend.owner{
 	// ----- ----- ----- ----- -----
 	// Tab 1.3 品牌管理
 
-	body.admin_catalog_manufacturer_form{
+	body.owner.admin_catalog_manufacturer_form{
 		table > tbody > tr:nth-child(2){
 			.admin_io;
 		}
@@ -145,7 +136,7 @@ body.backend.owner{
 	// ----- ----- ----- ----- -----
 	// Tab 1.4 文章管理
 
-	body.admin_catalog_information_form{
+	body.owner.admin_catalog_information_form{
 		#tab-data table > tbody > tr:first-child,	//  網店
 		#tab-data table > tbody > tr:nth-child(3),	// Display in Bottom(footer)
 
@@ -159,7 +150,7 @@ body.backend.owner{
 	// --------------------------------------------------
 	// Tab 2.1a 訂單管理 (Edit)
 
-	body.admin_sale_order_form{
+	body.owner.admin_sale_order_form{
 		// Internal script
 
 		#tab-customer table tbody tr:nth-child(1),	// 商店
@@ -189,26 +180,12 @@ body.backend.owner{
 		#tab-total table:last-child tbody tr:first-child{	// 配送方式
 			display: table-row!important;	// Keep w/ owner
 		}
-
-		input{
-			width: 200px;
-			height: 30px;
-			text-indent: 5px;
-		}
-		select{
-			width: 210px;
-			height: 40px;
-			text-indent: 20px;
-		}
-		textarea{
-			width: 205px;
-		}
 	}// !body.admin_sale_order_form | Tab 2.1 訂單管理
 
 	// ----- ----- ----- ----- -----
 	// Tab 2.1b 訂單管理 (View)	[ Cache BUG ]
 
-	body.admin_sale_order_info{
+	body.owner.admin_sale_order_info{
 		#tab-order > table > tbody > tr:nth-child(2),		// 發票號
 		#tab-order > table > tbody > tr:nth-child(6),		// 客戶組
 		#tab-order > table > tbody > tr:nth-child(12),	// 電郵地址（確認輸入）
@@ -236,7 +213,9 @@ body.backend.owner{
 	// ----- ----- ----- ----- -----
 	// Tab 2.2 客戶設置
 
-	body.admin_sale_customer_form{
+	body.owner.admin_sale_customer_form{
+		#htabs > a:nth-child(3),	// 交易
+
 		#tab-customer > table > tbody > tr:nth-child(2),	// Last name
 		#tab-customer > table > tbody > tr:nth-child(5),	// 傳真
 		#tab-customer > table > tbody > tr:nth-child(9),	// 電郵地址（確認輸入）
