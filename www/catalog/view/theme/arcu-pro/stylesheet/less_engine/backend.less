@@ -53,8 +53,18 @@ body.backend.owner{
 		}
 	}
 }// !body.backend.owner
+
 // --------------------------------------------------
-body.owner.admin_product_detail{
+body.owner.admin_sale_customer_form{
+	#tab-customer > table > tbody > tr:nth-child(2)	// Last name
+	{
+		// background: pink;
+		display: none;
+	}
+}
+
+// ----- ----- ----- ----- -----
+body.owner.admin_catalog_product_form{
 	#tabs a:nth-child(4),	// 屬性
 	#tabs a:nth-child(5),	// 選項設定
 	#tabs a:nth-child(6),	// 分期付款
@@ -95,10 +105,10 @@ body.owner.admin_product_detail{
 		 // background: pink;
 		 display: none!important;
 	}
-}// !admin_product_detail
+}// !admin_catalog_product_form
 
 // ----- ----- ----- ----- -----
-body.owner.admin_order_detail{
+body.owner.admin_sale_order_form{
 	// Internal script
 
 	#tab-customer table tbody tr:nth-child(1),	// 商店
@@ -127,4 +137,4 @@ body.owner.admin_order_detail{
 	#tab-total table:last-child tbody tr:first-child{	// 配送方式
 		display: table-row!important;	// Keep w/ owner
 	}
-}// !body.admin_order_detail
+}// !body.admin_sale_order_form

@@ -1,7 +1,7 @@
 <?php echo $header; ?>
 
 <script>
-  $('body').addClass('admin_product_detail');
+  $('body').addClass('admin_catalog_product_form');
 </script>
 
 <div id="content">

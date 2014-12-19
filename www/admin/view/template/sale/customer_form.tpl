@@ -1,4 +1,9 @@
 <?php echo $header; ?>
+
+<script>
+  $('body').addClass('admin_sale_customer_form');
+</script>
+
 <div id="content">
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -39,7 +44,7 @@
               </tr>
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-                <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
+                <td><input type="text" name="lastname" value="<?php echo $lastname; ?> " />
                   <?php if ($error_lastname) { ?>
                   <span class="error"><?php echo $error_lastname; ?></span>
                   <?php } ?></td>
