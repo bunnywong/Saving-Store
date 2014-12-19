@@ -61,6 +61,14 @@
 		if( $('select[name="shipping_country_id"] option:selected').text() != 'Hong Kong' )
 			$('select[name="shipping_country_id"] option:contains("Hong Kong")').prop('selected', 'selected');
 
+		$('select[name=\'payment_country_id\']').trigger('change');
+
+		// Default <select> of 中西區 to avoid add product bug
+		setTimeout(function(){
+			if( $.trim($('select[name="payment_zone_id"] option:selected').val()) == "" )
+				$('select[name="payment_zone_id"] option:nth-child(2)').prop('selected', 'selected');
+		}, 1000);
+
 	}// !$.fn.admin_order_detail
 
 	$.fn.owner = function(){
