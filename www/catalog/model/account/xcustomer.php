@@ -78,6 +78,7 @@ class ModelAccountXCustomer extends Model {
 		$this->language->load('mail/customer');
 
 		$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+
 		$message = $data['firstname']. ' :'."\n\n";
 
 		$message .= sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n";	// [ 歡迎您註冊成為... ]
@@ -93,7 +94,9 @@ class ModelAccountXCustomer extends Model {
 		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
 //		$message .= $this->language->get('text_services') . "\n\n";	// [登錄後， 您將能夠享受其他服務... ]
 		$message .= $this->language->get('text_thanks') . "\n";
-		$message .= $this->config->get('config_name');
+		$message .= $this->config->get('config_name') . "\n";
+		// Todo
+		// $message .= '<img src="http://greenmap.hk/image/data/logo.png">';
 
 		$mail = new Mail();
 		$mail->protocol = $this->config->get('config_mail_protocol');
