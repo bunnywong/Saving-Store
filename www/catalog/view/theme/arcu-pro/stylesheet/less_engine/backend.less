@@ -1,7 +1,21 @@
+// --------------------------------------------------
+// Global Class
+
+	.admin_io{
+		//background: pink;
+		display: none!important;
+	}
+	.admin_io_release{
+		// background: transparent;
+		// border: none;
+		display: table-row;
+	}
+
+// --------------------------------------------------
+
 // Hide menu for nor developer
 
 // #catalog, #extension, #sale, #system, #reports, #help
-
 
 body.backend.owner{
 
@@ -55,102 +69,189 @@ body.backend.owner{
 }// !body.backend.owner
 
 // --------------------------------------------------
-body.owner.admin_catalog_category_form{
-	#tab-data table tbody tr:nth-child(1),	// 上級分類
-	#tab-data table tbody tr:nth-child(2),	// 產品篩選
-	#tab-data table tbody tr:nth-child(3),	// empty row
-	#tab-data table tbody tr:nth-child(4),	// 網店
-	#tab-data table tbody tr:nth-child(7),	// 橫排顯示
-	#tab-data table tbody tr:nth-child(8),	// 列排顯示
-	#tab-data table tbody tr:nth-child(9),	// 分類順序
+// Tab 1.1 商品分類
 
-	#tabs > a:last-child{					// tab 規劃設計
-		// background: pink;
-		display: none!important;
-	}
-}// !body.admin_catalog_category_form
+	body.owner.admin_catalog_category_form{
+		#tab-data table tbody tr:nth-child(1),	// 上級分類
+		#tab-data table tbody tr:nth-child(2),	// 產品篩選
+		#tab-data table tbody tr:nth-child(3),	// empty row
+		#tab-data table tbody tr:nth-child(4),	// 網店
+		#tab-data table tbody tr:nth-child(7),	// 橫排顯示
+		#tab-data table tbody tr:nth-child(8),	// 列排顯示
+		#tab-data table tbody tr:nth-child(9),	// 分類順序
 
-// ----- ----- ----- ----- -----
-body.owner.admin_sale_customer_form{
-	#tab-customer > table > tbody > tr:nth-child(2)	// Last name
-	{
-		// background: pink;
-		display: none;
-	}
-}
+		#tabs > a:last-child{					// tab 規劃設計
+			.admin_io;
+		}
+	}// !body.admin_catalog_category_form | Tab 1.1 商品分類
 
 // ----- ----- ----- ----- -----
-body.owner.admin_catalog_product_form{
-	#tabs a:nth-child(4),	// 屬性
-	#tabs a:nth-child(5),	// 選項設定
-	#tabs a:nth-child(6),	// 分期付款
-	#tabs a:nth-child(7),	// 促銷活動
-	#tabs a:nth-child(8),	// 優惠價格
-	#tabs a:nth-child(9),	// 圖片參數
-	#tabs a:nth-child(11),	// 規劃設計
-	#tabs a:nth-child(12)	// 營銷推廣鏈接
-	{
-		//background: pink;
-		display: none!important;
-	}
-	// tab 常規項
-	#language2 > table > tbody > tr:last-child,		// 產品標籤
+//  Tab 1.2 商品管理
 
-	// tab 基本信息
-	#tab-data > table > tbody > tr:nth-child(2),	// SKU
-	#tab-data > table > tbody > tr:nth-child(3),	// UPC
-	#tab-data > table > tbody > tr:nth-child(4),	// EAN
-	#tab-data > table > tbody > tr:nth-child(5),	// JAN
-	#tab-data > table > tbody > tr:nth-child(6),	// ISBN
-	#tab-data > table > tbody > tr:nth-child(7),	// MPN
-	#tab-data > table > tbody > tr:nth-child(8),	// 商品位置
-	#tab-data > table > tbody > tr:nth-child(10),	// 商品稅類
-	#tab-data > table > tbody > tr:nth-child(12),	// 最小起訂量
-	#tab-data > table > tbody > tr:nth-child(13),	// 扣減庫存
-	#tab-data > table > tbody > tr:nth-child(14),	// 庫存狀況
-	#tab-data > table > tbody > tr:nth-child(15),	// 要求配送
-	#tab-data > table > tbody > tr:nth-child(18),	// 供貨日期
-	#tab-data > table > tbody > tr:nth-child(19),	// 尺寸 (L x W x H)
-	#tab-data > table > tbody > tr:nth-child(20),	// 尺寸單位
-	#tab-data > table > tbody > tr:nth-child(21),	// 重  量
-	#tab-data > table > tbody > tr:nth-child(22),	// 重量單位
+	body.admin_catalog_product_form{
+		#tabs a:nth-child(4),	// 屬性
+		#tabs a:nth-child(5),	// 選項設定
+		#tabs a:nth-child(6),	// 分期付款
+		#tabs a:nth-child(7),	// 促銷活動
+		#tabs a:nth-child(8),	// 優惠價格
+		#tabs a:nth-child(9),	// 圖片參數
+		#tabs a:nth-child(11),	// 規劃設計
+		#tabs a:nth-child(12)	// 營銷推廣鏈接
+		{
+			.admin_io;
+		}
 
-	// tab 鏈接
-	#tab-links > table > tbody > tr:nth-child(n+3)
-	{
-		 // background: pink;
-		 display: none!important;
-	}
-}// !admin_catalog_product_form
+		// ----- ----- ----- ----- -----
+		// tab 常規項
+		#language2 > table > tbody > tr:last-child,		// 產品標籤
+
+		// tab 基本信息
+		#tab-data > table > tbody > tr:nth-child(2),	// SKU
+		#tab-data > table > tbody > tr:nth-child(3),	// UPC
+		#tab-data > table > tbody > tr:nth-child(4),	// EAN
+		#tab-data > table > tbody > tr:nth-child(5),	// JAN
+		#tab-data > table > tbody > tr:nth-child(6),	// ISBN
+		#tab-data > table > tbody > tr:nth-child(7),	// MPN
+		#tab-data > table > tbody > tr:nth-child(8),	// 商品位置
+		#tab-data > table > tbody > tr:nth-child(10),	// 商品稅類
+		#tab-data > table > tbody > tr:nth-child(12),	// 最小起訂量
+		#tab-data > table > tbody > tr:nth-child(13),	// 扣減庫存
+		#tab-data > table > tbody > tr:nth-child(14),	// 庫存狀況
+		#tab-data > table > tbody > tr:nth-child(15),	// 要求配送
+		#tab-data > table > tbody > tr:nth-child(18),	// 供貨日期
+		#tab-data > table > tbody > tr:nth-child(19),	// 尺寸 (L x W x H)
+		#tab-data > table > tbody > tr:nth-child(20),	// 尺寸單位
+		#tab-data > table > tbody > tr:nth-child(21),	// 重  量
+		#tab-data > table > tbody > tr:nth-child(22),	// 重量單位
+
+		// tab 鏈接
+		#tab-links > table > tbody > tr:nth-child(n+3)
+		{
+			.admin_io;
+		}
+
+	}// !admin_catalog_product_form	| Tab 1.2 商品管理
+
+	// ----- ----- ----- ----- -----
+	// Tab 1.3 品牌管理
+
+	body.admin_catalog_manufacturer_form{
+		table > tbody > tr:nth-child(2){
+			.admin_io;
+		}
+
+	}// !admin_catalog_manufacturer_form | Tab 1.3 品牌管理
+
+	// ----- ----- ----- ----- -----
+	// Tab 1.4 文章管理
+
+	body.admin_catalog_information_form{
+		#tab-data table > tbody > tr:first-child,	//  網店
+		#tab-data table > tbody > tr:nth-child(3),	// Display in Bottom(footer)
+
+		#tabs > a:last-child						// 規劃設計
+		{
+			.admin_io;
+		}
+
+	}// !body.admin_catalog_information_form | Tab 1.4 文章管理
+
+	// --------------------------------------------------
+	// Tab 2.1a 訂單管理 (Edit)
+
+	body.admin_sale_order_form{
+		// Internal script
+
+		#tab-customer table tbody tr:nth-child(1),	// 商店
+		#tab-customer table tbody tr:nth-child(3),	// 客戶組
+		#tab-customer table tbody tr:nth-child(5),	// Last name
+		#tab-customer table tbody tr:nth-child(8),	// 傳真
+
+		#vtabs > a:nth-child(2),				// 支付地址 tab
+
+		#tab-shipping table tbody tr:nth-child(3),	// Last name
+		#tab-shipping table tbody tr:nth-child(4),	// 公司名稱
+		#tab-shipping table tbody tr:nth-child(6),	// 地址 2
+		#tab-shipping table tbody tr:nth-child(7),	// 城市
+		#tab-shipping table tbody tr:nth-child(8),	// 郵編
+
+		#vtabs > a:nth-last-child(2),				// 禮品券 tab
+
+		#tab-total table:last-child tbody tr:nth-child(2),	// 支付方式
+		#tab-total table:last-child tbody tr:nth-child(3),	// 折扣券
+		#tab-total table:last-child tbody tr:nth-child(4),	// 禮品券
+		#tab-total table:last-child tbody tr:last-child 	// 加盟會員
+		{
+		    // border: 3px solid pink;
+		 	//display: none!important;
+		 	.admin_io;
+		}
+		#tab-total table:last-child tbody tr:first-child{	// 配送方式
+			display: table-row!important;	// Keep w/ owner
+		}
+
+		input{
+			width: 200px;
+			height: 30px;
+			text-indent: 5px;
+		}
+		select{
+			width: 210px;
+			height: 40px;
+			text-indent: 20px;
+		}
+		textarea{
+			width: 205px;
+		}
+	}// !body.admin_sale_order_form | Tab 2.1 訂單管理
+
+	// ----- ----- ----- ----- -----
+	// Tab 2.1b 訂單管理 (View)	[ Cache BUG ]
+
+	body.admin_sale_order_info{
+		#tab-order > table > tbody > tr:nth-child(2),		// 發票號
+		#tab-order > table > tbody > tr:nth-child(6),		// 客戶組
+		#tab-order > table > tbody > tr:nth-child(12),	// 電郵地址（確認輸入）
+		#tab-order > table > tbody > tr:nth-child(13),	// 驗証碼
+		#tab-order > table > tbody > tr:nth-child(24),	// Checkbox
+
+		.vtabs > a:nth-child(2),
+
+		#tab-shipping > table > tbody > tr:nth-child(2),	// Last name
+
+		// Fix for duplicate [ Cache BUG ]
+		#tab-order > table > tbody > tr:nth-child(n+25),	// Tab 1 訂單詳情
+		#tab-shipping > table > tbody > tr:nth-child(5),	// Tab 3 配送地址 > 收貨電話
+		{
+			.admin_io;
+		}
+
+		#tab-order table > tbody > tr:nth-child(n+41)	// Checkbox
+		{
+			.admin_io_release;
+		}
+
+	}// !body.admin_sale_order_info | Tab 2.1b 訂單管理 (View)
+
+	// ----- ----- ----- ----- -----
+	// Tab 2.2 客戶設置
+
+	body.admin_sale_customer_form{
+		#tab-customer > table > tbody > tr:nth-child(2),	// Last name
+		#tab-customer > table > tbody > tr:nth-child(5),	// 傳真
+		#tab-customer > table > tbody > tr:nth-child(9),	// 電郵地址（確認輸入）
+		#tab-customer > table > tbody > tr:nth-child(10),	// 驗証碼
+		#tab-customer > table > tbody > tr:nth-child(21),	// 本人同意...
+		#tab-customer > table > tbody > tr:nth-child(25),	// 用戶組
+
+		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(2),	// Last name
+		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(3),	// 公司名稱
+		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(4),	// 公司編碼
+		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(7),	// 地址 2
+		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(10),	// 郵編
+		{
+			.admin_io;
+		}
+	}// !admin_sale_customer_form | Tab 2.2 客戶設置
 
 // ----- ----- ----- ----- -----
-body.owner.admin_sale_order_form{
-	// Internal script
-
-	#tab-customer table tbody tr:nth-child(1),	// 商店
-	#tab-customer table tbody tr:nth-child(3),	// 客戶組
-	#tab-customer table tbody tr:nth-child(5),	// Last name
-	#tab-customer table tbody tr:nth-child(8),	// 傳真
-
-	#vtabs > a:nth-child(2),				// 支付地址 tab
-
-	#tab-shipping table tbody tr:nth-child(3),	// Last name
-	#tab-shipping table tbody tr:nth-child(4),	// 公司名稱
-	#tab-shipping table tbody tr:nth-child(6),	// 地址 2
-	#tab-shipping table tbody tr:nth-child(7),	// 城市
-	#tab-shipping table tbody tr:nth-child(8),	// 郵編
-
-	#vtabs > a:nth-last-child(2),				// 禮品券 tab
-
-	#tab-total table:last-child tbody tr:nth-child(2),	// 支付方式
-	#tab-total table:last-child tbody tr:nth-child(3),	// 折扣券
-	#tab-total table:last-child tbody tr:nth-child(4),	// 禮品券
-	#tab-total table:last-child tbody tr:last-child 	// 加盟會員
-	{
-	    //border: 3px solid pink;
-	 	display: none!important;
-	}
-	#tab-total table:last-child tbody tr:first-child{	// 配送方式
-		display: table-row!important;	// Keep w/ owner
-	}
-}// !body.admin_sale_order_form

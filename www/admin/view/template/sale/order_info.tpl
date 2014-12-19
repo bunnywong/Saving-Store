@@ -1,4 +1,9 @@
 <?php echo $header; ?>
+
+<script>
+  $('body').addClass('admin_sale_order_info');
+</script>
+
 <div id="content">
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
