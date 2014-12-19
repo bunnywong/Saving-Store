@@ -55,6 +55,22 @@ body.backend.owner{
 }// !body.backend.owner
 
 // --------------------------------------------------
+body.owner.admin_catalog_category_form{
+	#tab-data table tbody tr:nth-child(1),	// 上級分類
+	#tab-data table tbody tr:nth-child(2),	// 產品篩選
+	#tab-data table tbody tr:nth-child(3),	// empty row
+	#tab-data table tbody tr:nth-child(4),	// 網店
+	#tab-data table tbody tr:nth-child(7),	// 橫排顯示
+	#tab-data table tbody tr:nth-child(8),	// 列排顯示
+	#tab-data table tbody tr:nth-child(9),	// 分類順序
+
+	#tabs > a:last-child{					// tab 規劃設計
+		// background: pink;
+		display: none!important;
+	}
+}// !body.admin_catalog_category_form
+
+// ----- ----- ----- ----- -----
 body.owner.admin_sale_customer_form{
 	#tab-customer > table > tbody > tr:nth-child(2)	// Last name
 	{

@@ -7,7 +7,7 @@
 </style>
 
 <script>
-$('body').addClass('admin_sale_order_form');
+  $('body').addClass('admin_sale_order_form');
 </script>
 
 <div id="content">
