@@ -360,6 +360,11 @@
 		}, 1000);
 	}// $.fn.account_myaddress_update
 
+	$.fn.account_return_customer = function() {
+		if( $.trim($('.warning').text()) == '確認密碼不符' )
+			$('input[name="password2').after('<br><span class="required">確認密碼不符</span>');
+	}
+
 }( jQuery ));
 
 // --------------------------------------------------
@@ -415,8 +420,8 @@ $(function () {
 		if( $('body').hasClass('account_myaddress_update') )
 			$('body').account_myaddress_update();
 
-			if( $('body').hasClass('address_myaddress_update') )
-				$('body').address_myaddress_update();
+		if( $('body').hasClass('account_return_customer') )
+			$('body').account_return_customer();
 
 	}); // !$(document).ready
 

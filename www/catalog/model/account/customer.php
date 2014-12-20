@@ -188,6 +188,13 @@ class ModelAccountCustomer extends Model {
 		}
 	}
 
+	// My Script
+	public function editIp( $email ) {
+		$ip = $_SERVER['REMOTE_ADDR'];
+
+		$this->db->query("UPDATE ". DB_PREFIX . "customer SET ip = '". $ip ."' WHERE email = '". $email ."'");
+	}
+
 	public function editCustomer($data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 		//--------------------------------------------Xcustomer

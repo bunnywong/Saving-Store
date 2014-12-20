@@ -18,7 +18,7 @@ jQuery(document).ready(function($){
     <?php } ?>
   </div>
   <h1 style="vertical-align: top;">舊網站用戶？<img src="/image/data/login/old_website.png" style="max-width: 300px; margin-left: 200px;"></h1>
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" class="returnuser">
     <p>請輸入您註冊賬戶時填寫的電子郵件地址以及重設密碼，點擊繼續。<br>於電郵信箱開啟連結，你的賬戶將會重新開通</p>
     <div class="content">
       <table class="form">
