@@ -62,7 +62,7 @@
 								</div>
 								<?php } ?>
 								<?php if ($product['reward']) { ?>
-								<div> <small><?php echo $product['reward']; ?></small>
+								<div> <small><?php //echo $product['reward']; ?></small>
 									<?php } ?>
 								</div></td>
 							<td class="model"><?php echo $product['model']; ?></td>
