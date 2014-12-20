@@ -85,6 +85,40 @@ class ControllerAccountReturnuser extends Controller {
 		$this->data['button_back'] = $this->language->get('button_back');
 
 		// --------------------------------------------------
+		// My Script - Do change pwd into DB
+
+		if ( isset( $this->request->get['email']) && isset( $this->request->get['pwd']) ) {
+
+			$email 	= $this->request->get['email'];
+			$pwd 	= $this->request->get['pwd'];
+
+			// DEBUG
+			// Email 	: bWVAYnVubnl3b25nLmNvbQ==	(me@bunnywong.com)
+			// Pwd 		: YnVubnlzb24=				(bunnyson)
+			/*$this->data['error_warning']   = base64_decode(base64_decode($email));
+			$this->data['error_warning']   .= ' / ';
+			$this->data['error_warning']   .= base64_decode(base64_decode($pwd));*/
+
+			// Decode
+			$email 	= base64_decode(base64_decode($email));
+			$pwd 	= base64_decode(base64_decode($pwd));
+
+			// Check is valid email a/c
+			if( count($this->model_account_customer->getCustomerByEmail($email)) ){
+				// Set 1st return user IP into DB
+				$this->model_account_customer->editIp($email);
+
+				// Set pwd into DB
+				$this->model_account_customer->editPassword($email, $pwd);
+
+				// Next page(Login) event
+				$this->session->data['success'] =  '你的帳戶已被啟動';
+				$this->redirect($this->url->link('account/login', '', 'SSL'));
+			}else{
+				$this->error['warning'] = '連結參數錯誤，請檢查電子郵件';
+			}
+		}
+		// --------------------------------------------------
 		// Show warning
 
 		if (isset($this->error['warning'])) {
@@ -114,37 +148,6 @@ class ControllerAccountReturnuser extends Controller {
 			'common/footer',
 			'common/header'
 		);
-
-		// --------------------------------------------------
-		// My Script - Do change pwd into DB
-
-		if ( isset( $this->request->get['email']) && isset( $this->request->get['pwd']) ) {
-
-			$email 	= $this->request->get['email'];
-			$pwd 	= $this->request->get['pwd'];
-
-			// DEBUG
-			// Email 	: bWVAYnVubnl3b25nLmNvbQ==	(me@bunnywong.com)
-			// Pwd 		: YnVubnlzb24=				(bunnyson)
-			/*$this->data['error_warning']   = base64_decode(base64_decode($email));
-			$this->data['error_warning']   .= ' / ';
-			$this->data['error_warning']   .= base64_decode(base64_decode($pwd));*/
-
-			// Decode
-			$email 	= base64_decode(base64_decode($email));
-			$pwd 	= base64_decode(base64_decode($pwd));
-
-			// Set 1st return user IP into DB
-			$this->model_account_customer->editIp($email);
-
-			// Set pwd into DB
-			$this->model_account_customer->editPassword($email, $pwd);
-
-			// Next page(Login) event
-			$this->session->data['success'] =  '你的帳戶已被啟動';
-			$this->redirect($this->url->link('account/login', '', 'SSL'));
-		}
-		// ----- ----- ----- ----- -----
 
 		$this->response->setOutput($this->render());
 	}
