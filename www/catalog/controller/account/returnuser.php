@@ -26,7 +26,7 @@ class ControllerAccountReturnuser extends Controller {
 			$message  =  $custom['firstname']. "\n\n\n";
 
 			$message  .= '請點擊以下連結啟動你的帳戶'. "\n\n";
-			$message  .= 'http://savingstore.com.hk/index.php?route=account/returnuser&email='.base64_encode(base64_encode($email)).'&pwd='.base64_encode(base64_encode($pwd)). "\n\n\n";
+			$message  .= $this->config->get('config_url').'index.php?route=account/returnuser&email='.base64_encode(base64_encode($email)).'&pwd='.base64_encode(base64_encode($pwd)). "\n\n\n";
 
 			$message .= '謝謝!'."\n";
 			$message .= 'SavingStore.com.hk'."\n";
