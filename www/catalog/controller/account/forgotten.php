@@ -22,7 +22,7 @@ class ControllerAccountForgotten extends Controller {
 
 			$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
 
-			$custom =  $this->model_account_customer->getCustomerByEmail('me@bunnywong.com');
+			$custom =  $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
 
 			$message  =  $custom['firstname']. "\n\n\n";
 
