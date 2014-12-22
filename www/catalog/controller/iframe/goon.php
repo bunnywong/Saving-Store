@@ -1,5 +1,5 @@
 <?php
-class ControllerCustompageMycustompage extends Controller {
+class ControllerIframeGoon extends Controller {
   public function index() {
     // set title of the page
     $this->document->setTitle("My Custom Page");
