@@ -24,19 +24,16 @@ class ControllerAccountForgotten extends Controller {
 
 			$custom =  $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
 
-			$message  =  $custom['firstname']. "\n\n\n";
+			$message  =  $custom['firstname']. "<br><br><br>";
 
-			$message  .= sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
+			$message  .= sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "<br><br>";
 
-			$message  .= '登入電郵：'.$this->request->post['email']. "\n";
-//			$message .= $this->language->get('text_password') . "\n\n";
-			$message .= $this->language->get('text_password') . $password . "\n\n";	// [您的新密碼: xxx ]
-//			$message .= $password;
+			$message  .= '登入電郵：'.$this->request->post['email']. "<br>";
+			$message .= $this->language->get('text_password') . $password . "<br><br>";	// [您的新密碼: xxx ]
 
-			$message .= '謝謝!'."\n";
-			$message .= 'SavingStore.com.hk'."\n";
-//			$message .= '<img src="http://greenmap.hk/image/data/logo.png" style="max-width: 180px; height: auto;">';	// todo IMG
-
+			$message .= '謝謝!'."<br>";
+			$message .= 'SavingStore.com.hk'."<br>";
+			$message .= '<img src="http://greenmap.hk/image/data/logo.png" style="max-width: 180px; height: auto;">';
 
 
 			$mail = new Mail();
@@ -51,7 +48,7 @@ class ControllerAccountForgotten extends Controller {
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setSender($this->config->get('config_name'));
 			$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
-			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+			$mail->setHtml(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 
 			$this->session->data['success'] = $this->language->get('text_success');
