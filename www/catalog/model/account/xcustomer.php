@@ -79,24 +79,23 @@ class ModelAccountXCustomer extends Model {
 
 		$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
 
-		$message = $data['firstname']. ' :'."\n\n";
+		$message = $data['firstname']. ' :'."<br><br>";
 
-		$message .= sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n";	// [ 歡迎您註冊成為... ]
+		$message .= sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "<br>";	// [ 歡迎您註冊成為... ]
 
-		$message .= '登入電郵：'.$data['email']. "\n\n";
+		$message .= '登入電郵：'.$data['email']. "<br><br>";
 
 		if (!$customer_group_info['approval']) {
-			$message .= $this->language->get('text_login') . "\n";
+			$message .= $this->language->get('text_login') . "<br>";
 		} else {
-			$message .= $this->language->get('text_approval') . "\n";
+			$message .= $this->language->get('text_approval') . "<br>";
 		}
 
-		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
+		$message .= $this->url->link('account/login', '', 'SSL') . "<br><br>";
 //		$message .= $this->language->get('text_services') . "\n\n";	// [登錄後， 您將能夠享受其他服務... ]
-		$message .= $this->language->get('text_thanks') . "\n";
-		$message .= $this->config->get('config_name') . "\n";
-		// Todo
-		// $message .= '<img src="http://greenmap.hk/image/data/logo.png">';
+		$message .= $this->language->get('text_thanks') . "<br>";
+		$message .= $this->config->get('config_name') . "<br>";
+		$message .= '<img src="'.$this->config->get('config_url').'image/data/email_logo.png" style="max-width: 180px; height: auto;">';
 
 		$mail = new Mail();
 		$mail->protocol = $this->config->get('config_mail_protocol');
@@ -110,7 +109,7 @@ class ModelAccountXCustomer extends Model {
 		$mail->setFrom($this->config->get('config_email'));
 		$mail->setSender($this->config->get('config_name'));
 		$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
-		$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+		$mail->setHtml(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 		$mail->send();
 
 		// Send to main admin email if new account email is enabled

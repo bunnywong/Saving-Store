@@ -33,7 +33,7 @@ class ControllerAccountForgotten extends Controller {
 
 			$message .= '謝謝!'."<br>";
 			$message .= 'SavingStore.com.hk'."<br>";
-			$message .= '<img src="http://greenmap.hk/image/data/logo.png" style="max-width: 180px; height: auto;">';
+			$message .= '<img src="'.$this->config->get('config_url').'image/data/email_logo.png" style="max-width: 180px; height: auto;">';
 
 
 			$mail = new Mail();
