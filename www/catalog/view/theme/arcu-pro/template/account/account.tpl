@@ -2,7 +2,11 @@
 
 <script src="http://savingstore.com.hk/catalog/view/theme/arcu-pro/js/jquery_cookie/src/jquery.cookie.js"></script>
 <script>
-  $('body').addClass('account_account');
+	if($.cookie("iframe_url") == undefined ){
+	  $('body').addClass('account_account');
+	}else{
+		$('body').addClass('account_account iframe');
+	}
 </script>
 
 <?php if ($success) { ?>

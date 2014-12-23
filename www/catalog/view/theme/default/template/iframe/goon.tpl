@@ -176,7 +176,7 @@
     function get(n) {
       var half = location.search.split(n + '=')[1];
       return half !== undefined ? decodeURIComponent(half.split('&')[0]) : null;
-     }
+    }
     // --------------------------------------------------
 
     var base = '<?= $base; ?>';
@@ -191,7 +191,7 @@
         window.top.location = base + 'index.php?route=account/returnuser';
     }
     function logout(){
-        window.top.location = base + 'index.php?route=account/logout';
+        window.location = base + 'index.php?route=account/logout';
     }
     function set_url(){
         var url = document.URL;
