@@ -410,7 +410,7 @@
 	}// !body.admin_sale_order_form | Tab 2.1 訂單管理
 
 	// ----- ----- ----- ----- -----
-	// Tab 2.1b 訂單管理 (View)	[ Cache BUG ]
+	// Tab 2.1b 訂單管理 (View)
 
 	body.admin_sale_order_info{
 		#tab-order > table > tbody > tr:nth-child(2),	// 發票號
@@ -422,9 +422,9 @@
 		.vtabs > a:nth-child(2),
 
 		#tab-shipping > table > tbody > tr:nth-child(2),	// Last name
-		#tab-shipping > table > tbody > tr:nth-child(6),	// Tab 3 配送地址 > 城市
-		#tab-shipping > table > tbody > tr:nth-child(8),	// Tab 3 配送地址 > 地區 / 省份代碼
-		#tab-shipping > table > tbody > tr:nth-child(10),	// Tab 3 配送地址 > 貨運方式
+		#tab-shipping > table > tbody > tr:nth-child(5),	// Tab 3 配送地址 > 城市
+		#tab-shipping > table > tbody > tr:nth-child(7),	// Tab 3 配送地址 > 地區 / 省份代碼
+		#tab-shipping > table > tbody > tr:nth-child(9),	// Tab 3 配送地址 > 貨運方式
 
 		// b) Fix for duplicate [ Cache BUG ]
 /*		 #tab-order > table > tbody > tr:nth-child(n+25),	// Tab 1 訂單詳情 [ Cache BUG ]
@@ -433,10 +433,10 @@
 			.admin_io;
 		}
 
-		#tab-order table > tbody > tr:nth-child(n+41)		// Checkbox [ Cache BUG ]
+		/*#tab-order table > tbody > tr:nth-child(n+41)		// Checkbox [ Cache BUG ]
 		{
 			.admin_io_release;
-		}
+		}*/
 
 	}// !body.admin_sale_order_info | Tab 2.1b 訂單管理 (View)
 
