@@ -1,6 +1,18 @@
 <?php include( DIR_TEMPLATE . '/arcu-pro/includes/megamenu.tpl' );?>
 <!DOCTYPE html>
-<html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+<!--[if lt IE 7 ]>
+	<html class="ie6" dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+<![endif]-->
+<!--[if IE 7 ]>
+	<html class="ie7" dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+<![endif]-->
+<!--[if IE 8 ]>
+	<html class="ie8" dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+<![endif]-->
+<!--[if IE 9 ]>
+	<html class="ie9" dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>"> <!--<![endif]-->
 <head>
 <meta charset="UTF-8" />
 <title><?php echo $title; ?></title>
