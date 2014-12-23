@@ -16,7 +16,7 @@
         height: 375px;
         margin: 0 auto;
         box-sizing: border-box;
-        padding: 105px 40px 0px 40px;
+        padding: 105px 20px 0px 20px;
         background: url("/image/data/login/goon-s1.png");
         position: relative;
         font-size: 12px;
@@ -26,7 +26,7 @@
         height: 375px;
         margin: 0 auto;
         box-sizing: border-box;
-        padding: 140px 40px 0px 40px;
+        padding: 140px 20px 0px 20px;
         background: lightblue;
         background: url("/image/data/login/goon-s2.png");
         position: relative;
@@ -175,6 +175,7 @@
 <script>
     function get(n) {
       var half = location.search.split(n + '=')[1];
+      //alert(location);
       return half !== undefined ? decodeURIComponent(half.split('&')[0]) : null;
     }
     // --------------------------------------------------
@@ -194,10 +195,14 @@
         window.location = base + 'index.php?route=account/logout';
     }
     function set_url(){
-        var url = document.URL;
-        // localStorage.setItem(url, 'iframe_url');
+        var url     = document.URL;
+        var tail    = url.indexOf('&');
+
+        // No error string's url before submit
+        if( tail != -1 )
+            url = url.substring(url, tail);
+
         $.cookie('iframe_url', url, { expires: 7, path: '/' });
-        // alert($.cookie('iframe_url'));
     }
     function edit_info(){
         window.top.location = base + 'index.php?route=account/account';
@@ -215,5 +220,10 @@
     if( get('error') ){
         $('.err_msg').text('用戶名稱或密碼不正確');
     }
+
+    // External script
+    // $.fn.account_login
+    // $.fn.account_logout
+    // $.fn.account_account
 
 </script>

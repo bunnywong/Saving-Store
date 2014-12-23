@@ -2,7 +2,7 @@
 class ControllerIframeGoon extends Controller {
   public function index() {
     // set title of the page
-    $this->document->setTitle("My Custom Page");
+    $this->document->setTitle("iFrame - GOON");
 
     // define template file
     if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/iframe/goon.tpl')) {

@@ -60,4 +60,4 @@
 
   $('body').addClass('my_account');
 </script>
-<?php echo $footer; ?>abc
+<?php echo $footer; ?>

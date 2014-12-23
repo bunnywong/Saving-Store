@@ -100,8 +100,11 @@
 		});
 	}
 	// ---------- ---------- ---------- ---------- ----------
+	// iFrame handle
+	// Cookie ref: https://github.com/carhartl/jquery-cookie
 
 	$.fn.account_login = function() {
+
 		var iframe_url = $.cookie('iframe_url');
 
 		if( iframe_url != null ){
@@ -111,9 +114,7 @@
 	}
 
 	$.fn.account_logout = function() {
-		// Cookie ref: https://github.com/carhartl/jquery-cookie
 
-		// iframe_url = localStorage.getItem('iframe_url');
 		var iframe_url = $.cookie('iframe_url');
 
 		if( iframe_url != null ){
@@ -124,11 +125,9 @@
 
 	$.fn.account_account = function() {
 
-		// iframe_url = localStorage.getItem('iframe_url');
 		var iframe_url = $.cookie('iframe_url');
 
 		if( iframe_url != null ){
-			// todo: clear cookie
 			$.removeCookie('iframe_url', { path: '/' });
 			window.location = iframe_url;
 		}
