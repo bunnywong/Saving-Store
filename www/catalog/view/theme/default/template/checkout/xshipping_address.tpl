@@ -274,8 +274,8 @@ $('#shipping-address <?php ((!$isActive['enablemod'] || $isActive['enablemod'] &
 					if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
 	      				html += ' selected="selected"';
 	    			}
-
-	    			html += '>' + json['zone'][i]['name'] + '</option>';
+            var str = json['zone'][i]['name'];
+	    			html += '>' + str.substr(5) + '</option>';
 				}
 			} else {
 				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
