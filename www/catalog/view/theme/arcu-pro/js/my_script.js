@@ -79,6 +79,22 @@
 	}
 
 	$.fn.sidebar = function() {
+
+		if(localStorage.getItem('lightbox') == null){
+
+			var str = '<h1 style="vertical-align: top;">舊網站用戶？<img src="/image/data/login/old_website.png" style="max-width: 300px; margin-left: 200px;"></h1>';
+			str += '<form action="http://savingstore.com.hk/index.php?route=account/returnuser" method="post" enctype="multipart/form-data" class="returnuser"><p>請輸入您註冊賬戶時填寫的電子郵件地址以及重設密碼，點擊繼續。<br>於電郵信箱開啟連結，你的賬戶將會重新開通</p><div class="content"><table class="form"><tbody><tr><td>郵箱地址：</td><td><input type="text" name="email" value=""></td></tr><tr><td>設定新密碼：</td><td><input type="password" name="password" value=""></td></tr><tr><td>設定新密碼（確認輸入）：</td><td><input type="password" name="password2" value=""></td></tr></tbody></table></div><div class="buttons"><div class="left"></div><div class="right"><input type="submit" value="繼續" class="button"></div></div></form>';
+
+			$( "body" ).append('<div class="lightbox_wrapper"><div class="lightbox"><span class="cross"></span>'+ str +'</div></div>').end();
+
+			$('.cross').click(function(){
+				$('.lightbox_wrapper').remove();
+			});
+
+			// Set lightbox was showed
+			localStorage.setItem('lightbox', 1);
+		}
+
 		// Click to cart
 		$('#header #cart').click(function(){
 			window.location = 'index.php?route=checkout/cart';
@@ -326,7 +342,6 @@
 
 	}
 
-	// ---------- ---------- ---------- ---------- ----------
 	// ---------- ---------- ---------- ---------- ----------
 	// Account Pages
 
