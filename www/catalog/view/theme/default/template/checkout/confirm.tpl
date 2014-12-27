@@ -4,17 +4,17 @@
     <thead>
       <tr>
         <td class="name"><?php echo $column_name; ?></td>
-        <td class="model"><?php echo $column_model; ?></td>
+        <td class="model">產品編號<?php //echo $column_model; ?></td>
         <td class="quantity"><?php echo $column_quantity; ?></td>
         <td class="price"><?php echo $column_price; ?></td>
         <td class="total"><?php echo $column_total; ?></td>
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($products as $product) { ?>  
+      <?php foreach ($products as $product) { ?>
       <?php if($product['recurring']): ?>
         <tr>
-            <td colspan="6" style="border:none;"><image src="catalog/view/theme/default/image/reorder.png" alt="" title="" style="float:left;" /><span style="float:left;line-height:18px; margin-left:10px;"> 
+            <td colspan="6" style="border:none;"><image src="catalog/view/theme/default/image/reorder.png" alt="" title="" style="float:left;" /><span style="float:left;line-height:18px; margin-left:10px;">
                 <strong><?php echo $text_recurring_item ?></strong>
                 <?php echo $product['profile_description'] ?>
             </td>
@@ -61,5 +61,5 @@
 <?php } else { ?>
 <script type="text/javascript"><!--
 location = '<?php echo $redirect; ?>';
-//--></script> 
+//--></script>
 <?php } ?>

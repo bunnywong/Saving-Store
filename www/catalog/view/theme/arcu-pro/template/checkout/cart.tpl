@@ -28,11 +28,11 @@
 					<thead>
 						<tr>
 							<td class="image"><?php echo $column_image; ?></td>
-							<td class="name"><?php echo $column_name; ?></td>
-							<td class="model"><?php echo $column_model; ?></td>
+							<td class="name">產品名稱<?php //echo $column_name; ?></td>
+							<td class="model">產品編號<?php //echo $column_model; ?></td>
 							<td class="quantity"><?php echo $column_quantity; ?></td>
-							<td class="price"><?php echo $column_price; ?></td>
-							<td class="total"><?php echo $column_total; ?></td>
+							<td class="price">價錢<?php //echo $column_price; ?></td>
+							<td class="total">合計<?php //echo $column_total; ?></td>
 						</tr>
 					</thead>
 					<tbody>
