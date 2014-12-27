@@ -50,7 +50,7 @@
 
         <td colspan="2" style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b><?php echo $text_order_id; ?></b> <?php echo ORDER_PREFIX.year_perfix($date_added).str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT); ?><br />
           <b><?php echo $text_date_added; ?></b> <?php echo $date_added; ?><br />
-          <b><?php echo $text_payment_method; ?></b> <?php echo $payment_method; ?><br />
+          <b><?php echo $text_payment_method; ?></b>貨到付款<?php //echo $payment_method; ?><br />
           <?php if ($shipping_method) { ?>
           <b><?php echo $text_email; ?></b> <?php echo $email; ?>
           <?php } ?>

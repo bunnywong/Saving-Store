@@ -25,7 +25,7 @@
       <tr>
         <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b><?php echo $text_order_id; ?></b> <?php echo $order_id; ?><br />
           <b><?php echo $text_date_added; ?></b> <?php echo $date_added; ?><br />
-          <b><?php echo $text_payment_method; ?></b>貨到付款<?php //echo $payment_method; ?><br />
+          <b><?php echo $text_payment_method; ?></b> <?php echo $payment_method; ?><br />
           <?php if ($shipping_method) { ?>
           <b><?php echo $text_shipping_method; ?></b> <?php echo $shipping_method; ?>
           <?php } ?></td>
