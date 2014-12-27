@@ -612,8 +612,13 @@
 		#buy_and_checkout:hover:before {
 			left: 100%;
 		}
-
-
+		.short_description_title{
+			display: inline-block;
+			vertical-align: top;
+		}
+		.short_description{
+			display: inline-block;
+		}
 	}// !.detail_view
 
 // --------------------------------------------------
@@ -774,7 +779,13 @@
 // 3. Address list view
 
 	body.account_address{
-		.my_address{line-height: 30px;}
+		#content > .box > .content > table{
+			border-bottom: 1px solid lightgray;
+			padding-top: 20px;
+			.my_address{
+				line-height: 30px;
+			}
+		}
 	}// !body.account_address
 
 // --------------------------------------------------

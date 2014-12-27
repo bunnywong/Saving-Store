@@ -110,7 +110,8 @@
 					<?php if ($minimum > 1) { ?>
 					<div class="minimum"><?php echo $text_minimum; ?></div>
 					<?php } ?>
-					<br /><span>產品簡介：</span><?php echo $meta_description; // Bun ?>
+					<br /><span class="short_description_title">產品簡介：</span>
+					<pre class="short_description"><?php echo $meta_description; ?></pre>
 				</div>
 				<?php if ($profiles): ?>
 				<div class="option">

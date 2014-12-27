@@ -19,7 +19,7 @@
 <base href="<?php echo $base; ?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <?php if ($description) { ?>
-<meta name="description" content="<?php echo $description; ?>" />
+<meta name="description" content="<?php echo str_replace(array("\n", "\r"), '', $description); ?>" />
 <?php } ?>
 <?php if ($keywords) { ?>
 <meta name="keywords" content="<?php echo $keywords; ?>" />
