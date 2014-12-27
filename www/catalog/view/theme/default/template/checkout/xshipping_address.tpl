@@ -13,7 +13,8 @@
   <tr><td >
   <input type="radio" name="shipping_address" value="new" id="shipping-address-new" />
   <label for="shipping-address-new">
-  <?php echo $text_address_new; ?>
+  <?php echo $text_address_new; ?><br>
+   (只接受香港地區用户訂購)
   </label>
   </td></tr>
   </table>
