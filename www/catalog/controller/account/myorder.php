@@ -12,18 +12,18 @@ class ControllerAccountMyOrder extends Controller {
 		$this->language->load('account/order');
 
 		$this->load->model('account/order');
-			
+
 		if (isset($this->request->get['order_id'])) {
 			$order_info = $this->model_account_order->getOrder($this->request->get['order_id']);
-				
+
 			if ($order_info) {
 				$order_products = $this->model_account_order->getOrderProducts($this->request->get['order_id']);
 
 				foreach ($order_products as $order_product) {
 					$option_data = array();
-						
+
 					$order_options = $this->model_account_order->getOrderOptions($this->request->get['order_id'], $order_product['order_product_id']);
-						
+
 					foreach ($order_options as $order_option) {
 						if ($order_option['type'] == 'select' || $order_option['type'] == 'radio') {
 							$option_data[$order_option['product_option_id']] = $order_option['product_option_value_id'];
@@ -35,12 +35,12 @@ class ControllerAccountMyOrder extends Controller {
 							$option_data[$order_option['product_option_id']] = $this->encryption->encrypt($order_option['value']);
 						}
 					}
-						
+
 					$this->session->data['success'] = sprintf($this->language->get('text_success'), $this->request->get['order_id']);
-						
+
 					$this->cart->add($order_product['product_id'], $order_product['quantity'], $option_data);
 				}
-					
+
 				$this->redirect($this->url->link('checkout/cart'));
 			}
 		}
@@ -51,13 +51,13 @@ class ControllerAccountMyOrder extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),        	
+			'href'      => $this->url->link('common/home'),
         	'separator' => false
 		);
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', 'SSL'),        	
+			'href'      => $this->url->link('account/account', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
 		);
 
@@ -69,7 +69,7 @@ class ControllerAccountMyOrder extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('account/myorder', $url, 'SSL'),        	
+			'href'      => $this->url->link('account/myorder', $url, 'SSL'),
         	'separator' => $this->language->get('text_separator')
 		);
 
@@ -138,7 +138,7 @@ class ControllerAccountMyOrder extends Controller {
 			'common/content_top',
 			'common/content_bottom',
 			'common/footer',
-			'common/header'	
+			'common/header'
 			);
 
 			$this->response->setOutput($this->render());
@@ -155,51 +155,51 @@ class ControllerAccountMyOrder extends Controller {
 
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/myorder/info', 'order_id=' . $order_id, 'SSL');
-				
+
 			$this->redirect($this->url->link('account/login', '', 'SSL'));
 		}
 
 		$this->load->model('account/order');
-			
+
 		$order_info = $this->model_account_order->getOrder($order_id);
 
 		if ($order_info) {
 			$this->document->setTitle($this->language->get('text_order'));
-				
+
 			$this->data['breadcrumbs'] = array();
 
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('text_home'),
-				'href'      => $this->url->link('common/home'),        	
+				'href'      => $this->url->link('common/home'),
 				'separator' => false
 			);
 
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('text_account'),
-				'href'      => $this->url->link('account/account', '', 'SSL'),        	
+				'href'      => $this->url->link('account/account', '', 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);
-				
+
 			$url = '';
-				
+
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('heading_title'),
-				'href'      => $this->url->link('account/myorder', $url, 'SSL'),      	
+				'href'      => $this->url->link('account/myorder', $url, 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);
-				
+
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('text_order'),
 				'href'      => $this->url->link('account/myorder/info', 'order_id=' . $this->request->get['order_id'] . $url, 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);
-				
+
 			$this->data['heading_title'] = $this->language->get('text_order');
-				
+
 			$this->data['text_order_detail'] = $this->language->get('text_order_detail');
 			$this->data['text_invoice_no'] = $this->language->get('text_invoice_no');
 			$this->data['text_order_id'] = $this->language->get('text_order_id');
@@ -220,7 +220,7 @@ class ControllerAccountMyOrder extends Controller {
 			$this->data['column_date_added'] = $this->language->get('column_date_added');
 			$this->data['column_status'] = $this->language->get('column_status');
 			$this->data['column_comment'] = $this->language->get('column_comment');
-				
+
 			$this->data['button_return'] = $this->language->get('button_return');
 			$this->data['button_continue'] = $this->language->get('button_continue');
 
@@ -229,7 +229,7 @@ class ControllerAccountMyOrder extends Controller {
 			} else {
 				$this->data['invoice_no'] = '';
 			}
-				
+
 			$this->data['order_id'] = $this->request->get['order_id'];
 			$this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
 			$this->load->model('account/xcustomer');
@@ -255,7 +255,7 @@ class ControllerAccountMyOrder extends Controller {
 				'{zone_code}',
       			'{country}'
       			);
-      				
+
       			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
       				array_push($find, '{'.$option['identifier'].'}');
       			}
@@ -265,12 +265,12 @@ class ControllerAccountMyOrder extends Controller {
 	  			'lastname'  => $order_info['payment_lastname'],
 	  			'company'   => $order_info['payment_company'],
       			'address_1' => $order_info['payment_address_1'],
-      			'address_2' => $order_info['payment_address_2'],			
+      			'address_2' => $order_info['payment_address_2'],
       			'city'      => $order_info['payment_city'],
       			'postcode'  => $order_info['payment_postcode'],
       			'zone'      => $order_info['payment_zone'],
 				'zone_code' => $order_info['payment_zone_code'],
-      			'country'   => $order_info['payment_country'],		
+      			'country'   => $order_info['payment_country'],
       			);
 
       			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
@@ -304,7 +304,7 @@ class ControllerAccountMyOrder extends Controller {
       			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
       				array_push($find, '{'.$option['identifier'].'}');
       			}
-      				
+
       			$replace = array(
 	  			'firstname' => $order_info['shipping_firstname'],
 	  			'lastname'  => $order_info['shipping_lastname'],
@@ -313,11 +313,11 @@ class ControllerAccountMyOrder extends Controller {
       			'address_2' => $order_info['shipping_address_2'],
       			'city'      => $order_info['shipping_city'],
       			'postcode'  => $order_info['shipping_postcode'],
-      			'zone'      => $order_info['shipping_zone'],
+      			'zone'      => substr($order_info['shipping_zone'], 5),
 				'zone_code' => $order_info['shipping_zone_code'],
-      			'country'   => $order_info['shipping_country']  
+      			'country'   => $order_info['shipping_country']
       			);
-      				
+
       			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
       				if($option['order_display']){$value = $this->model_account_xcustomer->getCustomerOrderOptions($option['option_id'],'shipping',$order_id);
       				$replace= array_merge($replace, array($option['identifier'] => $value));}
@@ -326,9 +326,9 @@ class ControllerAccountMyOrder extends Controller {
       			$this->data['shipping_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
 
       			$this->data['shipping_method'] = $order_info['shipping_method'];
-      				
+
       			$this->data['products'] = array();
-      				
+
       			$products = $this->model_account_order->getOrderProducts($this->request->get['order_id']);
 
       			foreach ($products as $product) {
@@ -342,7 +342,7 @@ class ControllerAccountMyOrder extends Controller {
       					} else {
       						$value = utf8_substr($option['value'], 0, utf8_strrpos($option['value'], '.'));
       					}
-      						
+
       					$option_data[] = array(
 						'name'  => $option['name'],
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
@@ -362,20 +362,20 @@ class ControllerAccountMyOrder extends Controller {
 
       			// Voucher
       			$this->data['vouchers'] = array();
-      				
+
       			$vouchers = $this->model_account_order->getOrderVouchers($this->request->get['order_id']);
-      				
+
       			foreach ($vouchers as $voucher) {
       				$this->data['vouchers'][] = array(
 					'description' => $voucher['description'],
 					'amount'      => $this->currency->format($voucher['amount'], $order_info['currency_code'], $order_info['currency_value'])
       				);
       			}
-      				
+
       			$this->data['totals'] = $this->model_account_order->getOrderTotals($this->request->get['order_id']);
-      				
+
       			$this->data['comment'] = nl2br($order_info['comment']);
-      				
+
       			$this->data['histories'] = array();
 
       			$results = $this->model_account_order->getOrderHistories($this->request->get['order_id']);
@@ -395,26 +395,26 @@ class ControllerAccountMyOrder extends Controller {
       			} else {
       				$this->template = 'default/template/account/order_info.tpl';
       			}
-      				
+
       			$this->children = array(
 				'common/column_left',
 				'common/column_right',
 				'common/content_top',
 				'common/content_bottom',
 				'common/footer',
-				'common/header'	
+				'common/header'
 				);
 
 				$this->response->setOutput($this->render());
 		} else {
 			$this->document->setTitle($this->language->get('text_order'));
-				
+
 			$this->data['heading_title'] = $this->language->get('text_order');
 
 			$this->data['text_error'] = $this->language->get('text_error');
 
 			$this->data['button_continue'] = $this->language->get('button_continue');
-				
+
 			$this->data['breadcrumbs'] = array();
 
 			$this->data['breadcrumbs'][] = array(
@@ -422,7 +422,7 @@ class ControllerAccountMyOrder extends Controller {
 				'href'      => $this->url->link('common/home'),
 				'separator' => false
 			);
-				
+
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('text_account'),
 				'href'      => $this->url->link('account/account', '', 'SSL'),
@@ -434,7 +434,7 @@ class ControllerAccountMyOrder extends Controller {
 				'href'      => $this->url->link('account/myorder', '', 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);
-				
+
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('text_order'),
 				'href'      => $this->url->link('account/myorder/info', 'order_id=' . $order_id, 'SSL'),
@@ -442,20 +442,20 @@ class ControllerAccountMyOrder extends Controller {
 			);
 
 			$this->data['continue'] = $this->url->link('account/myorder', '', 'SSL');
-			 
+
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
 			} else {
 				$this->template = 'default/template/error/not_found.tpl';
 			}
-				
+
 			$this->children = array(
 				'common/column_left',
 				'common/column_right',
 				'common/content_top',
 				'common/content_bottom',
 				'common/footer',
-				'common/header'	
+				'common/header'
 				);
 
 				$this->response->setOutput($this->render());
