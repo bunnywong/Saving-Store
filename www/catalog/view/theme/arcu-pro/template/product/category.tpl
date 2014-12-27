@@ -1,4 +1,7 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
+<script>
+	$('body').addClass('list_view');
+</script>
 
 <div id="content" class="category-page"><?php echo $content_top; ?>
 	<div class="box">
@@ -98,16 +101,12 @@
 <?php echo $footer; ?>
 <script type="text/javascript">
 $(document).ready(function () {
-	$('.box-product').masonry({
-		columnWidth: <?php echo $thumb_width + 72; ?>,
-		isFitWidth: true,
-		itemSelector: '.product-grid > div'
-	});
-
-// My Script
-// --------------------------------------------------
-
-   $('body').addClass('list_view');
-
+	setTimeout(function(){
+		$('.box-product').masonry({
+			columnWidth: <?php echo $thumb_width + 72; ?>,
+			isFitWidth: true,
+			itemSelector: '.product-grid > div'
+		});
+	}, 100);
 });
 </script>
