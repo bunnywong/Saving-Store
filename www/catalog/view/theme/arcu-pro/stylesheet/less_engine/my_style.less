@@ -542,41 +542,49 @@
 			border-bottom: 3px solid @gray!important;
 			padding-bottom: 15px!important;
 		}
+		.price{}
+		.discount{
+			margin-top: 10px!important; height: 20px;
+		}
 		.description{}
 
 		.cart > div:first-child{	// Add to cart btn container
 			border-bottom: 0px!important;
 		}
-		.btn_qty_wrapper{
-			width: 50px;
-			display: inline-block;
-			text-align: center;
-			position: relative;
-			top: 15px;
-			.btn{
-				display: inline-block;
-				font-size: 20px;
-				cursor: pointer;
-				border: 1px solid @white;
-				color: @white;
-				background-color: @gray;
-				margin: 0px!important;
-				border-radius: 5px;
-                min-width: 50px;
-			}
-			.btn:hover{
-				color: @black;
-				background-color: @yellow;
-			}
-			.btn:active{
-				border: 1px solid transparent;
-				position: relative;
-				top: 2px;
-			}
-			.btn:visited{
+		.qty_container{
+			margin-top: -20px!important;
 
-			}
-		}// !.btn_qty_wrapper
+			.btn_qty_wrapper{
+				width: 50px;
+				display: inline-block;
+				text-align: center;
+				position: relative;
+				top: 15px;
+				.btn{
+					display: inline-block;
+					font-size: 20px;
+					cursor: pointer;
+					border: 1px solid @white;
+					color: @white;
+					background-color: @gray;
+					margin: 0px!important;
+					border-radius: 5px;
+	                min-width: 50px;
+				}
+				.btn:hover{
+					color: @black;
+					background-color: @yellow;
+				}
+				.btn:active{
+					border: 1px solid transparent;
+					position: relative;
+					top: 2px;
+				}
+				.btn:visited{
+
+				}
+			}// !.btn_qty_wrapper
+		}
 
 		// ----- ----- ----- ----- -----
 

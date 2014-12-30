@@ -26,9 +26,10 @@
   <br />
 </div>
 <div id="login" class="right">
+  <h2>舊客户</h2>
   <div>
     <span>GOON 或 Suzuran 註冊用戶首次到訪？
-      <br />請<a href="#"><strong>按此</strong></a>設定新密碼</span>
+      <br />請<a href="/index.php?route=account/returnuser"><strong>按此</strong></a>設定新密碼</span>
   </div>
 
   <div class="hidden">

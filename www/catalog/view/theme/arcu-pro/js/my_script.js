@@ -82,7 +82,11 @@
 
 		if(localStorage.getItem('lightbox') == null){
 
-			var str = '<h1 style="vertical-align: top;">舊網站用戶？<img src="/image/data/login/old_website.png" style="max-width: 300px; margin-left: 200px;"></h1>';
+			var str = '<h1 style="vertical-align: top;">舊網站用戶？</h1>';
+			str += '<div>';
+			str += '<img src="/image/data/login/old_website_goon.png" style="max-height: 150px; margin-right: 20px;">';
+			str += '<img src="/image/data/login/old_website_suzuran.png" style="max-height: 150px;">';
+			str += '</div>';
 			str += '<form action="http://savingstore.com.hk/index.php?route=account/returnuser" method="post" enctype="multipart/form-data" class="returnuser"><p>請輸入您註冊賬戶時填寫的電子郵件地址以及重設密碼，點擊繼續。<br>於電郵信箱開啟連結，你的賬戶將會重新開通</p><div class="content"><table class="form"><tbody><tr><td>郵箱地址：</td><td><input type="text" name="email" value=""></td></tr><tr><td>設定新密碼：</td><td><input type="password" name="password" value=""></td></tr><tr><td>設定新密碼（確認輸入）：</td><td><input type="password" name="password2" value=""></td></tr></tbody></table></div><div class="buttons"><div class="left"></div><div class="right"><input type="submit" value="繼續" class="button"></div></div></form>';
 
 			$( "body" ).append('<div class="lightbox_wrapper"><div class="lightbox"><span class="cross"></span>'+ str +'</div></div>').end();
@@ -252,14 +256,14 @@
 				var my_row_0 = '';
 
 				if( selected_index == 1 ){
-					$('table tr:[sort="a66"]')
-						.slideUp('fast');
 					$('table tr:[sort="a65"]')
+						.slideUp('fast');
+					$('table tr:[sort="a66"]')
 						.fadeIn('slow');
 				}else{
-					$('table tr:[sort="a65"]')
-						.slideUp('fast');
 					$('table tr:[sort="a66"]')
+						.slideUp('fast');
+					$('table tr:[sort="a65"]')
 						.fadeIn('slow');
 				}
 			});
@@ -305,7 +309,7 @@
 
 			// Tip
 		$('table tr[sort="a27"] td:first-child')
-			.html('<span class="required">*</span> 驗証碼 (請輪入數字：' + rand + ')');
+			.html('<span class="required">*</span> 驗証碼 :（你的驗証碼是 <strong>' + rand + '</strong> ）');
 			// Clear field for error return
 		$('table tr[sort="a27"] td:last-child input').val('');
 

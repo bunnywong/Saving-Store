@@ -80,11 +80,13 @@
 					<span class="reward"><?php echo $text_points; ?> <?php echo $points; ?></span>
 					<?php } ?>
 					<?php if ($discounts) { ?>
+
 					<p class="discount">
 						<?php foreach ($discounts as $discount) { ?>
 						<?php echo sprintf($text_discount, $discount['quantity'], $discount['price']); ?><br />
 						<?php } ?>
 					</p>
+
 					<?php } ?>
 				</div>
 				<?php } ?>
@@ -92,26 +94,31 @@
 					<?php if ($manufacturer) { ?>
 					<span><?php echo $text_manufacturer; ?></span><?php echo $manufacturer; ?><br />
 					<?php } ?>
-					<span><?php echo $text_model; ?></span> <?php echo $model; ?><br />
+					<span>產品編號<?php //echo $text_model; ?></span> <?php echo $model; ?><br />
 <!--
 					<?php if ($reward) { ?>
 					<span><?php echo $text_reward; ?></span> <?php echo $reward; ?><br />
 					<?php } ?>
 -->
-					<span><?php echo $text_stock; ?></span> <?php echo $stock; ?><br />
-					<span><?php echo $text_qty; ?></span>
-					<input id="qty_box" type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
-					<div class="btn_qty_wrapper">
-						<button class="btn add">+</button>
-						<button class="btn less">-</button>
-					</div>
+					<span class="short_description_title">產品簡介：</span>
+					<pre class="short_description"><?php echo $meta_description; ?></pre><br />
 
-					<input type="hidden" name="product_id" size="4" value="<?php echo $product_id; ?>" />
-					<?php if ($minimum > 1) { ?>
-					<div class="minimum"><?php echo $text_minimum; ?></div>
-					<?php } ?>
-					<br /><span class="short_description_title">產品簡介：</span>
-					<pre class="short_description"><?php echo $meta_description; ?></pre>
+					<span class="qty_container">
+						<span><?php echo $text_qty; ?></span>
+						<input id="qty_box" type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
+						<div class="btn_qty_wrapper">
+							<button class="btn add">+</button>
+							<button class="btn less">-</button>
+						</div>
+						<input type="hidden" name="product_id" size="4" value="<?php echo $product_id; ?>" />
+						<?php if ($minimum > 1) { ?>
+						<div class="minimum"><?php echo $text_minimum; ?></div>
+						<?php } ?>
+					</span>
+
+					<br />
+					<span><?php echo $text_stock; ?></span> <?php echo $stock; ?>
+
 				</div>
 				<?php if ($profiles): ?>
 				<div class="option">

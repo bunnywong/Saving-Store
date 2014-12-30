@@ -55,7 +55,7 @@
 	        </span>
 	    </div>
 		<a href="<?= $base; ?>index.php?route=account/account">
-	    	<button class="half-btn-left">編輯資料</button>
+	    	<button class="half-btn-left">會員資料</button>
 	    </a>
 	    <a href="<?= $base; ?>index.php?route=account/logout">
 	    	<button class="half-btn-right">登出</button>

@@ -159,7 +159,7 @@
             </span>
         </div>
         <div class="div-con-goon">
-            <div class="half-left-goon padding_adjust pointer" onclick="edit_info()">編輯資料</div>
+            <div class="half-left-goon padding_adjust pointer" onclick="edit_info()">會員資料</div>
             <div class="half-right-goon padding_adjust pointer logout" onclick="logout()">登出</div>
         </div>
     </div>

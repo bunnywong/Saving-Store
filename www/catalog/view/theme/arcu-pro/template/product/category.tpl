@@ -15,6 +15,7 @@
 	  		$thumb_height = $this->config->get('config_image_product_height');
 		?>
 		<div class="box-product product-grid grid-layout">
+		<!--
 			<div class="category-info" style="width: <?php echo ($thumb_width + 52) * 2 + 20; ?>px">
 				<?php if ($thumb) { ?>
 				<div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
@@ -50,6 +51,8 @@
 					</div>
 				</div>
 			</div>
+		-->
+
 			<?php if ($products) { ?>
 			<?php foreach ($products as $product) { ?>
 			<div class="products" style="width: <?php echo $thumb_width + 52; ?>px">
