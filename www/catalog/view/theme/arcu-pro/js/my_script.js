@@ -40,6 +40,22 @@
 			$('input.mtz-monthpicker-widgetcontainer').val('N/A');
 		});
 	}
+
+	$.fn.zh_order_status = function(){
+		$(this).each(function(){
+			var status = $(this).text();
+//			console.log(status);
+			if( status != 'Canceled' & status != 'Complete' && status != 'Pending' && status != '' )
+				$(this).remove();
+
+			if( status == 'Canceled' )
+				$(this).text('已取消');
+			if( status == 'Complete' )
+				$(this).text('已完成');
+			if( status == 'Pending' )
+				$(this).text('處理中');
+		});
+	}// !$.fn.zh_order_status
 	// --------------------------------------------------
 	// Fn. By page
 
@@ -52,6 +68,13 @@
 			$(this).owner();
 
 	}// !$.fn.backend
+
+	$.fn.owner = function(){
+		$('#sale > ul > li:nth-child(4)').click(function(){
+			var url = $(this).find('ul > li:first-child > a').attr('href');
+			window.location = url;
+		});
+	}// !$.fn.owner
 
 	$.fn.admin_order_detail = function(){
 
@@ -71,12 +94,25 @@
 
 	}// !$.fn.admin_order_detail
 
-	$.fn.owner = function(){
-		$('#sale > ul > li:nth-child(4)').click(function(){
-			var url = $(this).find('ul > li:first-child > a').attr('href');
-			window.location = url;
-		});
+	$.fn.admin_sale_order = function(){
+
+		$('select[name="filter_order_status_id"] option').zh_order_status();
+
 	}
+
+	$.fn.admin_sale_order_form = function(){
+
+		$('select[name="order_status_id"] option').zh_order_status();
+
+	}// !$.fn.admin_sale_order_form
+
+	$.fn.admin_sale_order_info = function(){
+
+		$('select[name="order_status_id"] option').zh_order_status();
+
+	}// !$.fn.admin_sale_order_form
+
+
 
 	$.fn.sidebar = function() {
 
@@ -402,6 +438,15 @@ $(function () {
 
 		if( $('body').hasClass('admin_order_detail') )
 			$(this).admin_order_detail();
+
+		if( $('body').hasClass('admin_sale_order') )
+			$(this).admin_sale_order();
+
+			if( $('body').hasClass('admin_sale_order_form') )
+				$(this).admin_sale_order_form();
+
+			if( $('body').hasClass('admin_sale_order_info') )
+				$(this).admin_sale_order_info();
 
 		// ----- ----- ----- ----- -----
 		// Public

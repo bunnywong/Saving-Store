@@ -137,7 +137,7 @@
 				<?php foreach ($histories as $history) { ?>
 				<tr>
 					<td class="left"><?php echo $history['date_added']; ?></td>
-					<td class="left"><?php echo $history['status']; ?></td>
+					<td class="left"><?php echo zh_order_status($history['status']); ?></td>
 					<td class="left"><?php echo $history['comment']; ?></td>
 				</tr>
 				<?php } ?>

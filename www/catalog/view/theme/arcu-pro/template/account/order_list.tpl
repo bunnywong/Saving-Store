@@ -41,7 +41,7 @@
 					<!--
 						<td><?php echo $order['products']; ?></td>
 					-->
-						<td class="order-status"><?php echo $order['status']; ?> <a href="<?php echo $order['href']; ?>"><img src="catalog/view/theme/arcu-pro/image/icons/info.png" alt="<?php echo $button_view; ?>" title="<?php echo $button_view; ?>" /></a>
+						<td class="order-status"><?php echo zh_order_status($order['status']); ?> <a href="<?php echo $order['href']; ?>"><img src="catalog/view/theme/arcu-pro/image/icons/info.png" alt="<?php echo $button_view; ?>" title="<?php echo $button_view; ?>" /></a>
 						<!--
 							<a href="<?php echo $order['reorder']; ?>">
 								<img src="catalog/view/theme/arcu-pro/image/icons/reorder.png" alt="<?php echo $button_reorder; ?>" title="<?php echo $button_reorder; ?>" />
