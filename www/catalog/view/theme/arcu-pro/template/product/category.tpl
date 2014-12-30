@@ -3,6 +3,28 @@
 	$('body').addClass('list_view');
 </script>
 
+<div class="my_banner">
+	<?php
+		$this->language->load('information/information');
+
+	    $this->load->model('catalog/information');
+
+	    // Hardcode Section :D
+	    if( $_GET['path'] = 59 )
+	  		$information_id 	= 14;
+
+		if( $_GET['path'] = 60 )
+	  		$information_id 	= 15;
+
+		$information_info	= $this->model_catalog_information->getInformation($information_id);
+//		$this->data['info_heading_title'] = $information_info['title'];
+		if( count($information_info) > 0 ){
+			$my_banner = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+			echo $my_banner;
+		}
+	?>
+</div>
+
 <div id="content" class="category-page"><?php echo $content_top; ?>
 	<div class="box">
 		<div class="breadcrumb">
