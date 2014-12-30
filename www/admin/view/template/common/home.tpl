@@ -101,7 +101,7 @@
               <tr>
                 <td class="right"><?php echo $order['order_id']; ?></td>
                 <td class="left"><?php echo $order['customer']; ?></td>
-                <td class="left"><?php echo $order['status']; ?></td>
+                <td class="left"><?php echo zh_order_status($order['status']); ?></td>
                 <td class="left"><?php echo $order['date_added']; ?></td>
                 <td class="right"><?php echo $order['total']; ?></td>
                 <td class="right"><?php foreach ($order['action'] as $action) { ?>
@@ -123,8 +123,8 @@
 </div>
 <!--[if IE]>
 <script type="text/javascript" src="view/javascript/jquery/flot/excanvas.js"></script>
-<![endif]--> 
-<script type="text/javascript" src="view/javascript/jquery/flot/jquery.flot.js"></script> 
+<![endif]-->
+<script type="text/javascript" src="view/javascript/jquery/flot/jquery.flot.js"></script>
 <script type="text/javascript"><!--
 function getSalesChart(range) {
 	$.ajax({
@@ -133,16 +133,16 @@ function getSalesChart(range) {
 		dataType: 'json',
 		async: false,
 		success: function(json) {
-			var option = {	
+			var option = {
 				shadowSize: 0,
-				lines: { 
+				lines: {
 					show: true,
 					fill: true,
 					lineWidth: 1
 				},
 				grid: {
 					backgroundColor: '#FFFFFF'
-				},	
+				},
 				xaxis: {
             		ticks: json.xaxis
 				}
@@ -154,5 +154,5 @@ function getSalesChart(range) {
 }
 
 getSalesChart($('#range').val());
-//--></script> 
+//--></script>
 <?php echo $footer; ?>
