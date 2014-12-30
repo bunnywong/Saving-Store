@@ -234,7 +234,8 @@
 		}, 1000);
 
 		// Delivery tel issue
-		$('table tr:[sort="a12"]').hide();
+		$('table tr:[sort="a12"]').hide()
+			.children('td').children('input').val(' ');
 
 		// Add title
 		$('table tr:[sort="a50"]')

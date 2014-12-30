@@ -4,16 +4,16 @@ $_['heading_title']                  = '結賬';
 
 // Text
 $_['text_cart']                      = '購物車';
-$_['text_checkout_option']           = '第 1 步： 結賬選項';
+$_['text_checkout_option']           = '第 1 步： 會員登入';
 $_['text_checkout_account']          = '第 2 步： 賬戶 &amp; 運單詳細';
 $_['text_checkout_payment_address']  = '第 2 步： 運單地址';
 // $_['text_checkout_shipping_address'] = '第 3 步： 貨運地址';
-$_['text_checkout_shipping_address'] = '第 2 步： 貨運地址';
+$_['text_checkout_shipping_address'] = '第 2 步： 送貨地址';
 // $_['text_checkout_shipping_method']  = '第 4 步： 貨運方式';
-$_['text_checkout_shipping_method']  = '第 3 步： 貨運方式';
+$_['text_checkout_shipping_method']  = '第 3 步： 運費及備註';
 $_['text_checkout_payment_method']   = '第 5 步： 支付方式';
 // $_['text_checkout_confirm']          = '第 6 步： 確認訂單';
-$_['text_checkout_confirm']          = '第 4 步： 確認訂單';
+$_['text_checkout_confirm']          = '第 4 步： 訂單確認';
 $_['text_modify']                    = '更新 &raquo;';
 $_['text_new_customer']              = '新客戶';
 $_['text_returning_customer']        = '註冊用戶';
@@ -33,7 +33,7 @@ $_['text_your_password']             = '我的密碼';
 $_['text_agree']                     = '我已經閱讀並同意 <a class="colorbox" href="%s" alt="%s"><b>%s</b></a> 條款';
 $_['text_address_new']               = '添加一個新地址';
 $_['text_address_existing']          = '使用現存地址';
-$_['text_shipping_method']           = '請選擇一個貨運方式。';
+$_['text_shipping_method']           = '只要購物滿$500, 即可免運費';
 $_['text_payment_method']            = '請選擇一個支付方式。';
 $_['text_comments']                  = '添加訂單備註';
 
