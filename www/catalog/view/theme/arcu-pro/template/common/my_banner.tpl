@@ -7,7 +7,7 @@
 	  	$information_id 	= 10;	// Hardcode :D
 		$information_info	= $this->model_catalog_information->getInformation($information_id);
 	//		$this->data['info_heading_title'] = $information_info['title'];
-		if( count($information_info) > 0 ){
+		if( count($information_info) > 0 && $this->customer->getEmail() == '' ){
 			$my_banner = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
 			echo $my_banner;
 		}

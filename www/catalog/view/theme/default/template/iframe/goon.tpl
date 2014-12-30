@@ -107,9 +107,11 @@
         width: 50px;
         font-size: 15px;
         display: inline-block;
+        color:blueviolet;
     }
     .user-mail-goon{
         font-size: 15px;
+        color:blueviolet;
     }
 </style>
 
