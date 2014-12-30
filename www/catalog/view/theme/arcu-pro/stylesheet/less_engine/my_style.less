@@ -753,10 +753,26 @@
 				border-bottom: 1px solid @gray;
 				height: 36px;
 			}
+			.shipping-address-existing{	// 使用現存地址
+				height: 40px;
+				width: 400px!important;
+			}
+			.shipping-address-new{		// 添加一個新地址
+				width: 400px!important;
+			}
 			.xten input:checked +label{		// Checked item
+				background-color: transparent;
+				color: @black;
+			}
+			input#shipping-address-existing +label,
+			input#shipping-address-new +label{
+				height: 40px;
+				width: 400px;
+			}
+			input#shipping-address-existing:checked +label,
+			input#shipping-address-new:checked +label{
 				background-color: @green;
 				color: @white;
-				border: 1px solid @yellow;
 			}
 			.xten label{
 				background-color: transparent;
@@ -764,12 +780,19 @@
 			.xten label:hover{
 				color: @black;
 			}
+			.radio_shipping_address{
+				display: inline-block!important;
+				margin: 10px 10px 0px 0px;
+				float: left;
+			}
 
 			select[name="country_id"]{
 				background: lightgray;
 				cursor: not-allowed;
 			}
-		}
+
+		}// !#shipping-address
+
 
 	}// !body.checkout
 

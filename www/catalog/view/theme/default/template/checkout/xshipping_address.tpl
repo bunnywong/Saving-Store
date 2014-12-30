@@ -25,14 +25,14 @@
   <tr >
   <?php if ($address['address_id'] == $address_id) { ?>
   	<td>
-  		<input id="s-<?php echo $address['address_id']; ?>" type="radio" name="saddress_id" value="<?php echo $address['address_id']; ?>" checked="checked"/>
+  		<input id="s-<?php echo $address['address_id']; ?>" class="radio_shipping_address" type="radio" name="saddress_id" value="<?php echo $address['address_id']; ?>" checked="checked"/>
   		<label for="s-<?php echo $address['address_id']; ?>">
   			<?php echo $address['address']; ?>
   		</label>
   	</td>
   <?php }else{?>
   	<td>
-  		<input id="s-<?php echo $address['address_id']; ?>" type="radio" name="saddress_id" value="<?php echo $address['address_id']; ?>" />
+  		<input id="s-<?php echo $address['address_id']; ?>" class="radio_shipping_address"  type="radio" name="saddress_id" value="<?php echo $address['address_id']; ?>" />
   		<label for="s-<?php echo $address['address_id']; ?>">
   			<?php echo $address['address']; ?>
   		</label>
