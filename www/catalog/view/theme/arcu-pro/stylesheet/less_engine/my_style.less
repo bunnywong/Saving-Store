@@ -599,9 +599,11 @@
 			transition: background-color 0.3s linear;
 			-moz-transition: background-color 0.3s linear;
 			-webkit-transition: background-color 0.3s linear;
-			span {
+			span.icon-basket-light{
+				background: url(../image/icons/icon-basket-light.png) left 1px no-repeat;
 				position: relative;
 				top: -1px;
+				opacity: 0;
 			}
 		}
 		#buy_and_checkout:before {
@@ -617,8 +619,11 @@
 			-webkit-transition: 0.3s ease;
 		}
 		#buy_and_checkout:hover {
-			background-color: rgba(68, 68, 68, 1);
+			background-color: transparent;
 			opacity: 1;
+			span.icon-basket-light{
+				opacity: 1;
+			}
 		}
 		#buy_and_checkout:hover:before {
 			left: 100%;
