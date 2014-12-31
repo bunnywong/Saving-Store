@@ -80,13 +80,13 @@
 					<span class="reward"><?php echo $text_points; ?> <?php echo $points; ?></span>
 					<?php } ?>
 					<?php if ($discounts) { ?>
-
+<!--
 					<p class="discount">
 						<?php foreach ($discounts as $discount) { ?>
 						<?php echo sprintf($text_discount, $discount['quantity'], $discount['price']); ?><br />
 						<?php } ?>
 					</p>
-
+-->
 					<?php } ?>
 				</div>
 				<?php } ?>
