@@ -22,7 +22,7 @@
 			&nbsp;(<?php echo $weight; ?>)
 			<?php } ?>
 		</h1>
-		<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+		<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" class="tbl_cart">
 			<div class="cart-info">
 				<table class="list">
 					<thead>
@@ -54,10 +54,10 @@
 								<?php if ($product['option']) { ?>
 								<div>
 									<?php foreach ($product['option'] as $option) { ?>
-									- <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
+									<small>（套裝優惠）<?php //echo $option['name']; ?><?php //echo $option['value']; ?></small><br />
 									<?php } ?>
 									<?php if($product['recurring']): ?>
-									- <small><?php echo $text_payment_profile ?>: <?php echo $product['profile_name'] ?></small>
+									- <small><?php echo $text_payment_profile ?><?php echo $product['profile_name'] ?></small>
 									<?php endif; ?>
 								</div>
 								<?php } ?>
@@ -66,9 +66,9 @@
 									<?php } ?>
 								</div></td>
 							<td class="model"><?php echo $product['model']; ?></td>
-							<td class="quantity"><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
+							<td class="quantity"><input type="text" class="qty" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
 								&nbsp;
-								<input type="image" src="catalog/view/theme/arcu-pro/image/icons/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
+								<input type="image" class="img_update" src="catalog/view/theme/arcu-pro/image/icons/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
 								&nbsp;<a href="<?php echo $product['remove']; ?>"><img src="catalog/view/theme/arcu-pro/image/icons/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
 							<td class="price"><?php echo $product['price']; ?></td>
 							<td class="total"><?php echo $product['total']; ?></td>
