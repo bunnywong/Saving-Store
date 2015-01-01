@@ -342,7 +342,9 @@ class ControllerProductProduct extends Controller {
 			}
 
 			$this->data['options'] = array();
-
+/*echo '<pre>';
+echo var_dump($this->model_catalog_product->getProductOptions($this->request->get['product_id']));
+echo '</pre>';*/
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
 				if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') {
 					$option_value_data = array();
@@ -361,7 +363,8 @@ class ControllerProductProduct extends Controller {
 								'name'                    => $option_value['name'],
 								'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
 								'price'                   => $price,
-								'price_prefix'            => $option_value['price_prefix']
+								'price_prefix'            => $option_value['price_prefix'],
+								'offer_package_qty'       => $option_value['quantity']
 							);
 						}
 					}
@@ -372,7 +375,7 @@ class ControllerProductProduct extends Controller {
 						'name'              => $option['name'],
 						'type'              => $option['type'],
 						'option_value'      => $option_value_data,
-						'required'          => $option['required']
+						'required'          => $option['required'],
 					);
 				} elseif ($option['type'] == 'text' || $option['type'] == 'textarea' || $option['type'] == 'file' || $option['type'] == 'date' || $option['type'] == 'datetime' || $option['type'] == 'time') {
 					$this->data['options'][] = array(

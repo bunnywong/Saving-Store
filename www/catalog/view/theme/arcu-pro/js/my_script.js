@@ -27,6 +27,33 @@
 	    return false;
 	}
 
+	function do_package(){
+		// var offer_package_qty set from product.tpl
+
+		var ttl_purchase = $('#qty_box').val();
+		var no_package_qty = ttl_purchase % offer_package_qty;
+
+		if( offer_package_qty <= ttl_purchase && offer_package_qty != 0 ){
+			// 1.1 Package handle
+			var do_offer_package_qty = ttl_purchase - no_package_qty;
+
+			$('.options input').prop('checked', true);
+			$('#qty_box').val(do_offer_package_qty);
+			add2cart();
+
+			// 1.2 Mod handle
+			if( no_package_qty > 0 ){
+				$('.options input').prop('checked', false);
+				$('#qty_box').val(no_package_qty);
+				add2cart();
+			}
+		}else{
+			// 2. No package issue
+			$('.options input').prop('checked', false);
+			add2cart();
+		}
+	}// !do_package()
+
 	// --------------------------------------------------
 	// Fn. By module
 	$.fn.district = function(){
@@ -135,7 +162,6 @@
 	}// !$.fn.admin_sale_order_form
 
 
-
 	$.fn.sidebar = function() {
 
 		if(localStorage.getItem('lightbox') == null){
@@ -184,7 +210,7 @@
 				window.location = 'index.php?route=account/register';
 			}
 		});
-	}
+	}// $.fn.sidebar
 	// ---------- ---------- ---------- ---------- ----------
 	// iFrame handle
 	// Cookie ref: https://github.com/carhartl/jquery-cookie
@@ -221,6 +247,22 @@
 	}// !$.fn.account_account
 
 	// ---------- ---------- ---------- ---------- ----------
+
+	$.fn.cart = function() {
+
+		$('.tbl_cart td.name small').each(function(){
+			var offer_text = '（套裝優惠）';
+
+			if( $(this).text() == offer_text ){
+				$(this).parent().parent().next().next()
+					.find('.img_update').hide().end()
+					.find('.qty')
+						.css({'margin-right': '19px'})
+						.prop('disabled', 'disabled');
+			}
+		});
+
+	}// !$.fn.cart
 
 	$.fn.list_view = function() {
 
@@ -270,17 +312,18 @@
 
 		});
 		// ----- ----- ----- ----- -----
-		// Click to buy + checkout
+		// Click to buy
+		$('#button-cart').click(function(){
+			do_package();
+		});
 
+		//  + checkout
 		$('#buy_and_checkout').click(function(){
-			$('#button-cart').trigger('click');
+			do_package();
+
 			setTimeout(function(){
 				window.location = 'index.php?route=checkout/checkout';
 			},  1000)
-		});
-
-		$('#buy_and_checkout').mouseover(function(){
-//			$(this).children('span').trigger('');
 		});
 
 	}// !$.fn.detail_view
@@ -477,6 +520,9 @@ $(function () {
 		// Public
 
 		$('body').sidebar();
+
+		if( $('body').hasClass('cart') )
+			$(this).cart();
 
 		if( $('body').hasClass('list_view') )
 			$(this).list_view();

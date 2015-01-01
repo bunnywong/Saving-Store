@@ -1,5 +1,10 @@
 <?php echo $header; ?>
-<script>$('body').addClass('detail_view');</script>
+
+<script>
+	$('body').addClass('detail_view');
+	var offer_package_qty  = 0;
+</script>
+
 <?php echo $column_left; ?><?php echo $column_right; ?>
 
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/detail_view.css" />
@@ -80,13 +85,13 @@
 					<span class="reward"><?php echo $text_points; ?> <?php echo $points; ?></span>
 					<?php } ?>
 					<?php if ($discounts) { ?>
-<!--
+
 					<p class="discount">
 						<?php foreach ($discounts as $discount) { ?>
 						<?php echo sprintf($text_discount, $discount['quantity'], $discount['price']); ?><br />
 						<?php } ?>
 					</p>
--->
+
 					<?php } ?>
 				</div>
 				<?php } ?>
@@ -177,6 +182,13 @@
 						</div>
 					</div>
 					<?php } ?>
+
+<script>
+<?php
+	echo 'offer_package_qty ="'. $option['option_value'][0]['offer_package_qty'].'"';
+?>
+</script>
+
 					<?php if ($option['type'] == 'checkbox') { ?>
 					<div id="option-<?php echo $option['product_option_id']; ?>" class="option multi">
 						<?php if ($option['required']) { ?>
@@ -458,7 +470,8 @@ $('select[name="profile_id"], input[name="quantity"]').change(function(){
 });
 
 var _productCartTimer;
-$('#button-cart').bind('click', function() {
+
+function add2cart(){
 	clearTimeout(_productCartTimer);
 
 	$.ajax({
@@ -496,7 +509,8 @@ $('#button-cart').bind('click', function() {
 			}
 		}
 	});
-});
+}// !add2cart
+
 //--></script>
 <?php if ($options) { ?>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ajaxupload.js"></script>
