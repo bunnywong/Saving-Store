@@ -1188,7 +1188,7 @@ function addOptionValue(option_row) {
 	html += '    </select></td>';
 	html += '    <td class="right"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price_prefix]">';
 	html += '      <option value="+">+</option>';
-	html += '      <option value="-">-</option>';
+	html += '      <option value="-" selected="selected">-</option>';
 	html += '    </select>';
 	html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price]" value="" size="5" /></td>';
 	html += '    <td class="right"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points_prefix]">';
