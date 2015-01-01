@@ -159,8 +159,7 @@
 
 		$('select[name="order_status_id"] option').zh_order_status();
 
-	}// !$.fn.admin_sale_order_form
-
+	}// !$.fn.admin_sale_order_info
 
 	$.fn.sidebar = function() {
 

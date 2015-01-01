@@ -361,6 +361,7 @@
             <a href="#tab-option-<?php echo $option_row; ?>" id="option-<?php echo $option_row; ?>"><?php echo $product_option['name']; ?>&nbsp;<img src="view/image/delete.png" alt="" onclick="$('#option-<?php echo $option_row; ?>').remove(); $('#tab-option-<?php echo $option_row; ?>').remove(); $('#vtabs a:first').trigger('click'); return false;" /></a>
             <?php $option_row++; ?>
             <?php } ?>
+            <span class="tips">加入優惠裝選項：<br>請於以下輸入『Checkbox』及點選</span>
             <span id="option-add">
             <input name="option" value="" style="width: 130px;" />
             &nbsp;<img src="view/image/add.png" alt="<?php echo $button_add_option; ?>" title="<?php echo $button_add_option; ?>" /></span></div>
@@ -372,7 +373,7 @@
             <input type="hidden" name="product_option[<?php echo $option_row; ?>][name]" value="<?php echo $product_option['name']; ?>" />
             <input type="hidden" name="product_option[<?php echo $option_row; ?>][option_id]" value="<?php echo $product_option['option_id']; ?>" />
             <input type="hidden" name="product_option[<?php echo $option_row; ?>][type]" value="<?php echo $product_option['type']; ?>" />
-            <table class="form">
+            <table class="form required">
               <tr>
                 <td><?php echo $entry_required; ?></td>
                 <td><select name="product_option[<?php echo $option_row; ?>][required]">
@@ -1061,12 +1062,12 @@ $('input[name=\'option\']').catcomplete({
 		html += '	<input type="hidden" name="product_option[' + option_row + '][name]" value="' + ui.item.label + '" />';
 		html += '	<input type="hidden" name="product_option[' + option_row + '][option_id]" value="' + ui.item.value + '" />';
 		html += '	<input type="hidden" name="product_option[' + option_row + '][type]" value="' + ui.item.type + '" />';
-		html += '	<table class="form">';
+		html += '	<table class="form required">';
 		html += '	  <tr>';
 		html += '		<td><?php echo $entry_required; ?></td>';
 		html += '       <td><select name="product_option[' + option_row + '][required]">';
 		html += '	      <option value="1"><?php echo $text_yes; ?></option>';
-		html += '	      <option value="0"><?php echo $text_no; ?></option>';
+		html += '	      <option value="0" selected="selected"><?php echo $text_no; ?></option>';
 		html += '	    </select></td>';
 		html += '     </tr>';
 
@@ -1146,7 +1147,7 @@ $('input[name=\'option\']').catcomplete({
 
 		$('#tab-option').append(html);
 
-		$('#option-add').before('<a href="#tab-option-' + option_row + '" id="option-' + option_row + '">' + ui.item.label + '&nbsp;<img src="view/image/delete.png" alt="" onclick="$(\'#option-' + option_row + '\').remove(); $(\'#tab-option-' + option_row + '\').remove(); $(\'#vtab-option a:first\').trigger(\'click\'); return false;" /></a>');
+		$('#option-add').before('<a href="#tab-option-' + option_row + '" id="option-' + option_row + '">' + ui.item.label + '&nbsp;<img src="view/image/delete.png" alt="" onclick="$(\'#option-' + option_row + '\').remove(); $(\'#tab-option-' + option_row + '\').remove(); $(\'#vtab-option a:first\').trigger(\'click\'); $(\'.owner #option-add\').fadeIn().children().select();  return false;" /></a>');
 
 		$('#vtab-option a').tabs();
 
@@ -1161,6 +1162,8 @@ $('input[name=\'option\']').catcomplete({
 		$('.time').timepicker({timeFormat: 'h:m'});
 
 		option_row++;
+
+    $('.owner #option-add').hide();
 
 		return false;
 	},

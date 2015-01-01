@@ -329,7 +329,6 @@
 
 	body.admin_catalog_product_form{
 		#tabs a:nth-child(4),	// tab > 屬性
-		#tabs a:nth-child(5),	// 選項設定
 		#tabs a:nth-child(6),	// 分期付款
 		#tabs a:nth-child(7),	// 促銷活動
 		#tabs a:nth-child(8),	// 優惠價格
@@ -357,7 +356,14 @@
 		#tab-data > table > tbody > tr:nth-child(21),	// 重  量
 		#tab-data > table > tbody > tr:nth-child(22),	// 重量單位
 
-		#tab-links > table > tbody > tr:nth-child(n+3)	// tab 鏈接
+		#tab-links > table > tbody > tr:nth-child(n+3),	// tab 鏈接
+			.form.required,
+			.vtabs-content .list tr td:first-child,		//   商品數量
+			.vtabs-content .list tr td:nth-child(3),	//   扣減庫存
+			.vtabs-content .list tr td:nth-child(5),	//   積分
+			.vtabs-content .list tr td:nth-child(6),	//   重量
+			.vtabs-content .list tbody:nth-child(2) tr td:nth-child(4) select	// [ - ]
+				//   [ - ]
 		{
 			.admin_io;
 		}
@@ -370,6 +376,11 @@
 		}
 		textarea{
 			.textarea;
+		}
+
+		.tips{
+			text-align: left;
+			font-weight: normal;
 		}
 	}// !admin_catalog_product_form	| Tab 1.2 商品管理
 
@@ -528,7 +539,7 @@
 	body.detail_view{
 		.review,
 		.cart > div:last-child,	// [add2wish][add2compare][shareThis]
-		#tabs > a:nth-child(2)	// [Reviews]
+		#tabs > a:nth-child(2),	// [Reviews]
 //		.options				// option
 			{display: none!important;}
 
