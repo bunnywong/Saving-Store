@@ -464,7 +464,10 @@
 			.find('tr:[sort="a1"] select')		// [ 稱謂 ]
 				.hide()
 				.before(function(){
-					return  $(this).children('option:selected').text();
+					var str = $.trim($(this).children('option:selected').text());
+					if( str == '--- 請選擇 ---' )
+						str = '';
+					return  str;
 				}).end()
 
 			.find('tr:[sort="a10"] input')		// [ 姓名 ]
