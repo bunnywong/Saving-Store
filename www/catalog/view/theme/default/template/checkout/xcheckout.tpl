@@ -8,6 +8,15 @@
 			});
 	}// !step3and4_hide_hk()
 
+	function do_valid_address(){
+		if( $('#shipping-existing > .xten label').length == 1 && $.trim($('#shipping-existing > .xten label').text()) == 'Hong Kong'){
+			$('#shipping-existing > .xten label').parent().hide();
+			$('#button-shipping-address').hide();
+		}else{
+			$('#button-shipping-address').fadeIn();
+		}
+	}// !do_valid_address()
+
 	$(document).ready(function() {
 		$('body').addClass('checkout');
 	});
@@ -108,17 +117,6 @@ $(document).ready(function() {
 			// My Script: Skip step 2
 			$('#button-payment-address').trigger('click');
 
-			// ----- ----- ----- ----- -----
-			// Address handle
-			function do_valid_address(){
-				if( $('#shipping-existing > .xten label').length == 1 && $.trim($('#shipping-existing > .xten label').text()) == 'Hong Kong'){
-					$('#shipping-existing > .xten label').parent().hide();
-					$('#button-shipping-address').hide();
-				}else{
-					$('#button-shipping-address').fadeIn();
-				}
-			}// !do_valid_address()
-
 			// Existing Address
 			$('#shipping-address .xleft > .xten label, #shipping-address > .checkout-heading > a')
 				.click(function(){
@@ -132,7 +130,7 @@ $(document).ready(function() {
 					$('#button-shipping-address').fadeIn();
 				});
 
-			// Initial
+			// Address handle - Initial
 			do_valid_address();
 			// ----- ----- ----- ----- -----
 		},
