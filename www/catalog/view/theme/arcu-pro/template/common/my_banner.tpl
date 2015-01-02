@@ -77,4 +77,8 @@
 	<a href="<?= $base; ?>index.php?route=product/category&path=60">
 		<div id="sidebar-goon"></div>
 	</a>
+	<?php // Hardcode ^_^ ?>
+	<a href="<?= $base; ?>index.php?route=information/information&information_id=13">
+		<div id="sidebar-faq"></div>
+	</a>
 </div>
