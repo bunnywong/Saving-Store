@@ -1,6 +1,13 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
 
 <script>
+	function hide_hk(){	// For step 3 & 4
+		$('#shipping-existing > .xten label').each(function(){
+				if( $.trim($(this).text()) == 'Hong Kong' )
+					$(this).parent().hide();
+			});
+	}// !step3and4_hide_hk()
+
 	$(document).ready(function() {
 		$('body').addClass('checkout');
 	});
@@ -58,10 +65,12 @@ $('#checkout .checkout-content input[name=\'account\']').live('change', function
 	}
 });
 
+// My Script: btn.update
 $('.checkout-heading a').live('click', function() {
 	$('.checkout-content').slideUp('slow');
 
 	$(this).parent().parent().find('.checkout-content').slideDown('slow');
+	hide_hk();	// My Script
 });
 <?php if (!$logged) { ?>
 $(document).ready(function() {
@@ -96,7 +105,36 @@ $(document).ready(function() {
 
 			$('#payment-address .checkout-content').slideDown('slow');
 
-			$('#button-payment-address').trigger('click');	// My Script: Skip step 2
+			// My Script: Skip step 2
+			$('#button-payment-address').trigger('click');
+
+			// ----- ----- ----- ----- -----
+			// Address handle
+			function do_valid_address(){
+				if( $('#shipping-existing > .xten label').length == 1 && $.trim($('#shipping-existing > .xten label').text()) == 'Hong Kong'){
+					$('#shipping-existing > .xten label').parent().hide();
+					$('#button-shipping-address').hide();
+				}else{
+					$('#button-shipping-address').fadeIn();
+				}
+			}// !do_valid_address()
+
+			// Existing Address
+			$('#shipping-address .xleft > .xten label, #shipping-address > .checkout-heading > a')
+				.click(function(){
+					alert();
+					do_valid_address();
+				});
+
+			// Add Address
+			$('#shipping-address .xright > .xten label')
+				.click(function(){
+					$('#button-shipping-address').fadeIn();
+				});
+
+			// Initial
+			do_valid_address();
+			// ----- ----- ----- ----- -----
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -320,7 +358,6 @@ $('#button-register').live('click', function() {
 							$('#payment-address .checkout-content').slideUp('slow');
 
 							$('#shipping-address .checkout-content').slideDown('slow');
-
 							$('#checkout .checkout-heading a').remove();
 							$('#payment-address .checkout-heading a').remove();
 							$('#shipping-address .checkout-heading a').remove();
@@ -469,7 +506,9 @@ $('#button-payment-address').live('click', function() {
 						$('#payment-method .checkout-heading a').remove();
 
 						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
-//						$('#button-shipping-address').trigger('click');	// My Script: Skip step 3
+
+						// My Script: Skip step 3
+//						$('#button-shipping-address').trigger('click');
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -936,7 +975,9 @@ $('#button-shipping-method').live('click', function() {
 						$('#payment-method .checkout-heading a').remove();
 
 						$('#shipping-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
-						$('#button-payment-method').trigger('click');	// My Script: Skip step 5
+
+						// My Script: Skip step 5
+						$('#button-payment-method').trigger('click');
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
