@@ -506,6 +506,7 @@ $('#button-payment-address').live('click', function() {
 
 						// Initial
 						do_valid_address();
+						hide_hk();
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
