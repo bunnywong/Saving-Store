@@ -1,9 +1,9 @@
 <?php
 // Heading
-$_['heading_title']              = '商品管理';
+$_['heading_title']              = '商品管理'; 
 
 
-// Text
+// Text  
 $_['text_success']               = '成功： 您已成功更新商品！';
 $_['text_plus']                  = '+';
 $_['text_minus']                 = '-';
@@ -42,12 +42,12 @@ $_['entry_mpn']             		 = 'MPN:<br/><span class="help">製造商的零件
 $_['entry_location']             = '&nbsp;&nbsp;商品位置：';
 $_['entry_manufacturer']         = '&nbsp;&nbsp;商品品牌：';
 $_['entry_manufacturer']         = '商品品牌：<br /><span class="幫助">(自動完成)</span>';
-$_['entry_shipping']             = '&nbsp;&nbsp;要求配送：';
+$_['entry_shipping']             = '&nbsp;&nbsp;要求配送：'; 
 $_['entry_date_available']       = '&nbsp;&nbsp;供貨日期：';
-$_['entry_quantity']             = '&nbsp;&nbsp;優惠裝數量：';
+$_['entry_quantity']             = '&nbsp;&nbsp;商品數量：';
 $_['entry_minimum']              = '&nbsp;&nbsp;最小起訂量：<br/><span class="help">最小訂單數據</span>';
 $_['entry_stock_status']         = '&nbsp;&nbsp;庫存狀況：<br/><span class="help">顯示當一個產品沒有存貨時的狀態</span>';
-$_['entry_price']                = '&nbsp;&nbsp;優惠裝價格：';
+$_['entry_price']                = '&nbsp;&nbsp;銷售價格：';
 $_['entry_tax_class']            = '&nbsp;&nbsp;商品稅類：';
 $_['entry_points']               = '積分：<br/><span class="help">購買此商品所需積分。如果您不想讓客戶使用積分來購買此產品，請將值設為0。</span>';
 $_['entry_option_points']        = '積分：';

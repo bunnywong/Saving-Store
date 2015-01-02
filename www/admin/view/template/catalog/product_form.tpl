@@ -361,7 +361,7 @@
             <a href="#tab-option-<?php echo $option_row; ?>" id="option-<?php echo $option_row; ?>"><?php echo $product_option['name']; ?>&nbsp;<img src="view/image/delete.png" alt="" onclick="$('#option-<?php echo $option_row; ?>').remove(); $('#tab-option-<?php echo $option_row; ?>').remove(); $('#vtabs a:first').trigger('click'); return false;" /></a>
             <?php $option_row++; ?>
             <?php } ?>
-            <span class="tips">加入優惠裝選項：<br>請於以下輸入『Checkbox』及點選</span>
+            <span class="tips">加入優惠裝選項：<br>請於以下輸入『Package』及點選</span>
             <span id="option-add">
             <input name="option" value="" style="width: 130px;" />
             &nbsp;<img src="view/image/add.png" alt="<?php echo $button_add_option; ?>" title="<?php echo $button_add_option; ?>" /></span></div>
