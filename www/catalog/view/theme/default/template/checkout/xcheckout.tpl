@@ -9,6 +9,7 @@
 	}// !step3and4_hide_hk()
 
 	function do_valid_address(){
+		alert('do_valid_address');
 		if( $('#shipping-existing > .xten label').length == 1 && $.trim($('#shipping-existing > .xten label').text()) == 'Hong Kong'){
 			$('#shipping-existing > .xten label').parent().hide();
 			$('#button-shipping-address').hide();
@@ -116,23 +117,6 @@ $(document).ready(function() {
 
 			// My Script: Skip step 2
 			$('#button-payment-address').trigger('click');
-
-			// Existing Address
-			$('#shipping-address .xleft > .xten label, #shipping-address > .checkout-heading > a')
-				.click(function(){
-					alert();
-					do_valid_address();
-				});
-
-			// Add Address
-			$('#shipping-address .xright > .xten label')
-				.click(function(){
-					$('#button-shipping-address').fadeIn();
-				});
-
-			// Address handle - Initial
-			do_valid_address();
-			// ----- ----- ----- ----- -----
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -505,8 +489,24 @@ $('#button-payment-address').live('click', function() {
 
 						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
 
+						// This: 第 2 步： 送貨地址
 						// My Script: Skip step 3
 //						$('#button-shipping-address').trigger('click');
+
+						// Existing Address
+						$('#shipping-address .xleft > .xten label, #shipping-address > .checkout-heading > a')
+							.click(function(){
+								do_valid_address();
+							});
+
+						// Add Address
+						$('#shipping-address .xright > .xten label')
+							.click(function(){
+								$('#button-shipping-address').fadeIn();
+							});
+
+						// Initial
+						do_valid_address();
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
