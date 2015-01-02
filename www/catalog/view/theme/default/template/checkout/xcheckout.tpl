@@ -9,7 +9,6 @@
 	}// !step3and4_hide_hk()
 
 	function do_valid_address(){
-		alert('do_valid_address');
 		if( $('#shipping-existing > .xten label').length == 1 && $.trim($('#shipping-existing > .xten label').text()) == 'Hong Kong'){
 			$('#shipping-existing > .xten label').parent().hide();
 			$('#button-shipping-address').hide();

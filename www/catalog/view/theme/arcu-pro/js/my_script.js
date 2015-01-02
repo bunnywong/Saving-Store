@@ -490,10 +490,19 @@
 		}, 1000);
 	}// $.fn.account_myaddress_update
 
+	$.fn.account_address = function() {
+		$('.my_address').each(function(){
+			if( $.trim($(this).text()) == 'Hong Kong' )
+				$(this)
+					.parent('tr').parent('tbody').parent('table').parent('div')
+						.remove();
+		});
+	}// $.fn.account_address
+
 	$.fn.account_return_customer = function() {
 		if( $.trim($('.warning').text()) == '確認密碼不符' )
 			$('input[name="password2').after('<br><span class="required">確認密碼不符</span>');
-	}
+	}// $.fn.account_return_customer
 
 }( jQuery ));
 
@@ -561,6 +570,9 @@ $(function () {
 
 		if( $('body').hasClass('account_myaddress_update') )
 			$('body').account_myaddress_update();
+
+		if( $('body').hasClass('account_address') )
+			$('body').account_address();
 
 		if( $('body').hasClass('account_return_customer') )
 			$('body').account_return_customer();
