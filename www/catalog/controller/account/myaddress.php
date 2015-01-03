@@ -1,7 +1,7 @@
 <?php
 class ControllerAccountMyAddress extends Controller {
 	private $error = array();
-	 
+
 	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', 'SSL');
@@ -30,10 +30,10 @@ class ControllerAccountMyAddress extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/xaddress');
-			
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_account_xaddress->addAddress($this->request->post);
-				
+
 			$this->session->data['success'] = $this->language->get('text_insert');
 
 			$this->redirect($this->url->link('account/address', '', 'SSL'));
@@ -57,7 +57,7 @@ class ControllerAccountMyAddress extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_account_xaddress->editAddress($this->request->get['address_id'], $this->request->post);
-			 
+
 			// Default Shipping Address
 			if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
 				$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
@@ -67,7 +67,7 @@ class ControllerAccountMyAddress extends Controller {
 				unset($this->session->data['shipping_method']);
 				unset($this->session->data['shipping_methods']);
 			}
-				
+
 			// Default Payment Address
 			if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
 				$this->session->data['payment_country_id'] = $this->request->post['country_id'];
@@ -76,9 +76,9 @@ class ControllerAccountMyAddress extends Controller {
 				unset($this->session->data['payment_method']);
 				unset($this->session->data['payment_methods']);
 			}
-				
+
 			$this->session->data['success'] = $this->language->get('text_update');
-			 
+
 			$this->redirect($this->url->link('account/address', '', 'SSL'));
 		}
 
@@ -91,7 +91,7 @@ class ControllerAccountMyAddress extends Controller {
 
 			$this->redirect($this->url->link('account/login', '', 'SSL'));
 		}
-			
+
 		$this->language->load('account/address');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -100,7 +100,7 @@ class ControllerAccountMyAddress extends Controller {
 
 		if (isset($this->request->get['address_id']) && $this->validateDelete()) {
 			$this->model_account_xaddress->deleteAddress($this->request->get['address_id']);
-				
+
 			// Default Shipping Address
 			if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
 				unset($this->session->data['shipping_address_id']);
@@ -110,7 +110,7 @@ class ControllerAccountMyAddress extends Controller {
 				unset($this->session->data['shipping_method']);
 				unset($this->session->data['shipping_methods']);
 			}
-				
+
 			// Default Payment Address
 			if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
 				unset($this->session->data['payment_address_id']);
@@ -119,9 +119,9 @@ class ControllerAccountMyAddress extends Controller {
 				unset($this->session->data['payment_method']);
 				unset($this->session->data['payment_methods']);
 			}
-				
+
 			$this->session->data['success'] = $this->language->get('text_delete');
-			 
+
 			$this->redirect($this->url->link('account/address', '', 'SSL'));
 		}
 
@@ -146,11 +146,11 @@ class ControllerAccountMyAddress extends Controller {
 			'href'      => $this->url->link('account/address', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
 		);
-			
+
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_address_book'] = $this->language->get('text_address_book');
-		 
+
 		$this->data['button_new_address'] = $this->language->get('button_new_address');
 		$this->data['button_edit'] = $this->language->get('button_edit');
 		$this->data['button_delete'] = $this->language->get('button_delete');
@@ -210,9 +210,9 @@ class ControllerAccountMyAddress extends Controller {
       			'address_2' => $result['address_2'],
       			'city'      => $result['city'],
       			'postcode'  => $result['postcode'],
-      			'zone'      => $result['zone'],
+      			'zone'      => substr($result['zone'], 5),
 				'zone_code' => $result['zone_code'],
-      			'country'   => $result['country']  
+      			'country'   => $result['country']
       			);
       			foreach ($this->model_account_xcustomer->getCustomOptions(2) as $option){
       				if($option['list_display']){
@@ -243,7 +243,7 @@ class ControllerAccountMyAddress extends Controller {
 			'common/content_top',
 			'common/content_bottom',
 			'common/footer',
-			'common/header'		
+			'common/header'
 			);
 
 			$this->response->setOutput($this->render());
@@ -260,7 +260,7 @@ class ControllerAccountMyAddress extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),       	
+			'href'      => $this->url->link('common/home'),
         	'separator' => false
 		);
 
@@ -272,26 +272,26 @@ class ControllerAccountMyAddress extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('account/address', '', 'SSL'),        	
+			'href'      => $this->url->link('account/address', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
 		);
 
 		if (!isset($this->request->get['address_id'])) {
 			$this->data['breadcrumbs'][] = array(
         		'text'      => $this->language->get('text_edit_address'),
-				'href'      => $this->url->link('account/myaddress/insert', '', 'SSL'),       		
+				'href'      => $this->url->link('account/myaddress/insert', '', 'SSL'),
         		'separator' => $this->language->get('text_separator')
 			);
 		} else {
 			$this->data['breadcrumbs'][] = array(
         		'text'      => $this->language->get('text_edit_address'),
-				'href'      => $this->url->link('account/myaddress/update', 'address_id=' . $this->request->get['address_id'], 'SSL'),       		
+				'href'      => $this->url->link('account/myaddress/update', 'address_id=' . $this->request->get['address_id'], 'SSL'),
         		'separator' => $this->language->get('text_separator')
 			);
 		}
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
-		 
+
 		$this->data['text_edit_address'] = $this->language->get('text_edit_address');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
@@ -310,7 +310,7 @@ class ControllerAccountMyAddress extends Controller {
 		$this->data['entry_country'] = $this->language->get('entry_country');
 		$this->data['entry_zone'] = $this->language->get('entry_zone');
 		$this->data['entry_default'] = $this->language->get('entry_default');
-		 
+
 		$this->language->load('account/xtensions');
 		$this->data['title_firstname'] = $this->language->get('title_firstname');
 		$this->data['title_lastname'] = $this->language->get('title_lastname');
@@ -558,7 +558,7 @@ class ControllerAccountMyAddress extends Controller {
 			'common/content_top',
 			'common/content_bottom',
 			'common/footer',
-			'common/header'		
+			'common/header'
 			);
 
 			$this->response->setOutput($this->render());
@@ -620,10 +620,10 @@ class ControllerAccountMyAddress extends Controller {
 				if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 					$this->error['postcode'] = $this->language->get('error_postcode');
 				}
-					
+
 				// VAT Validation
 				$this->load->helper('vat');
-					
+
 				if ($this->config->get('config_vat') && !empty($this->request->post['tax_id']) && (vat_validation($country_info['iso_code_2'], $this->request->post['tax_id']) == 'invalid')) {
 					$this->error['tax_id'] = $this->language->get('error_vat');
 				}
@@ -678,7 +678,7 @@ class ControllerAccountMyAddress extends Controller {
 				'address_format'    => $country_info['address_format'],
 				'postcode_required' => $country_info['postcode_required'],
 				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']		
+				'status'            => $country_info['status']
 			);
 		}
 
