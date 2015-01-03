@@ -421,6 +421,12 @@
 		// Form handle
 
 		$('form').submit(function(){
+			// Delivery tel clone as "電話 (預設為訂單電話)"
+			$('table tr:[sort="a12"]')
+				.children('td').children('input').val(function(){
+					return $('table tr:[sort="a16"] input').val();
+				});
+
 			// Check is same captcha
 			var user_captcha = $('table tr[sort="a27"] td:last-child input').val();
 			if( user_captcha != rand )
