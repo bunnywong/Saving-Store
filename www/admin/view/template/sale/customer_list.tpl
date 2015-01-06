@@ -1,4 +1,9 @@
 <?php echo $header; ?>
+
+<script>
+  $('body').addClass('admin_sale_customer_listview');
+</script>
+
 <div id="content">
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -18,6 +23,17 @@
     </div>
     <div class="content">
       <form action="" method="post" enctype="multipart/form-data" id="form">
+
+        <table class="list">
+          <tbody>
+            <tr>
+              <td style="background: #E7EFEF; padding: 5px;">
+                <span style="margin-right: 20px;"><strong>電話</strong></span>
+                <input type="text" name="filter_telephone" value="" />
+              </td>
+          </tr>
+          </tbody>
+        </table>
         <table class="list">
           <thead>
             <tr>
@@ -105,7 +121,7 @@
               <td><input type="text" name="filter_ip" value="<?php echo $filter_ip; ?>" /></td>
               <td><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" size="12" id="date" /></td>
               <td></td>
-              <td align="right"><a onclick="filter();" class="button"><?php echo $button_filter; ?></a></td>
+              <td align="right"><a onclick="filter();" class="button btn_filter"><?php echo $button_filter; ?></a></td>
             </tr>
             <?php if ($customers) { ?>
             <?php foreach ($customers as $customer) { ?>
@@ -155,6 +171,12 @@ function filter() {
 	if (filter_name) {
 		url += '&filter_name=' + encodeURIComponent(filter_name);
 	}
+
+  var filter_telephone = $('input[name=\'filter_telephone\']').attr('value');
+
+  if (filter_telephone) {
+    url += '&filter_telephone=' + encodeURIComponent(filter_telephone);
+  }
 
 	var filter_email = $('input[name=\'filter_email\']').attr('value');
 

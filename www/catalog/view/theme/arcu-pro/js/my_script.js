@@ -161,6 +161,16 @@
 
 	}// !$.fn.admin_sale_order_info
 
+	$.fn.admin_sale_customer_listview = function(){
+
+		$('input[type=text]').keypress(function( event ) {
+			if ( event.which == 13 ) {	// Enter
+				$('.btn_filter').trigger('click');
+				event.preventDefault();
+			}
+		});
+	}// !$.fn.admin_sale_customer_listview
+
 	$.fn.sidebar = function() {
 
 		if(localStorage.getItem('lightbox') == null && $(window).width() > 767 ){
@@ -536,6 +546,9 @@ $(function () {
 
 			if( $('body').hasClass('admin_sale_order_info') )
 				$(this).admin_sale_order_info();
+
+		if( $('body').hasClass('admin_sale_customer_listview') )
+			$(this).admin_sale_customer_listview();
 
 		// ----- ----- ----- ----- -----
 		// Public

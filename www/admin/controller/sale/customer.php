@@ -1,5 +1,15 @@
 <?php
 class ControllerSaleCustomer extends Controller {
+/*
+	function
+		index(), insert(), update(), delete(), approve()
+		getList(), getForm(),
+		validateForm(), validateDelete()
+
+		login(), history(), transaction(), reward(), addBanIP()
+		removeBanIP(), autocomplete(), country(), address()
+*/
+
 	private $error = array();
 
   	public function index() {
@@ -273,6 +283,12 @@ class ControllerSaleCustomer extends Controller {
 			$filter_name = null;
 		}
 
+		if (isset($this->request->get['filter_telephone'])) {
+			$filter_telephone = $this->request->get['filter_telephone'];
+		} else {
+			$filter_telephone = null;
+		}
+
 		if (isset($this->request->get['filter_email'])) {
 			$filter_email = $this->request->get['filter_email'];
 		} else {
@@ -333,6 +349,10 @@ class ControllerSaleCustomer extends Controller {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_telephone'])) {
+			$url .= '&filter_telephone=' . urlencode(html_entity_decode($this->request->get['filter_telephone'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_email'])) {
 			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -391,6 +411,7 @@ class ControllerSaleCustomer extends Controller {
 
 		$data = array(
 			'filter_name'              => $filter_name,
+			'filter_telephone'         => $filter_telephone,
 			'filter_email'             => $filter_email,
 			'filter_customer_group_id' => $filter_customer_group_id,
 			'filter_status'            => $filter_status,
@@ -418,6 +439,7 @@ class ControllerSaleCustomer extends Controller {
 			$this->data['customers'][] = array(
 				'customer_id'    => $result['customer_id'],
 				'name'           => $result['name'],
+				'telephone'           => $result['telephone'],
 				'email'          => $result['email'],
 				'customer_group' => $result['customer_group'],
 				'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
@@ -476,6 +498,10 @@ class ControllerSaleCustomer extends Controller {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_telephone'])) {
+			$url .= '&filter_telephone=' . urlencode(html_entity_decode($this->request->get['filter_telephone'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_email'])) {
 			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -524,6 +550,10 @@ class ControllerSaleCustomer extends Controller {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_telephone'])) {
+			$url .= '&filter_telephone=' . urlencode(html_entity_decode($this->request->get['filter_telephone'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_email'])) {
 			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -566,6 +596,7 @@ class ControllerSaleCustomer extends Controller {
 		$this->data['pagination'] = $pagination->render();
 
 		$this->data['filter_name'] = $filter_name;
+		$this->data['filter_telephone'] = $filter_telephone;
 		$this->data['filter_email'] = $filter_email;
 		$this->data['filter_customer_group_id'] = $filter_customer_group_id;
 		$this->data['filter_status'] = $filter_status;
@@ -1020,7 +1051,7 @@ class ControllerSaleCustomer extends Controller {
 		);
 
 		$this->response->setOutput($this->render());
-	}
+	}//! getForm()
 
   	protected function validateForm() {
     	if (!$this->user->hasPermission('modify', 'sale/customer')) {
