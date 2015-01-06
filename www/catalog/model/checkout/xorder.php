@@ -388,7 +388,7 @@ class ModelCheckoutXOrder extends Model {
 					$format = $order_info['shipping_address_format'];
 				} else {
 					//$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" .$stringP. '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
-					// My Script
+
 					// My Script
 					$format = '{firstname} {lastname}' . "\n" .'{telephone}'. '{company}' . "\n" . '{address_1}'  . '{address_2}' . $stringP. '{city} {postcode}'  . '{zone}' . "\n" . '{country}';
 				}
@@ -549,15 +549,16 @@ class ModelCheckoutXOrder extends Model {
 				$mail->port = $this->config->get('config_smtp_port');
 				$mail->timeout = $this->config->get('config_smtp_timeout');
 
-				// My Script
 				$mail->setTo($order_info['email']);
-//				$mail->setTo($order_info['email'].', '.$this->config->get('config_email'));
-
 				$mail->setFrom($this->config->get('config_email'));
 				$mail->setSender($order_info['store_name']);
 				$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 				$mail->setHtml($html);
 				$mail->setText(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
+				$mail->send();
+
+				// My Script: For admin email
+				$mail->setTo($this->config->get('config_email'));
 				$mail->send();
             }
 
