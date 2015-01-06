@@ -163,9 +163,9 @@
 
 	$.fn.sidebar = function() {
 
-		if(localStorage.getItem('lightbox') == null){
+		if(localStorage.getItem('lightbox') == null && $(window).width() > 767 ){
 
-			var str = '<h1 style="vertical-align: top;">舊網站用戶？</h1>';
+			var str = '<h1 style="vertical-align: top; max-width: 100%;">舊網站用戶？</h1>';
 			str += '<div>';
 			str += '<img src="/image/data/login/old_website_goon.png" style="max-height: 150px; margin-right: 20px;">';
 			str += '<img src="/image/data/login/old_website_suzuran.png" style="max-height: 150px;">';
@@ -586,9 +586,25 @@ $(function () {
 	}); // !$(document).ready
 
 	// ---------- ---------- ---------- ---------- ----------
+	function responsive_footer(){
+		if( $(window).width() < 768 && $('.sidebar-banners > #powered_mobi').length == 0 ){
+
+			$('#powered')
+				.clone().attr('id', 'powered'+('_mobi') )
+				.appendTo('.sidebar-banners ');
+		}
+	}// !responsive_footer()
+
+	// ---------- ---------- ---------- ---------- ----------
 	// Random
 
 	var rand = '';
+
+	$(window).resize(function(){
+		responsive_footer();
+	});
+
+	responsive_footer();
 
 });
 

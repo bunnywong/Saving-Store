@@ -18,6 +18,8 @@
 	@btn_blue_hover : #4199dd;
 	@disabled : #EEE;
 
+	@screen-sm-max : 767px;
+
 // --------------------------------------------------
 // Global class
 
@@ -849,3 +851,36 @@
 	body.account_myorder{
 		table.list_view{}
 	}// !body.account_myorder
+
+// --------------------------------------------------
+// Responsive issue
+
+    @media (max-width: @screen-sm-max){
+		body{
+			#bottom,
+			#footer,
+			#powered,
+				{display: none!important;}
+			#header{
+				position: relative!important;
+				float: left;
+				#mCSB_1{
+					//min-height: 650px;
+				}
+				.mCustomScrollbar{
+					height: 100%!important;
+				}
+				#powered_mobi{
+					display: block;
+					max-width: 270px;
+					margin-top: -150px;
+					padding: 0px 20px;
+				}
+			}
+
+		}
+	}// !@media
+
+	#powered_mobi{
+		display: none;
+	}
