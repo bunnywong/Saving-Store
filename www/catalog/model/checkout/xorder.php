@@ -567,7 +567,7 @@ class ModelCheckoutXOrder extends Model {
 
 					// Text
 					$text  = $language->get('text_new_received') . "\n\n";
-					$text .= $language->get('text_new_order_id') . ' ' . $order_id . "\n";
+					$text .= $language->get('text_new_order_id') . ' ' .  ORDER_PREFIX.date("ym").str_pad($order_id,ORDER_DIGI,'0',STR_PAD_LEFT) . "\n";
 					$text .= $language->get('text_new_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n";
 					$text .= $language->get('text_new_order_status') . ' ' . $order_status . "\n\n";
 					// My Script
