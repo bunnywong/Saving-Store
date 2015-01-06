@@ -202,9 +202,9 @@ class ControllerAccountEditAccount extends Controller {
 	protected function validate($modData,$isActive) {
 		foreach ($this->model_account_xcustomer->getCustomOptions(1) as $option) {
 			if($option['required']){if (($option['type'] == 'date' || $option['type'] == 'radio' || $option['type'] == 'select')  && (!isset($this->request->post['option'.$option['option_id']]) || empty($this->request->post['option'.$option['option_id']]))) {
-				$this->error['optionVE'.$option['option_id']]  = $option['error'];
+				//$this->error['optionVE'.$option['option_id']]  = $option['error'];
 			}
-			if (( $option['type'] == 'text' || $option['type'] == 'textarea')  && (!isset($this->request->post['option'.$option['option_id']]) ||
+/*			if (( $option['type'] == 'text' || $option['type'] == 'textarea')  && (!isset($this->request->post['option'.$option['option_id']]) ||
 			empty($this->request->post['option'.$option['option_id']]))) {
 				$this->error['optionVE'.$option['option_id']]  = $option['error'];
 			}
@@ -224,8 +224,9 @@ class ControllerAccountEditAccount extends Controller {
 					$this->error['optionVE'.$option['option_id']]  = $option['error'];
 				}
 			}
+*/
 			}}
-			if ((!$isActive || ($isActive && $modData['f_name_req_edit'] && $modData['f_name_show_edit']))  && ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32))) {
+/*			if ((!$isActive || ($isActive && $modData['f_name_req_edit'] && $modData['f_name_show_edit']))  && ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32))) {
 				$this->error['firstname'] = $this->language->get('error_firstname');
 			}
 
@@ -240,6 +241,7 @@ class ControllerAccountEditAccount extends Controller {
 			if (($this->customer->getEmail() != $this->request->post['email']) && $this->model_account_xcustomer->getTotalCustomersByEmail($this->request->post['email'])) {
 				$this->error['warning'] = $this->language->get('error_exists');
 			}
+*/
 
 			if ( $isActive && $modData['mob_req_edit'] && $modData['mob_show_edit'] && $modData['mob_fix'] && ((utf8_strlen($this->request->post['telephone']) != $modData['mob_fix']))){
 				$this->error['telephone'] = $this->language->get('error_telephone');
