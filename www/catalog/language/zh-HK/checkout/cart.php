@@ -1,6 +1,6 @@
 <?php
 
-// Heading  
+// Heading
 $_['heading_title']          = '購物車內的商品';
 
 // Text
@@ -14,7 +14,8 @@ $_['text_login']             = '注意： 請<a href="%s">登錄</a> 或 <a href
 $_['text_points']            = '積分： %s';
 $_['text_items']             = '%s 個商品 - %s';
 $_['text_next']              = '下一步您想要做什麼？';
-$_['text_next_choice']       = '選擇使用折扣券， 或獎勵積分， 或預估配送成本';
+// $_['text_next_choice']       = '選擇使用折扣券， 或獎勵積分， 或預估配送成本';
+$_['text_next_choice']       = '選擇使用優惠卷';
 $_['text_use_coupon']        = '使用折扣券';
 $_['text_use_voucher']       = '使用禮品券';
 $_['text_use_reward']        = '使用積分(有效積分 %s)';
@@ -55,13 +56,13 @@ $_['entry_zone']             = '地區/省份：';
 $_['entry_postcode']         = '郵政編碼：';
 
 // Error
-$_['error_stock']            = '商品標有 *** 表示數量不足或沒有存貨！';	
-$_['error_minimum']          = '%s 最小起訂量是 %s！';	
-$_['error_required']         = '%s 要求！';	
-$_['error_product']          = '警告： 您的購物車內沒有商品！';	
+$_['error_stock']            = '商品標有 *** 表示數量不足或沒有存貨！';
+$_['error_minimum']          = '%s 最小起訂量是 %s！';
+$_['error_required']         = '%s 要求！';
+$_['error_product']          = '警告： 您的購物車內沒有商品！';
 $_['error_coupon']           = '警告： 無效折扣券或已經過期！';
 $_['error_voucher']          = '警告： 無效禮品券或已經過期！';
-$_['error_reward']           = '警告： 請輸入需要使用的積分！';	
+$_['error_reward']           = '警告： 請輸入需要使用的積分！';
 $_['error_points']           = '警告： 您沒有 %s 積分！';
 $_['error_maximum']          = '警告： 最大可使用積分為%s！';
 $_['error_postcode']         = '郵編必須在2到10字符之間！';

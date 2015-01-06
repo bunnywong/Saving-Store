@@ -93,7 +93,7 @@
 		<h2><?php echo $text_next; ?></h2>
 		<div class="content">
 			<p><?php echo $text_next_choice; ?></p>
-			<table class="radio">
+			<table class="radio cart_option">
 				<?php if ($coupon_status) { ?>
 				<tr class="highlight">
 					<td><?php if ($next == 'coupon') { ?>
@@ -101,11 +101,11 @@
 						<?php } else { ?>
 						<input type="radio" name="next" value="coupon" id="use_coupon" />
 						<?php } ?></td>
-					<td><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
+					<td><label for="use_coupon" class="option_discount"><?php echo $text_use_coupon; ?></label></td>
 				</tr>
 				<?php } ?>
 				<?php if ($voucher_status) { ?>
-				<tr class="highlight">
+				<tr class="highlight hidden">
 					<td><?php if ($next == 'voucher') { ?>
 						<input type="radio" name="next" value="voucher" id="use_voucher" checked="checked" />
 						<?php } else { ?>
@@ -115,7 +115,7 @@
 				</tr>
 				<?php } ?>
 				<?php if ($reward_status) { ?>
-				<tr class="highlight">
+				<tr class="highlight hidden">
 					<td><?php if ($next == 'reward') { ?>
 						<input type="radio" name="next" value="reward" id="use_reward" checked="checked" />
 						<?php } else { ?>
@@ -125,7 +125,7 @@
 				</tr>
 				<?php } ?>
 				<?php if ($shipping_status) { ?>
-				<tr class="highlight">
+				<tr class="highlight hidden">
 					<td><?php if ($next == 'shipping') { ?>
 						<input type="radio" name="next" value="shipping" id="shipping_estimate" checked="checked" />
 						<?php } else { ?>

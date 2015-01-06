@@ -249,6 +249,10 @@
 
 	$.fn.cart = function() {
 
+		//
+		$('label.option_discount').trigger('click');
+
+		// Package issue
 		$('.tbl_cart td.name small').each(function(){
 			var offer_text = '（套裝優惠）';
 
