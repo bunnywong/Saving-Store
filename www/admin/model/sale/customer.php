@@ -64,6 +64,7 @@ class ModelSaleCustomer extends Model {
 	}
 
 	public function getCustomers($data = array()) {
+
 		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		$implode = array();
@@ -72,19 +73,17 @@ class ModelSaleCustomer extends Model {
 			$implode[] = "CONCAT(c.firstname, ' ', c.lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
-		// My Script
-		if (!empty($data['filter_telephone'])) {
+		// My Script: Worked for single tel
+/*		if (!empty($data['filter_telephone'])) {
 			$implode[] = "c.telephone LIKE '" . $this->db->escape($data['filter_telephone']) . "%'";
-		}
+		}*/
 
 // Trial script
-/*		if (!empty($data['filter_telephone'])) {
-			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "xcustom_customer_option` WHERE value = '" . $this->db->escape($data['filter_telephone']) . "')";
-		}*/
-// Ref
-/*
-		$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
-*/
+		if (!empty($data['filter_telephone'])) {
+			$tel = $this->db->escape($data['filter_telephone']);
+
+			$implode[] = "c.telephone LIKE '%" . $tel . "%' OR c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "xcustom_customer_option WHERE customer_id = c.customer_id AND value LIKE '%".$tel."%')  ";
+		}
 
 		if (!empty($data['filter_email'])) {
 			$implode[] = "c.email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
@@ -114,7 +113,7 @@ class ModelSaleCustomer extends Model {
 			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
 
-		if ($implode) {
+		if ($implode ) {
 			$sql .= " AND " . implode(" AND ", $implode);
 		}
 
@@ -151,7 +150,7 @@ class ModelSaleCustomer extends Model {
 
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
-
+// echo 'SQL:['.$sql.']';	// Debug
 		$query = $this->db->query($sql);
 
 		return $query->rows;

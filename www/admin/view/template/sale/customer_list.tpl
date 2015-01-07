@@ -120,8 +120,12 @@
                 </select></td>
               <td><input type="text" name="filter_ip" value="<?php echo $filter_ip; ?>" /></td>
               <td><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" size="12" id="date" /></td>
-              <td></td>
-              <td align="right"><a onclick="filter();" class="button btn_filter"><?php echo $button_filter; ?></a></td>
+              <td align="right">
+                 <a onclick="filter();" class="button btn_filter"><?php echo $button_filter; ?></a>
+              </td>
+              <td align="right">
+                <a onclick="filter_clear();" class="button">清除搜索</a>
+              </td>
             </tr>
             <?php if ($customers) { ?>
             <?php foreach ($customers as $customer) { ?>
@@ -163,6 +167,11 @@
   </div>
 </div>
 <script type="text/javascript"><!--
+function filter_clear(){
+  $('input[type=text]').val('');
+  $('.btn_filter').trigger('click');
+}// !filter_clear()
+
 function filter() {
 	url = 'index.php?route=sale/customer&token=<?php echo $token; ?>';
 
