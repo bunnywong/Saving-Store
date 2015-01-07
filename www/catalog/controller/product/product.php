@@ -280,12 +280,16 @@ class ControllerProductProduct extends Controller {
 			$this->data['points'] = $product_info['points'];
 
 			if ($product_info['quantity'] <= 0) {
-				$this->data['stock'] = $product_info['stock_status'];
+				//$this->data['stock'] = $product_info['stock_status'];
+				$this->data['stock'] = '暫時缺貨';
 			} elseif ($this->config->get('config_stock_display')) {
 				$this->data['stock'] = $product_info['quantity'];
 			} else {
 				$this->data['stock'] = $this->language->get('text_instock');
 			}
+
+			// My Script
+			$this->data['stock_qty'] = $product_info['quantity'];
 
 			$this->load->model('tool/image');
 
