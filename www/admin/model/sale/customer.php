@@ -63,6 +63,84 @@ class ModelSaleCustomer extends Model {
 		return $query->row;
 	}
 
+	// My Script
+	public function getOptionSql( $option_title, $csv_title ) {
+		// Ref# 34
+		$field_style = 'select';
+		if( $csv_title == 'KnowUsForm' || $csv_title == 'AlwaysBuyPlace' )
+			$field_style = 'checkbox';
+
+/*
+		# SQL Ref: http://x.co/6A3VG
+		Debug:
+			SELECT
+				GROUP_CONCAT(name SEPARATOR ', ') AS temp
+			FROM oc_xcustom_value_description cvd, oc_customer c
+			WHERE (cvd.option_value_id = 52 OR cvd.option_value_id = 56)  AND customer_id = 34
+*/
+		$str = ", (SELECT (SELECT name FROM " . DB_PREFIX . "xcustom_value_description cvd ";
+		$str .= 	"WHERE (cvd.option_value_id = cco.value) ORDER BY value DESC LIMIT 0, 1 ) ";
+		$str .= 	"AS temp FROM " . DB_PREFIX . "xcustom_customer_option cco ";
+
+		if( $field_style = 'select' )
+			$str .= "WHERE name = '". $option_title ."' AND customer_id = c.customer_id  LIMIT 0, 1) AS  ".$csv_title." ";
+		else
+			$str .= "WHERE name = '". $option_title ."' AND customer_id = c.customer_id  LIMIT 0, 1) AS  ".$csv_title." ";
+
+		return $str;
+	}
+
+	public function getCustomersCsv( $filter_bb_from, $filter_bb_to ) {
+		// Fields declear
+		$fields_query = array(
+						// $csv_title , $option_title
+/*						'SentGift'		=> '已贈送禮品',
+						'Title' 		=> '稱謂',
+						'GoonSize' 		=> 'GOO.N 紙尿片試用裝尺碼',*/
+						'KnowUsForm'	=> '你從什麼途徑得知思詩樂', // THIS
+						'AlwaysBuyPlace' => '你最常購買嬰兒產品',	// THIS
+						'BirthMonth' => '出生日期 / 預產期 (e.g. 2015-12)',	// Main, THIS
+/*						'HospitalClass' => '出生醫院 - 類別',
+						'PublicHospitalName1' => '出生公立醫院 - 名稱',
+						'PrivateHospitalName2' => '出生私家醫院 - 名稱',*/
+						'BabyNickName' => '別名',	// THIS
+/*						'BabyAge' => '年齡',
+						'BabySex' => '性別',*/
+					);
+
+		// Months handle
+		$start    = (new DateTime($filter_bb_from))->modify('first day of this month');
+		$end      = (new DateTime($filter_bb_to))->modify('+1 month');
+		$interval = DateInterval::createFromDateString('1 month');
+		$period   = new DatePeriod($start, $interval, $end);
+		$months   = array();
+
+		foreach ($period as $dt)
+		    $months[] = "'".$dt->format("Y-m")."'";
+//		foreach ($months as $m)	echo $m.', ';	// DEBUG
+		$period = " value= " . implode(" OR value=", $months);
+
+		// SQL code
+		$sql  = "SELECT *, ";
+		$sql .= "CONCAT(c.firstname, ' ', c.lastname) AS name";
+		$sql .= ", cgd.name AS customer_group ";
+
+		// Fields Query
+		foreach ($fields_query as $csv_title => $web_title)
+			$sql .= $this->getOptionSql($web_title, trim($csv_title));
+
+		$sql .= "FROM " . DB_PREFIX . "customer c ";
+		$sql .= "LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";
+		$sql .= "AND c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "xcustom_customer_option WHERE customer_id = c.customer_id AND name LIKE '%出生日期%' AND $period ) ";
+
+		$sql .= ' ORDER BY BirthMonth ASC ';
+		$sql .= ' LIMIT 0, 10';
+
+		$query = $this->db->query($sql);
+		echo '<p>'.$sql.'</p>';	// DEBUG
+		return $query->rows;
+	}
+
 	public function getCustomers($data = array()) {
 
 		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
@@ -73,12 +151,7 @@ class ModelSaleCustomer extends Model {
 			$implode[] = "CONCAT(c.firstname, ' ', c.lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
-		// My Script: Worked for single tel
-/*		if (!empty($data['filter_telephone'])) {
-			$implode[] = "c.telephone LIKE '" . $this->db->escape($data['filter_telephone']) . "%'";
-		}*/
-
-// Trial script
+		// My Script
 		if (!empty($data['filter_telephone'])) {
 			$tel = $this->db->escape($data['filter_telephone']);
 
@@ -150,7 +223,7 @@ class ModelSaleCustomer extends Model {
 
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
-// echo 'SQL:['.$sql.']';	// Debug
+ //		echo 'SQL:['.$sql.']';	// DEBUG
 		$query = $this->db->query($sql);
 
 		return $query->rows;

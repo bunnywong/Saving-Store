@@ -1,5 +1,5 @@
 <?php
-class ControllerSaleCustomer extends Controller {
+class ControllerSaleCustomerCsv extends Controller {
 /*
 	function
 		index(), insert(), update(), delete(), approve()
@@ -22,50 +22,6 @@ class ControllerSaleCustomer extends Controller {
     	$this->getList();
   	}
 
-  	function outputCSV($data) {
-
-		// Gen CSV
-		header("Content-Type: text/csv charset=utf-8");
-		header("Content-Disposition: attachment; filename=file.csv");
-		// Disable caching
-		header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
-		header("Pragma: no-cache"); // HTTP 1.0
-		header("Expires: 0"); // Proxies
-		print(chr(0xEF).chr(0xBB).chr(0xBF));//设置utf-8 + bom ，处理汉字显示的乱码
-
-	    $output = fopen("php://output", "w");
-	    foreach ($data as $row) {
-	        fputcsv($output, $row); // here you can change delimiter/enclosure
-	    }
-	    fclose($output);
-	}
-
-  	public function csv() {
-  		$this->load->model('sale/customer');
-
-	  	if (isset($this->request->get['filter_bb_from'])) {
-
-		  	$filter_bb_from = $this->request->get['filter_bb_from'];
-		  	$filter_bb_to	= $this->request->get['filter_bb_to'];
-			$csv_data 		= $this->model_sale_customer->getCustomersCsv($filter_bb_from, $filter_bb_to);
-			// Filter array
-			//echo $csv_data[0]['customer_id'].'<br>';
-
-			// Debug
-			$debug = 0;
-			if($debug){
-				echo '<meta charset="UTF-8">';
-				echo '<pre>';
-			  	echo  var_dump($csv_data);
-			  	echo '</pre>';
-		  	}else{
-		  		$this->outputCSV($csv_data);
-		  		//$this->redirect($this->url->link('sale/customer', 'token=' . $this->session->data['token'] . $url, 'SSL'));
-		  	}
-
-	  	}
-  	}
-
   	public function insert() {
 		$this->language->load('sale/customer');
 
@@ -73,7 +29,7 @@ class ControllerSaleCustomer extends Controller {
 
 		$this->load->model('sale/customer');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validalteForm()) {
       	  	$this->model_sale_customer->addCustomer($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');

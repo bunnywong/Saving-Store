@@ -22,13 +22,32 @@
       <div class="buttons"><a onclick="$('form').attr('action', '<?php echo $approve; ?>'); $('form').submit();" class="button"><?php echo $button_approve; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').attr('action', '<?php echo $delete; ?>'); $('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
     </div>
     <div class="content">
-      <form action="" method="post" enctype="multipart/form-data" id="form">
-
-        <table class="list">
+      <form  action="/admin/index.php" method="get" enctype="multipart/form-data" id="form_csv">
+        <input type="hidden" name="route" value="sale/customer/csv">
+        <input type="hidden" name="token" value="<?= $token; ?>">
+        <table class="list my_search">
           <tbody>
             <tr>
-              <td style="background: #E7EFEF; padding: 5px;">
-                <span style="margin-right: 20px;"><strong>電話</strong></span>
+              <td>
+                <span><strong>Baby From</strong></span>
+                <input type="text" name="filter_bb_from" class="baby_date root mtz-monthpicker-widgetcontainer" value="" />
+              </td><td>
+                <span><strong>Baby To</strong></span>
+                <input type="text" name="filter_bb_to" class="baby_date root mtz-monthpicker-widgetcontainer" value="" />
+              </td>
+              <td>
+                <a class="button btn_export_csv">Export CSV</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+      <form action="" method="post" enctype="multipart/form-data" id="form">
+        <table class="list my_search">
+          <tbody>
+            <tr>
+              <td>
+                <span><strong>電話</strong></span>
                 <input type="text" name="filter_telephone" value="" />
               </td>
           </tr>
@@ -231,4 +250,8 @@ $(document).ready(function() {
 	$('#date').datepicker({dateFormat: 'yy-mm-dd'});
 });
 //--></script>
+
+<script type="text/javascript" src="<?= HTTP_CATALOG; ?>catalog/view/theme/arcu-pro/js/jquery.mtz.monthpicker.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<?= HTTP_CATALOG; ?>catalog/view/javascript/mbTooltip.css" media="screen">
 <?php echo $footer; ?>

@@ -12,6 +12,7 @@
 	@white 	: #FFF;
 	@gray	: #ddd;
 	@lightgray : lightgray;
+	@lightblue: #E7EFEF;
 	@title	: #333;
 	@btn_bg_hover : #444444;
 	@btn_blue : #71bdf7;
@@ -54,6 +55,34 @@
 	}
 	.textarea{
 		width: 205px;
+	}
+
+	.act_clear_parent{
+		height: 42px;
+		width: 90px;
+		margin-left: 5px;
+		background-color: @btn_blue;
+		color: white;
+		display: inline-block;
+		vertical-align: middle;
+		border-radius: 5px;
+		cursor: pointer;
+		-webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+		-moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+		box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+	}
+	.act_clear_child{
+		display: block;
+		text-align: center;
+		top: 10px;
+		position: relative;
+	}
+	span.act_clear:hover{
+		background-color: @btn_blue_hover;
+	}
+	span.act_clear:active{
+		position: relative;
+		top: 2px;
 	}
 
 // --------------------------------------------------
@@ -531,8 +560,24 @@
 	// --------------------------------------------------
 	// Backend - List view
 
-	body.admin_sale_customer_list{
-
+	body.admin_sale_customer_listview{
+		table.my_search{
+			td{
+				background: @lightblue;//
+				padding: 5px;
+				span{
+					margin-right: 20px;
+				}
+				span.act_clear{
+					.act_clear_parent;
+					height: 25px; // override
+					> span{
+						.act_clear_child;
+						top: 5px; // override
+					}
+				}
+			}
+		}
 	}// !body.admin_sale_customer_list
 
 // --------------------------------------------------
@@ -695,31 +740,10 @@
 					// span
 
 					span.act_clear{
-						height: 42px;
-						width: 90px;
-						margin-left: 5px;
-						background-color: @btn_blue;
-						color: white;
-						display: inline-block;
-						vertical-align: middle;
-						border-radius: 5px;
-						cursor: pointer;
-						-webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
-						-moz-box-shadow:    1px 1px 2px 0px rgba(50, 50, 50, 0.5);
-						box-shadow:         1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+						.act_clear_parent;
 						> span{
-							display: block;
-							text-align: center;
-							top: 10px;
-							position: relative;
+							.act_clear_child;
 						}
-					}
-					span.act_clear:hover{
-						background-color: @btn_blue_hover;
-					}
-					span.act_clear:active{
-						position: relative;
-						top: 2px;
 					}
 				}
 				> td:first-child{

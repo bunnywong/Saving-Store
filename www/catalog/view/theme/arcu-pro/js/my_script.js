@@ -80,13 +80,19 @@
 				    finalYear: this_year + 1,
 				    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 				};
+		var selector = '';
 
-		$(this).children().children('input')	// [出生日期 / 預產期]
+		if( $(this).hasClass('root') )
+			selector = $(this);
+		else
+			selector = $(this).children().children('input');
+
+		selector	// [出生日期 / 預產期]
 			.after('<span class="act_clear"><span>清除</span></span>')
-			.monthpicker(options).end()
+			.monthpicker(options);
 		// Clear field
-		.find('span.act_clear').click(function(){
-			$('input.mtz-monthpicker-widgetcontainer').val('N/A');
+		$('span.act_clear').click(function(){
+			$(this).prev().val('N/A');
 		});
 	}
 
@@ -169,6 +175,13 @@
 				event.preventDefault();
 			}
 		});
+
+		$('.baby_date').my_date_picker();
+
+		$('.btn_export_csv').click(function(){
+			$('#form_csv').submit();
+		})
+
 	}// !$.fn.admin_sale_customer_listview
 
 	$.fn.sidebar = function() {
@@ -361,6 +374,7 @@
 
 		// BB day
 		$('table tr[sort="a60"]').my_date_picker();
+		$('table tr[sort="a61"]').hide();	// 已贈送禮品
 
 		// Hospital
 			// Hide Hospital row
