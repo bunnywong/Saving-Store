@@ -64,48 +64,78 @@ class ModelSaleCustomer extends Model {
 	}
 
 	// My Script
+
 	public function getOptionSql( $option_title, $csv_title ) {
 		// Ref# 34
 		$field_style = 'select';
+
+		// Checkbox issue
 		if( $csv_title == 'KnowUsForm' || $csv_title == 'AlwaysBuyPlace' )
 			$field_style = 'checkbox';
+		if(  $csv_title == 'BabyNickName' || $csv_title == 'BirthMonth' )
+			$field_style = 'text';
 
+ //		echo $field_style.' '.$option_title.' - '.$csv_title.'<br>';	// DEBUG
 /*
 		# SQL Ref: http://x.co/6A3VG
-		Debug:
-			SELECT
-				GROUP_CONCAT(name SEPARATOR ', ') AS temp
-			FROM oc_xcustom_value_description cvd, oc_customer c
-			WHERE (cvd.option_value_id = 52 OR cvd.option_value_id = 56)  AND customer_id = 34
-*/
-		$str = ", (SELECT (SELECT name FROM " . DB_PREFIX . "xcustom_value_description cvd ";
-		$str .= 	"WHERE (cvd.option_value_id = cco.value) ORDER BY value DESC LIMIT 0, 1 ) ";
-		$str .= 	"AS temp FROM " . DB_PREFIX . "xcustom_customer_option cco ";
+#		IN (52, 56)
 
-		if( $field_style = 'select' )
-			$str .= "WHERE name = '". $option_title ."' AND customer_id = c.customer_id  LIMIT 0, 1) AS  ".$csv_title." ";
-		else
-			$str .= "WHERE name = '". $option_title ."' AND customer_id = c.customer_id  LIMIT 0, 1) AS  ".$csv_title." ";
+		SET @a = '34';
+
+			SELECT
+				*, GROUP_CONCAT(name SEPARATOR ', ') AS temp
+			FROM
+				oc_customer c, oc_xcustom_value_description cvd
+			WHERE
+				cvd.option_value_id IN (52, 56)
+			AND customer_id = @a
+
+		# # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+		// OLD
+		// (SELECT (SELECT name FROM oc_xcustom_value_description cvd WHERE (cvd.option_value_id = cco.value) LIMIT 0, 1 ) AS temp FROM oc_xcustom_customer_option cco WHERE name = '你從什麼途徑得知思詩樂' AND customer_id = c.customer_id LIMIT 0, 1) AS KnowUsForm
+
+		# # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+		SET @a = '34';
+		SELECT
+			GROUP_CONCAT(
+				(SELECT cvd.name FROM oc_xcustom_value_description cvd WHERE option_value_id = cco.option_value_id)
+			SEPARATOR ', ')  AS temp
+		FROM oc_xcustom_customer_option cco
+		WHERE
+			cco.name LIKE '%出生日期%' AND value <> ''
+			AND customer_id = @a
+*/
+
+		if( $field_style == 'select' ){
+			$str = ", (SELECT (SELECT name FROM " . DB_PREFIX . "xcustom_value_description cvd WHERE (cvd.option_value_id = cco.value) LIMIT 0, 1 ) AS temp FROM " . DB_PREFIX . "xcustom_customer_option cco WHERE name = '". $option_title ."' AND customer_id = c.customer_id LIMIT 0, 1) AS  ".$csv_title." ";
+
+		}elseif( $field_style == 'checkbox' ){
+			$str = ", (SELECT GROUP_CONCAT((SELECT cvd.name FROM " . DB_PREFIX . "xcustom_value_description cvd WHERE option_value_id = cco.option_value_id) SEPARATOR ', ')  AS temp FROM " . DB_PREFIX . "xcustom_customer_option cco WHERE cco.name LIKE '%".$option_title."%' AND value <> '' AND customer_id = c.customer_id LIMIT 0, 1) AS  ".$csv_title." ";
+
+		}else{	// text
+			$str = ", (SELECT value AS temp FROM " . DB_PREFIX . "xcustom_customer_option cco WHERE cco.name LIKE '%".$option_title."%' AND value <> '' AND customer_id = c.customer_id LIMIT 0, 1) AS  ".$csv_title." ";
+		}
 
 		return $str;
-	}
+	}// !getOptionSql()
 
 	public function getCustomersCsv( $filter_bb_from, $filter_bb_to ) {
 		// Fields declear
 		$fields_query = array(
 						// $csv_title , $option_title
-/*						'SentGift'		=> '已贈送禮品',
+						'SentGift'		=> '已贈送禮品',
+						'BirthMonth' 	=> '出生日期 / 預產期 (e.g. 2015-12)',	// Main
 						'Title' 		=> '稱謂',
-						'GoonSize' 		=> 'GOO.N 紙尿片試用裝尺碼',*/
-						'KnowUsForm'	=> '你從什麼途徑得知思詩樂', // THIS
-						'AlwaysBuyPlace' => '你最常購買嬰兒產品',	// THIS
-						'BirthMonth' => '出生日期 / 預產期 (e.g. 2015-12)',	// Main, THIS
-/*						'HospitalClass' => '出生醫院 - 類別',
+						'GoonSize' 		=> 'GOO.N 紙尿片試用裝尺碼',
+						'KnowUsForm'	=> '你從什麼途徑得知思詩樂',
+						'AlwaysBuyPlace'=> '你最常購買嬰兒產品',
+						'HospitalClass' => '出生醫院 - 類別',
 						'PublicHospitalName1' => '出生公立醫院 - 名稱',
-						'PrivateHospitalName2' => '出生私家醫院 - 名稱',*/
+						'PrivateHospitalName2' => '出生私家醫院 - 名稱',
 						'BabyNickName' => '別名',	// THIS
-/*						'BabyAge' => '年齡',
-						'BabySex' => '性別',*/
+						'BabyAge'		=> '年齡',
+						'BabySex'		=> '性別',
 					);
 
 		// Months handle
@@ -137,7 +167,7 @@ class ModelSaleCustomer extends Model {
 		$sql .= ' LIMIT 0, 10';
 
 		$query = $this->db->query($sql);
-		echo '<p>'.$sql.'</p>';	// DEBUG
+//		echo '<p>'.$sql.'</p>';	// DEBUG
 		return $query->rows;
 	}
 

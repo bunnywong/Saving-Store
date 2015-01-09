@@ -49,7 +49,25 @@ class ControllerSaleCustomer extends Controller {
 		  	$filter_bb_to	= $this->request->get['filter_bb_to'];
 			$csv_data 		= $this->model_sale_customer->getCustomersCsv($filter_bb_from, $filter_bb_to);
 			// Filter array
-			//echo $csv_data[0]['customer_id'].'<br>';
+
+			$this_unset = array(
+								'store_id', 'lastname', 'fax', 'password',
+								'salt', 'cart', 'wishlist', 'newsletter',
+								'address_id', 'customer_group', 'customer_group_id',
+								'token', 'language_id',
+								'status', 'approved'
+								);
+			//echo var_dump($this_unset);
+
+			foreach(array_keys($csv_data) as $k){
+				foreach(array_keys($this_unset) as $k2){
+					unset($csv_data[$k][$this_unset[$k2]]);
+				}
+			}
+
+
+	  		//$csv_data = unset(array(1,2));
+			//$csv_data = array_values($csv_data);
 
 			// Debug
 			$debug = 0;
