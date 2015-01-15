@@ -1,0 +1,42 @@
+<modification>
+	<id>Reward Points Extended - Default Theme/All Themes</id>
+	<version>2.1</version>
+	<vqmver>1.2.3</vqmver>
+	<author>Tcalp</author>
+
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation> <!-- ADD POINTS ONLY PURCHASE PRICE IN PLACE OF PRICE  -->
+			<search position="before"><![CDATA[($minimum > 1)]]></search>
+			<add><![CDATA[
+		<?php if ($text_points_only_purchase) { ?>
+		<div class="minimum"><?php echo $text_points_only_purchase; ?></div>
+		<?php } ?>
+		<?php if ($text_reward_points_amount) { ?>
+		<div class="minimum"><?php echo $text_reward_points_amount; ?></div>
+		<?php } ?>
+			]]></add>
+		</operation>
+
+		<operation> <!-- ADD JSON REDIRECT CODE TO ADD TO CART FUNCTION -->
+			<search position="after"><![CDATA[$('.success, .warning, .attention,]]></search>
+			<add><![CDATA[
+			if (json['redirect'] && json['login_required']) {
+				window.location.href = json['redirect'];
+			}]]></add>
+		</operation>
+		<operation> <!-- ADD JSON ERROR MESSAGE DISPLAY TO ADD TO CART FUNCTION -->
+			<search position="before"><![CDATA[(json['error']['option'])]]></search>
+			<add><![CDATA[
+			if (json['error']['warning']) {
+				$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');	
+				$('.warning').fadeIn('slow');
+				$('html, body').animate({ scrollTop: 0 }, 'slow'); 
+			}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<span><?php echo $text_reward; ?></span> <?php echo $reward; ?><br />]]></search>
+			<add><![CDATA[ <?php if ($reward > 0) { ?> <span><?php echo $text_reward; ?></span> <?php echo $reward; ?><br /> <?php } ?> ]]></add>
+		</operation>
+	</file>
+</modification>

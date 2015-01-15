@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+		<sql><![CDATA[
+			ALTER TABLE `product` ADD `credit_points_amount` DECIMAL( 15, 4 ) NOT NULL DEFAULT '0';
+			ALTER TABLE `product` ADD `points_only_purchase` INT( 1 ) NOT NULL DEFAULT '0';
+			ALTER TABLE `product_discount` ADD `points` DECIMAL( 15, 4 ) NOT NULL DEFAULT '0' AFTER `price`;
+			ALTER TABLE `customer_reward` CHANGE `points` `points` DECIMAL( 15, 4 ) NOT NULL DEFAULT '0';
+			ALTER TABLE `product_reward` CHANGE `points` `points` DECIMAL( 15, 4 ) NOT NULL DEFAULT '0';
+			ALTER TABLE `product_option_value` CHANGE `points` `points` DECIMAL( 15, 4 ) NOT NULL;
+			ALTER TABLE `product` CHANGE `points` `points` DECIMAL( 15, 4 ) NOT NULL DEFAULT '0';
+			UPDATE `setting` SET `value` = '9' WHERE `key` = 'reward_sort_order';
+			UPDATE `setting` SET `value` = '10' WHERE `key` = 'total_sort_order';
+		]]></sql>
+        <id>Reward Points Extended Currency</id>
+        <version>2.2.2</version>
+        <vqmver>2.1</vqmver>
+        <author>Jeff Hunter aka Tcalp</author>
+
+
+<!--   ====================================================================================================================================================   -->
+<!--   CATALOG AREA      CATALOG AREA      CATALOG AREA      CATALOG AREA      CATALOG AREA      CATALOG AREA      CATALOG AREA      CATALOG AREA      CATA   -->
+<!--   ====================================================================================================================================================   -->
+
+	<!-- ======  EARLY VERSION OF POINT DISPLAY OVERRIDE  ====== -->
+	<!-- ======  EARLY VERSION OF POINT DISPLAY OVERRIDE  ====== -->
+	<file name="catalog/controller/product/product.php">
+		<operation> <!-- ADD NEW LANGUAGE READS -->
+			<search position="after"><![CDATA[$this->data['text_minimum']]]></search>
+			<add><![CDATA[
+			$this->data['text_reward_points_amount'] = ($this->config->get('rewardpoints_subtext_display')) ? sprintf($this->language->get('text_reward_points_amount'), $this->currency->formatPoints($product_info['reward'])) : false;
+			$this->data['text_points_only_purchase'] = ($this->config->get('rewardpoints_pop_notification') && $product_info['points_only_purchase']) ? ($this->language->get('text_points_only_purchase') . ($this->config->get('rewardpoints_purchase_url') ? sprintf($this->language->get('text_points_only_purchase_url'), $this->config->get('rewardpoints_purchase_url')) : '')) : false;
+			]]></add>
+		</operation>
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="after"><![CDATA[$this->data['price'] = $this->currency->format]]></search>
+			<add><![CDATA[$this->data['price'] = $product_info['points_only_purchase'] ? $this->currency->formatPoints($product_info['points']) : $this->data['price'];]]></add>
+		</operation>
+		<operation> <!-- OVERRIDE PRODUCT SPECIAL PRICE TO USE RP WHEN NEEDED -->
+			<search position="after"><![CDATA[$this->data['special'] = $this->currency->format]]></search>
+			<add><![CDATA[$this->data['special'] = ((int)$product_info['points_special'] && $product_info['points_only_purchase']) ? $this->currency->formatPoints($product_info['points_special']) : (($product_info['points_only_purchase']) ? false : $this->data['special']);]]></add>
+		</operation>
+		<operation> <!-- DO NOT DISPLAY EX. TAX IF IT'S A POINT ONLY PURCHASE ITEM -->
+			<search position="after"><![CDATA[$this->data['tax'] = $this->currency->format]]></search>
+			<add><![CDATA[$this->data['tax'] = $product_info['points_only_purchase'] ? false : $this->data['tax'];]]></add>
+		</operation>
+		<operation> <!-- SHOW RP DISCOUNT INSTEAD OF PRICE FOR POP ITEMS -->
+			<search position="replace"><![CDATA[$this->currency->format($this->tax->calculate($discount['price'], $product_info['tax_class_id'], $this->config->get('config_tax')))]]></search>
+			<add><![CDATA[($product_info['points_only_purchase'] ? $this->currency->formatPoints($discount['points']) : $this->currency->format($this->tax->calculate($discount['price'], $product_info['tax_class_id'], $this->config->get('config_tax'))))]]></add>
+		</operation>
+
+		<!-- ======  RELATED PRODUCTS RP DISPLAY  ====== -->
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace" index="1"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? $this->currency->formatPoints($result['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$result['points_special'] && $result['points_only_purchase']) ? $this->currency->formatPoints($result['points_special']) : (($result['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+
+
+		<operation>  <!-- HIDE THE DISPLAY OF 'PRICE IN REWARD POINTS' IF IT'S A POINT ONLY PURCHASE -->
+			<search position="replace"><![CDATA[$this->data['points'] = $product_info['points'];]]></search>
+			<add><![CDATA[$this->data['points'] = ($product_info['points_only_purchase'] || $product_info['points'] == 0) ? false : $this->currency->formatPoints($product_info['points']);]]></add>
+		</operation>
+		<operation> <!-- HIDE THE STANDARD REWARD EARNINGS IF USING SUB-TEXT -->
+			<search position="replace"><![CDATA[$this->data['reward'] = $product_info['reward'];]]></search>
+			<add><![CDATA[$this->data['reward'] = ($this->config->get('rewardpoints_subtext_display')) ? false : $this->currency->formatPoints($product_info['reward']);]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/product/category.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? $this->currency->formatPoints($result['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$result['points_special'] && $result['points_only_purchase']) ? $this->currency->formatPoints($result['points_special']) : (($result['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+		<operation> <!-- DO NOT DISPLAY EX. TAX IF IT'S A POINT ONLY PURCHASE ITEM -->
+			<search position="replace"><![CDATA[=> $tax,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? false : $tax,]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/product/search.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? $this->currency->formatPoints($result['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$result['points_special'] && $result['points_only_purchase']) ? $this->currency->formatPoints($result['points_special']) : (($result['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+		<operation> <!-- DO NOT DISPLAY EX. TAX IF IT'S A POINT ONLY PURCHASE ITEM -->
+			<search position="replace"><![CDATA[=> $tax,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? false : $tax,]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/manufacturer.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? $this->currency->formatPoints($result['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$result['points_special'] && $result['points_only_purchase']) ? $this->currency->formatPoints($result['points_special']) : (($result['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+		<operation> <!-- DO NOT DISPLAY EX. TAX IF IT'S A POINT ONLY PURCHASE ITEM -->
+			<search position="replace"><![CDATA[=> $tax,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? false : $tax,]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/compare.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $product_info['points_only_purchase'] ? $this->currency->formatPoints($product_info['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$product_info['points_special'] && $product_info['points_only_purchase']) ? $this->currency->formatPoints($product_info['points_special']) : (($product_info['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+		<operation error="skip"> <!-- DO NOT DISPLAY EX. TAX IF IT'S A POINT ONLY PURCHASE ITEM -->
+			<search position="replace"><![CDATA[=> $tax,]]></search>
+			<add><![CDATA[=> $product_info['points_only_purchase'] ? false : $tax,]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/special.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? $this->currency->formatPoints($result['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$result['points_special'] && $result['points_only_purchase']) ? $this->currency->formatPoints($result['points_special']) : (($result['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+		<operation> <!-- DO NOT DISPLAY EX. TAX IF IT'S A POINT ONLY PURCHASE ITEM -->
+			<search position="replace"><![CDATA[=> $tax,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? false : $tax,]]></add>
+		</operation>
+	</file>
+
+	<!-- MODULES == FEATURED / LATEST / BESTSELLERS / SPECIAL -->
+	<file name="catalog/controller/module/special.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? $this->currency->formatPoints($result['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$result['points_special'] && $result['points_only_purchase']) ? $this->currency->formatPoints($result['points_special']) : (($result['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/module/bestseller.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? $this->currency->formatPoints($result['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$result['points_special'] && $result['points_only_purchase']) ? $this->currency->formatPoints($result['points_special']) : (($result['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/module/featured.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $product_info['points_only_purchase'] ? $this->currency->formatPoints($product_info['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$product_info['points_special'] && $product_info['points_only_purchase']) ? $this->currency->formatPoints($product_info['points_special']) : (($product_info['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/module/latest.php">
+		<operation> <!-- SWAP CURRENCY FOR POINTS WHEN IT'S A POINT ONLY PURCHASE PRODUCT -->
+			<search position="replace"><![CDATA[=> $price,]]></search>
+			<add><![CDATA[=> $result['points_only_purchase'] ? $this->currency->formatPoints($result['points']) : $price,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[=> $special,]]></search>
+			<add><![CDATA[=> ((int)$result['points_special'] && $result['points_only_purchase']) ? $this->currency->formatPoints($result['points_special']) : (($result['points_only_purchase']) ? false : $special),]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/language/english/product/product.php">
+		<operation> <!-- ADD REWARD POINT EARNING TEXT ON PRODUCT PAGE  -->
+			<search position="after"><![CDATA[$_['text_minimum']]]></search>
+			<add><![CDATA[
+			$_['text_reward_points_amount']      = 'Purchase this item and you will receive %s reward points.';
+			$_['text_points_only_purchase']      = 'This product can only be purchased with reward points.';
+			$_['text_points_only_purchase_url']  = '  <a href="%s">Click here to purchase points</a>.';
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/model/catalog/product.php">
+		<operation error="skip"> <!-- ADD READ OF POP TO PRODUCT DATA -->
+			<search position="before"><![CDATA[$query->row['reward'],]]></search>
+			<add><![CDATA[
+			'points_only_purchase' => $query->row['points_only_purchase'],
+			'points_special'       => $query->row['points_special'],
+			]]></add>
+		</operation>
+		<operation> <!-- ADD REWARD POINT SPECIAL TO PRODUCT QUERY -->
+			<search position="replace"><![CDATA[AS special,]]></search>
+			<add><![CDATA[AS special, (SELECT points_special FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int)$customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.points_special ASC LIMIT 1) AS points_special,]]></add>
+		</operation>
+	</file>
+
+
+	<file name="catalog/model/checkout/order.php">
+		<operation> <!-- APPLY REWARD POINT CREDIT IN CHECKOUT/ORDER->CONFIRM -->
+			<search position="before"><![CDATA[// Send out any gift voucher mails]]></search>
+			<add><![CDATA[
+			if (in_array($order_status_id, $this->config->get('rewardpoints_completed_orders'))) {
+				$this->load->model('total/reward');
+				$this->model_total_reward->addReward($order_info);
+			}
+
+			// IF ORDER IS CANCELLED STATUS REMOVE ANY POSSIBLE REWARDED POINTS
+			if (in_array($order_status_id, $this->config->get('rewardpoints_cancelled_orders'))) {
+				$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$this->customer->getId() . "' AND order_id = '" . $order_id . "';");
+			}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/model/total/reward.php">
+		<operation error="skip">  <!-- FORMAT POINTS DISPLAY IN ORDER TOTALS -->
+			<search position="replace"><![CDATA[sprintf($this->language->get('text_reward'), $this->session->data['reward'])]]></search>
+			<add><![CDATA[sprintf($this->language->get('text_reward'), $this->currency->formatPoints($this->session->data['reward'], false))]]></add>
+		</operation>
+	</file>
+
+
+	<file name="catalog/controller/checkout/checkout.php">
+		<operation> <!-- VALIDATE REWARD POINT ONLY PURCHASES // RE-DIRECT TO CART -->
+			<search position="before"><![CDATA[foreach ($products as $product)]]></search>
+			<add><![CDATA[
+			$points = $this->customer->getRewardPoints();
+			$points_total = 0;
+			$pop = 0;
+			foreach ($this->cart->getProducts() as $product) {
+				if ($product['points']) {
+					$points_total += $product['points'];
+					$pop += $product['points_only_purchase'];
+				}
+			}
+			if ($pop && $points_total && $points_total > $points)
+				$this->redirect($this->url->link('checkout/cart'));
+			]]></add>
+		</operation>
+		<operation> <!-- AUTO APPLY REWARD POINTS ON CHECKOUT PAGE -->
+			<search position="before"><![CDATA[foreach ($products as $product)]]></search>
+			<add><![CDATA[
+			if ($this->config->get('rewardpoints_auto_checkout')) {
+				$points = $this->customer->getRewardPoints();
+				$points_total = 0;
+				foreach ($this->cart->getProducts() as $product) {
+					if ($product['points']) {
+						$points_total += $product['points'];
+					}
+				}
+				if ($points && $points_total) {
+					$this->session->data['reward'] = min($points, $points_total);
+				}
+			}]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/checkout/cart.php">
+		<operation error="skip"> <!-- DISABLE POINT USE FORM IF AUTO APPLY POINTS -->
+			<search position="replace"><![CDATA[($points && $points_total && $this->config->get('reward_status'))]]></search>
+			<add><![CDATA[($points && $points_total && $this->config->get('reward_status') && !$this->config->get('rewardpoints_auto_checkout'))]]></add>
+		</operation>
+		<operation error="skip"> <!-- ADD TO CART VALIDATION OF POINTS ONLY PURCHASE 1.5.2x -->
+			<search position="before" index="1"><![CDATA[if (!$json)]]></search>
+			<add><![CDATA[
+			if ($product_info['points_only_purchase']) {
+				if (!$this->customer->isLogged()) {
+					$this->session->data['warning'] = $this->language->get('error_pop_login_required');
+					$json['login_required'] = true;
+					$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/login', '', 'SSL'));
+				} else {
+					$points = $this->customer->getRewardPoints();
+					$points_total = 0;
+					$pop = 0;
+					foreach ($this->cart->getProducts() as $product) {
+						if ($product['points'] && $product['points_only_purchase']) {
+							$points_total += $product['points'];
+							$pop += $product['points_only_purchase'];
+						}
+					}
+					$points_total += $product_info['points'];
+					if ($points_total && $points_total > $points) {
+						$json['error']['warning'] = $this->language->get('error_pop_insufficient_points') . ($this->config->get('rewardpoints_purchase_url') ? sprintf($this->language->get('error_pop_insufficient_points_url'), $this->config->get('rewardpoints_purchase_url')) : '');
+						$this->session->data['warning'] = $this->language->get('error_pop_insufficient_points') . ($this->config->get('rewardpoints_purchase_url') ? sprintf($this->language->get('error_pop_insufficient_points_url'), $this->config->get('rewardpoints_purchase_url')) : '');
+						$json['redirect'] = str_replace('&amp;', '&', $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']));
+					}
+				}
+			}
+			]]></add>
+		</operation>
+		<operation error="skip"> <!-- ADD TO CART VALIDATION OF POINTS ONLY PURCHASE 1.5.1x -->
+			<search position="before" index="1"><![CDATA[if (!isset($json['error'])) {]]></search>
+			<add><![CDATA[
+			if ($product_info['points_only_purchase']) {
+				if (!$this->customer->isLogged()) {
+					$this->session->data['warning'] = $this->language->get('error_pop_login_required');
+					$json['login_required'] = true;
+					$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/login', '', 'SSL'));
+				} else {
+					$points = $this->customer->getRewardPoints();
+					$points_total = 0;
+					$pop = 0;
+					foreach ($this->cart->getProducts() as $product) {
+						if ($product['points'] && $product['points_only_purchase']) {
+							$points_total += $product['points'];
+							$pop += $product['points_only_purchase'];
+						}
+					}
+					$points_total += $product_info['points'];
+					if ($points_total && $points_total > $points) {
+						$json['error']['warning'] = $this->language->get('error_pop_insufficient_points') . ($this->config->get('rewardpoints_purchase_url') ? sprintf($this->language->get('error_pop_insufficient_points_url'), $this->config->get('rewardpoints_purchase_url')) : '');
+						$this->session->data['warning'] = $this->language->get('error_pop_insufficient_points') . ($this->config->get('rewardpoints_purchase_url') ? sprintf($this->language->get('error_pop_insufficient_points_url'), $this->config->get('rewardpoints_purchase_url')) : '');
+						$json['redirect'] = str_replace('&amp;', '&', $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']));
+					}
+				}
+			}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="1"><![CDATA[$json['total'] = sprintf($this->language->get('text_items'),]]></search>
+			<add><![CDATA[if (!isset($json['redirect']))]]></add>
+		</operation>
+		<operation> <!-- VALIDATE REWARD POINT ONLY PURCHASES -->
+			<search position="before"><![CDATA[isset($this->error['warning'])]]></search>
+			<add><![CDATA[
+			$points = $this->customer->getRewardPoints();
+			$points_total = 0;
+			$pop = 0;
+			foreach ($this->cart->getProducts() as $product) {
+				if ($product['points']) {
+					$points_total += $product['points'];
+					$pop += $product['points_only_purchase'];
+				}
+			}
+			if ($pop && $points_total && $points_total > $points)
+				$this->error['warning'] = $this->language->get('error_pop_cart_insufficient_points') . ($this->config->get('rewardpoints_purchase_url') ? sprintf($this->language->get('error_pop_insufficient_points_url'), $this->config->get('rewardpoints_purchase_url')) : '');
+
+			]]></add>
+		</operation>
+		<operation> <!-- AUTO APPLY REWARD POINTS IF CONFIGURED TO DO SO -->
+			<search position="before"><![CDATA[isset($this->request->post['reward']) && $this->validateReward()]]></search>
+			<add><![CDATA[
+			if ($this->config->get('rewardpoints_auto_checkout')) {
+				$points = $this->customer->getRewardPoints();
+				$points_total = 0;
+				foreach ($this->cart->getProducts() as $product) {
+					if ($product['points']) {
+						$points_total += $product['points'];
+					}
+				}
+				if ($points && $points_total)
+					$this->session->data['reward'] = min($points, $points_total);
+			}
+			]]></add>
+		</operation>
+		<operation> <!-- ALTER 'USE POINTS' TO BE FORMATTED -->
+			<search position="replace"><![CDATA[sprintf($this->language->get('text_use_reward'), $points);]]></search>
+			<add><![CDATA[sprintf($this->language->get('text_use_reward'), $this->currency->formatPoints($points));]]></add>
+		</operation>
+		<operation> <!-- ALTER 'AVAILABLE POINTS' TO BE FORMATTED -->
+			<search position="replace"><![CDATA[$this->data['reward'] = $this->session->data['reward'];]]></search>
+			<add><![CDATA[$this->data['reward'] = $this->currency->formatPoints($this->session->data['reward'], false);]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/language/english/checkout/cart.php">
+		<operation> <!-- ADD POINTS ONLY PURCHASE ERROR MESSAGE -->
+			<search position="after"><![CDATA[?php]]></search>
+			<add><![CDATA[
+			$_['error_pop_cart_insufficient_points'] = 'One or more products in your shopping cart can only be purchased with reward points and you do not have enough to complete this transaction.';
+			$_['error_pop_login_required']           = 'The product that you attempted to add to your cart can only be purchased with reward points.  You must be logged in to add this item to your shopping cart.';
+			$_['error_pop_insufficient_points']      = 'This item can only be purchased with reward points.  Currently you do no have enough points to complete purchase.';
+			$_['error_pop_insufficient_points_url']  = '  <a href="%s">Click here to purchase additional points</a>.';
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- ======  CUSTOMER ACCOUNT RELATED CODING      CUSTOMER ACCOUNT RELATED CODING      CUSTOMER ACCOUNT RELATED CODING  ====== -->
+	<!-- ======  CUSTOMER ACCOUNT RELATED CODING      CUSTOMER ACCOUNT RELATED CODING      CUSTOMER ACCOUNT RELATED CODING  ====== -->
+	<file name="catalog/controller/account/login.php">
+		<operation> <!-- ADD SESSION DATA 'ERROR WARNING' READ -->
+			<search position="before"><![CDATA[isset($this->error['warning'])]]></search>
+			<add><![CDATA[
+			if (isset($this->session->data['warning'])) {
+				$this->error['warning'] = $this->session->data['warning'];
+				unset($this->session->data['warning']);
+			}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/account/reward.php">
+		<operation> <!-- FORMAT POINTS -->
+			<search position="replace"><![CDATA['points'      => $result['points'],]]></search>
+			<add><![CDATA['points'      => $this->currency->formatPoints($result['points']),]]></add>
+		</operation>
+		<operation> <!-- FORMAT POINTS -->
+			<search position="replace"><![CDATA[$this->data['total'] = (int)$this->customer->getRewardPoints();]]></search>
+			<add><![CDATA[$this->data['total'] = $this->currency->formatPoints($this->customer->getRewardPoints());]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/model/account/customer.php">
+		<operation> <!-- APPLY BONUS REWARD POINTS UPON REGISTRATION FOR NEWSLETTER AND REGISTRATION -->
+			<search position="before"><![CDATA[$this->language->load('mail/customer');]]></search>
+			<add><![CDATA[
+			$this->language->load('module/rewardpoints');
+			if ($this->config->get('rewardpoints_registration_bonus')) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET "
+					. "customer_id   = '" . $customer_id
+					. "', order_id   = '0"
+					. "', description = '" . $this->db->escape($this->language->get('text_rewardpoints_registration_bonus'))
+					. "', points      = '" . $this->config->get('rewardpoints_registration_bonus')
+					. "', reason_code = '" . 'REGISTRATION'
+					. "', date_added = NOW()");
+			}
+			// NEWSLETTER BONUS
+			if ($this->config->get('rewardpoints_newsletter_bonus') && (isset($data['newsletter']) && (int)$data['newsletter'])) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET "
+					. "customer_id   = '" . $customer_id
+					. "', order_id   = '0"
+					. "', description = '" . $this->db->escape($this->language->get('text_rewardpoints_newsletter_bonus'))
+					. "', points      = '" . $this->config->get('rewardpoints_newsletter_bonus')
+					. "', reason_code = '" . 'NEWSLETTER'
+					. "', date_added = NOW()");
+			}
+			]]></add>
+		</operation>
+		<operation>  <!-- REWARD / REMOVE NEWSLETTER BONUS ON EDIT -->
+			<search position="after"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "customer SET newsletter]]></search>
+			<add><![CDATA[
+			$this->language->load('module/rewardpoints');
+			if ($this->config->get('rewardpoints_newsletter_bonus') && (int)$newsletter) {
+				$check = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$this->customer->getId() . "' AND description = '" . $this->db->escape($this->language->get('text_rewardpoints_newsletter_bonus')) . "';");
+				if (!$check->num_rows) {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET "
+						. "customer_id   = '" . (int)$this->customer->getId()
+						. "', order_id   = '0"
+						. "', description = '" . $this->db->escape($this->language->get('text_rewardpoints_newsletter_bonus'))
+						. "', points      = '" . $this->config->get('rewardpoints_newsletter_bonus')
+						. "', reason_code = '" . 'NEWSLETTER'
+						. "', date_added = NOW()");
+				}
+			} elseif ($this->config->get('rewardpoints_newsletter_bonus') && $this->config->get('rewardpoints_newsletter_unsubscribe') && (int)$newsletter == 0) {
+				$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$this->customer->getId() . "' AND reason_code = 'NEWSLETTER';");
+			}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/model/catalog/review.php">
+		<operation> <!-- REWARD BONUS FOR SUBMITTING A PRODUCT REVIEW -->
+			<search position="after"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "review]]></search>
+			<add><![CDATA[
+			//AUTO APPROVE REVIEWS
+			$review_id = $this->db->getLastId();
+			if (isset($data['rating']) && $data['rating'] >= $this->config->get('rewardpoints_review_auto_approve')) {
+				$this->db->query("UPDATE " . DB_PREFIX . "review SET status = '1' WHERE review_id = '" . $review_id . "'");
+			}
+			//REWARD POINT BONUS FOR CUSTOMER REVIEWS
+			if ($this->customer->isLogged() && $this->config->get('rewardpoints_review_bonus')) {
+				$check = $this->db->query("SELECT COUNT(*) AS total_reviews FROM " . DB_PREFIX . "review WHERE customer_id = '" . (int)$this->customer->getId() . "';");
+				if ($this->config->get('rewardpoints_review_limit') == 0 || $check->row['total_reviews'] <= $this->config->get('rewardpoints_review_limit')) {
+					$this->language->load('module/rewardpoints');
+					$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET "
+						. "customer_id   = '" . (int)$this->customer->getId()
+						. "', order_id   = '0"
+						. "', description = '" . $this->db->escape($this->language->get('text_rewardpoints_review_bonus'))
+						. "', points      = '" . $this->config->get('rewardpoints_review_bonus')
+						. "', reason_code = '" . 'PRODUCT_REVIEW'
+						. "', date_added = NOW()");
+				}
+			}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- ======  AUTOMATED APPLICATION OF REWARD POINTS EARNED  ====== -->
+	<!-- ======  AUTOMATED APPLICATION OF REWARD POINTS EARNED  ====== -->
+	<file name="catalog/model/total/reward.php">
+		<operation> <!-- ADD FUNCTION TO REWARD MODEL TO APPLY CREDIT -->
+			<search position="before"><![CDATA[public function confirm($order_info, $order_total) {]]></search>
+			<add><![CDATA[
+			public function addReward($order_info) {
+				$reward_query = $this->db->query("SELECT op.name, op.product_id, op.quantity, pr.points FROM " . DB_PREFIX . "order_product op, " . DB_PREFIX . "product_reward pr, `" . DB_PREFIX . "order` o WHERE op.product_id     = pr.product_id AND o.customer_group_id = pr.customer_group_id AND o.order_id = op.order_id AND o.order_id = '" . (int)$order_info['order_id'] . "' AND points > 0 AND o.customer_id > 0");
+				if ($reward_query->num_rows) {
+					$this->language->load('module/rewardpoints');
+					$check_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_reward "
+						. "WHERE customer_id = '" . (int)$order_info['customer_id']
+						. "' AND order_id    = '" . (int)$order_info['order_id']
+						. "' AND alt_id      = '" . (int)$reward_query->row['product_id'] . "'");
+					if (!$check_query->num_rows) {
+						if ($this->config->get('rewardpoints_order_bonus') && $order_info['customer_id']) {
+							$total_orders = $this->db->query("SELECT COUNT(*) as total FROM `" . DB_PREFIX . "order` WHERE customer_id = '" . (int)$order_info['customer_id'] . "' AND order_status_id IN (" . implode(',',$this->config->get('rewardpoints_completed_orders')) . ", 9999)");
+							if ($total_orders->row['total'] == 1) { // FIRST ORDER
+								$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET "
+									. "customer_id   = '" . (int)$order_info['customer_id']
+									. "', order_id   = '" . (int)$order_info['order_id']
+									. "', description = '" . $this->db->escape($this->language->get('text_rewardpoints_firstorder_bonus'))
+									. "', points      = '" . $this->config->get('rewardpoints_order_bonus')
+									. "', reason_code = '" . 'FIRSTORDER'
+									. "', date_added = NOW()");
+							}
+						}
+
+						foreach ($reward_query->rows as $reward) {
+							$total_points = ($reward['points'] * $reward['quantity']);
+							$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward "
+								. "SET customer_id = '" . (int)$order_info['customer_id']
+								. "',  order_id    = '" . (int)$order_info['order_id']
+								. "',  alt_id      = '" . (int)$reward['product_id']
+								. "',  description = '" . $this->db->escape(sprintf($this->language->get('text_rewardpoints_product_purchase'), $order_info['order_id'], $reward['name']))
+								. "',  points      = '" . $total_points
+								. "', date_added = NOW()");
+						}
+					}
+				}
+			}
+			]]></add>
+		</operation>
+	</file>
+
+
+<!--   ====================================================================================================================================================   -->
+<!--   ADMIN AREA      ADMIN AREA      ADMIN AREA      ADMIN AREA      ADMIN AREA      ADMIN AREA      ADMIN AREA      ADMIN AREA      ADMIN AREA      ADMI   -->
+<!--   ====================================================================================================================================================   -->
+
+	<file name="admin/model/sale/customer.php">
+		<operation> <!-- CONVERT REWARD FROM INT TO DYNAMIC INT/FLOAT -->
+			<search position="replace"><![CDATA[(int)$points]]></search>
+			<add><![CDATA[(($this->config->get('rewardpoints_currency_mode')) ? (float)$points : (int)$points)]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/product.php">
+		<operation> <!-- CONVERT REWARD POINTS TO DYNAMIC INT/FLOAT -->
+			<search position="replace"><![CDATA[(int)$product_option_value['points']]]></search>
+			<add><![CDATA[(($this->config->get('rewardpoints_currency_mode')) ? $product_option_value['points'] : (int)$product_option_value['points'])]]></add>
+		</operation>
+
+		<operation error="skip"> <!-- CONVERT REWARD POINTS TO DYNAMIC INT/FLOAT -->
+			<search position="replace"><![CDATA[(int)$value['points']]]></search>
+			<add><![CDATA[(($this->config->get('rewardpoints_currency_mode')) ? (float)$value['points'] : (int)$value['points'])]]></add>
+		</operation>
+
+		<operation error="skip"> <!-- CONVERT REWARD POINTS TO DYNAMIC INT/FLOAT -->
+			<search position="replace"><![CDATA[(int)$data['points']]]></search>
+			<add><![CDATA[(($this->config->get('rewardpoints_currency_mode')) ? (float)$data['points'] : (int)$data['points'])]]></add>
+		</operation>
+
+		<operation> <!-- ADD POINTS ONLY PURCHASE TO INSERT / UPDATE -->
+			<search position="replace"><![CDATA["', sku = '" . $this->db->escape($data['sku']) .]]></search>
+			<add><![CDATA["', sku = '" . $this->db->escape($data['sku']) . "', points_only_purchase = '" . (int)$data['points_only_purchase'] .]]></add>
+		</operation>
+
+		<operation> <!-- ADD POINTS TO DISCOUNT INSERT / UPDATE -->
+			<search position="replace"><![CDATA["', quantity = '" . (int)$product_discount['quantity'] .]]></search>
+			<add><![CDATA["', quantity = '" . (int)$product_discount['quantity'] . "', points = '" . (($this->config->get('rewardpoints_currency_mode')) ? $product_discount['points'] : (int)$product_discount['points']) .]]></add>
+		</operation>
+
+		<operation> <!-- ADD POINTS TO SPECIALS INSERT / UPDATE -->
+			<search position="replace"><![CDATA["', price = '" . (float)$product_special['price'] . ]]></search>
+			<add><![CDATA["', price = '" . (float)$product_special['price'] . "', points_special = '" . (($this->config->get('rewardpoints_currency_mode')) ? (float)$product_special['points_special'] : (int)$product_special['points_special']) . ]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/sale/customer.php">
+		<operation> <!-- REWARD POINTS OUTPUT FORMAT POINTS AS CURRENCY -->
+			<search position="replace"><![CDATA[=> $result['points'],]]></search>
+			<add><![CDATA[=> $this->currency->formatPoints($result['points']),]]></add>
+		</operation>
+		<operation> <!-- REWARD TOTAL OUTPUT FORMAT POINTS AS CURRENCY -->
+			<search position="replace"><![CDATA[= $this->model_sale_customer->getRewardTotal($this->request->get['customer_id']);]]></search>
+			<add><![CDATA[= $this->currency->formatPoints($this->model_sale_customer->getRewardTotal($this->request->get['customer_id']));]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/model/sale/order.php">
+		<operation> <!-- ADD AUTO APPLY OF REWARD POINTS -->
+			<search position="before"><![CDATA[// Send out any gift voucher mails]]></search>
+			<add><![CDATA[
+			// Automated Application Of Reward Points For Completed Order
+			if (in_array($data['order_status_id'], $this->config->get('rewardpoints_completed_orders'))) {
+				$credit_query = $this->db->query("SELECT op.product_id, op.name, op.quantity, pr.points FROM "
+						. DB_PREFIX . "order_product op, " . DB_PREFIX . "product_reward pr, `" . DB_PREFIX . "order` o "
+						. " WHERE op.product_id     = pr.product_id "
+						. " AND o.customer_group_id = pr.customer_group_id "
+						. " AND o.order_id          = op.order_id "
+						. " AND o.order_id = '" . (int)$order_info['order_id'] . "'"
+						. " AND points > 0 AND o.customer_id > 0");
+
+				if ($credit_query->num_rows) {
+
+					// FIRST ORDER BONUS PROCESSING
+					if ($this->config->get('rewardpoints_order_bonus') && $order_info['customer_id']) {
+						$total_orders = $this->db->query("SELECT COUNT(*) as total FROM `" . DB_PREFIX . "order` WHERE customer_id = '" . (int)$order_info['customer_id'] . "' AND order_status_id IN (" . implode(',',$this->config->get('rewardpoints_completed_orders')) . ",9999)");
+						if ($total_orders->row['total'] == 1) {
+							$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET "
+								. "customer_id   = '" . (int)$order_info['customer_id']
+								. "', order_id   = '" . (int)$order_info['order_id']
+								. "', description = '" . $this->db->escape('First Order Bonus')
+								. "', points      = '" . $this->config->get('rewardpoints_order_bonus')
+								. "', reason_code = '" . 'FIRSTORDER'
+								. "', date_added = NOW()");
+						}
+					}
+
+					// APPLY REWARD POINTS EARNED
+					foreach ($credit_query->rows as $award) {
+						$check_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$order_info['customer_id'] . "' AND order_id    = '" . (int)$order_info['order_id'] . "' AND alt_id = '" . (int)$award['product_id'] . "'");
+						if (!$check_query->num_rows) {
+							foreach ($credit_query->rows as $award) {
+								$reward = ($award['points'] * $award['quantity']);
+								$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET customer_id = '" . (int)$order_info['customer_id']
+									. "', order_id = '" . (int)$order_info['order_id']
+									. "', description = '" . $this->db->escape('Order ID #'.(int)$order_info['order_id'].' - Purchase: ' . $award['name'])
+									. "', points = '" . (($this->config->get('rewardpoints_currency_mode')) ? (float)$reward : (int)$reward)
+									. "', date_added = NOW()");
+							}
+							break;
+						}
+					}
+				}
+			}
+
+			if (in_array($data['order_status_id'], $this->config->get('rewardpoints_cancelled_orders'))) {
+				$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "'");
+			}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation> <!-- ADD REWARD POINTS TO DISCOUNT TAB / HEADER ROW -->
+			<search position="after" offset="6"><![CDATA[          <table id="discount" class="list">]]></search>
+			<add><![CDATA[                <td class="right"><?php echo $entry_reward; ?></td>]]></add>
+		</operation>
+		<operation> <!-- ADD REWARD POINTS DISCOUNT INPUT -->
+			<search position="after"><![CDATA[<input type="text" name="product_discount[<?php echo $discount_row; ?>][price]]]></search>
+			<add><![CDATA[                <td class="right"><input type="text" name="product_discount[<?php echo $discount_row; ?>][points]" value="<?php echo $product_discount['points']; ?>" /></td>]]></add>
+		</operation>
+		<operation error="skip"> <!-- INCREASE DISCOUNTS 'ADD' BUTTON COLSPAN SECTION -->
+			<search position="replace"><![CDATA[<td colspan="6"></td>]]></search>
+			<add><![CDATA[<td colspan="7"></td>]]></add>
+		</operation>
+		<operation> <!-- ALTER ADD JAVASCRIPT FOR DISCOUNT INPUT TO INCLUDE REWARD POINTS -->
+			<search position="after"><![CDATA[name="product_discount[' + discount_row + '][price]" value="" /></td>';]]></search>
+			<add><![CDATA[html += '    <td class="right"><input type="text" name="product_discount[' + discount_row + '][points]" value="" /></td>';]]></add>
+		</operation>
+
+		<operation> <!-- ADD REWARD POINTS TO SPECIALS TAB / HEADER ROW -->
+			<search position="after" offset="5"><![CDATA[<table id="special" class="list">]]></search>
+			<add><![CDATA[<td class="right"><?php echo $entry_reward; ?></td>]]></add>
+		</operation>
+		<operation> <!-- ADD REWARD POINTS TO SPECIALS TAB -->
+			<search position="after"><![CDATA[<td class="right"><input type="text" name="product_special[<?php echo $special_row; ?>][price]]]></search>
+			<add><![CDATA[<td class="right"><input type="text" name="product_special[<?php echo $special_row; ?>][points_special]" value="<?php echo $product_special['points_special']; ?>" /></td>]]></add>
+		</operation>
+		<operation error="skip"> <!-- INCREASE SPECIALS 'ADD' BUTTON COLSPAN SECTION -->
+			<search position="replace"><![CDATA[<td colspan="5"></td>]]></search>
+			<add><![CDATA[<td colspan="6"></td>]]></add>
+		</operation>
+		<operation> <!-- ALTER ADD JAVASCRIPT FOR SPECIAL INPUT TO INCLUDE REWARD POINTS -->
+			<search position="after"><![CDATA[name="product_special[' + special_row + '][price]" value="" /></td>';]]></search>
+			<add><![CDATA[	html += '    <td class="right"><input type="text" name="product_special[' + special_row + '][points_special]" value="" /></td>';]]></add>
+		</operation>
+
+		<operation> <!-- ADD 'SET_PRINT_CREDITS', 'ACCOUNT_CREDIT_AMOUNT', 'ACCOUNT_REWARD_AMOUNT' TO FORM -->
+			<search position="after" offset="1"><![CDATA[<input type="text" name="points"]]></search>
+			<add><![CDATA[
+			<tr>
+			  <td><?php echo $entry_points_only_purchase; ?></td>
+			  <td><select name="points_only_purchase">
+				  <option value="1" <?php echo ($points_only_purchase) ? 'selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
+				  <option value="0" <?php echo (!$points_only_purchase) ? 'selected="selected"' : ''; ?>><?php echo $text_no; ?></option>
+				</select></td>
+			</tr>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/catalog/product.php">
+		<operation> <!-- POPULATE LANGUAGE DATA -->
+			<search position="after"><![CDATA[$this->data['entry_meta_keyword']]]></search>
+			<add><![CDATA[$this->data['entry_points_only_purchase'] = $this->language->get('entry_points_only_purchase');]]></add>
+		</operation>
+		<operation> <!-- ADD READ OF 'points_only_purchase' -->
+			<search position="before"><![CDATA[if (isset($this->request->post['status'])) {]]></search>
+			<add><![CDATA[
+			if (isset($this->request->post['points_only_purchase'])) {
+				$this->data['points_only_purchase'] = $this->request->post['points_only_purchase'];
+			} elseif (isset($product_info)) {
+				$this->data['points_only_purchase'] = $product_info['points_only_purchase'];
+			} else {
+				$this->data['points_only_purchase'] = 0;
+			}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/language/english/catalog/product.php">
+		<operation> <!-- STATE ENGLISH LANGUATE DATA -->
+			<search position="after"><![CDATA[$_['entry_meta_keyword']]]></search>
+			<add><![CDATA[$_['entry_points_only_purchase'] = 'Points Only Purchase:<br/><span class="help">Only allow purchase with reward points.</span>';]]></add>
+		</operation>
+	</file>
+
+
+<!--   ====================================================================================================================================================   -->
+<!--   SYSTEM LIBRARIES      SYSTEM LIBRARIES      SYSTEM LIBRARIES      SYSTEM LIBRARIES      SYSTEM LIBRARIES      SYSTEM LIBRARIES      SYSTEM LIBRARIES   -->
+<!--   ====================================================================================================================================================   -->
+
+	<file name="system/library/cart.php">
+		<operation> <!-- ADD points_only_purchase TO getProducts() -->
+			<search position="after"><![CDATA[$product_query->row['minimum'],]]></search>
+			<add><![CDATA['points_only_purchase'		=> $product_query->row['points_only_purchase'],]]></add>
+        </operation>
+		<operation> <!-- ADD TEMP VARIABLE FOR POINTS STORAGE -->
+			<search position="after"><![CDATA[$price = $product_query->row['price'];]]></search>
+			<add><![CDATA[$points = $product_query->row['points'];]]></add>
+		</operation>
+		<operation> <!-- ADD POINTS TO DISCOUNTS QUERY -->
+			<search position="replace"><![CDATA[price FROM " . DB_PREFIX . "product_discount]]></search>
+			<add><![CDATA[price, points FROM " . DB_PREFIX . "product_discount]]></add>
+		</operation>
+		<operation> <!-- ADD CHECK TO DISCOUNT FOR $points -->
+			<search position="after"><![CDATA[$price = $product_discount_query->row['price'];]]></search>
+			<add><![CDATA[$points = ($product_discount_query->row['points'] > 0) ? $product_discount_query->row['points'] : $points;]]></add>
+		</operation>
+		<operation> <!-- ADD POINTS TO SPECIALS QUERY -->
+			<search position="replace"><![CDATA[price FROM " . DB_PREFIX . "product_special]]></search>
+			<add><![CDATA[price, points_special FROM " . DB_PREFIX . "product_special]]></add>
+		</operation>
+		<operation> <!-- ADD CHECK TO SPECIALS FOR $points -->
+			<search position="after"><![CDATA[$product_special_query->row['price']]]></search>
+			<add><![CDATA[$points = ($product_special_query->row['points_special'] > 0) ? $product_special_query->row['points_special'] : $points;]]></add>
+		</operation>
+		<operation error="skip"> <!-- ALTER MATH TO USE CALCULATED $points INSTEAD OF DIRECT QUERY  ===(v1.5.2+)=== -->
+			<search position="replace"><![CDATA[($product_query->row['points'] ? ($product_query->row['points'] + $option_points) * $quantity : 0),]]></search>
+			<add><![CDATA[($points ? ($points + $option_points) * $quantity : 0),]]></add>
+		</operation>
+		<operation error="skip"> <!-- ALTER MATH TO USE CALCULATED $points INSTEAD OF DIRECT QUERY  ===(v1.5.1x)=== -->
+			<search position="replace"><![CDATA[($product_query->row['points'] + $option_points) * $quantity,]]></search>
+			<add><![CDATA[($points ? ($points + $option_points) * $quantity : 0),]]></add>
+		</operation>
+	</file>
+
+	<file name="system/library/currency.php">
+		<operation> <!-- ADD formatPoints() FUNCTION TO CURRENCY FORMATTING LIBRARY -->
+			<search position="before"><![CDATA[public function format(]]></search>
+			<add><![CDATA[
+			public function formatPoints($points, $format = true) {
+				$decimal_point  = ($this->language->get('decimal_point'))  ? $this->language->get('decimal_point') : '.';
+				$thousand_point = ($this->language->get('thousand_point')) ? $this->language->get('thousand_point') : '';
+				$decimal_place  = $this->currencies[$this->code]['decimal_place'];
+				$return_string  = '';
+
+				if ($format) {
+					$symbol_right  = $this->config->get('rewardpoints_currency_suffix');
+
+					if ($this->config->get('rewardpoints_currency_prefix')) {
+						$return_string .= $this->config->get('rewardpoints_currency_prefix');
+					}
+
+					if ($this->config->get('rewardpoints_currency_mode')) {
+						$return_string .= number_format(round($points, (int)$decimal_place), (int)$decimal_place, $decimal_point, $thousand_point);
+					} else {
+						$return_string .= (int)$points;
+					}
+					if ($this->config->get('rewardpoints_currency_suffix')) {
+						$return_string .= $this->config->get('rewardpoints_currency_suffix');
+					}
+				} else {
+					if ($this->config->get('rewardpoints_currency_mode')) {
+						$return_string .= number_format(round($points, (int)$decimal_place), (int)$decimal_place, $decimal_point, $thousand_point);
+					} else {
+						$return_string .= (int)$points;
+					}
+				}
+				return $return_string;
+			}
+			]]></add>
+		</operation>
+	</file>
+</modification>
