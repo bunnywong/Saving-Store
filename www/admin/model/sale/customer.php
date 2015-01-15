@@ -64,7 +64,6 @@ class ModelSaleCustomer extends Model {
 	}
 
 	// My Script
-
 	public function getOptionSql( $option_title, $csv_title ) {
 		// Ref# 34
 		$field_style = 'select';

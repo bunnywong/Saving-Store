@@ -374,7 +374,7 @@
 
 		// BB day
 		$('table tr[sort="a60"]').my_date_picker();
-		$('table tr[sort="a61"]').hide();	// 已贈送禮品
+		$('table tr[sort="a63"], table tr[sort="a64"]').hide();	// 已贈送禮品（預產期 & 迎新）
 
 		// Hospital
 			// Hide Hospital row
