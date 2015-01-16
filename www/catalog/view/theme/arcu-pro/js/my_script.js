@@ -305,6 +305,14 @@
 			return Math.floor(x) === x;
 		}
 		// ----- ----- ----- ----- -----
+		// Redeem Only
+
+		var str = $('.price-fixed').text();
+			// Ans: 0 or -1
+		if( str.indexOf('$') == -1 )
+			$('.price-fixed').append(' 積分換領');
+
+		// ----- ----- ----- ----- -----
 		// qty add +
 
 		$('.btn.add').click(function(){

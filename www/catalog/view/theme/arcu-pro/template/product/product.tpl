@@ -107,21 +107,34 @@
 -->
 					<span class="short_description_title">產品簡介：</span>
 					<pre class="short_description"><?php echo $meta_description; ?></pre><br />
+<?php
+	$user_points = $this->customer->getRewardPoints();
+
+	if( $text_points_only_purchase )
+		$points = $price;	// Initial points only purchase $points is empty
+?>
 					<?php if( $stock_qty != 0): ?>
-						<span class="qty_container">
-							<span><?php echo $text_qty; ?></span>
-							<input id="qty_box" type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
-							<div class="btn_qty_wrapper">
-								<button class="btn add">+</button>
-								<button class="btn less">-</button>
-							</div>
-							<input type="hidden" name="product_id" size="4" value="<?php echo $product_id; ?>" />
-							<?php if ($minimum > 1) { ?>
-							<div class="minimum"><?php echo $text_minimum; ?></div>
-							<?php } ?>
-						</span>
-						<br />
+						<?php if( $points == '' OR $user_points >= $points ): ?>
+							<span class="qty_container">
+								<span><?php echo $text_qty; ?></span>
+								<input id="qty_box" type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
+								<div class="btn_qty_wrapper">
+									<button class="btn add">+</button>
+									<button class="btn less">-</button>
+								</div>
+								<input type="hidden" name="product_id" size="4" value="<?php echo $product_id; ?>" />
+								<?php if ($minimum > 1) { ?>
+								<div class="minimum"><?php echo $text_minimum; ?></div>
+								<?php } ?>
+							</span>
+							<br />
+						<?php endif; ?>
 					<?php endif; ?>
+<?php
+	// Debug
+/*	echo '$price - '.$price.'<br>';
+	echo '$points - '.$points.'<br>';*/
+?>
 					<span><?php echo $text_stock; ?></span> <?php echo $stock; ?>
 
 				</div>
@@ -289,23 +302,25 @@
 				<?php } ?>
 
 				<?php if( $stock_qty != 0): ?>
-					<div class="cart">
-						<div>
-							<button class="button" id="button-cart" data-hover="<?php echo $button_cart; ?>">
-								<span class="icon-basket-light"><?php echo $button_cart; ?></span>
-							</button>
-							<button class="button" id="buy_and_checkout" data-hover="直接結帳">
-								<span class="icon-basket-light">直接結帳</span>
-							</button>
-						</div>
-						<div> <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><span class="icon-wishlist-grey"><?php echo $button_wishlist; ?></span></a> <a class="button" onclick="addToCompare('<?php echo $product_id; ?>');"><span class="icon-compare-grey"><?php echo $button_compare; ?></span></a>
-							<div class="share clearafter"><!-- AddThis Button BEGIN -->
-								<div class="addthis_default_style"><a class="addthis_button_compact"><?php echo $text_share; ?></a> <a class="addthis_button_email"></a><a class="addthis_button_print"></a> <a class="addthis_button_facebook"></a> <a class="addthis_button_twitter"></a></div>
-								<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
-								<!-- AddThis Button END -->
+					<?php if( $points == '' OR $user_points >= $points ): ?>
+						<div class="cart">
+							<div>
+								<button class="button" id="button-cart" data-hover="<?php echo $button_cart; ?>">
+									<span class="icon-basket-light"><?php echo $button_cart; ?></span>
+								</button>
+								<button class="button" id="buy_and_checkout" data-hover="直接結帳">
+									<span class="icon-basket-light">直接結帳</span>
+								</button>
 							</div>
-						</div>
-					</div> <!-- #cart -->
+							<div> <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><span class="icon-wishlist-grey"><?php echo $button_wishlist; ?></span></a> <a class="button" onclick="addToCompare('<?php echo $product_id; ?>');"><span class="icon-compare-grey"><?php echo $button_compare; ?></span></a>
+								<div class="share clearafter"><!-- AddThis Button BEGIN -->
+									<div class="addthis_default_style"><a class="addthis_button_compact"><?php echo $text_share; ?></a> <a class="addthis_button_email"></a><a class="addthis_button_print"></a> <a class="addthis_button_facebook"></a> <a class="addthis_button_twitter"></a></div>
+									<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
+									<!-- AddThis Button END -->
+								</div>
+							</div>
+						</div> <!-- #cart -->
+					<?php endif; ?>
 				<?php endif; ?>
 			</div>
 		</div>

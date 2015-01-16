@@ -9,7 +9,7 @@
 			<search position="before"><![CDATA[($minimum > 1)]]></search>
 			<add><![CDATA[
 		<?php if ($text_points_only_purchase) { ?>
-		<div class="minimum"><?php echo $text_points_only_purchase; ?></div>
+		<div class="minimum">此產品只供積分換領<?php // echo $text_points_only_purchase; ?></div>
 		<?php } ?>
 		<?php if ($text_reward_points_amount) { ?>
 		<div class="minimum"><?php echo $text_reward_points_amount; ?></div>
@@ -28,9 +28,9 @@
 			<search position="before"><![CDATA[(json['error']['option'])]]></search>
 			<add><![CDATA[
 			if (json['error']['warning']) {
-				$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');	
+				$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 				$('.warning').fadeIn('slow');
-				$('html, body').animate({ scrollTop: 0 }, 'slow'); 
+				$('html, body').animate({ scrollTop: 0 }, 'slow');
 			}
 			]]></add>
 		</operation>

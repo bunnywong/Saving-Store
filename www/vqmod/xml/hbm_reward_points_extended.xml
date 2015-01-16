@@ -279,7 +279,8 @@
 			<add><![CDATA[
 			if ($product_info['points_only_purchase']) {
 				if (!$this->customer->isLogged()) {
-					$this->session->data['warning'] = $this->language->get('error_pop_login_required');
+					// $this->session->data['warning'] = $this->language->get('error_pop_login_required');
+					$this->session->data['warning'] = '請先登入（使用積分）';
 					$json['login_required'] = true;
 					$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/login', '', 'SSL'));
 				} else {
@@ -377,11 +378,12 @@
 		</operation>
 	</file>
 
-	<file name="catalog/language/english/checkout/cart.php">
+	<file name="catalog/language/zh-HK/checkout/cart.php">
 		<operation> <!-- ADD POINTS ONLY PURCHASE ERROR MESSAGE -->
 			<search position="after"><![CDATA[?php]]></search>
 			<add><![CDATA[
-			$_['error_pop_cart_insufficient_points'] = 'One or more products in your shopping cart can only be purchased with reward points and you do not have enough to complete this transaction.';
+			// $_['error_pop_cart_insufficient_points'] = 'One or more products in your shopping cart can only be purchased with reward points and you do not have enough to complete this transaction.';
+			$_['error_pop_cart_insufficient_points'] = '部份產品只能以積分換領，你所存有之積分並未足以支付是次交易';
 			$_['error_pop_login_required']           = 'The product that you attempted to add to your cart can only be purchased with reward points.  You must be logged in to add this item to your shopping cart.';
 			$_['error_pop_insufficient_points']      = 'This item can only be purchased with reward points.  Currently you do no have enough points to complete purchase.';
 			$_['error_pop_insufficient_points_url']  = '  <a href="%s">Click here to purchase additional points</a>.';
@@ -675,14 +677,14 @@
 		</operation>
 		<operation> <!-- ALTER ADD JAVASCRIPT FOR SPECIAL INPUT TO INCLUDE REWARD POINTS -->
 			<search position="after"><![CDATA[name="product_special[' + special_row + '][price]" value="" /></td>';]]></search>
-			<add><![CDATA[	html += '    <td class="right"><input type="text" name="product_special[' + special_row + '][points_special]" value="" /></td>';]]></add>
+			<add><![CDATA[	html += '    <td class="right"><input type="text" name="product_special[' + special_row + '][points_special]" value="" />888</td>';]]></add>
 		</operation>
 
 		<operation> <!-- ADD 'SET_PRINT_CREDITS', 'ACCOUNT_CREDIT_AMOUNT', 'ACCOUNT_REWARD_AMOUNT' TO FORM -->
 			<search position="after" offset="1"><![CDATA[<input type="text" name="points"]]></search>
 			<add><![CDATA[
 			<tr>
-			  <td><?php echo $entry_points_only_purchase; ?></td>
+			  <td>只許積分購買<?php // echo $entry_points_only_purchase; ?></td>
 			  <td><select name="points_only_purchase">
 				  <option value="1" <?php echo ($points_only_purchase) ? 'selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
 				  <option value="0" <?php echo (!$points_only_purchase) ? 'selected="selected"' : ''; ?>><?php echo $text_no; ?></option>
