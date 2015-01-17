@@ -258,8 +258,12 @@
 				$points = $this->customer->getRewardPoints();
 				$points_total = 0;
 				foreach ($this->cart->getProducts() as $product) {
+					// My Script
 					if ($product['points']) {
-						$points_total += $product['points'];
+						if( $product['points_only_purchase'])
+							$points_total += $product['points'];
+						else
+							$points_total += $product['points'] / 2;
 					}
 				}
 				if ($points && $points_total) {
@@ -359,9 +363,13 @@
 				$points = $this->customer->getRewardPoints();
 				$points_total = 0;
 				foreach ($this->cart->getProducts() as $product) {
+					// My Script
 					if ($product['points']) {
-						$points_total += $product['points'];
-					}
+						if( $product['points_only_purchase'])
+							$points_total += $product['points'];
+						else
+							$points_total += $product['points'] / 2;
+						}
 				}
 				if ($points && $points_total)
 					$this->session->data['reward'] = min($points, $points_total);
