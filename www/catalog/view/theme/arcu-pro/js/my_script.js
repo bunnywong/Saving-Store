@@ -607,9 +607,6 @@ $(function () {
 		if( $('body').hasClass('account_logout') )
 			$('body').account_logout();
 
-		if( $('body').hasClass('success') )
-			$('body').g2redeem();
-
 		if( $('body').hasClass('account_editaccount') )
 			$('body').account_editaccount();
 
