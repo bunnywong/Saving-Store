@@ -82,7 +82,7 @@
 					<span class="price-tax"><?php echo $text_tax; ?> <?php echo $tax; ?></span>
 					<?php } ?>
 					<?php if ($points) { ?>
-					<span class="reward"><?php echo $text_points; ?> <?php echo $points; ?></span>
+					<span class="reward"><?php echo $text_points; ?> <?php echo $points / 2; ?></span>
 					<?php } ?>
 <!--
 					<?php if ($discounts) { ?>

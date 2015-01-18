@@ -180,7 +180,7 @@
 
 		$('.btn_export_csv').click(function(){
 			$('#form_csv').submit();
-		})
+		});
 
 	}// !$.fn.admin_sale_customer_listview
 
