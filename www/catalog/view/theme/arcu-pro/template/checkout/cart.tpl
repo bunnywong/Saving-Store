@@ -377,3 +377,10 @@ $('select[name=\'country_id\']').trigger('change');
 //--></script>
 <?php } ?>
 <?php echo $footer; ?>
+
+<?php
+	// http://blog.arvixe.com/deleting-from-the-cart-open-cart/
+/*	echo '<pre>';
+	echo var_dump($this->session->data['cart']);
+	echo '</pre>';*/
+?>

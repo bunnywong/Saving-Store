@@ -22,21 +22,42 @@
       <div class="buttons"><a onclick="$('form').attr('action', '<?php echo $approve; ?>'); $('form').submit();" class="button"><?php echo $button_approve; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').attr('action', '<?php echo $delete; ?>'); $('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
     </div>
     <div class="content">
-      <form  action="/admin/index.php" method="get" enctype="multipart/form-data" id="form_csv">
+       <form  action="/admin/index.php" method="get" enctype="multipart/form-data" id="member_form_csv">
         <input type="hidden" name="route" value="sale/customer/csv">
         <input type="hidden" name="token" value="<?= $token; ?>">
-        <table class="list my_search">
+        <table class="list my_search tbl_csv">
           <tbody>
             <tr>
               <td>
-                <span><strong>Baby From</strong></span>
+                <span><strong>添加日期 - 由</strong></span>
+                <input type="text" name="member_from" class="date" value="" />
+              </td><td>
+                <span><strong>添加日期 - 至</strong></span>
+                <input type="text" name="member_to" class="date" value="" />
+              </td>
+              <td>
+                <a class="button btn_member">Export CSV</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+
+      <form  action="/admin/index.php" method="get" enctype="multipart/form-data" id="bb_form_csv">
+        <input type="hidden" name="route" value="sale/customer/csv">
+        <input type="hidden" name="token" value="<?= $token; ?>">
+        <table class="list my_search tbl_csv">
+          <tbody>
+            <tr>
+              <td>
+                <span><strong>預產期 - 由</strong></span>
                 <input type="text" name="filter_bb_from" class="baby_date root mtz-monthpicker-widgetcontainer" value="" />
               </td><td>
-                <span><strong>Baby To</strong></span>
+                <span><strong>預產期 - 至</strong></span>
                 <input type="text" name="filter_bb_to" class="baby_date root mtz-monthpicker-widgetcontainer" value="" />
               </td>
               <td>
-                <a class="button btn_export_csv">Export CSV</a>
+                <a class="button btn_bb">Export CSV</a>
               </td>
             </tr>
           </tbody>
@@ -247,7 +268,7 @@ function filter() {
 //--></script>
 <script type="text/javascript"><!--
 $(document).ready(function() {
-	$('#date').datepicker({dateFormat: 'yy-mm-dd'});
+	$('#date, .date').datepicker({dateFormat: 'yy-mm-dd'});
 });
 //--></script>
 

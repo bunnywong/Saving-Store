@@ -43,44 +43,49 @@ class ControllerSaleCustomer extends Controller {
   	public function csv() {
   		$this->load->model('sale/customer');
 
-	  	if (isset($this->request->get['filter_bb_from'])) {
+	  	if( isset($this->request->get['filter_bb_from']) ) {
 
 		  	$filter_bb_from = $this->request->get['filter_bb_from'];
 		  	$filter_bb_to	= $this->request->get['filter_bb_to'];
 			$csv_data 		= $this->model_sale_customer->getCustomersCsv($filter_bb_from, $filter_bb_to);
-			// Filter array
 
-			$this_unset = array(
-								'store_id', 'lastname', 'fax', 'password',
-								'salt', 'cart', 'wishlist', 'newsletter',
-								'address_id', 'customer_group', 'customer_group_id',
-								'token', 'language_id',
-								'status', 'approved'
-								);
-			//echo var_dump($this_unset);
+		}elseif( isset($this->request->get['member_from']) ){
 
-			foreach(array_keys($csv_data) as $k){
-				foreach(array_keys($this_unset) as $k2){
-					unset($csv_data[$k][$this_unset[$k2]]);
-				}
+			$member_from = $this->request->get['member_from'];
+		  	$member_to	= $this->request->get['member_to'];
+			$csv_data 		= $this->model_sale_customer->getCustomersCsv($member_from, $member_to);
+
+		}
+
+		// Filter array
+		$this_unset = array(
+							'store_id', 'lastname', 'fax', 'password',
+							'salt', 'cart', 'wishlist', 'newsletter',
+							'address_id', 'customer_group', 'customer_group_id',
+							'token', 'language_id',
+							'status', 'approved'
+							);
+		//echo var_dump($this_unset);
+
+		foreach(array_keys($csv_data) as $k){
+			foreach(array_keys($this_unset) as $k2){
+				unset($csv_data[$k][$this_unset[$k2]]);
 			}
+		}
 
+  		//$csv_data = unset(array(1,2));
+		//$csv_data = array_values($csv_data);
 
-	  		//$csv_data = unset(array(1,2));
-			//$csv_data = array_values($csv_data);
-
-			// Debug
-			$debug = 0;
-			if($debug){
-				echo '<meta charset="UTF-8">';
-				echo '<pre>';
-			  	echo  var_dump($csv_data);
-			  	echo '</pre>';
-		  	}else{
-		  		$this->outputCSV($csv_data);
-		  		//$this->redirect($this->url->link('sale/customer', 'token=' . $this->session->data['token'] . $url, 'SSL'));
-		  	}
-
+		// Debug
+		$debug = 0;
+		if($debug){
+			echo '<meta charset="UTF-8">';
+			echo '<pre>';
+		  	echo  var_dump($csv_data);
+		  	echo '</pre>';
+	  	}else{
+	  		$this->outputCSV($csv_data);
+	  		//$this->redirect($this->url->link('sale/customer', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 	  	}
   	}
 

@@ -178,8 +178,12 @@
 
 		$('.baby_date').my_date_picker();
 
-		$('.btn_export_csv').click(function(){
-			$('#form_csv').submit();
+		$('.btn_bb').click(function(){
+			$('#bb_form_csv').submit();
+		});
+
+		$('.btn_member').click(function(){
+			$('#member_form_csv').submit();
 		});
 
 	}// !$.fn.admin_sale_customer_listview

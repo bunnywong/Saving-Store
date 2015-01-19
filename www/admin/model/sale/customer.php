@@ -71,7 +71,7 @@ class ModelSaleCustomer extends Model {
 		// Checkbox issue
 		if( $csv_title == 'KnowUsForm' || $csv_title == 'AlwaysBuyPlace' )
 			$field_style = 'checkbox';
-		if(  $csv_title == 'BabyNickName' || $csv_title == 'BirthMonth' )
+		if( $csv_title == 'BabyNickName' || $csv_title == 'BirthMonth' )
 			$field_style = 'text';
 
  //		echo $field_style.' '.$option_title.' - '.$csv_title.'<br>';	// DEBUG
@@ -119,7 +119,7 @@ class ModelSaleCustomer extends Model {
 		return $str;
 	}// !getOptionSql()
 
-	public function getCustomersCsv( $filter_bb_from, $filter_bb_to ) {
+	public function getCustomersCsv( $date_from, $date_to ) {
 		// Fields declear
 		$fields_query = array(
 						// $csv_title , $option_title
@@ -132,38 +132,45 @@ class ModelSaleCustomer extends Model {
 						'HospitalClass' => '出生醫院 - 類別',
 						'PublicHospitalName1' => '出生公立醫院 - 名稱',
 						'PrivateHospitalName2' => '出生私家醫院 - 名稱',
-						'BabyNickName' => '別名',	// THIS
+						'BabyNickName' => '別名',
 						'BabyAge'		=> '年齡',
 						'BabySex'		=> '性別',
 					);
 
-		// Months handle
-		$start    = (new DateTime($filter_bb_from))->modify('first day of this month');
-		$end      = (new DateTime($filter_bb_to))->modify('+1 month');
-		$interval = DateInterval::createFromDateString('1 month');
-		$period   = new DatePeriod($start, $interval, $end);
-		$months   = array();
+		// Baby date
+		if (isset($this->request->get['filter_bb_from'])){
+			// Months handle
+			$start    = (new DateTime($date_from))->modify('first day of this month');
+			$end      = (new DateTime($date_to))->modify('+1 month');
+			$interval = DateInterval::createFromDateString('1 month');
+			$period   = new DatePeriod($start, $interval, $end);
+			$months   = array();
 
-		foreach ($period as $dt)
-		    $months[] = "'".$dt->format("Y-m")."'";
-//		foreach ($months as $m)	echo $m.', ';	// DEBUG
-		$period = " value= " . implode(" OR value=", $months);
+			foreach ($period as $dt)
+			    $months[] = "'".$dt->format("Y-m")."'";
+	//		foreach ($months as $m)	echo $m.', ';	// DEBUG
+			$period = " value= " . implode(" OR value=", $months);
+			$period = " AND c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "xcustom_customer_option WHERE customer_id = c.customer_id AND name LIKE '%出生日期%' AND ".$period.")";
+		}else{
+			// Member
+			$period = " AND (date_added BETWEEN '$date_from' AND '$date_to')";
+		}
 
 		// SQL code
 		$sql  = "SELECT *, ";
 		$sql .= "CONCAT(c.firstname, ' ', c.lastname) AS name";
 		$sql .= ", cgd.name AS customer_group ";
 
-		// Fields Query
+		// Query - Fields
 		foreach ($fields_query as $csv_title => $web_title)
 			$sql .= $this->getOptionSql($web_title, trim($csv_title));
 
 		$sql .= "FROM " . DB_PREFIX . "customer c ";
 		$sql .= "LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";
-		$sql .= "AND c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "xcustom_customer_option WHERE customer_id = c.customer_id AND name LIKE '%出生日期%' AND $period ) ";
+		$sql .= $period;
 
 		$sql .= ' ORDER BY BirthMonth ASC ';
-		$sql .= ' LIMIT 0, 10';
+		$sql .= ' LIMIT 0, 200';
 
 		$query = $this->db->query($sql);
 //		echo '<p>'.$sql.'</p>';	// DEBUG
