@@ -545,6 +545,15 @@
 		});
 	}// $.fn.account_address
 
+	$.fn.account_myorder = function() {
+		// Hide coupon order
+		$('table.list_view > tbody > tr > td:last-child').each(function(){
+			var this_str = $.trim($(this).text());
+			if( this_str == '$0.00')
+				$(this).parent().parent().fadeOut('fast');
+		});
+	}// $.fn.account_myorder
+
 	$.fn.account_return_customer = function() {
 		if( $.trim($('.warning').text()) == '確認密碼不符' )
 			$('input[name="password2').after('<br><span class="required">確認密碼不符</span>');
@@ -619,6 +628,9 @@ $(function () {
 
 		if( $('body').hasClass('account_address') )
 			$('body').account_address();
+
+		if( $('body').hasClass('account_myorder') )
+			$('body').account_myorder();
 
 		if( $('body').hasClass('account_return_customer') )
 			$('body').account_return_customer();
