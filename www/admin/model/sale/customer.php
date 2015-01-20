@@ -151,9 +151,11 @@ class ModelSaleCustomer extends Model {
 	//		foreach ($months as $m)	echo $m.', ';	// DEBUG
 			$period = " value= " . implode(" OR value=", $months);
 			$period = " AND c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "xcustom_customer_option WHERE customer_id = c.customer_id AND name LIKE '%出生日期%' AND ".$period.")";
+			$order_by = ' ORDER BY BirthMonth ASC ';
 		}else{
 			// Member
 			$period = " AND (date_added BETWEEN '$date_from' AND '$date_to')";
+			$order_by = ' ORDER BY date_added ASC ';
 		}
 
 		// SQL code
@@ -169,8 +171,8 @@ class ModelSaleCustomer extends Model {
 		$sql .= "LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";
 		$sql .= $period;
 
-		$sql .= ' ORDER BY BirthMonth ASC ';
-		$sql .= ' LIMIT 0, 200';
+		$sql .= $order_by;
+//		$sql .= ' LIMIT 0, 200';
 
 		$query = $this->db->query($sql);
 //		echo '<p>'.$sql.'</p>';	// DEBUG
