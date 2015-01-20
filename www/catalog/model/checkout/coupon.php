@@ -1,5 +1,9 @@
 <?php
 class ModelCheckoutCoupon extends Model {
+	public function renderCoupon($data) {
+		$this->db->query("INSERT INTO " . DB_PREFIX . "coupon SET name = '" . $this->db->escape($data['name']) . "', code = '" . $this->db->escape($data['code']) . "', discount = '" . (float)$data['discount'] . "', type = '" . $this->db->escape($data['type']) . "', total = '" . (float)$data['total'] . "', logged = '" . (int)$data['logged'] . "', shipping = '" . (int)$data['shipping'] . "', date_start = '" . $this->db->escape($data['date_start']) . "', date_end = '" . $this->db->escape($data['date_end']) . "', uses_total = '" . (int)$data['uses_total'] . "', uses_customer = '" . (int)$data['uses_customer'] . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
+	}
+
 	public function getCoupon($code) {
 		$status = true;
 
@@ -44,10 +48,10 @@ class ModelCheckoutCoupon extends Model {
 
 			foreach ($coupon_category_query->rows as $category) {
 				$coupon_category_data[] = $category['category_id'];
-			}			
-			
+			}
+
 			$product_data = array();
-			
+
 			if ($coupon_product_data || $coupon_category_data) {
 				foreach ($this->cart->getProducts() as $product) {
 					if (in_array($product['product_id'], $coupon_product_data)) {
@@ -63,9 +67,9 @@ class ModelCheckoutCoupon extends Model {
 							$product_data[] = $product['product_id'];
 
 							continue;
-						}						
+						}
 					}
-				}	
+				}
 
 				if (!$product_data) {
 					$status = false;

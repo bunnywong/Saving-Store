@@ -756,13 +756,21 @@
 
 // --------------------------------------------------
 	// Cart
-
 	body.cart{
-/*		h2,
-		.cart-module,
-		#content > div.box > div.content,
-		.reward
-			{display: none;}*/
+		h2,
+		//.cart-module,
+		//#content > div.box > div.content,
+		.reward,
+		.this_hidden
+			{display: none;}
+
+		#layer_mask{
+			z-index: 999;
+			background: white;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+		}
 
 		table tbody td.quantity{
 			text-align: right;

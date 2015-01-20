@@ -18,6 +18,20 @@ class ControllerPaymentCod extends Controller {
 		$this->load->model('checkout/order');
 
 		$this->model_checkout_order->confirm($this->session->data['order_id'], $this->config->get('cod_order_status_id'));
+
+		// Clear: coupon_in_process
+		unset($this->session->data['coupon_in_process']);
+
+		// Apply old cart(without coupon)
+		unset($this->session->data['cart']);
+		$this->session->data['cart'] = $this->session->data['temp_cart'];
+		unset($this->session->data['temp_cart']);
+
+		// Apply coupon
+		$this->session->data['coupon'] = $this->session->data['next_coupon'];
+
+		// Redirect to checkout step // TEMP ***
+		$this->redirect($this->url->link('checkout/cart'));	// DEBUG
 	}
 }
 ?>

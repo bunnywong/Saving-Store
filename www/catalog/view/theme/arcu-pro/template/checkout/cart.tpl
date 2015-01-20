@@ -64,6 +64,10 @@
 								<?php if ($product['reward']) { ?>
 								<div> <small class="reward"><?php echo $product['reward']; ?></small>
 									<?php } ?>
+									<?php
+										// Debug
+									 	echo '<br>'.$product['product_id'].' / '.$product['category_id'].' - '.$product['category_name']['name'];
+									?>
 								</div></td>
 							<td class="model"><?php echo $product['model']; ?></td>
 							<td class="quantity"><input type="text" class="qty" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
@@ -105,7 +109,7 @@
 				</tr>
 				<?php } ?>
 				<?php if ($voucher_status) { ?>
-				<tr class="highlight hidden">
+				<tr class="highlight this_hidden">
 					<td><?php if ($next == 'voucher') { ?>
 						<input type="radio" name="next" value="voucher" id="use_voucher" checked="checked" />
 						<?php } else { ?>
@@ -115,7 +119,7 @@
 				</tr>
 				<?php } ?>
 				<?php if ($reward_status) { ?>
-				<tr class="highlight hidden">
+				<tr class="highlight this_hidden">
 					<td><?php if ($next == 'reward') { ?>
 						<input type="radio" name="next" value="reward" id="use_reward" checked="checked" />
 						<?php } else { ?>
@@ -125,7 +129,7 @@
 				</tr>
 				<?php } ?>
 				<?php if ($shipping_status) { ?>
-				<tr class="highlight hidden">
+				<tr class="highlight this_hidden">
 					<td><?php if ($next == 'shipping') { ?>
 						<input type="radio" name="next" value="shipping" id="shipping_estimate" checked="checked" />
 						<?php } else { ?>
@@ -376,11 +380,6 @@ $('select[name=\'country_id\']').trigger('change');
 
 //--></script>
 <?php } ?>
+
 <?php echo $footer; ?>
 
-<?php
-	// http://blog.arvixe.com/deleting-from-the-cart-open-cart/
-/*	echo '<pre>';
-	echo var_dump($this->session->data['cart']);
-	echo '</pre>';*/
-?>

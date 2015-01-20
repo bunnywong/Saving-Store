@@ -1015,6 +1015,7 @@ $('#button-payment-method').live('click', function() {
 					$('.warning').fadeIn('slow');
 				}
 			} else {
+				// Load last step
 				$.ajax({
 					url: 'index.php?route=checkout/xconfirm',
 					dataType: 'html',
