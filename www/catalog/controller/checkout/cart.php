@@ -824,15 +824,18 @@ class ControllerCheckoutCart extends Controller {
 		// Time
 		$date_start = $date_end = new DateTime();
 		$date_start->setTimezone(new DateTimeZone('Asia/Hong_Kong'));
+		$date_end->setTimezone(new DateTimeZone('Asia/Hong_Kong'));
 		$hour = $date_start->format('H');
+		$date_start = $date_start->modify('-1 day');
 		$date_start = $date_start->format('Y-m-d');
+
 
 		$date_end->setTimezone(new DateTimeZone('Asia/Hong_Kong'));
 
 		if( $hour == 23 ){
-			$date_end = $date_end->modify('+2 day');
+			$date_end = $date_end->modify('+3 day');
 		}else{
-			$date_end = $date_end->modify('+1 day');
+			$date_end = $date_end->modify('+2 day');
 		}
 
 		$date_end	= $date_end->format('Y-m-d');
