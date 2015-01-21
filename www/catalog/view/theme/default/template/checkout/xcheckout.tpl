@@ -41,14 +41,14 @@
     </div>
     <?php } else { ?>
 
-    <div id="reward">
+    <div id="redeem">
       <div class="checkout-heading"><span>第 2 步：積分換領</span></div>
       <div class="checkout-content">
-      	<div class="reward_btn_wrapper">
+      	<div class="redeem_btn_wrapper">
       		<button onclick="location.href='/index.php?route=product/category&path=61'">積分換領 - 產品</button>
       		<button onclick="location.href='/index.php?route=product/category&path=62'">積分換領 - 折扣</button>
       	</div>
-      	<input type="button" value="繼續" id="button-reward" class="button">
+      	<input type="button" value="繼續" id="button-redeem" class="button">
       </div>
     </div>
 
@@ -120,19 +120,19 @@ $(document).ready(function() {
 	<?php }else{ ?>
 
 	// Step 2.0
-	$('#reward .checkout-content').slideDown('slow', function(){
-		var skip_reward = localStorage.getItem('skip_reward');
+	$('#redeem .checkout-content').slideDown('slow', function(){
+		var skip_redeem = localStorage.getItem('skip_redeem');
 
-		if( skip_reward ){
-			$('#button-reward').trigger('click');
-			localStorage.setItem('skip_reward', 0);
+		if( skip_redeem ){
+			$('#button-redeem').trigger('click');
+			localStorage.setItem('skip_redeem', 0);
 		}
 	});
 
-	$('#button-reward').click(function(){
-		$('#reward .checkout-content').slideUp('slow');
-		if( $('#reward > .checkout-heading a').length == 0 )
-			$('#reward > .checkout-heading').append('<a>更新 »</a>');
+	$('#button-redeem').click(function(){
+		$('#redeem .checkout-content').slideUp('slow');
+		if( $('#redeem > .checkout-heading a').length == 0 )
+			$('#redeem > .checkout-heading').append('<a>更新 »</a>');
 
 		// Step 3
 		$.ajax({

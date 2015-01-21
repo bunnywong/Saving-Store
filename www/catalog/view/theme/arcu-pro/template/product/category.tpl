@@ -123,13 +123,13 @@
 		<?php else: ?>
 			<?php
 				$this->load->model('catalog/category');
-				$cid = $this->model_catalog_category->getCategoryId($products[0]['product_id']);
-				$catalog = $this->model_catalog_category->getCategory($cid);
-				$catalog_name = strtolower($catalog['name']);
+				$cid 			= $this->model_catalog_category->getCategoryId($products[0]['product_id']);
+				$catalog 		= $this->model_catalog_category->getCategory($cid);
+				$catalog_name 	= strtolower($catalog['name']);
 
-				if( $catalog_name  == 'coupon' || $catalog_name  == 'reward' )
-					echo "<script>localStorage.setItem('skip_reward', 1);</script>";
-
+				// Hardcode
+				if( $catalog_name  == 'coupon' || $catalog_name  == 'redeem' )
+					echo "<script>localStorage.setItem('skip_redeem', 1);</script>";
 			?>
 		<?php endif; ?>
 

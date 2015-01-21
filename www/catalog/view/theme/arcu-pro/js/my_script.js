@@ -357,10 +357,11 @@
 
 		//  + checkout
 		$('#buy_and_checkout').click(function(){
+			var href_tail = $(this).attr('data-href');
 			do_package();
 
 			setTimeout(function(){
-				window.location = 'index.php?route=checkout/checkout';
+				window.location = 'index.php?route=checkout/' + href_tail;
 			},  1000)
 		});
 
@@ -487,7 +488,7 @@
 		if( is_visited_cart ){
 			localStorage.removeItem("visited_cart");
 			$('.btn_continue').attr('href', 'index.php?route=checkout/checkout');	// edit
-			// Todo: Skip reward step
+			// Todo: Skip redeem step
 		}
 
 	}// !g2redeem

@@ -5,6 +5,23 @@
 	var offer_package_qty  = 0;
 </script>
 
+<?php
+	$this->load->model('catalog/category');
+
+	$cid 			= $this->model_catalog_category->getCategoryId($product_id);
+	$catalog		= $this->model_catalog_category->getCategory($cid);
+	$catalog_name 	= strtolower($catalog['name']);
+
+	if( $catalog_name  == 'coupon' )
+		$product_type = 'coupon';
+	elseif( $catalog_name  == 'redeem' )
+		$product_type = 'redeem';
+	else
+		$product_type = 'regular';
+
+	// echo $product_type;	// DEBUG
+?>
+
 <?php echo $column_left; ?><?php echo $column_right; ?>
 
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/detail_view.css" />
@@ -305,11 +322,26 @@
 					<?php if( $points == '' OR $user_points >= $points ): ?>
 						<div class="cart">
 							<div>
-								<button class="button" id="button-cart" data-hover="<?php echo $button_cart; ?>">
-									<span class="icon-basket-light"><?php echo $button_cart; ?></span>
-								</button>
-								<button class="button" id="buy_and_checkout" data-hover="直接結帳">
-									<span class="icon-basket-light">直接結帳</span>
+								<?php if( $product_type == 'regular'): ?>
+									<button class="button" id="button-cart" data-hover="<?php echo $button_cart; ?>">
+										<span class="icon-basket-light"><?php echo $button_cart; ?></span>
+									</button>
+								<?php endif; ?>
+								<?php
+									if( $product_type == 'regular')
+										$btn_r = '直接結帳';
+									else
+										$btn_r = '換領';
+
+									if( $product_type == 'coupon')
+										$href = 'cart';	// For auto apply process
+									else
+										$href = 'checkout';
+								?>
+								<button class="button" id="buy_and_checkout" data-hover="<?= $btn_r; ?>" data-href="<?= $href; ?>">
+									<span class="icon-basket-light">
+										<?= $btn_r; ?>
+									</span>
 								</button>
 							</div>
 							<div> <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><span class="icon-wishlist-grey"><?php echo $button_wishlist; ?></span></a> <a class="button" onclick="addToCompare('<?php echo $product_id; ?>');"><span class="icon-compare-grey"><?php echo $button_compare; ?></span></a>
@@ -564,6 +596,7 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 <?php } ?>
 <?php } ?>
 <?php } ?>
+
 <script type="text/javascript"><!--
 $('#review .pagination a').live('click', function() {
 	$('#review').fadeOut('slow');
@@ -625,6 +658,8 @@ $(document).ready(function() {
 		timeFormat: 'h:m'
 	});
 	$('.time').timepicker({timeFormat: 'h:m'});
+
+	// ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 });
 //--></script>
