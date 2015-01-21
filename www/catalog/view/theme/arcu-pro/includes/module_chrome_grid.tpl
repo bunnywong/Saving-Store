@@ -1,3 +1,11 @@
+<?php
+	$this->load->model('catalog/category');
+	$catalog_name = $this->model_catalog_category->getCategory($this->model_catalog_category->getCategoryId($product['product_id']))['name'];
+	$catalog_name = strtolower($catalog_name);
+
+	//if( $catalog_name != 'redeem' ):
+?>
+
 <a href="<?php echo $product['href']; ?>">
 	<div data-product-id="<?php echo $product['product_id']; ?>" style="width: <?php echo $setting['image_width'] + 52; ?>px">
 		<input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>" />
@@ -194,3 +202,4 @@
 		<?php } ?>
 	</div>
 </a>
+<?php //endif; ?>

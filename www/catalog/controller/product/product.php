@@ -436,6 +436,7 @@ echo '</pre>';*/
 
 				$this->data['products'][] = array(
 					'product_id' => $result['product_id'],
+					'category_name'=> $this->model_catalog_category->getCategory($this->model_catalog_category->getCategoryId($result['product_id']))['name'],
 					'thumb'   	 => $image,
 					'name'    	 => $result['name'],
 					'price'   	 => $price,

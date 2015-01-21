@@ -6,6 +6,7 @@
 </script>
 
 <?php
+	// Todo: MVC
 	$this->load->model('catalog/category');
 
 	$cid 			= $this->model_catalog_category->getCategoryId($product_id);
