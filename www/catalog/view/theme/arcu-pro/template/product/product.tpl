@@ -130,7 +130,7 @@
 	if( $text_points_only_purchase )
 		$points = $price;	// Initial points only purchase $points is empty
 ?>
-					<?php if( $stock_qty != 0): ?>
+					<?php if( $stock_qty != 0 && $product_type != 'coupon' ): ?>
 						<?php if( $points == '' OR $user_points >= $points ): ?>
 							<span class="qty_container">
 								<span><?php echo $text_qty; ?></span>
