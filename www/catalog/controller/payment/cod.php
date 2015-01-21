@@ -30,8 +30,9 @@ class ControllerPaymentCod extends Controller {
 		// Apply coupon
 		$this->session->data['coupon'] = $this->session->data['next_coupon'];
 
-		// Redirect to checkout step // TEMP ***
-		$this->redirect($this->url->link('checkout/cart'));	// DEBUG
+		// Redirect to checkout step
+		//$this->redirect($this->url->link('checkout/cart'));	// DEBUG
+		$this->redirect($this->url->link('checkout/checkout'));
 	}
 }
 ?>

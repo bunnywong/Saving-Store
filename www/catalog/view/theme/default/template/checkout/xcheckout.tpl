@@ -40,10 +40,23 @@
       <div class="checkout-content"></div>
     </div>
     <?php } else { ?>
+
+    <div id="reward">
+      <div class="checkout-heading"><span>第 2 步：積分換領</span></div>
+      <div class="checkout-content">
+      	<div class="reward_btn_wrapper">
+      		<button onclick="location.href='/index.php?route=product/category&path=61'">積分換領 - 產品</button>
+      		<button onclick="location.href='/index.php?route=product/category&path=62'">積分換領 - 折扣</button>
+      	</div>
+      	<input type="button" value="繼續" id="button-reward" class="button">
+      </div>
+    </div>
+
     <div id="payment-address">
       <div class="checkout-heading"><span><?php echo $text_checkout_payment_address; ?></span></div>
       <div class="checkout-content"></div>
     </div>
+
     <?php } ?>
     <?php if ($shipping_required) { ?>
     <div id="shipping-address">
@@ -105,22 +118,40 @@ $(document).ready(function() {
 	<?php if(isset($quickconfirm)) { ?>
 		quickConfirm();
 	<?php }else{ ?>
-	// Step 2
-	$.ajax({
-		url: 'index.php?route=checkout/xpayment_address',
-		dataType: 'html',
-		success: function(html) {
-			$('#payment-address .checkout-content').html(html);
 
-			$('#payment-address .checkout-content').slideDown('slow');
+	// Step 2.0
+	$('#reward .checkout-content').slideDown('slow', function(){
+		var skip_reward = localStorage.getItem('skip_reward');
 
-			// My Script: Skip step 2
-			$('#button-payment-address').trigger('click');
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		if( skip_reward ){
+			$('#button-reward').trigger('click');
+			localStorage.setItem('skip_reward', 0);
 		}
 	});
+
+	$('#button-reward').click(function(){
+		$('#reward .checkout-content').slideUp('slow');
+		if( $('#reward > .checkout-heading a').length == 0 )
+			$('#reward > .checkout-heading').append('<a>更新 »</a>');
+
+		// Step 3
+		$.ajax({
+			url: 'index.php?route=checkout/xpayment_address',
+			dataType: 'html',
+			success: function(html) {
+				$('#payment-address .checkout-content').html(html);
+
+				$('#payment-address .checkout-content').slideDown('slow');
+
+				// My Script: Skip step 3
+				$('#button-payment-address').trigger('click');
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	});
+
 	<?php } ?>
 });
 <?php } ?>
@@ -304,7 +335,7 @@ $('#button-register').live('click', function() {
 							$('#payment-address .checkout-content').slideUp('slow');
 
 							$('#shipping-method .checkout-content').slideDown('slow');
-
+							alert();
 							$('#checkout .checkout-heading a').remove();
 							$('#payment-address .checkout-heading a').remove();
 							$('#shipping-address .checkout-heading a').remove();
@@ -488,7 +519,7 @@ $('#button-payment-address').live('click', function() {
 
 						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
 
-						// This: 第 2 步： 送貨地址
+						// This: 第 3 步： 送貨地址
 						// My Script: Skip step 3
 //						$('#button-shipping-address').trigger('click');
 

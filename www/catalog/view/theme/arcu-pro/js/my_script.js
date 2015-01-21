@@ -487,6 +487,7 @@
 		if( is_visited_cart ){
 			localStorage.removeItem("visited_cart");
 			$('.btn_continue').attr('href', 'index.php?route=checkout/checkout');	// edit
+			// Todo: Skip reward step
 		}
 
 	}// !g2redeem
