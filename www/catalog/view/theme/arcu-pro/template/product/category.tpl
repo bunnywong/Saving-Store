@@ -113,14 +113,26 @@
 		<?php if ($products) { ?>
 		<div class="pagination"><?php echo $pagination; ?></div>
 		<?php } ?>
-		<?php if (!$categories && !$products) { ?>
+		<?php if (!$categories && !$products): ?>
 		<div class="content">
 			<p><?php echo $text_empty; ?></p>
 		</div>
 		<div class="buttons">
 			<div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
 		</div>
-		<?php } ?>
+		<?php else: ?>
+			<?php
+				$this->load->model('catalog/category');
+				$cid = $this->model_catalog_category->getCategoryId($products[0]['product_id']);
+				$catalog = $this->model_catalog_category->getCategory($cid);
+				$catalog_name = strtolower($catalog['name']);
+
+				if( $catalog_name  == 'coupon' || $catalog_name  == 'reward' )
+					echo "<script>localStorage.setItem('skip_reward', 1);</script>";
+
+			?>
+		<?php endif; ?>
+
 	</div>
 	<?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>
