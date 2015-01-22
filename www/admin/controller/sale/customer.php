@@ -503,10 +503,18 @@ class ControllerSaleCustomer extends Controller {
 				'href' => $this->url->link('sale/customer/update', 'token=' . $this->session->data['token'] . '&customer_id=' . $result['customer_id'] . $url, 'SSL')
 			);
 
+$this->load->model('sale/customer_group');
+
+
 			$this->data['customers'][] = array(
 				'customer_id'    => $result['customer_id'],
 				'name'           => $result['name'],
 				'telephone'           => $result['telephone'],
+
+				// My Script
+				'new_gift'           => $this->model_sale_customer->getCustomCheckbox($result['customer_id'], '已贈送禮品（迎新）'),
+				'baby_gift'           => $this->model_sale_customer->getCustomCheckbox($result['customer_id'], '已贈送禮品（預產期）'),
+
 				'email'          => $result['email'],
 				'customer_group' => $result['customer_group'],
 				'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),

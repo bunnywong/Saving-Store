@@ -74,7 +74,7 @@
           </tr>
           </tbody>
         </table>
-        <table class="list">
+        <table class="list main">
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
@@ -88,6 +88,8 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_email; ?>"><?php echo $column_email; ?></a>
                 <?php } ?></td>
+                <td>已送<br>迎新禮品</td>
+              <td>已送<br>預產期禮品</td>
               <td class="left"><?php if ($sort == 'customer_group') { ?>
                 <a href="<?php echo $sort_customer_group; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_customer_group; ?></a>
                 <?php } else { ?>
@@ -122,6 +124,8 @@
               <td></td>
               <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
               <td><input type="text" name="filter_email" value="<?php echo $filter_email; ?>" /></td>
+              <td></td>
+              <td></td>
               <td><select name="filter_customer_group_id">
                   <option value="*"></option>
                   <?php foreach ($customer_groups as $customer_group) { ?>
@@ -177,6 +181,8 @@
                 <?php } ?></td>
               <td class="left"><?php echo $customer['name']; ?></td>
               <td class="left"><?php echo $customer['email']; ?></td>
+              <td class="left"><?php echo $customer['new_gift']; ?></td>
+              <td class="left"><?php echo $customer['baby_gift']; ?></td>
               <td class="left"><?php echo $customer['customer_group']; ?></td>
               <td class="left"><?php echo $customer['status']; ?></td>
               <td class="left"><?php echo $customer['approved']; ?></td>

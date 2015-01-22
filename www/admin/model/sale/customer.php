@@ -747,6 +747,19 @@ public function getCustomerOrderOptions($option_id,$data_in,$order_id) {
 			return  "";
 	}
 
+public function getCustomCheckbox($customer_id, $field_name ) {
+	$query = $this->db->query("SELECT value FROM " . DB_PREFIX . "xcustom_customer_option where customer_id = '.$customer_id.' AND name = '$field_name'");
+
+	// Old customer have no customer-field in DB
+	if( !$query->row )
+		return 'No';
+
+	if( $query->row["value"] )
+		return 'Yes';
+	else
+		return 'No';
+}
+
 public function getCustomOptions($section=0) {
 		$product_option_data = array();
 		$product_option_query = $this->db->query("SELECT * FROM
