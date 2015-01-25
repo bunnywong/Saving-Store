@@ -309,12 +309,17 @@
 			return Math.floor(x) === x;
 		}
 		// ----- ----- ----- ----- -----
-		// Redeem Only
+		// Point Redeem Only
 
-		var str = $('.price-fixed').text();
-			// Ans: 0 or -1
-		if( str.indexOf('$') == -1 )
+		var points = $('.price-fixed').text();
+
+		if( points.indexOf('$') == -1 ){	// Ans: 0 or -1
 			$('.price-fixed').append(' 積分換領');
+
+			if( user_points < points)
+				$('.cart').hide();
+		}
+
 
 		// ----- ----- ----- ----- -----
 		// qty add +

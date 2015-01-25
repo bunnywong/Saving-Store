@@ -320,7 +320,7 @@
 					<?php } ?>
 				</div>
 				<?php } ?>
-
+<?= '<script>var user_points = '.$user_points.'</script>'; ?>
 				<?php if( $stock_qty != 0): ?>
 					<?php if( $points == '' OR $user_points >= $points ): ?>
 						<div class="cart">
