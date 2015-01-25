@@ -90,7 +90,12 @@
 					<?php if ($product['price']) { ?>
 					<div class="price">
 						<?php if (!$product['special']) { ?>
-						<div><span class="price-fixed"><?php echo $product['price']; ?></span></div>
+						<div>
+							<span class="price-fixed">
+								<?= $product['price']; ?>
+								<?= ( strpos($product['price'], '.') ? '' : '積分' ); ?>
+							</span>
+						</div>
 						<?php } else { ?>
 						<div class="special-price"><span class="price-fixed"><?php echo $product['special']; ?></span><span class="price-old"><?php echo $product['price']; ?></span></div>
 						<?php } ?>
