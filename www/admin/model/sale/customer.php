@@ -123,9 +123,11 @@ class ModelSaleCustomer extends Model {
 		// Fields declear
 		$fields_query = array(
 						// $csv_title , $option_title
-						'SentGift'		=> '已贈送禮品',
-						'BirthMonth' 	=> '出生日期 / 預產期 (e.g. 2015-12)',	// Main
 						'Title' 		=> '稱謂',
+						'MyAge'			=> '年齡',
+						'SentNewbieGift'=> '已贈送禮品（迎新）',
+						'SentBBGift'	=> '已贈送禮品（預產期）',
+						'BirthMonth' 	=> '出生日期 / 預產期 (e.g. 2015-12)',	// Main
 						'GoonSize' 		=> 'GOO.N 紙尿片試用裝尺碼',
 						'KnowUsForm'	=> '你從什麼途徑得知思詩樂',
 						'AlwaysBuyPlace'=> '你最常購買嬰兒產品',
@@ -133,7 +135,6 @@ class ModelSaleCustomer extends Model {
 						'PublicHospitalName1' => '出生公立醫院 - 名稱',
 						'PrivateHospitalName2' => '出生私家醫院 - 名稱',
 						'BabyNickName' => '別名',
-						'BabyAge'		=> '年齡',
 						'BabySex'		=> '性別',
 					);
 
@@ -163,16 +164,19 @@ class ModelSaleCustomer extends Model {
 		$sql .= "CONCAT(c.firstname, ' ', c.lastname) AS name";
 		$sql .= ", cgd.name AS customer_group ";
 
+		// Query - Address(included all of shipping)
+		$sql .= " ,(SELECT GROUP_CONCAT(address_1 SEPARATOR '\\n\\r') FROM " . DB_PREFIX . "address ad WHERE ad.customer_id = c.customer_id) AS address ";
+
 		// Query - Fields
 		foreach ($fields_query as $csv_title => $web_title)
 			$sql .= $this->getOptionSql($web_title, trim($csv_title));
 
 		$sql .= "FROM " . DB_PREFIX . "customer c ";
 		$sql .= "LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";
-		$sql .= $period;
 
+		$sql .= $period;
 		$sql .= $order_by;
-//		$sql .= ' LIMIT 0, 200';
+//		$sql .= ' LIMIT 0, 50';	// DEBUG
 
 		$query = $this->db->query($sql);
 //		echo '<p>'.$sql.'</p>';	// DEBUG

@@ -51,10 +51,9 @@ class ControllerSaleCustomer extends Controller {
 
 		}elseif( isset($this->request->get['member_from']) ){
 
-			$member_from = $this->request->get['member_from'];
-		  	$member_to	= $this->request->get['member_to'];
+			$member_from 	= $this->request->get['member_from'];
+		  	$member_to		= $this->request->get['member_to'];
 			$csv_data 		= $this->model_sale_customer->getCustomersCsv($member_from, $member_to);
-
 		}
 
 		// Filter array
@@ -62,8 +61,8 @@ class ControllerSaleCustomer extends Controller {
 							'store_id', 'lastname', 'fax', 'password',
 							'salt', 'cart', 'wishlist', 'newsletter',
 							'address_id', 'customer_group', 'customer_group_id',
-							'token', 'language_id',
-							'status', 'approved'
+							'token', 'language_id', 'firstname',
+							'status', 'approved', 'description'
 							);
 		//echo var_dump($this_unset);
 
@@ -73,9 +72,43 @@ class ControllerSaleCustomer extends Controller {
 			}
 		}
 
-  		//$csv_data = unset(array(1,2));
-		//$csv_data = array_values($csv_data);
+		// Insert subject
+		for( $i = count($csv_data); $i < count($csv_data); $i--){
+			$csv_data[$i+1] = $csv_data[$i];
+		}
 
+		// Setup Title
+		unset($csv_data[0]);
+		$subject = array(
+					'客戶編號',				// customer_id
+					'電郵',					// email
+					'電話',					// telephone
+					'ip',					// 'ip
+					'註冊日期',				// date_added
+					'姓名',					// name
+					'地址',					// address
+					'稱謂',					// Title
+					'客戶年齡群',			// MyAge
+					'禮品（迎新）',			// SentNewbieGift
+					'禮品（預產期）',		// SentBBGift
+					'預產期',				// BirthMonth
+					'GOO.N 紙尿片試用裝',	// GoonSize
+					'得知思詩樂途徑',		// KnowUsForm
+					'最常購買嬰兒產品地方',	// AlwaysBuyPlace
+					'出生醫院 - 類別',		// HospitalClass
+					'出生醫院（公立）',		// PublicHospitalName1
+					'出生醫院（私家）',		// PrivateHospitalName2
+					'子女姓名',				// BabyNickName
+					'子女性別',				// BabySex
+					);
+
+		for($i = 0; $i < count($subject); $i++){
+			$csv_data[0][$i] = $subject[$i];
+		}
+
+		ksort($csv_data);
+
+		// ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 		// Debug
 		$debug = 0;
 		if($debug){
