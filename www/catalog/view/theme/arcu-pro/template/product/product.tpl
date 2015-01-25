@@ -131,9 +131,9 @@
 	if( $text_points_only_purchase )
 		$points = $price;	// Initial points only purchase $points is empty
 ?>
-					<?php if( $stock_qty != 0 && $product_type != 'coupon' ): ?>
+					<?php if( $stock_qty != 0 /*&& $product_type != 'coupon'*/ ): ?>
 						<?php if( $points == '' OR $user_points >= $points ): ?>
-							<span class="qty_container">
+							<span class="qty_container <?= ($product_type == 'coupon' ? 'this_hidden' : ''); ?>">
 								<span><?php echo $text_qty; ?></span>
 								<input id="qty_box" type="text" name="quantity" size="4" value="<?php echo $minimum; ?>" />
 								<div class="btn_qty_wrapper">
