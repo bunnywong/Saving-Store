@@ -3,7 +3,7 @@
 	$catalog_name = $this->model_catalog_category->getCategory($this->model_catalog_category->getCategoryId($product['product_id']))['name'];
 	$catalog_name = strtolower($catalog_name);
 
-	//if( $catalog_name != 'redeem' ):
+	if( $catalog_name != 'redeem' && $catalog_name != 'coupon' ):
 ?>
 
 <a href="<?php echo $product['href']; ?>">
@@ -202,4 +202,4 @@
 		<?php } ?>
 	</div>
 </a>
-<?php //endif; ?>
+<?php endif; ?>
