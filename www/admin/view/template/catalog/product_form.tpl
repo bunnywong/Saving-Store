@@ -1,4 +1,6 @@
 <?php echo $header; ?>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/inputs-ext/wysihtml5/bootstrap-wysihtml5-0.0.2/wysiwyg-color.css"></link>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
 
 <script>
   $('body').addClass('admin_catalog_product_form');
@@ -38,8 +40,8 @@
                   <?php } ?></td>
               </tr>
               <tr>
-                <td><?php echo $entry_meta_description; ?></td>
-                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_description]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea></td>
+                <td><?php //echo $entry_meta_description; ?>Meta 標籤描述 / 產品簡介：</td>
+                <td><textarea id="meta_description" name="product_description[<?php echo $language['language_id']; ?>][meta_description]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea></td>
               </tr>
               <tr>
                 <td><?php echo $entry_meta_keyword; ?></td>
@@ -766,6 +768,41 @@
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
+CKEDITOR.replace('meta_description', {
+  toolbar: [
+      { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
+  { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+  { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+  { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+  '/',
+  { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+  { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+  { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+  { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+  '/',
+  { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+  { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+  { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+  { name: 'others', items: [ '-' ] },
+  { name: 'about', items: [ 'About' ] }
+  ],
+  toolbarGroups : [ { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+  { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+  { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
+  { name: 'forms' },
+  '/',
+  { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+  { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+  { name: 'links' },
+  { name: 'insert' },
+  '/',
+  { name: 'styles' },
+  { name: 'colors' },
+  { name: 'tools' },
+  { name: 'others' },
+  { name: 'about' }]
+});
+
 CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
@@ -1379,4 +1416,7 @@ function addProfile() {
 
 //--></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/inputs-ext/wysihtml5/bootstrap-wysihtml5-0.0.2/wysihtml5-0.3.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/bootstrap-wysihtml5.js"></script>
 <?php echo $footer; ?>

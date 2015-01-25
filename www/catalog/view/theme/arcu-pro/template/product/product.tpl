@@ -124,7 +124,7 @@
 					<?php } ?>
 -->
 					<span class="short_description_title">產品簡介：</span>
-					<pre class="short_description"><?php echo $meta_description; ?></pre><br />
+					<span class="short_description"><?php echo html_entity_decode($meta_description); ?></span><br />
 <?php
 	$user_points = $this->customer->getRewardPoints();
 
