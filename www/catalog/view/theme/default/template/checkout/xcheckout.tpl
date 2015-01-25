@@ -121,13 +121,13 @@ $(document).ready(function() {
 
 	// Step 2.0
 	$('#redeem .checkout-content').slideDown('slow', function(){
-		var skip_redeem = localStorage.getItem('skip_redeem');
-
-		if( skip_redeem ){
+		if( skip_redeem == 1 ){
 			$('#button-redeem').trigger('click');
 			localStorage.setItem('skip_redeem', 0);
 		}
 	});
+
+	var skip_redeem = localStorage.getItem('skip_redeem');
 
 	$('#button-redeem').click(function(){
 		$('#redeem .checkout-content').slideUp('slow');
