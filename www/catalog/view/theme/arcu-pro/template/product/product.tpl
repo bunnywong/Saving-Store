@@ -153,7 +153,9 @@
 /*	echo '$price - '.$price.'<br>';
 	echo '$points - '.$points.'<br>';*/
 ?>
-					<span><?php echo $text_stock; ?></span> <?php echo $stock; ?>
+				<?php if( $product_type != 'coupon'): ?>
+					<span ><?php echo $text_stock; ?></span> <?php echo $stock; ?>
+				<?php endif; ?>
 
 				</div>
 				<?php if ($profiles): ?>
