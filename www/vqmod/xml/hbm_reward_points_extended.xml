@@ -342,6 +342,7 @@
 		<operation> <!-- VALIDATE REWARD POINT ONLY PURCHASES -->
 			<search position="before"><![CDATA[isset($this->error['warning'])]]></search>
 			<add><![CDATA[
+				// This is using
 			$points = $this->customer->getRewardPoints();
 			$points_total = 0;
 			$pop = 0;

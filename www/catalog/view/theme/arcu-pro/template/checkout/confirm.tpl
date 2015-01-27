@@ -1,6 +1,6 @@
 <?php if (!isset($redirect)) { ?>
 
-<div class="checkout-product">
+<div class="checkout-product last-step">
 	<table>
 		<thead>
 			<tr>
@@ -31,8 +31,28 @@
 					<?php endif; ?></td>
 				<td class="model"><?php echo $product['model']; ?></td>
 				<td class="quantity"><?php echo $product['quantity']; ?></td>
-				<td class="price"><?php echo $product['price']; ?></td>
-				<td class="total"><?php echo $product['total']; ?></td>
+				<td class="price">
+					<?php
+						//echo '<pre>'.var_dump($product).'</pre>';
+/*						if( strtolower($product['category_name']) == 'redeem' && $product['price'] != '$0.00' )
+							// point + $
+							echo $this->currency->format($product['price_digi'] / 2);
+						else*/
+							//	Regular
+							echo $product['price'];
+					?>
+				</td>
+				<td class="total">
+					<?php
+						//echo '<pre>'.var_dump($product).'</pre>';
+/*						if( strtolower($product['category_name']) == 'redeem' && $product['total'] != '$0.00' )
+							// point + $
+							echo $this->currency->format($product['price_digi'] / 2);
+						else*/
+							//	Regular
+							echo $product['total'];
+					?>
+				</td>
 			</tr>
 			<?php } ?>
 			<?php foreach ($vouchers as $voucher) { ?>
@@ -46,12 +66,22 @@
 			<?php } ?>
 		</tbody>
 		<tfoot>
+			<?php
+				// DEBUG
+				echo '<pre>';
+				echo  var_dump($totals[1]);	// reward
+				//echo  var_dump($totals);
+				echo '</pre>';
+			?>
 			<?php foreach ($totals as $total) { ?>
-			<tr>
-				<td colspan="2" class="collapse"></td>
-				<td colspan="2" class="price"><?php echo $total['title']; ?>:</td>
-				<td class="total"><?php echo $total['text']; ?></td>
-			</tr>
+				<?php if( $total['code'] != 'reward' ): ?>
+					<tr>
+						<td colspan="2" class="collapse"></td>
+						<td colspan="2" class="price"><?php echo $total['title']; ?>:</td>
+						<td class="total">
+							<?php echo $total['text']; ?></td>
+					</tr>
+				<?php endif; ?>
 			<?php } ?>
 		</tfoot>
 	</table>

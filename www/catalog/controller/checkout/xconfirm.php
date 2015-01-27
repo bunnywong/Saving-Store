@@ -306,9 +306,9 @@ class ControllerCheckoutXConfirm extends Controller {
 				}
 			}
 
-			$data['products'] = $product_data;
-			$data['vouchers'] = $voucher_data;
-			$data['totals'] = $total_data;
+			$data['products'] 	= $product_data;
+			$data['vouchers'] 	= $voucher_data;
+			$data['totals'] 	= $total_data;
 
 			// My Script
 			if( $coupon_in_process ){
@@ -422,19 +422,23 @@ class ControllerCheckoutXConfirm extends Controller {
                     }
                 }
 
-
-
+				$this->load->model('catalog/category');
 
 				$this->data['products'][] = array(
 					'key'                 => $product['key'],
                     'product_id'          => $product['product_id'],
+                    'category_name'=> $this->model_catalog_category->getCategory($this->model_catalog_category->getCategoryId($product['product_id']))['name'],
                     'name'                => $product['name'],
                     'model'               => $product['model'],
                     'option'              => $option_data,
                     'quantity'            => $product['quantity'],
                     'subtract'            => $product['subtract'],
                     'price'               => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),
+                    'price_digi'               => $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')),
                     'total'               => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity']),
+
+                    'total_digi'               => ($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity']),
+
 					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id']),
 					'recurring'           => $product['recurring'],
                     'profile_name'        => $product['profile_name'],

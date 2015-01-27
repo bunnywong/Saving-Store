@@ -277,6 +277,7 @@ class ControllerCheckoutCart extends Controller {
 					'category_name'                 => $this->model_catalog_category->getCategory($this->model_catalog_category->getCategoryId($product['product_id'])),
 
 					'key'                 => $product['key'],
+					'points'                 => $product['points'],
 					'thumb'               => $image,
 					'name'                => $product['name'],
 					'model'               => $product['model'],

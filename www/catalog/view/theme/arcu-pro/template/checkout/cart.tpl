@@ -45,7 +45,7 @@
 						<?php endif; ?>
 						<tr>
 							<td class="image"><?php if ($product['thumb']) { ?>
-								<a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
+								<a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /><?= $product['points'];?></a>
 								<?php } ?></td>
 							<td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
 								<?php if (!$product['stock']) { ?>
@@ -66,7 +66,10 @@
 									<?php } ?>
 									<?php
 										// Debug
-									 	echo '<br>'.$product['product_id'].' / '.$product['category_id'].' - '.$product['category_name']['name'];
+										echo '<pre>';
+										//echo var_dump($product);
+										echo '<pre>';
+									 	//echo '<br>'.$product['product_id'].' / '.$product['category_id'].' - '.$product['category_name']['name'];
 									?>
 								</div></td>
 							<td class="model"><?php echo $product['model']; ?></td>
@@ -74,8 +77,26 @@
 								&nbsp;
 								<input type="image" class="img_update" src="catalog/view/theme/arcu-pro/image/icons/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
 								&nbsp;<a href="<?php echo $product['remove']; ?>"><img src="catalog/view/theme/arcu-pro/image/icons/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
-							<td class="price"><?php echo $product['price']; ?></td>
-							<td class="total"><?php echo $product['total']; ?></td>
+							<td class="price">
+								<?php
+/*									if( strtolower($product['category_name']['name']) == 'redeem' && $product['price'] != '$0.00' )
+										// Point + $
+										echo $this->currency->format(floatval(substr($product['price'], 1)) / 2);
+									else*/
+										// Regular
+										echo $product['price'];
+								?>
+							</td>
+							<td class="total">
+								<?php
+/*									if( strtolower($product['category_name']['name']) == 'redeem' && $product['price'] != '$0.00' )
+										// Point + $
+										echo $this->currency->format(floatval(substr($product['total'], 1)) / 2);
+									else*/
+										// Regular
+										echo $product['total'];
+								?>
+							</td>
 						</tr>
 						<?php } ?>
 						<?php foreach ($vouchers as $vouchers) { ?>
@@ -210,10 +231,12 @@
 		<div class="cart-total">
 			<table id="total">
 				<?php foreach ($totals as $total) { ?>
-				<tr>
-					<td><strong><?php echo $total['title']; ?>:</strong></td>
-					<td class="total"><?php echo $total['text']; ?></td>
-				</tr>
+					<?php if( $total['code'] != 'abc'): // Change to nor 'reward' for - DEBUG ?>
+						<tr>
+							<td><strong><?php echo $total['title']; ?>:</strong></td>
+							<td class="total"><?php echo $total['text']; ?></td>
+						</tr>
+					<?php endif; ?>
 				<?php } ?>
 			</table>
 		</div>

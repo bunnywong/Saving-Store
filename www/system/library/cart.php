@@ -18,6 +18,20 @@ class Cart {
 		}
 	}
 
+	// Duplicate Fn. as catalog/category
+	// 1/2
+	public function getCategoryId( $product_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category WHERE product_id = $product_id ");
+		return $query->row['category_id'];
+	}
+
+	// 2/2
+	public function getCategory($category_id) {
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
+
+		return $query->row;
+	}
+
 	public function getProducts() {
 		if (!$this->data) {
 			foreach ($this->session->data['cart'] as $key => $quantity) {
@@ -30,7 +44,7 @@ class Cart {
 					$options = unserialize(base64_decode($product[1]));
 				} else {
 					$options = array();
-				} 
+				}
 
 				// Profile
 
@@ -92,10 +106,10 @@ class Cart {
 										'price'                   => $option_value_query->row['price'],
 										'price_prefix'            => $option_value_query->row['price_prefix'],
 										'points'                  => $option_value_query->row['points'],
-										'points_prefix'           => $option_value_query->row['points_prefix'],									
+										'points_prefix'           => $option_value_query->row['points_prefix'],
 										'weight'                  => $option_value_query->row['weight'],
 										'weight_prefix'           => $option_value_query->row['weight_prefix']
-									);								
+									);
 								}
 							} elseif ($option_query->row['type'] == 'checkbox' && is_array($option_value)) {
 								foreach ($option_value as $product_option_value_id) {
@@ -140,9 +154,9 @@ class Cart {
 											'points_prefix'           => $option_value_query->row['points_prefix'],
 											'weight'                  => $option_value_query->row['weight'],
 											'weight_prefix'           => $option_value_query->row['weight_prefix']
-										);								
+										);
 									}
-								}						
+								}
 							} elseif ($option_query->row['type'] == 'text' || $option_query->row['type'] == 'textarea' || $option_query->row['type'] == 'file' || $option_query->row['type'] == 'date' || $option_query->row['type'] == 'datetime' || $option_query->row['type'] == 'time') {
 								$option_data[] = array(
 									'product_option_id'       => $product_option_id,
@@ -157,13 +171,13 @@ class Cart {
 									'price'                   => '',
 									'price_prefix'            => '',
 									'points'                  => '',
-									'points_prefix'           => '',								
+									'points_prefix'           => '',
 									'weight'                  => '',
 									'weight_prefix'           => ''
-								);						
+								);
 							}
 						}
-					} 
+					}
 
 					if ($this->customer->isLogged()) {
 						$customer_group_id = $this->customer->getCustomerGroupId();
@@ -195,19 +209,19 @@ class Cart {
 
 					if ($product_special_query->num_rows) {
 						$price = $product_special_query->row['price'];
-					}						
+					}
 
 					// Reward Points
 					$product_reward_query = $this->db->query("SELECT points FROM " . DB_PREFIX . "product_reward WHERE product_id = '" . (int)$product_id . "' AND customer_group_id = '" . (int)$customer_group_id . "'");
 
-					if ($product_reward_query->num_rows) {	
+					if ($product_reward_query->num_rows) {
 						$reward = $product_reward_query->row['points'];
 					} else {
 						$reward = 0;
 					}
 
-					// Downloads		
-					$download_data = array();     		
+					// Downloads
+					$download_data = array();
 
 					$download_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_download p2d LEFT JOIN " . DB_PREFIX . "download d ON (p2d.download_id = d.download_id) LEFT JOIN " . DB_PREFIX . "download_description dd ON (d.download_id = dd.download_id) WHERE p2d.product_id = '" . (int)$product_id . "' AND dd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
@@ -256,11 +270,16 @@ class Cart {
 							$recurring_trial_duration = $profile_info['trial_duration'];
 						}
 					}
-
+// todo
 					$this->data[$key] = array(
 						'key'                       => $key,
 						'product_id'                => $product_query->row['product_id'],
 						'name'                      => $product_query->row['name'],
+
+						// My Script
+						'category_id'                 => $this->getCategoryId($product_query->row['product_id']),
+						'category_name'                 => $this->getCategory($this->getCategoryId($product_query->row['product_id']))['name'],
+
 						'model'                     => $product_query->row['model'],
 						'shipping'                  => $product_query->row['shipping'],
 						'image'                     => $product_query->row['image'],
@@ -421,7 +440,7 @@ class Cart {
 
 		foreach ($products as $product) {
 			$product_total += $product['quantity'];
-		}		
+		}
 
 		return $product_total;
 	}
@@ -472,6 +491,6 @@ class Cart {
 		}
 
 		return $download;
-	}	
+	}
 }
 ?>
