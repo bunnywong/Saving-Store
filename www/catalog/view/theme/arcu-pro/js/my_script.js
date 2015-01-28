@@ -557,7 +557,7 @@
 		$('table.list_view > tbody > tr > td:last-child').each(function(){
 			var this_str = $.trim($(this).text());
 			if( this_str == '$0.00')
-				$(this).parent().parent().fadeOut('fast');
+				$(this).parent().fadeOut('fast');
 		});
 	}// $.fn.account_myorder
 
