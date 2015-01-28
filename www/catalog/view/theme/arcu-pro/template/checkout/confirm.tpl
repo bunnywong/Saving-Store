@@ -68,10 +68,10 @@
 		<tfoot>
 			<?php
 				// DEBUG
-				echo '<pre>';
+/*				echo '<pre>';
 				echo  var_dump($totals[1]);	// reward
 				//echo  var_dump($totals);
-				echo '</pre>';
+				echo '</pre>';*/
 			?>
 			<?php foreach ($totals as $total) { ?>
 				<?php if( $total['code'] != 'reward' ): ?>

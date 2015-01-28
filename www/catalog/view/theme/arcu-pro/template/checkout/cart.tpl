@@ -45,7 +45,7 @@
 						<?php endif; ?>
 						<tr>
 							<td class="image"><?php if ($product['thumb']) { ?>
-								<a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /><?= $product['points'];?></a>
+								<a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
 								<?php } ?></td>
 							<td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
 								<?php if (!$product['stock']) { ?>
