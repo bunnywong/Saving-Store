@@ -132,13 +132,10 @@
 			<?php
 				$catalog_name = strtolower($products[0]['category_name']);
 
-				// Hardcode
+				// Hardcode :D
 				if( $catalog_name  == 'coupon' || $catalog_name  == 'redeem' ){
-					echo "<script>localStorage.setItem('skip_redeem', 1);</script>";
+					// echo "<script>localStorage.setItem('skip_redeem', 1);</script>";
 				}
-/*				echo '<pre>';
-				echo var_dump($catalog_name);
-				echo '</pre>';*/
 			?>
 		<?php endif; ?>
 
