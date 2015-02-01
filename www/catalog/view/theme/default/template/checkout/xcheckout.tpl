@@ -139,12 +139,11 @@ $(document).ready(function() {
 			url: 'index.php?route=checkout/xpayment_address',
 			dataType: 'html',
 			success: function(html) {
-				$('#payment-address .checkout-content').html(html);
-
-				$('#payment-address .checkout-content').slideDown('slow');
-
-				// My Script: Skip step 3
-				$('#button-payment-address').trigger('click');
+				$('#payment-address .checkout-content')
+					.html(html)
+					.slideDown('slow').end()
+					.find('#button-payment-address')
+					.trigger('click');	// My Script: Skip step 3
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
 				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -506,18 +505,19 @@ $('#button-payment-address').live('click', function() {
 					url: 'index.php?route=checkout/xshipping_address',
 					dataType: 'html',
 					success: function(html) {
-						$('#shipping-address .checkout-content').html(html);
 
-						$('#payment-address .checkout-content').slideUp('slow');
-
-						$('#shipping-address .checkout-content').slideDown('slow');
-
-						$('#payment-address .checkout-heading a').remove();
-						$('#shipping-address .checkout-heading a').remove();
-						$('#shipping-method .checkout-heading a').remove();
-						$('#payment-method .checkout-heading a').remove();
-
-						$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+						$('#shipping-address')
+							.children('.checkout-content')
+							.html(html).slideDown('slow')
+								.children('a').remove()
+						.parent()
+						.siblings('#payment-address')
+							.children('.checkout-content')
+							.slideUp('slow')
+								.children('a').remove()
+								.parent()
+								.siblings('.checkout-heading')
+								.append('<a><?php echo $text_modify; ?></a>');
 
 						// This: 第 3 步： 送貨地址
 						// My Script: Skip step 3
@@ -994,16 +994,19 @@ $('#button-shipping-method').live('click', function() {
 					url: 'index.php?route=checkout/payment_method',
 					dataType: 'html',
 					success: function(html) {
-						$('#payment-method .checkout-content').html(html);
+						$('#shipping-method')
+							.children('.checkout-content')
+							.slideUp('slow')
+								.children('a').remove()
+							.parent()
+							.siblings('.checkout-heading')
+							.append('<a><?php echo $text_modify; ?></a>');
 
-						$('#shipping-method .checkout-content').slideUp('slow');
-
-						$('#payment-method .checkout-content').slideDown('slow');
-
-						$('#shipping-method .checkout-heading a').remove();
-						$('#payment-method .checkout-heading a').remove();
-
-						$('#shipping-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+						$('#payment-method')
+							.children('.checkout-content')
+							.html(html)
+							.slideDown('slow')
+							.children('a').remove();
 
 						// My Script: Skip step 5
 						$('#button-payment-method').trigger('click');
