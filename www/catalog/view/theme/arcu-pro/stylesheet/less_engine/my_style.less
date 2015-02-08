@@ -608,7 +608,6 @@
 			margin: 0px auto 0px auto;
 		}
 
-		// Product
 		h1{
 			font-weight: bold;
             color: @black !important;
@@ -660,7 +659,8 @@
 
 		// ----- ----- ----- ----- -----
 
-		#buy_and_checkout {
+		#buy_and_checkout,
+		.button-back {
 			overflow: hidden;
 			padding: 10px 30px;
 			position: relative;
@@ -675,7 +675,8 @@
 				opacity: 0;
 			}
 		}
-		#buy_and_checkout:before {
+		#buy_and_checkout:before,
+		.button-back:before {
 			top: 0;
 			left: 0;
 			position: absolute;
@@ -687,14 +688,16 @@
 			-moz-transition: 0.3s ease;
 			-webkit-transition: 0.3s ease;
 		}
-		#buy_and_checkout:hover {
+		#buy_and_checkout:hover,
+		.button-back:hover {
 			background-color: transparent;
 			opacity: 1;
 			span.icon-basket-light{
 				opacity: 1;
 			}
 		}
-		#buy_and_checkout:hover:before {
+		#buy_and_checkout:hover:before,
+		.button-back:hover:before {
 			left: 100%;
 		}
 		.short_description_title{
