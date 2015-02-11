@@ -74,14 +74,14 @@
 				echo '</pre>';*/
 			?>
 			<?php foreach ($totals as $total) { ?>
-				<?php if( $total['code'] != 'reward' ): ?>
+				<?php //if( $total['code'] != 'reward' ): ?>
 					<tr>
 						<td colspan="2" class="collapse"></td>
 						<td colspan="2" class="price"><?php echo $total['title']; ?>:</td>
 						<td class="total">
 							<?php echo $total['text']; ?></td>
 					</tr>
-				<?php endif; ?>
+				<?php //endif; ?>
 			<?php } ?>
 		</tfoot>
 	</table>

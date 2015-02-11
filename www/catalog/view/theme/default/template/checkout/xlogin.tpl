@@ -29,7 +29,7 @@
   <h2>舊客户</h2>
   <div>
     <span>GOON 或 Suzuran 註冊用戶首次到訪？
-      <br />請<a href="/index.php?route=account/returnuser"><strong>按此</strong></a>設定新密碼</span>
+      <br />請<a href="/index.php?route=account/returnuser"><strong>按此</strong></a>設定新密碼</span><p>如果你已啟動舊有帳户，請先從左邊登入</p>
   </div>
 
   <div class="hidden">

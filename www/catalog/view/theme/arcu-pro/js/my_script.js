@@ -286,7 +286,7 @@
 			if( $(this).text() == offer_text ){
 				$(this).parent().parent().next().next()
 					.find('.img_update').hide().end()
-					.find('.qty')
+				 	.find('.qty')
 						.css({'margin-right': '19px'})
 						.prop('disabled', 'disabled');
 			}
@@ -308,6 +308,15 @@
 		function isInt(x) {
 			return Math.floor(x) === x;
 		}
+		// ----- ----- ----- ----- -----
+		// Change breadcrumb
+
+		$('.breadcrumb > a').each(function(){
+			if( $(this).text() == 'Redeem' )
+				$(this).text('積分換領產品');
+		});
+
+
 		// ----- ----- ----- ----- -----
 		// Point Redeem Only
 

@@ -332,9 +332,9 @@
 									</button>
 
 								<?php if( $product_type == 'redeem' ): ?>
-									<button class="button button-back" data-hover="結帳離開" data-href="#">
-									<a href="/index.php?route=checkout/checkout">
-										<span class="icon-basket-light">結帳離開</span>
+									<button class="button button-back" data-hover="去購物車" data-href="#">
+									<a href="/index.php?route=checkout/cart">
+										<span class="icon-basket-light">去購物車</span>
 									</a>
 									</button>
 								<?php endif; ?>

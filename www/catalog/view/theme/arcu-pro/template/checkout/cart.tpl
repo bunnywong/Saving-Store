@@ -117,10 +117,10 @@
 		<?php if ($coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>
 		<h2><?php echo $text_next; ?></h2>
 		<div class="content">
-			<p><?php echo $text_next_choice; ?></p>
+			<p><?php //echo $text_next_choice; ?></p>
 			<table class="radio cart_option">
 				<?php if ($coupon_status) { ?>
-				<tr class="highlight">
+				<tr class="highlight hidden">
 					<td><?php if ($next == 'coupon') { ?>
 						<input type="radio" name="next" value="coupon" id="use_coupon" checked="checked" />
 						<?php } else { ?>
