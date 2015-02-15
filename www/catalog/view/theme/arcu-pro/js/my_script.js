@@ -317,8 +317,6 @@
 			else if($(this).text() == 'Coupon')
 				$(this).text('優惠卷');
 		});
-
-
 		// ----- ----- ----- ----- -----
 		// Point Redeem Only
 

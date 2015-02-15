@@ -233,8 +233,17 @@
 				<?php foreach ($totals as $total) { ?>
 					<?php if( $total['code'] != 'abc'): // Change to nor 'reward' for - DEBUG ?>
 						<tr>
-							<td><strong><?php echo $total['title']; ?>:</strong></td>
-							<td class="total"><?php echo $total['text']; ?></td>
+							<td>
+								<strong>
+									<?php echo $total['title']; ?>
+									<?php if( $total['code'] != 'reward' ): ?>
+										:
+									<?php endif; ?>
+								</strong>
+							</td>
+							<?php if( $total['code'] != 'reward' ): ?>
+								<td class="total"><?php echo $total['text']; ?></td>
+							<?php endif; ?>
 						</tr>
 					<?php endif; ?>
 				<?php } ?>

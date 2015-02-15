@@ -1,5 +1,17 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
 
+<?php
+	// User offer setup
+	$user_offer = '';
+	foreach($my_products as $product){
+		if(strtolower($product['category_name']) == 'redeem')
+			$user_offer = 'redeem';
+	}
+	foreach($totals as $total){
+		if($total['code'] =='coupon')
+			$user_offer = 'coupon';
+	}
+?>
 <script>
 	function hide_hk(){	// For step 3 & 4
 		$('#shipping-existing > .xten label').each(function(){
@@ -45,8 +57,14 @@
       <div class="checkout-heading"><span>第 2 步：積分換領</span></div>
       <div class="checkout-content">
       	<div class="redeem_btn_wrapper">
-      		<button onclick="location.href='/index.php?route=product/category&path=61'">積分換領 - 產品</button>
-      		<button onclick="location.href='/index.php?route=product/category&path=62'">積分換領 - 折扣</button>
+
+      		<?php if ($user_offer != 'coupon'): ?>
+	      		<button onclick="location.href='/index.php?route=product/category&path=61'">積分換領 - 產品</button>
+	      	<?php endif; ?>
+
+      		<?php if ($user_offer != 'redeem' && $user_offer != 'coupon'): ?>
+	      		<button onclick="location.href='/index.php?route=product/category&path=62'">積分換領 - 折扣</button>
+	      	<?php endif; ?>
       	</div>
       	<input type="button" value="繼續" id="button-redeem" class="button">
       </div>

@@ -66,23 +66,23 @@
 			<?php } ?>
 		</tbody>
 		<tfoot>
-			<?php
-				// DEBUG
-/*				echo '<pre>';
-				echo  var_dump($totals[1]);	// reward
-				//echo  var_dump($totals);
-				echo '</pre>';*/
-			?>
-			<?php foreach ($totals as $total) { ?>
-				<?php //if( $total['code'] != 'reward' ): ?>
-					<tr>
-						<td colspan="2" class="collapse"></td>
-						<td colspan="2" class="price"><?php echo $total['title']; ?>:</td>
-						<td class="total">
-							<?php echo $total['text']; ?></td>
+		<?php foreach ($totals as $total) { ?>
+			<?php //if( $total['code'] != 'reward' ): ?>
+				<tr>
+					<td colspan="2" class="collapse"></td>
+					<td colspan="2" class="price">
+						<?php echo $total['title']; ?>
+							<?php if( $total['code'] != 'reward' ): ?>
+								:
+							<?php endif; ?>
+					</td>
+					<td class="total">
+						<?php if( $total['code'] != 'reward' ): ?>
+							<?php echo $total['text']; ?>
+						<?php endif; ?>
+					</td>
 					</tr>
-				<?php //endif; ?>
-			<?php } ?>
+		<?php } ?>
 		</tfoot>
 	</table>
 </div>
