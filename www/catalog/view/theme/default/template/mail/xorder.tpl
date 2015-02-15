@@ -141,7 +141,12 @@
               echo $total['title'];
             }
           ?>:</b></td>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?php echo $total['text']; ?></td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">
+          <?php
+            if( $total['code'] != 'reward' )
+               echo $total['text'];
+          ?>
+        </td>
       </tr>
       <?php } ?>
     </tfoot>
