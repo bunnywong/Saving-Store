@@ -340,24 +340,21 @@
 								<?php endif; ?>
 
 								<?php endif; ?>
-								<?php
-									if( $product_type == 'regular')
-										$btn_r = '直接結帳';
-									else
-										$btn_r = '換領';
 
-									if( $product_type == 'coupon')
-										$href = 'cart';	// For auto apply process
-									else
-										$href = 'checkout';
-								?>
-								<?php if( $product_type != 'redeem'): ?>
-									<button class="button" id="buy_and_checkout" data-hover="<?= $btn_r; ?>" data-href="<?= $href; ?>">
-										<span class="icon-basket-light">
-											<?= $btn_r; ?>
-										</span>
+								<?php if( $product_type == 'regular'): ?>
+									<button class="button button-back" data-hover="去購物車" data-href="#">
+										<a href="/index.php?route=checkout/cart">
+											<span class="icon-basket-light">去購物車</span>
+										</a>
 									</button>
 								<?php endif; ?>
+
+								<?php if( $product_type == 'coupon'): ?>
+									<button class="button" id="buy_and_checkout" data-hover="換領" data-href="cart">
+										<span class="icon-basket-light">換領</span>
+									</button>
+								<?php endif; ?>
+
 							</div>
 							<div> <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><span class="icon-wishlist-grey"><?php echo $button_wishlist; ?></span></a> <a class="button" onclick="addToCompare('<?php echo $product_id; ?>');"><span class="icon-compare-grey"><?php echo $button_compare; ?></span></a>
 								<div class="share clearafter"><!-- AddThis Button BEGIN -->
