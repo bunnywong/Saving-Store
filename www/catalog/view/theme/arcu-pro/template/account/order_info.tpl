@@ -104,7 +104,11 @@
 				<?php foreach ($totals as $total) { ?>
 				<tr>
 					<td class="right"><b><?php echo $total['title']; ?>:</b></td>
-					<td class="right"><?php echo $total['text']; ?></td>
+					<td class="right">
+						<?php if( $total['code'] != 'reward' ): ?>
+							<?php echo $total['text']; ?>
+						<?php endif; ?>
+					</td>
 				</tr>
 				<?php } ?>
 			</tbody>
