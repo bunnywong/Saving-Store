@@ -314,6 +314,8 @@
 		$('.breadcrumb > a').each(function(){
 			if( $(this).text() == 'Redeem' )
 				$(this).text('積分換領產品');
+			else if($(this).text() == 'Coupon')
+				$(this).text('優惠卷');
 		});
 
 
