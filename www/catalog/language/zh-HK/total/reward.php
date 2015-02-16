@@ -4,7 +4,7 @@ $_['heading_title'] = '使用獎勵積分 (有效 %s)';
 
 // Text
 //$_['text_reward']   = '使用積分(%s)';
-$_['text_reward']   = '已使用積分 - (%s) 分';
+$_['text_reward']   = '已使用 (%s) 積分';
 $_['text_order_id'] = '訂單號： #%s';
 $_['text_success']  = '成功： 您已經成功使用了獎勵積分！';
 

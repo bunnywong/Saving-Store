@@ -48,7 +48,7 @@
 	        <span class="user-point">
 	        	<?php
 	        	 	if( $this->customer->getRewardPoints() > 0 )
-	        	 			echo $this->customer->getRewardPoints();
+	        	 			echo number_format($this->customer->getRewardPoints(), 0);
 	        	 		else
 	        	 			echo 0;
 	        	 ?>

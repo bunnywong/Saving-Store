@@ -325,6 +325,13 @@
 					<?php if( $points == '' OR $user_points >= $points ): ?>
 						<div class="cart">
 							<div>
+								<?php if( $product_type == 'redeem'): ?>
+									<button class="button button-back" data-hover="上一頁" data-href="#">
+										<a href="/index.php?route=product/category&path=61">
+											<span class="icon-basket-light">上一頁</span>
+										</a>
+									</button>
+								<?php endif; ?>
 								<?php if( $product_type == 'regular' || $product_type == 'redeem' ): ?>
 								<?php if( $product_type == 'redeem' ) $button_cart = '換領'; ?>
 									<button class="button" id="button-cart" data-hover="<?php echo $button_cart; ?>">
@@ -332,9 +339,9 @@
 									</button>
 
 								<?php if( $product_type == 'redeem' ): ?>
-									<button class="button button-back" data-hover="去購物車" data-href="#">
+									<button class="button button-back" data-hover="去結帳" data-href="#">
 									<a href="/index.php?route=checkout/cart">
-										<span class="icon-basket-light">去購物車</span>
+										<span class="icon-basket-light">去結帳</span>
 									</a>
 									</button>
 								<?php endif; ?>
@@ -342,14 +349,19 @@
 								<?php endif; ?>
 
 								<?php if( $product_type == 'regular'): ?>
-									<button class="button button-back" data-hover="去購物車" data-href="#">
+									<button class="button button-back" data-hover="去結帳" data-href="#">
 										<a href="/index.php?route=checkout/cart">
-											<span class="icon-basket-light">去購物車</span>
+											<span class="icon-basket-light">去結帳</span>
 										</a>
 									</button>
 								<?php endif; ?>
 
 								<?php if( $product_type == 'coupon'): ?>
+									<button class="button button-back" data-hover="上一頁" data-href="#">
+										<a href="/index.php?route=product/category&path=62">
+											<span class="icon-basket-light">上一頁</span>
+										</a>
+									</button>
 									<button class="button" id="buy_and_checkout" data-hover="換領" data-href="cart">
 										<span class="icon-basket-light">換領</span>
 									</button>
