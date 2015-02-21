@@ -24,11 +24,13 @@ class ControllerPaymentCod extends Controller {
 
 		// Apply old cart(without coupon)
 		unset($this->session->data['cart']);
-		$this->session->data['cart'] = $this->session->data['temp_cart'];
+		if (isset($this->session->data['temp_cart']))
+			$this->session->data['cart'] = $this->session->data['temp_cart'];
 		unset($this->session->data['temp_cart']);
 
 		// Apply coupon
-		$this->session->data['coupon'] = $this->session->data['next_coupon'];
+		if (isset($this->session->data['next_coupon']))
+			$this->session->data['coupon'] = $this->session->data['next_coupon'];
 
 		// Set point was spent
 		unset($this->session->data['reward']);
