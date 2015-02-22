@@ -10,10 +10,10 @@
 	    $this->load->model('catalog/information');
 
 	    // Hardcode Section :D
-	    if( $_GET['path'] = 59 )
+	    if( $_GET['path'] == 59 )
 	  		$information_id 	= 14;
 
-		if( $_GET['path'] = 60 )
+		if( $_GET['path'] == 60 )
 	  		$information_id 	= 15;
 
 		$information_info	= $this->model_catalog_information->getInformation($information_id);
