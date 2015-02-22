@@ -452,9 +452,16 @@
 	// --------------------------------------------------
 	// Tab 2.1a 訂單管理 (Edit)
 
-	body.admin_sale_order_form{
-		// Internal script
+	body.admin_sale_order {
+		.list tr td:nth-child(2) {
+			.admin_io;
+		}
+	}
+	// --------------------------------------------------
+	// Tab 2.1a 訂單管理 (Edit)
 
+	body.admin_sale_order_form {
+		// Internal script
 		#tab-customer table tbody tr:nth-child(1),	// 商店
 		#tab-customer table tbody tr:nth-child(3),	// 客戶組
 		#tab-customer table tbody tr:nth-child(5),	// Last name

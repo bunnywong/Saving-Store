@@ -685,7 +685,7 @@ class ModelSaleOrder extends Model {
 
 			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET invoice_no = '" . (int)$invoice_no . "', invoice_prefix = '" . $myInvoicePrefix . "' WHERE order_id = '" . (int)$order_id . "'");
 
-			return $myInvoicePrefix . str_pad($invoice_no, 5, "0", STR_PAD_LEFT);;
+			return $myInvoicePrefix . str_pad($invoice_no, ORDER_DIGI, "0", STR_PAD_LEFT);;
 		}
 	}
 
