@@ -44,10 +44,8 @@
 						</tr>
 						<?php endif; ?>
 						<tr>
-							<td class="image"><?php if ($product['thumb']) { ?>
 								<a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
 								<?php } ?></td>
-							<td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
 								<?php if (!$product['stock']) { ?>
 								<span class="stock">***</span>
 								<?php } ?>
@@ -72,8 +70,6 @@
 									 	//echo '<br>'.$product['product_id'].' / '.$product['category_id'].' - '.$product['category_name']['name'];
 									?>
 								</div></td>
-							<td class="model"><?php echo $product['model']; ?></td>
-							<td class="quantity"><input type="text" class="qty" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
 								&nbsp;
 								<input type="image" class="img_update" src="catalog/view/theme/arcu-pro/image/icons/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
 								&nbsp;<a href="<?php echo $product['remove']; ?>"><img src="catalog/view/theme/arcu-pro/image/icons/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
