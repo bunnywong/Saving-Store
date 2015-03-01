@@ -1,5 +1,12 @@
 <?php echo $header; ?>
-
+<?php
+  if($invoice_no) {
+    $head = substr($invoice_no, 0, 6);
+    $tail = substr($invoice_no, 6);
+    $tail = str_pad($tail,ORDER_DIGI,'0',STR_PAD_LEFT);
+    $invoice_no = $head.$tail;
+  }
+?>
 <script>
   $('body').addClass('admin_sale_order_info');
 </script>

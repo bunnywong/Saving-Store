@@ -5,7 +5,8 @@ $_['heading_title']           = '訂單管理';
 // Text
 $_['text_success']            = '成功： 您已成功更新訂單！';
 $_['text_order_id']           = '訂單號：';
-$_['text_invoice_no']         = '發票號：';
+//$_['text_invoice_no']         = '發票號：';
+$_['text_invoice_no']         = '訂單號：';
 $_['text_invoice_date']       = '發票日期：';
 $_['text_store_name']         = '網店名稱：';
 $_['text_store_url']          = '網店地址：';
