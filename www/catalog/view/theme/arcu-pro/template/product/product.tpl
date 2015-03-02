@@ -339,36 +339,20 @@
 									</button>
 
 								<?php if( $product_type == 'redeem' ): ?>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-									<button class="button button-back" data-hover="去購物車" data-href="#" onclick="self.location.href='/index.php?route=checkout/cart'">
-										<span class="icon-basket-light">去購物車</span>
-=======
->>>>>>> Stashed changes
 									<button class="button button-back" data-hover="去結帳" data-href="#">
 									<a href="/index.php?route=checkout/cart">
 										<span class="icon-basket-light">去結帳</span>
 									</a>
->>>>>>> FETCH_HEAD
 									</button>
 								<?php endif; ?>
 
 								<?php endif; ?>
 
 								<?php if( $product_type == 'regular'): ?>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-									<button class="button button-back" data-hover="去購物車" data-href="#" onclick="self.location.href='/index.php?route=checkout/cart'">
-											<span class="icon-basket-light">去購物車</span>
-=======
->>>>>>> Stashed changes
 									<button class="button button-back" data-hover="去結帳" data-href="#">
 										<a href="/index.php?route=checkout/cart">
 											<span class="icon-basket-light">去結帳</span>
 										</a>
->>>>>>> FETCH_HEAD
 									</button>
 								<?php endif; ?>
 
