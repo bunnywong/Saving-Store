@@ -497,6 +497,8 @@ class ModelCheckoutXOrder extends Model {
 
 				// Invoice issue
 				$template->data['invoice'] = $this->createInvoiceNo($order_id);
+				// Override $subject
+				$subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $template->data['invoice']);
 
 				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/xorder.tpl')) {
 					$html = $template->fetch($this->config->get('config_template') . '/template/mail/xorder.tpl');
