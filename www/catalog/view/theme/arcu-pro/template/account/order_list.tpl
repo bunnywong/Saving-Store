@@ -33,7 +33,7 @@
 				<tbody>
 					<?php foreach ($orders as $order) { ?>
 					<tr>
-						<td><?php echo ORDER_PREFIX.year_perfix($order['date_added']).str_pad($order['order_id'],ORDER_DIGI,'0',STR_PAD_LEFT); ?></td>
+						<td> <?= $order['invoice_no']; ?> </td>
 					<!--
 						<td><?php echo $order['name']; ?></td>
 					-->

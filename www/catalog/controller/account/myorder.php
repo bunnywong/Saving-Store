@@ -103,15 +103,28 @@ class ControllerAccountMyOrder extends Controller {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
 			$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
 
+			// New #inv, otherwise show old order_id
+			$date_added = date($this->language->get('date_format_short'), strtotime($result['date_added']));
+
+			$invoice_no = $this->model_account_order->getInvoiceNo($result['order_id']);
+			if($invoice_no != FALSE) {
+				// New order id (invoice)
+				$invoice_no = $invoice_no;
+			} else {
+				// Old order
+				$invoice_no =  ORDER_PREFIX.year_perfix($date_added).str_pad($result['order_id'],ORDER_DIGI,'0',STR_PAD_LEFT);
+			}
+
 			$this->data['orders'][] = array(
 				'order_id'   => $result['order_id'],
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
 				'status'     => $result['status'],
-				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+				'date_added' => $date_added,
 				'products'   => ($product_total + $voucher_total),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'href'       => $this->url->link('account/myorder/info', 'order_id=' . $result['order_id'], 'SSL'),
-				'reorder'    => $this->url->link('account/myorder', 'order_id=' . $result['order_id'], 'SSL')
+				'reorder'    => $this->url->link('account/myorder', 'order_id=' . $result['order_id'], 'SSL'),
+				'invoice_no' => $invoice_no
 			);
 		}
 
