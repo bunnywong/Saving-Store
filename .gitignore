@@ -3,6 +3,8 @@ www/.htaccess
 www/config.php
 www/admin/config.php
 www/catalog/view/theme/arcu-pro/stylesheet/less_engine/base_url.less
+MyDoc/*
+Shortcut/*
 
 # System Cache Files
 www/system/cache/*
@@ -16,4 +18,4 @@ www/image/cache/*
 www/system/logs/*
 !/www/system/logs/index.html
 
-www/vqmod/vqcache/
+www/vqmod/vqcache/*
