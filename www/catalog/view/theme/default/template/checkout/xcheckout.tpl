@@ -59,11 +59,11 @@
       	<div class="redeem_btn_wrapper">
 
       		<?php if ($user_offer != 'coupon'): ?>
-	      		<button onclick="location.href='/index.php?route=product/category&path=61'">積分換領 - 產品</button>
+	      		<button class="redeem" onclick="location.href='/index.php?route=product/category&path=61'">積分換領 - 產品</button>
 	      	<?php endif; ?>
 
       		<?php if ($user_offer != 'redeem' && $user_offer != 'coupon'): ?>
-	      		<button onclick="location.href='/index.php?route=product/category&path=62'">積分換領 - 折扣</button>
+	      		<button class="coupon" onclick="location.href='/index.php?route=product/category&path=62'">積分換領 - 折扣</button>
 	      	<?php endif; ?>
 	      	<?php if ($user_offer == 'coupon'): ?>
 				<h3>積分換領及折扣券 不可以同時使用</h3>
