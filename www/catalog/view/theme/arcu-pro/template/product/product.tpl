@@ -339,20 +339,22 @@
 									</button>
 
 								<?php if( $product_type == 'redeem' ): ?>
-									<button class="button button-back" data-hover="去結帳" data-href="#">
+									<button class="button button-back" data-hover="去結帳" data-href="#" onclick="self.location.href='/index.php?route=checkout/cart'">
 									<a href="/index.php?route=checkout/cart">
 										<span class="icon-basket-light">去結帳</span>
 									</a>
+
 									</button>
 								<?php endif; ?>
 
 								<?php endif; ?>
 
 								<?php if( $product_type == 'regular'): ?>
-									<button class="button button-back" data-hover="去結帳" data-href="#">
-										<a href="/index.php?route=checkout/cart">
+                                        <button class="button button-back" data-hover="上一頁" data-href="#" onclick="history.go(-1);">
+                                        <span class="icon-basket-light">上一頁</span>
+                                        </button>
+									<button class="button button-back" data-hover="去結帳" data-href="#" onclick="self.location.href='/index.php?route=checkout/cart'">
 											<span class="icon-basket-light">去結帳</span>
-										</a>
 									</button>
 								<?php endif; ?>
 
