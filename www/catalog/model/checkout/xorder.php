@@ -496,7 +496,9 @@ class ModelCheckoutXOrder extends Model {
 
 
 				// Invoice issue
-				$template->data['invoice'] = $this->createInvoiceNo($order_id);
+				if( isset($this->session->data['coupon_in_process']) == FALSE)
+					$template->data['invoice'] = $this->createInvoiceNo($order_id);
+
 				// Override $subject
 				$subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $template->data['invoice']);
 
