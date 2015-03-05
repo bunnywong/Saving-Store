@@ -7,7 +7,9 @@
 			<?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
 			<?php } ?>
 		</div>
+		<!--
 		<h1><?php echo $heading_title; ?></h1>
+	-->
 		<p><?php echo $text_total; ?><b> <?php echo $total; ?></b>.</p>
 		<table class="list">
 			<thead>
