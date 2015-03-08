@@ -328,8 +328,15 @@ class ControllerSaleOrder extends Controller {
 				);
 			}
 
+			if($result['invoice_no'] != 0) {
+			$invoice = $result['invoice_prefix'] . str_pad($result['invoice_no'], ORDER_DIGI, "0", STR_PAD_LEFT);
+			} else {
+				$invoice = '';
+			}
+
 			$this->data['orders'][] = array(
 				'order_id'      => $result['order_id'],
+				'invoice'       => $invoice,
 				'customer'      => $result['customer'],
 				'status'        => $result['status'],
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),

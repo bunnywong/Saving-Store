@@ -27,8 +27,15 @@
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
+              <td class="right">訂單號</td>
               <td class="right"><?php if ($sort == 'o.order_id') { ?>
-                <a href="<?php echo $sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_order_id; ?></a>
+                <!--
+                <a href="<?php echo $sort_order; ?>" class="<?php echo strtolower($order); ?>">
+                -->
+                  <?php echo $column_order_id; ?>
+                <!--
+                </a>
+              -->
                 <?php } else { ?>
                 <a href="<?php echo $sort_order; ?>"><?php echo $column_order_id; ?></a>
                 <?php } ?></td>
@@ -63,7 +70,14 @@
           <tbody>
             <tr class="filter">
               <td></td>
-              <td align="right"><input type="text" name="filter_order_id" value="<?php echo $filter_order_id; ?>" size="4" style="text-align: right;" /></td>
+               <td align="right">
+                <!--
+                <input type="text" name="filter_order_id" value="<?php echo $filter_order_id; ?>" size="10" style="text-align: right;" />
+              -->
+              </td>
+              <td align="right">
+                <input type="text" name="filter_order_id" value="<?php echo $filter_order_id; ?>" size="10" style="text-align: right;" />
+              </td>
               <td><input type="text" name="filter_customer" value="<?php echo $filter_customer; ?>" /></td>
               <td><select name="filter_order_status_id">
                   <option value="*"></option>
@@ -94,6 +108,7 @@
                 <input type="checkbox" name="selected[]" value="<?php echo $order['order_id']; ?>" />
                 <?php } ?></td>
               <td class="right"><?php echo $order['order_id']; ?></td>
+              <td class="right"><?php echo $order['invoice']; ?></td>
               <td class="left"><?php echo $order['customer']; ?></td>
               <td class="left"><?php echo zh_order_status($order['status']); ?></td>
               <td class="right"><?php echo $order['total']; ?></td>

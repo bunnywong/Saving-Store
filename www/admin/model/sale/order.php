@@ -491,7 +491,7 @@ class ModelSaleOrder extends Model {
 	}
 
 	public function getOrders($data = array()) {
-		$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+		$sql = "SELECT  CONCAT(o.invoice_no, o.invoice_prefix) AS invoice, o.invoice_no, o.invoice_prefix, o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
 
 		if (isset($data['filter_order_status_id']) && !is_null($data['filter_order_status_id'])) {
 			$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
@@ -499,8 +499,14 @@ class ModelSaleOrder extends Model {
 			$sql .= " WHERE o.order_status_id > '0'";
 		}
 
+	// Sample Data: DS15030005
+	$inv_pre = substr($data['filter_order_id'],0,6);
+	$inv_code = str_pad(substr($data['filter_order_id'],6), ORDER_DIGI, "0", STR_PAD_LEFT);
+
 		if (!empty($data['filter_order_id'])) {
-			$sql .= " AND o.order_id = '" . (int)$data['filter_order_id'] . "'";
+			//$sql .= " AND o.order_id = '" . (int)$data['filter_order_id'] . "'";
+			$sql .= " AND o.invoice_prefix = '" . $inv_pre. "'";
+			$sql .= " AND o.invoice_no = '" . $inv_code. "'";
 		}
 
 		if (!empty($data['filter_customer'])) {
