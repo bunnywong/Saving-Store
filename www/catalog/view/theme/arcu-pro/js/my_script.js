@@ -274,6 +274,11 @@
 
 	// ---------- ---------- ---------- ---------- ----------
 
+	$.fn.home = function() {
+		$('.home-notic .cross').on('click', function() {
+			$('.home-notic').remove();
+		});
+	}
 	$.fn.cart = function() {
 
 		//
@@ -606,6 +611,8 @@ $(function () {
 
 		$('body').sidebar();
 
+		if( $('body').hasClass('home') )
+			$(this).home();
 		if( $('body').hasClass('cart') )
 			$(this).cart();
 
