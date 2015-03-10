@@ -8,7 +8,7 @@
 		if( count($information_info) > 0 ){
 			$my_banner = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
 			echo '<div class="home-notic">';
-			echo '<span class="cross"></span>'
+			echo '<span class="cross"></span>';
 			echo $my_banner;
 			echo '</div>';
 		}
