@@ -1,6 +1,4 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div class="home-notic">
-	<span class="cross"></span>
 	<?php
 	  $this->load->model('catalog/information');
 
@@ -9,10 +7,12 @@
 //		$this->data['info_heading_title'] = $information_info['title'];
 		if( count($information_info) > 0 ){
 			$my_banner = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+			echo '<div class="home-notic">';
+			echo '<span class="cross"></span>'
 			echo $my_banner;
+			echo '</div>';
 		}
 		?>
-</div>
 
 <div class="home-my_banner my_banner">
 	<?php
