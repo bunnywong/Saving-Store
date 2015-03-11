@@ -210,39 +210,6 @@
 // Home
 
 	body.home {
-		.home-notic {
-			position: fixed;
-			right: 0px;
-			bottom: 0px;
-			z-index: 999;
-			padding: 20px;
-			background-color: white;
-			width: 300px;
-			border: 1px solid lightgray;
-			box-shadow: 1px 1px 1px gray;
-			.cross{
-				@base: 15px;
-				top: -@base;
-				left: -@base;
-					position: relative;
-					float: left;
-					height: 25px;
-					width: 25px;
-					background: gray;
-					border-radius: 30px;
-					cursor: pointer;
-				}
-				.cross:before {
-				   content: "x";
-				   float: right;
-				   padding: 15px;
-				   color: white;
-				   font-size: 15px;
-				   top: -13px;
-				   left: 6px;
-				   position: relative;
-				}
-		}
 		.my_banner{
 			padding		: 0px;
 			max-width	: 1115px;
@@ -269,6 +236,39 @@
 		.description	// Items
 			{display: none!important;}
 
+		.home-notic {
+			position: fixed;
+			right: 0px;
+			bottom: 0px;
+			z-index: 999;
+			padding: 20px;
+			background-color: #FFC;
+			width: 300px;
+			border: 1px solid lightgray;
+			box-shadow: 1px 1px 1px gray;
+			.cross{
+				@base: 15px;
+				top: -@base;
+				left: -@base;
+					position: relative;
+					float: left;
+					height: 25px;
+					width: 25px;
+					background: gray;
+					border-radius: 30px;
+					cursor: pointer;
+				}
+				.cross:before {
+				   content: "x";
+				   float: right;
+				   padding: 15px;
+				   color: white;
+				   font-size: 15px;
+				   top: -13px;
+				   left: 6px;
+				   position: relative;
+				}
+		}
 		.my_banner{
 			margin-left: 40px;
 		}

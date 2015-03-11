@@ -274,13 +274,7 @@
 
 	// ---------- ---------- ---------- ---------- ----------
 
-	$.fn.home = function() {
-		$('.home-notic .cross').on('click', function() {
-			$('.home-notic').remove();
-		});
-	}
 	$.fn.cart = function() {
-
 		//
 		$('label.option_discount').trigger('click');
 
@@ -300,10 +294,13 @@
 	}// !$.fn.cart
 
 	$.fn.list_view = function() {
-
 		// Added URL wrapper to whole item
 		$('body.list_view .products').click(function(){
 			window.location = $(this).children('a').attr('href');
+		});
+
+		$('.home-notic .cross').on('click', function() {
+			$('.home-notic').remove();
 		});
 	}
 
@@ -612,8 +609,8 @@ $(function () {
 
 		$('body').sidebar();
 
-		if( $('body').hasClass('home') )
-			$(this).home();
+		/*if( $('body').hasClass('home') )
+			$(this).home();*/
 		if( $('body').hasClass('cart') )
 			$(this).cart();
 
