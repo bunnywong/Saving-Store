@@ -268,7 +268,7 @@ body.list_view .box-product > div .name:hover {
 #welcome,
 #search,
 #topbar > .links,
-#menu,
+.front-end#menu,
 #topbar,
 #bottom > span.toggle,
 #footer > span.toggle {
@@ -507,8 +507,12 @@ span#cart-total img {
   color: #fff !important;
   opacity: 0.6;
 }
-body.backend #menu,
+body.backend #menu {
+  display: block!important;
+  display: block;
+}
 body.backend #footer {
+  display: none!important;
   display: none;
 }
 body.backend .div2 > img,

@@ -197,7 +197,7 @@ $(document).ready(function () {
 
 		<?php } ?>
 		<?php if ($categories) { ?>
-		<div id="menu">
+		<div id="menu front-end">
 			<div id="menu-inner"> <span id="btn-mobile-toggle">Menu</span>
 				<?php if ($this->config->get('kuler_menu_status')) { ?>
 				<?php echo $this->getChild('module/kuler_menu'); ?>
