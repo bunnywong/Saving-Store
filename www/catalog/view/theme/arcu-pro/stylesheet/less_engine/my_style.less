@@ -4,22 +4,22 @@
 // --------------------------------------------------
 // Common
 
-	@red 	: lightcoral;
-	@blue 	: #5bc0de;
-	@yellow : #FBD606;
-	@black 	: #666;
-	@green 	: #5cb85c;
-	@white 	: #FFF;
-	@gray	: #ddd;
-	@lightgray : lightgray;
-	@lightblue: #E7EFEF;
-	@title	: #333;
-	@btn_bg_hover : #444444;
-	@btn_blue : #71bdf7;
+	@red 	          : lightcoral;
+	@blue 	         : #5bc0de;
+	@yellow         : #FBD606;
+	@black 	        : #666;
+	@green 	        : #5cb85c;
+	@white 	        : #FFF;
+	@gray	          : #ddd;
+	@lightgray      : lightgray;
+	@lightblue      : #E7EFEF;
+	@title	         : #333;
+	@btn_bg_hover   : #444444;
+	@btn_blue       : #71bdf7;
 	@btn_blue_hover : #4199dd;
-	@disabled : #EEE;
+	@disabled       : #EEE;
 
-	@screen-sm-max : 767px;
+	@screen-sm-max  : 767px;
 
 // --------------------------------------------------
 
@@ -225,6 +225,7 @@
 	body.iframe.account_account
 	{
 		display: none!important;
+		display: none;
 	}
 
 	// --------------------------------------------------
@@ -234,7 +235,10 @@
 		.rating,		// Items
 		.details,		// Items
 		.description	// Items
-			{display: none!important;}
+			{
+				display: none!important;
+				display: none;
+			}
 
 		.home-notic {
 			position: fixed;
@@ -273,7 +277,8 @@
 			margin-left: 40px;
 		}
 		.box-heading{
-			display: none!important;	// working
+			display: none!important;
+			display: none;
 			border-bottom: 1px solid @lightgray!important;
 			margin-left: 50px;
 		}
@@ -338,12 +343,13 @@
 	// Backend
 
 	body.backend{
-		#menu{
-			display: block!important;
+
+		#menu,
+		#footer {
+			display: none;
 		}
 		// ----- ----- ----- ----- -----
 		.div2 > img,	// Logo
-		#footer,
 
 		#extension,
 		#system,
@@ -648,7 +654,10 @@
 		#tabs > a:nth-child(2),	// [Reviews]
 		.options,				// option
 		.this_hidden
-			{display: none!important;}
+			{
+				display: none!important;
+				display: none;
+			}
 
 		// ----- ----- ----- ----- -----
 
@@ -894,6 +903,7 @@
 		}
 		#shipping-method table tr:nth-child(n+3){
 			display: none!important;	// Show free or charge shipping $ only
+			display: none;
 		}
 		// ----- ----- ----- ----- -----
 		// Step 2
@@ -990,7 +1000,10 @@
 			#bottom,
 			#footer,
 			#powered,
-				{display: none!important;}
+				{
+					display: none!important;
+					display: none;
+				}
 			#header{
 				position: relative!important;
 				float: left;
