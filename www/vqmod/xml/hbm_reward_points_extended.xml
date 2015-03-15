@@ -605,7 +605,7 @@
 			<add><![CDATA[
 			// Automated Application Of Reward Points For Completed Order
 			if (in_array($data['order_status_id'], $this->config->get('rewardpoints_completed_orders'))) {
-				$credit_query = $this->db->query("SELECT op.product_id, op.name, op.quantity, pr.points FROM "
+				$credit_query = $this->db->query("SELECT op.product_id, op.name, op.quantity, pr.points, op.total FROM "
 						. DB_PREFIX . "order_product op, " . DB_PREFIX . "product_reward pr, `" . DB_PREFIX . "order` o "
 						. " WHERE op.product_id     = pr.product_id "
 						. " AND o.customer_group_id = pr.customer_group_id "
@@ -614,7 +614,6 @@
 						. " AND points > 0 AND o.customer_id > 0");
 
 				if ($credit_query->num_rows) {
-
 					// FIRST ORDER BONUS PROCESSING
 					if ($this->config->get('rewardpoints_order_bonus') && $order_info['customer_id']) {
 						$total_orders = $this->db->query("SELECT COUNT(*) as total FROM `" . DB_PREFIX . "order` WHERE customer_id = '" . (int)$order_info['customer_id'] . "' AND order_status_id IN (" . implode(',',$this->config->get('rewardpoints_completed_orders')) . ",9999)");
@@ -634,7 +633,7 @@
 						$check_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$order_info['customer_id'] . "' AND order_id    = '" . (int)$order_info['order_id'] . "' AND alt_id = '" . (int)$award['product_id'] . "'");
 						if (!$check_query->num_rows) {
 							foreach ($credit_query->rows as $award) {
-								$reward = ($award['points'] * $award['quantity']);
+								$reward = ($award['total']);
 								$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET customer_id = '" . (int)$order_info['customer_id']
 									. "', order_id = '" . (int)$order_info['order_id']
 									. "', description = '" . $this->db->escape('Order ID #'.(int)$order_info['order_id'].' - Purchase: ' . $award['name'])

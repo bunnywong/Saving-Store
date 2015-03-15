@@ -34,7 +34,6 @@ class ModelCheckoutXOrder extends Model {
 
 
 		foreach ($data['products'] as $product) {
-			// MARK
 			// Avoid reward as regular price when offen event
 			if($product['reward'] != 0)
 				$product['reward'] = $product['total'];
