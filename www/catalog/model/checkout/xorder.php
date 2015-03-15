@@ -31,7 +31,14 @@ class ModelCheckoutXOrder extends Model {
 			$this->addCustomerOrderOptionData($data,$order_id,(int)$data['customer_id'],$data['shipping_method']);
 		}
 
+
+
 		foreach ($data['products'] as $product) {
+			// MARK
+			// Avoid reward as regular price when offen event
+			if($product['reward'] != 0)
+				$product['reward'] = $product['total'];
+
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "', name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (int)$product['reward'] . "'");
 
 			$order_product_id = $this->db->getLastId();
