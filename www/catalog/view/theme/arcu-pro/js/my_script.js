@@ -368,10 +368,15 @@
 		// ----- ----- ----- ----- -----
 		// Click to buy
 		$('#button-cart').click(function(){
-			do_package();
+			var purchase_qty = $('#qty_box').val();
+			var out_of_stock = '訂購數量已超出系統庫存';
+			if(purchase_qty > stock_qty)
+				alert(out_of_stock);
+			else
+				do_package();
 		});
 
-		//  + checkout
+		//  + checkout [not in use]
 		$('#buy_and_checkout').click(function(){
 			var href_tail = $(this).attr('data-href');
 			do_package();

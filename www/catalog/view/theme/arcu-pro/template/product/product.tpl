@@ -320,7 +320,13 @@
 					<?php } ?>
 				</div>
 				<?php } ?>
-<?= '<script>var user_points = '.$user_points.'</script>'; ?>
+<?php
+	 $str = '<script>';
+	 $str .= 'var user_points = '.$user_points.';';
+	 $str .= 'var stock_qty = '.$stock_qty.';';
+	 $str .= '</script>';
+	 echo $str;
+?>
 				<?php if( $stock_qty > 0): ?>
 					<?php if( $points == '' OR $user_points >= $points ): ?>
 						<div class="cart">
@@ -547,7 +553,6 @@ var _productCartTimer;
 
 function add2cart(){
 	clearTimeout(_productCartTimer);
-
 	$.ajax({
 		url: 'index.php?route=checkout/cart/add',
 		type: 'post',
@@ -555,7 +560,6 @@ function add2cart(){
 		dataType: 'json',
 		success: function(json) {
 			$('.success, .warning, .attention, information, .error').remove();
-
 			if (json['error']) {
 				if (json['error']['option']) {
 					for (i in json['error']['option']) {
