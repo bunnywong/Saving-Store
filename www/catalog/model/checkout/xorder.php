@@ -32,11 +32,31 @@ class ModelCheckoutXOrder extends Model {
 		}
 
 
+		// MARK
+		(float) $coupon_value 		   = 0;
+		$product_all_qty 	           = 0;
+		(float) $coupon_value_adjust = 0;
+
+		foreach($data['totals'] as $total){
+			if($total['code'] =='coupon')
+				$coupon_value = $total['value'];
+		}
+
+		foreach($data['products'] as $product) {
+			$product_all_qty += $product['quantity'];
+		}
+
+		if($coupon_value != 0) {
+			$coupon_value_adjust = abs($coupon_value / $product_all_qty);
+			$coupon_value_adjust = $coupon_value_adjust;
+		}
 
 		foreach ($data['products'] as $product) {
 			// Avoid reward as regular price when offen event
-			if($product['reward'] != 0)
-				$product['reward'] = $product['total'];
+			if($product['reward'] != 0) {
+				$coupon_value_adjust *= (int)$product['quantity'];
+				$product['reward'] = round($product['total'] - $coupon_value_adjust);
+			}
 
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "', name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (int)$product['reward'] . "'");
 
