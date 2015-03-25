@@ -616,7 +616,7 @@ class ModelSaleCustomer extends Model {
 			$mail->setSender($store_name);
 			$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_reward_subject'), $store_name), ENT_QUOTES, 'UTF-8'));
 			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
-			$mail->send();
+			// $mail->send();
 		}
 	}
 
