@@ -220,16 +220,16 @@ class ControllerAccountOrder extends Controller {
 			$this->data['column_date_added'] = $this->language->get('column_date_added');
       		$this->data['column_status'] = $this->language->get('column_status');
       		$this->data['column_comment'] = $this->language->get('column_comment');
-			
+
 			$this->data['button_return'] = $this->language->get('button_return');
       		$this->data['button_continue'] = $this->language->get('button_continue');
-		
+
 			if ($order_info['invoice_no']) {
-				$this->data['invoice_no'] = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+				$this->data['invoice_no'] = $order_info['invoice_prefix'] . str_pad($order_info['invoice_no'],ORDER_DIGI,'0',STR_PAD_LEFT);
 			} else {
 				$this->data['invoice_no'] = '';
 			}
-			
+
 			$this->data['order_id'] = $this->request->get['order_id'];
 			$this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
 		$this->load->model('account/customer');
@@ -314,27 +314,27 @@ class ControllerAccountOrder extends Controller {
       			'address_2' => $order_info['shipping_address_2'],
       			'city'      => $order_info['shipping_city'],
       			'postcode'  => $order_info['shipping_postcode'],
-      			'zone'      => $order_info['shipping_zone'],
+      			'zone'      => substr($order_info['shipping_zone'], 5),
 				'zone_code' => $order_info['shipping_zone_code'],
-      			'country'   => $order_info['shipping_country']  
+      			'country'   => $order_info['shipping_country']
 			);
-			
+
 			foreach ($this->model_account_customer->getCustomOptions(2) as $option){
-				if($option['order_display']){$value = $this->model_account_customer->getCustomerOrderOptions($option['option_id'],'shipping',$order_id);			
+				if($option['order_display']){$value = $this->model_account_customer->getCustomerOrderOptions($option['option_id'],'shipping',$order_id);
 				$replace= array_merge($replace, array($option['identifier'] => $value));}
 				else $replace= array_merge($replace, array($option['identifier'] => ''));
 			}
 			$this->data['shipping_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
 
 			$this->data['shipping_method'] = $order_info['shipping_method'];
-			
+
 			$this->data['products'] = array();
-			
+
 			$products = $this->model_account_order->getOrderProducts($this->request->get['order_id']);
 
       		foreach ($products as $product) {
 				$option_data = array();
-				
+
 				$options = $this->model_account_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
 
          		foreach ($options as $option) {
