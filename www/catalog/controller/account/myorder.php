@@ -238,7 +238,7 @@ class ControllerAccountMyOrder extends Controller {
 			$this->data['button_continue'] = $this->language->get('button_continue');
 
 			if ($order_info['invoice_no']) {
-				$this->data['invoice_no'] = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+				$this->data['invoice_no'] = $order_info['invoice_prefix'] . str_pad($order_info['invoice_no'],ORDER_DIGI,'0',STR_PAD_LEFT);
 			} else {
 				$this->data['invoice_no'] = '';
 			}
