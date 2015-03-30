@@ -321,8 +321,9 @@
 				</div>
 				<?php } ?>
 <?php
+	$user_points == '' ? $js_user_points = 0 : $js_user_points = $user_points;
 	 $str = '<script>';
-	 $str .= 'var user_points = '.$user_points.';';
+	 $str .= 'var user_points = '.$js_user_points.';';
 	 $str .= 'var stock_qty = '.$stock_qty.';';
 	 $str .= '</script>';
 	 echo $str;
