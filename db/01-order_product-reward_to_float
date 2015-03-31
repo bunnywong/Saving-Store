@@ -1,0 +1,1 @@
+ALTER TABLE `oc_order_product` CHANGE `reward` `reward` DECIMAL(15,4) NOT NULL;
