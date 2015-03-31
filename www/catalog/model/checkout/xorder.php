@@ -50,11 +50,11 @@ class ModelCheckoutXOrder extends Model {
 				if($coupon_value != 0) {
 					$coupon_value_adjust = abs($coupon_value / $product_all_qty);
 				}
-				$coupon_value_adjust *= (int)$product['quantity'];
-				$product['reward'] 		= ceil($product['total'] - $coupon_value_adjust);
+				$coupon_value_adjust *= $product['quantity'];
+				$product['reward'] 		= $product['total'] - $coupon_value_adjust;
 			}
 
-			$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "', name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (int)$product['reward'] . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "', name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (float)$product['reward'] . "'");
 
 			$order_product_id = $this->db->getLastId();
 
