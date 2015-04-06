@@ -135,17 +135,28 @@ class ModelSaleCoupon extends Model {
 
 		if ($limit < 1) {
 			$limit = 10;
-		}	
+		}
 
 		$query = $this->db->query("SELECT ch.order_id, CONCAT(c.firstname, ' ', c.lastname) AS customer, ch.amount, ch.date_added FROM " . DB_PREFIX . "coupon_history ch LEFT JOIN " . DB_PREFIX . "customer c ON (ch.customer_id = c.customer_id) WHERE ch.coupon_id = '" . (int)$coupon_id . "' ORDER BY ch.date_added ASC LIMIT " . (int)$start . "," . (int)$limit);
 
 		return $query->rows;
 	}
 
+	public function getInvoiceNo($order_id) {
+		$query = $this->db->query("SELECT invoice_no, invoice_prefix FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "'");
+
+		if($query->row['invoice_no'] == 0)
+			return FALSE;
+
+		 $invoice = $query->row['invoice_prefix'] . str_pad($query->row['invoice_no'], ORDER_DIGI, "0", STR_PAD_LEFT);
+
+		return $invoice;
+	}
+
 	public function getTotalCouponHistories($coupon_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "coupon_history WHERE coupon_id = '" . (int)$coupon_id . "'");
 
 		return $query->row['total'];
-	}			
+	}
 }
 ?>

@@ -592,15 +592,16 @@ class ControllerSaleCoupon extends Controller {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
-		}  
+		}
 
 		$this->data['histories'] = array();
 
 		$results = $this->model_sale_coupon->getCouponHistories($this->request->get['coupon_id'], ($page - 1) * 10, 10);
 
+
 		foreach ($results as $result) {
 			$this->data['histories'][] = array(
-				'order_id'   => $result['order_id'],
+				'order_id'   => $this->model_sale_coupon->getInvoiceNo($result['order_id']),
 				'customer'   => $result['customer'],
 				'amount'     => $result['amount'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
