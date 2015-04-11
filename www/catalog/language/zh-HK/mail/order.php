@@ -27,7 +27,7 @@ $_['text_new_order_total']      = '總計';
 $_['text_new_total']            = '總計：';
 $_['text_new_download']         = '確認付款後您將通過以下鏈接下載商品：';
 $_['text_new_comment']          = '訂單附言：';
-$_['text_new_footer']           = '如果您有任何疑問， 請直接回復此郵件。';
+$_['text_new_footer']           = '如果您有任何疑問， 請致電2543 3110，切勿直接回復此郵件。';
 // $_['text_new_powered']          = '技術支持 <a href="http://www.opencart.cn">OpenCart中文支持網</a>。';
 $_['text_new_powered']          = '';
 $_['text_update_subject']       = '%s - 訂單更新 %s';
