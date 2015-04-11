@@ -19,3 +19,5 @@ www/system/logs/*
 !/www/system/logs/index.html
 
 www/vqmod/vqcache/*
+*.log
+*.cache
