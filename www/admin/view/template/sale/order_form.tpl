@@ -185,6 +185,7 @@
             </tr>
           </table>
         </div>
+
         <div id="tab-shipping" class="vtabs-content">
           <table class="form">
             <tr>
@@ -235,6 +236,12 @@
                 <?php if ($error_shipping_postcode) { ?>
                 <span class="error"><?php echo $error_shipping_postcode; ?></span>
                 <?php } ?></td>
+            </tr>
+            <tr>
+              <td>電話</td>
+              <td>
+                <?= $address['my_delivery_tel'] ?>
+              </td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_country; ?></td>
