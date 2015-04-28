@@ -16,7 +16,9 @@ class ModelModuleKulerProductList extends Model
     }
 
     public function getProducts(array $options)
-    {
+    {   // ***
+        $options['sort'] = 'p.sort_order'; // Hardcode :D
+
         if ($this->customer->isLogged())
         {
             $customer_group_id = $this->customer->getCustomerGroupId();
