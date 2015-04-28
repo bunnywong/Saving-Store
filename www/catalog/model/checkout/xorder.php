@@ -430,10 +430,7 @@ class ModelCheckoutXOrder extends Model {
 				if ($order_info['shipping_address_format']) {
 					$format = $order_info['shipping_address_format'];
 				} else {
-					//$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" .$stringP. '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
-
-					// My Script
-					$format = '{firstname} {lastname}' . "\n" .'{telephone}'. '{company}' . "\n" . '{address_1}'  . '{address_2}' . $stringP. '{city} {postcode}'  . '{zone}' . "\n" . '{country}';
+					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" .$stringP. '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
 				}
 
 				$find = array(
