@@ -1,5 +1,16 @@
 <?php
 class ModelSaleOrder extends Model {
+
+	public function getDeliveryAddressTel($order_id) {
+		$query = $this->db->query("SELECT value FROM " . DB_PREFIX . "xcustom_customer_order_option WHERE order_id = '$order_id' AND data_in = 'shipping'");
+
+		return $query->rows;
+	}
+
+	public function updateDeliveryTel($order_id, $my_delivery_tel) {
+		$this->db->query("UPDATE " . DB_PREFIX . "xcustom_customer_order_option SET value = '$my_delivery_tel' WHERE order_id = '$order_id' AND data_in = 'shipping' AND name = '聯絡電話'");
+	}
+
 	public function addOrder($data) {
 		$this->load->model('setting/store');
 

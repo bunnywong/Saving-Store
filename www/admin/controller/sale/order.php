@@ -118,6 +118,12 @@ class ControllerSaleOrder extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+    if (isset($this->request->post['my_delivery_tel'])) {
+    	$my_delivery_tel =  $this->request->post['my_delivery_tel'];
+    	$order_id =  $this->request->post['order_id'];
+	    $this->model_sale_order->updateDeliveryTel($order_id, $my_delivery_tel);
+    }
+
 			$this->redirect($this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 

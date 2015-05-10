@@ -240,7 +240,11 @@
             <tr>
               <td>電話</td>
               <td>
-                <?= $address['my_delivery_tel'] ?>
+              <?php
+                $deliveryTel =  $this->model_sale_order->getDeliveryAddressTel($order_id);
+              ?>
+                <input type="text" name="my_delivery_tel" value="<?= $deliveryTel[0]['value']; ?>" />
+                <input type="hidden" name="order_id" value="<?= $order_id; ?>">
               </td>
             </tr>
             <tr>
