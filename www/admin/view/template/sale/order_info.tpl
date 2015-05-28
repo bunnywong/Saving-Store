@@ -115,7 +115,7 @@
           <?php if ($reward && $customer) { ?>
           <tr>
             <td><?php echo $text_reward; ?></td>
-            <td><?php echo floor($reward); ?>
+            <td><?php echo round($reward); ?>
               <?php if (!$reward_total) { ?>
               <span id="reward"><b>[</b> <a id="reward-add"><?php echo $text_reward_add; ?></a> <b>]</b></span>
               <?php } else { ?>

@@ -2092,7 +2092,7 @@ class ControllerSaleOrder extends Controller {
 				$my_description = ' 完成訂單編號 ' .$order_info['invoice_prefix'].str_pad($order_info['invoice_no'],ORDER_DIGI,'0',STR_PAD_LEFT);
 
 				if (!$reward_total) {
-					$this->model_sale_customer->addReward($order_info['customer_id'], $my_description, floor($order_info['reward']), $this->request->get['order_id']);
+					$this->model_sale_customer->addReward($order_info['customer_id'], $my_description, round($order_info['reward']), $this->request->get['order_id']);
 					$json['success'] = $this->language->get('text_reward_added');
 				} else {
 					$json['error'] = $this->language->get('error_action');
