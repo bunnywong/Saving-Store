@@ -1,5 +1,8 @@
 # SavingStore.com.hk
 
+### 9-May-2015 Product todo: Remove 尿褲 - L 碼（男） & （女） in extension options
+
+
 ### 6-May-2015 Tag for all version 2
 
 ### 6-May-2015 Production Deploy fail

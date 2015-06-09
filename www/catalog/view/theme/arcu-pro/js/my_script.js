@@ -437,7 +437,6 @@
 		// [想要的大王紙產品..]
 		$('table tr:[sort="a70"] td, table tr:[sort="a95"] td')
 			.animate({'padding-top': '50px'},'slow');
-			$('table tr:[sort="a70"] td option:nth-child(6), table tr:[sort="a70"] td option:nth-child(7)').hide();
 
 		// Receive EDM
 			// Styling
