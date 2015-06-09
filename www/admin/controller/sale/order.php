@@ -2449,7 +2449,7 @@ class ControllerSaleOrder extends Controller {
 				}
 
 				if ($order_info['invoice_no']) {
-					$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+					$invoice_no = $order_info['invoice_prefix'] . str_pad($order_info['invoice_no'], ORDER_DIGI, "0", STR_PAD_LEFT);
 				} else {
 					$invoice_no = '';
 				}
