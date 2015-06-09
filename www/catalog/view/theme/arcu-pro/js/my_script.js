@@ -115,6 +115,12 @@
 	// Fn. By page
 
 	$.fn.backend = function(){
+		var isIE11 = !!navigator.userAgent.match(/Trident.*rv[ :]*11\./);
+
+		if(navigator.appVersion.indexOf("MSIE ")!=-1 || isIE11) {
+			alert('This page do not support IE, please use Google Chrome or Firefox to visit');
+			window.location = 'http://savingstore.com.hk';
+		}
 
 		setTimeout(function(){
 			$('table tbody tr td select[name="address[1][zone_id]"').district();
