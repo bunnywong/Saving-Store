@@ -430,7 +430,7 @@ class ModelCheckoutXOrder extends Model {
 				if ($order_info['shipping_address_format']) {
 					$format = $order_info['shipping_address_format'];
 				} else {
-					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" .$stringP. '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+					$format = "<b>姓名 : </b>" . '{firstname} {lastname}' . "\n" . "<b>登記電話 : </b>" . '{telephone}' . "\n" . '{company}' . "\n" . "<b>送貨地址 : </b>" . '{address_1}' . "\n" . '{address_2}' . "\n" . "<b>送貨電話 : </b>" .$stringP. "<b>區域 : </b>" . '{city} {postcode}' . "-" . '{zone}' . "-" . '{country}';
 				}
 
 				$find = array(
