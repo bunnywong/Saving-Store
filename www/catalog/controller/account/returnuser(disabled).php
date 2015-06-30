@@ -158,7 +158,7 @@ class ControllerAccountReturnuser extends Controller {
 
 		$custom =  $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
 
-		count($custom) > 0 ? $ip = $custom['ip'] : $ip = '';
+		$ip = $custom['ip'];
 
 		if (!isset($this->request->post['email'])) {	// Blank email
 			$this->error['warning'] = $this->language->get('error_email');
