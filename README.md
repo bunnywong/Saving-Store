@@ -1,10 +1,11 @@
 # SavingStore.com.hk
 
+### 7-Jul-2015 Production
+- Disabled: Sidebar - Banner
+- Controller form file renamed as [ returnuser(disabled).php ] [ TESTED ]
+
 
 ### 1-Jul-2015 Remove old user return form Banner(sidebar) & Content
-	Todo: Production
-	- Disable: Sidebar - Banner
-	- Controller form file renamed as [ returnuser(disabled).php ]
 
 ### 9-May-2015 Product [ GOO.N 紙尿片試用裝尺碼 ]
 	Removed 尿褲 - L 碼（男） & （女） in extension options
