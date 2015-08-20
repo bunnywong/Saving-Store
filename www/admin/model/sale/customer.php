@@ -155,7 +155,12 @@ class ModelSaleCustomer extends Model {
 			$order_by = ' ORDER BY BirthMonth ASC ';
 		}else{
 			// Member
+			$date_to = date_create($date_to);
+			date_add($date_to, date_interval_create_from_date_string('1 day'));
+			$date_to = date_format($date_to, 'Y-m-d');
+
 			$period = " AND (date_added BETWEEN '$date_from' AND '$date_to')";
+			echo 'bbday' . $date_to;
 			$order_by = ' ORDER BY date_added ASC ';
 		}
 
