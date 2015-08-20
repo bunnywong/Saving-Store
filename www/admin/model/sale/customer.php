@@ -156,7 +156,6 @@ class ModelSaleCustomer extends Model {
 		}else{
 			// Member
 			$period = " AND (date_added BETWEEN '$date_from 00:00:00' AND '$date_to 23:59:59')";
-			echo 'bbday' . $date_to;
 			$order_by = ' ORDER BY date_added ASC ';
 		}
 
