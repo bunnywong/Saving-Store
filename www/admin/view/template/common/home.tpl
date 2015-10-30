@@ -99,7 +99,7 @@
               <?php if ($orders) { ?>
               <?php foreach ($orders as $order) { ?>
               <tr>
-                <td class="right"><?php echo $order['order_id']; ?></td>
+                <td class="right"><?php echo $order['invoice_no']; ?></td>
                 <td class="left"><?php echo $order['customer']; ?></td>
                 <td class="left"><?php echo zh_order_status($order['status']); ?></td>
                 <td class="left"><?php echo $order['date_added']; ?></td>
