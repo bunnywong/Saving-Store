@@ -154,7 +154,7 @@
             <span class="user-mail-goon">
                 <?php
                     if( $this->customer->getRewardPoints() > 0 )
-                            echo $this->customer->getRewardPoints();
+                            echo number_format($this->customer->getRewardPoints());
                         else
                             echo 0;
                 ?>
