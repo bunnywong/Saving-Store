@@ -654,35 +654,7 @@ body.admin_sale_order_info #tab-shipping > table > tbody > tr:nth-child(9) {
   background: #f08080;
   border: 2px solid #f08080;
 }
-body.admin_sale_customer_form #htabs > a:nth-child(3),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(2),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(5),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(9),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(10),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(23),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(24),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(25),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(26),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(27),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(28),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(29),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(30),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(31),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(32),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(33),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(34),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(35),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(36),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(37),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(38),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(39),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(40),
-body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(41),
-body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(2),
-body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(3),
-body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(4),
-body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(7),
-body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(10) {
+body.admin_sale_customer_form #htabs > a:nth-child(3) {
   background: #f08080;
   border: 2px solid #f08080;
 }

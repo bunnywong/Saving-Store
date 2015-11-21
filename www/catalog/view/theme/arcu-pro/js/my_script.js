@@ -137,6 +137,22 @@
 		});
 	}// !$.fn.owner
 
+  $.fn.admin_sale_customer_form = function(){
+    var mySort = [
+                  ['稱謂', 1],
+                  ['年齡', 3],
+                  ['地域', 4],
+                  ['電話', 4], // ORG
+                  ['已贈送禮品（預產期）', 20],
+                  ['已贈送禮品（迎新）', 20],
+                ];
+
+    for (i=0; i < mySort.length; i++) {
+      $(".js-form-normal tr > td:contains(" + mySort[i][0] + ")").parent('tr')
+      .insertBefore('.js-form-normal tbody > tr:nth-child(' + mySort[i][1] + ')');
+    }
+  }
+
 	$.fn.admin_order_detail = function(){
 
 		// Default <select> of Hong Kong
@@ -578,6 +594,9 @@ $(function () {
 		// Admin
 		if( $('body').hasClass('backend') )
 			$(this).backend();
+
+    if( $('body').hasClass('admin_sale_customer_form') )
+      $(this).admin_sale_customer_form();
 
 		if( $('body').hasClass('admin_order_detail') )
 			$(this).admin_order_detail();
