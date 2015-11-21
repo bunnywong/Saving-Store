@@ -125,30 +125,7 @@ body.owner.admin_sale_order_info #tab-shipping > table > tbody > tr:nth-child(5)
 body.owner.admin_sale_order_info #tab-order table > tbody > tr:nth-child(n+41) {
   display: table-row;
 }
-body.owner.admin_sale_customer_form #htabs > a:nth-child(3),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(2),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(5),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(9),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(10),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(23),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(24),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(25),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(26),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(27),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(28),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(29),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(30),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(31),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(32),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(33),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(34),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(35),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(36),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(37),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(38),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(39),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(40),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(41) {
+body.owner.admin_sale_customer_form #htabs > a:nth-child(3) {
   display: none!important;
   display: none;
 }
