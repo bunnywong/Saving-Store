@@ -5,7 +5,7 @@
 // Common
 
 	@red 	          : lightcoral;
-	@blue 	         : #5bc0de;
+	@blue 	        : #5bc0de;
 	@yellow         : #FBD606;
 	@black 	        : #666;
 	@green 	        : #5cb85c;
@@ -544,21 +544,8 @@
 	// ----- ----- ----- ----- -----
 	// Tab 2.2 客戶設置
 
-	body.admin_sale_customer_form{
+	body.admin_sale_customer_form {
 		#htabs > a:nth-child(3),	// 交易
-
-		#tab-customer > table > tbody > tr:nth-child(2),	// Last name
-		#tab-customer > table > tbody > tr:nth-child(5),	// 傳真
-		#tab-customer > table > tbody > tr:nth-child(9),	// 電郵地址（確認輸入）
-		#tab-customer > table > tbody > tr:nth-child(10),	// 驗証碼
-		#tab-customer > table > tbody > tr:nth-child(21),	// 本人同意...
-		#tab-customer > table > tbody > tr:nth-child(25),	// 用戶組
-
-		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(2),	// Last name
-		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(3),	// 公司名稱
-		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(4),	// 公司編碼
-		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(7),	// 地址 2
-		#tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(10),	// 郵編
 		{
 			.admin_io;
 		}
@@ -988,3 +975,50 @@
 	#powered_mobi{
 		display: none;
 	}
+
+/*
+ * Wing Kee - Script
+ */
+  .div-con-goon.pointer:last-child{
+    display: none;
+  }
+  .lightbox_wrapper {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
+    .lightbox {
+      border-radius: 30px;
+      padding: 50px;
+      background: white;
+      display: block;
+      width: 800px;
+      height: 500px;
+      margin: 50px auto 0px auto;
+      border: 1px solid gray;
+      .cross {
+        top: -30px;
+        right: -30px;
+        position: relative;
+        float: right;
+        height: 50px;
+        width: 50px;
+        background: gray;
+        border-radius: 30px;
+        cursor: pointer;
+        &:hover {
+          background: lightgray;
+        }
+        &:before {
+          content: "X";
+          float: right;
+          padding: 15px;
+          color: white;
+          font-size: 30px;
+        }
+      }
+    }
+  }

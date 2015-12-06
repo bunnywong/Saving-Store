@@ -177,7 +177,15 @@ class ControllerCommonHome extends Controller {
 				'href' => $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'], 'SSL')
 			);
 
+      // Append custom invoice
+      if($result['invoice_no'] != 0) {
+        $invoice = $result['invoice_prefix'] . str_pad($result['invoice_no'], ORDER_DIGI, "0", STR_PAD_LEFT);
+      } else {
+        $invoice = '';
+      }
+
 			$this->data['orders'][] = array(
+        'invoice_no' => $invoice,
 				'order_id'   => $result['order_id'],
 				'customer'   => $result['customer'],
 				'status'     => $result['status'],

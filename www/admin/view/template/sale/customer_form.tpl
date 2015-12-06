@@ -34,23 +34,16 @@
             <?php } ?>
             <span id="address-add"><?php echo $button_add_address; ?>&nbsp;<img src="view/image/add.png" alt="" onclick="addAddress();" /></span></div>
           <div id="tab-customer" class="vtabs-content">
-            <table class="form">
+            <table class="form js-form-normal">
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
+                <td><span class="required">*</span> 姓名<?php //echo $entry_firstname; ?></td>
                 <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
                   <?php if ($error_firstname) { ?>
                   <span class="error"><?php echo $error_firstname; ?></span>
                   <?php } ?></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-                <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
-                  <?php if ($error_lastname) { ?>
-                  <span class="error"><?php echo $error_lastname; ?></span>
-                  <?php } ?></td>
-              </tr>
-              <tr>
-                <td><span class="required">*</span> <?php echo $entry_email; ?></td>
+                <td><span class="required">*</span> 電郵地址<?php //echo $entry_email; ?></td>
                 <td><input type="text" name="email" value="<?php echo $email; ?>" />
                   <?php if ($error_email) { ?>
                   <span class="error"><?php echo $error_email; ?></span>
@@ -63,13 +56,47 @@
                   <span class="error"><?php echo $error_telephone; ?></span>
                   <?php  } ?></td>
               </tr>
+
               <tr>
-                <td><?php echo $entry_fax; ?></td>
-                <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
+                <td><?php echo $entry_password; ?></td>
+                <td><input type="password" name="password" value="<?php echo $password; ?>"  />
+                  <?php if ($error_password) { ?>
+                  <span class="error"><?php echo $error_password; ?></span>
+                  <?php  } ?></td>
               </tr>
-                       <?php if ($options) { ?>
+<?php if ($options) { ?>
+<?php
+/*
+  This array for ref only
+  $exist_sort_ref = array(
+                    0 => '稱謂',
+                    1 => '年齡',
+                    2 => '地域',
+                    3 => '確認電郵地址', // remove
+                    4 => '驗証',      // remove
+                    5 => '姓名',
+                    6 => '別名',
+                    7 => '性別',
+                    8 => '出生日期 / 預產期',
+                    9 => '出生醫院 - 類別',
+                    10 => '已贈送禮品（預產期）',
+                    11 => '已贈送禮品（迎新）',
+                    12 => '出生私家醫院 - 名稱',
+                    13 => '出生公立醫院 - 名稱',
+                    14 => 'GOO.N 紙尿片試用裝尺碼',
+                    15 => '你從什麼途徑得知思詩樂 / GOO.N 大王品牌的產品?',
+                    16 => '你最常購買嬰兒產品 / 紙尿片 / 褲的地方?',
+                    17 => '本人願意提供我的個人資料予先寧國際(集團)有限公司', // remove
+                  );
+*/
+  unset($options[3]);
+  unset($options[4]);
+  unset($options[17]);
+  $options[5]['name'] = '子女' . $options[5]['name'];
+  $options[6]['name'] = '子女' . $options[6]['name'];
+  $options[7]['name'] = '子女' . $options[7]['name'];
 
-
+?>
         <?php foreach ($options as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
        <tr><td>
@@ -164,20 +191,6 @@
 
         <?php } ?>
         <?php } ?>
-              <tr>
-                <td><?php echo $entry_password; ?></td>
-                <td><input type="password" name="password" value="<?php echo $password; ?>"  />
-                  <?php if ($error_password) { ?>
-                  <span class="error"><?php echo $error_password; ?></span>
-                  <?php  } ?></td>
-              </tr>
-              <tr>
-                <td><?php echo $entry_confirm; ?></td>
-                <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
-                  <?php if ($error_confirm) { ?>
-                  <span class="error"><?php echo $error_confirm; ?></span>
-                  <?php  } ?></td>
-              </tr>
               <tr>
                 <td><?php echo $entry_newsletter; ?></td>
                 <td><select name="newsletter">

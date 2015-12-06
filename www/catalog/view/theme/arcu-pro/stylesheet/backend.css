@@ -125,18 +125,7 @@ body.owner.admin_sale_order_info #tab-shipping > table > tbody > tr:nth-child(5)
 body.owner.admin_sale_order_info #tab-order table > tbody > tr:nth-child(n+41) {
   display: table-row;
 }
-body.owner.admin_sale_customer_form #htabs > a:nth-child(3),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(2),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(5),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(9),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(10),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(21),
-body.owner.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(25),
-body.owner.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(2),
-body.owner.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(3),
-body.owner.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(4),
-body.owner.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(7),
-body.owner.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(10) {
+body.owner.admin_sale_customer_form #htabs > a:nth-child(3) {
   display: none!important;
   display: none;
 }
