@@ -100,6 +100,46 @@ body input[type=password],
 body select {
   max-width: 300px!important;
 }
+body .lightbox_wrapper {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.5);
+}
+body .lightbox_wrapper .lightbox {
+  border-radius: 30px;
+  padding: 50px;
+  background: white;
+  display: block;
+  width: 800px;
+  height: 500px;
+  margin: 50px auto 0px auto;
+  border: 1px solid gray;
+}
+body .lightbox_wrapper .lightbox .cross {
+  top: -30px;
+  right: -30px;
+  position: relative;
+  float: right;
+  height: 50px;
+  width: 50px;
+  background: gray;
+  border-radius: 30px;
+  cursor: pointer;
+}
+body .lightbox_wrapper .lightbox .cross:hover {
+  background: lightgray;
+}
+body .lightbox_wrapper .lightbox .cross:before {
+  content: "X";
+  float: right;
+  padding: 15px;
+  color: white;
+  font-size: 30px;
+}
 body div#header .primary-define #toppanel #logo img {
   max-width: 90%;
 }
@@ -114,7 +154,7 @@ body div#container #container-inner {
   margin: 0 20px 0 290px;
 }
 body div#container #container-inner .my_banner img {
-  min-width: 665px!important;
+  
   width: auto!important;
   height: auto!important;
 }
@@ -187,9 +227,6 @@ body.list_view .category-info b {
 }
 body.list_view .products {
   cursor: pointer;
-}
-body.list_view .box-content {
-  min-width: 800px;
 }
 body.list_view .box-product > div {
   min-height: 312px;
@@ -407,7 +444,7 @@ span#cart-total img {
   min-width: 240px!important;
 }
 .sidebar-banners div {
-  min-height: 70px;
+  min-height: 80px;
   background-repeat: no-repeat;
   background-position: center;
   margin: 10px 0px 10px 0px;
@@ -422,7 +459,7 @@ span#cart-total img {
   background-image: url("/image/data/sidebar/my_img/menu/promotion.png");
 }
 .sidebar-banners #sidebar-suzuran {
-  height: 80px;
+  
   background-image: url("/image/data/sidebar/suzuran-sel.png");
 }
 .sidebar-banners #sidebar-suzuran:hover {
@@ -654,7 +691,18 @@ body.admin_sale_order_info #tab-shipping > table > tbody > tr:nth-child(9) {
   background: #f08080;
   border: 2px solid #f08080;
 }
-body.admin_sale_customer_form #htabs > a:nth-child(3) {
+body.admin_sale_customer_form #htabs > a:nth-child(3),
+body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(2),
+body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(5),
+body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(9),
+body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(10),
+body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(21),
+body.admin_sale_customer_form #tab-customer > table > tbody > tr:nth-child(25),
+body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(2),
+body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(3),
+body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(4),
+body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(7),
+body.admin_sale_customer_form #tab-general > div:nth-child(n+3) table > tbody > tr:nth-child(10) {
   background: #f08080;
   border: 2px solid #f08080;
 }
@@ -678,6 +726,10 @@ body.admin_sale_customer_listview table.my_search td {
 }
 body.admin_sale_customer_listview table.my_search td span {
   margin-right: 20px;
+}
+
+.primary-define .cart-info{
+    overflow: scroll;
 }
 body.admin_sale_customer_listview table.my_search td span.act_clear {
   height: 42px;
@@ -975,8 +1027,7 @@ body.account_address #content > .box > .content > table .my_address {
 }
 @media (max-width: 767px) {
   body #bottom,
-  body #footer,
-  body #powered {
+  body #footer {
     display: none!important;
     display: none;
   }
@@ -987,59 +1038,14 @@ body.account_address #content > .box > .content > table .my_address {
   body #header .mCustomScrollbar {
     height: 100%!important;
   }
-  body #header #powered_mobi {
-    display: block;
-    max-width: 270px;
-    margin-top: -150px;
-    padding: 0px 20px;
-  }
+  
 }
 #powered_mobi {
   display: none;
 }
-/*
- * Wing Kee - Script
- */
-.div-con-goon.pointer:last-child {
-  display: none;
+
+@media screen and (max-width: 1024px) {
+#logo a {
+width: 100px;
 }
-.lightbox_wrapper {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  z-index: 999;
-  background: rgba(0, 0, 0, 0.5);
-}
-.lightbox_wrapper .lightbox {
-  border-radius: 30px;
-  padding: 50px;
-  background: white;
-  display: block;
-  width: 800px;
-  height: 500px;
-  margin: 50px auto 0px auto;
-  border: 1px solid gray;
-}
-.lightbox_wrapper .lightbox .cross {
-  top: -30px;
-  right: -30px;
-  position: relative;
-  float: right;
-  height: 50px;
-  width: 50px;
-  background: gray;
-  border-radius: 30px;
-  cursor: pointer;
-}
-.lightbox_wrapper .lightbox .cross:hover {
-  background: lightgray;
-}
-.lightbox_wrapper .lightbox .cross:before {
-  content: "X";
-  float: right;
-  padding: 15px;
-  color: white;
-  font-size: 30px;
 }

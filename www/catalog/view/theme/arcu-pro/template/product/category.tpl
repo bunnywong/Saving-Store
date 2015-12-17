@@ -93,7 +93,7 @@
 
 			<?php foreach ($products as $product) { ?>
 				<?php if( strtolower($product['category_name']) ): ?>
-				<div class="products" style="width: <?php echo $thumb_width + 52; ?>px">
+				<div class="products" style="width: <?php echo $thumb_width + 20; ?>px">
 					<a href="<?php echo $product['href']; ?>"></a>
 					<?php if ($product['thumb']) { ?>
 					<div class="image"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></div>
@@ -163,7 +163,7 @@
 $(document).ready(function () {
 	setTimeout(function(){
 		$('.box-product').masonry({
-			columnWidth: <?php echo $thumb_width + 72; ?>,
+			columnWidth: 20,
 			isFitWidth: true,
 			itemSelector: '.product-grid > div'
 		});

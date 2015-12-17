@@ -14,7 +14,7 @@ $(document).ready(function () {
 		<div class="box-heading"><span><?php echo $module_title ?></span></div>
 		<?php } ?>
 		<div class="box-content horizontal">
-			<div class="box-product product-grid">
+			<div class="box-product product-grid grid-layout">
 				<?php foreach ($products as $product) { ?>
 				<?php echo $this->loadChromeTemplate($setting, $product); ?>
 				<?php } ?>

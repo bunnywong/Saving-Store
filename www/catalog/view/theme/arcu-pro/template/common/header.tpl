@@ -17,7 +17,7 @@
 <meta charset="UTF-8" />
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width" />
 <?php if ($description) { ?>
 <meta name="description" content="<?php echo str_replace(array("\n", "\r"), '', strip_tags(strip_tags(html_entity_decode($description)))); ?>" />
 
@@ -36,6 +36,7 @@
 <?php } else { ?>
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/modules.css" />
+    <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/responsive.css" />
 <!--
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/arcu-pro/stylesheet/responsive.css" />
 -->

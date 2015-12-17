@@ -313,7 +313,6 @@ small {
 	z-index: 3;
 	width: 280px;
 	position: fixed;
-	min-height: 100%;
 	text-align: center;
 	transition: left 0.3s ease-in-out;
 	-moz-transition: left 0.3s ease-in-out;

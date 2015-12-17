@@ -7,9 +7,39 @@
 /* ============================== RESOLUTION 1024px ============================== */
 @media screen and (max-width: 1024px) {
 	/* HEADER */
+	#logo a {
+        width: 200px;
+    }
+    #toppanel{
+        text-align:left;
+	}
+    .sidebar-banners{
+        padding: 10px;
+    }
+    .sidebar-banners a div{
+        background-position: center!important;
+        border-radius: 5px;
+        margin: 5px;
+        background-size: contain;
+    }
+    .sidebar-banners a{
+        width: 33%;
+        float: left;
+    }
+    .home.list_view{
+    }
+#powered{
+	background: #FB065A!important;
+	color:#fff!important;
+}
+.frm_sidebar_login_wrapper{display:none;}
+.primary-define #powered{position: absolute;
+		bottom: 0;}
+
 	.primary-define #header {
-		width: auto;
+		width: 100%;
 		position: static;
+		margin-right:0px;
 	}
 	.primary-define #header .wrapper {
 		height: auto !important;
@@ -65,9 +95,14 @@
 		display: block;
 		visibility: hidden;
 	}
+	.primary-define #container{margin-bottom: 300px;}
+	#container #container-inner{margin-left: 0px!important;margin-right: 0px!important;}
+	.list_view .my_banner{margin-left: 40px;
+	margin-right: 40px;}
 	.primary-define #header #cart {
 		float: right;
-		margin-right: 20px;
+		margin-right: 0px;
+		width:100%
 	}
 	.primary-define #header #cart .heading a {
 		padding: 20px 0;
@@ -151,7 +186,6 @@
 		margin-left: 20px;
 	}
 	.primary-define #content {
-		width: 800px;
 		max-width: 100%;
 	}
 	.primary-define .product-info > .left,
@@ -298,9 +332,12 @@
 	.primary-define .kuler-newsletter .box-heading {
 		display: none;
 	}
+  
 }
 /* ============================== RESOLUTION 640px ============================== */
 @media screen and (max-width: 640px) {
+    body{
+    }
 	/* BOX PRODUCTS */
 	.primary-define .box-product {
 		margin: 0 auto;
@@ -326,6 +363,10 @@
 }
 /* ============================== RESOLUTION 480px ============================== */
 @media screen and (max-width: 480px) {
+    .sidebar-banners a div{
+            height: 45px!Important;
+    min-height: 45px;
+    }
 	.primary-define #header #cart,
 	.primary-define #header #topbar {
 		margin: 0;
