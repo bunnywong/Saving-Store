@@ -21,3 +21,11 @@ www/system/logs/*
 www/vqmod/vqcache/*
 *.log
 *.cache
+
+*.php
+
+*.phtml
+
+www/catalog/view/theme/default/template/module/kulercp.phtml
+
+www/catalog/view/theme/default/template/module/kuler_social_icons.phtml
