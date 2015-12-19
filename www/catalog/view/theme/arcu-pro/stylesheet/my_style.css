@@ -960,6 +960,12 @@ body.checkout #button-redeem {
   padding: 10px 30px;
   margin-bottom: 20px;
 }
+.xten{
+    padding: 0 10px;
+}
+.xleft, .xright{
+    float:left!important;
+}
 body.checkout #payment-address > div.checkout-content > .xleft > .xten label:hover,
 body.checkout #payment-address > div.checkout-content > .xright > .xten label:hover {
   background-color: #4199dd !important;
@@ -993,7 +999,7 @@ body.checkout #shipping-address .xten input:checked + label {
 body.checkout #shipping-address input#shipping-address-existing + label,
 body.checkout #shipping-address input#shipping-address-new + label {
   height: 40px;
-  width: 400px;
+  width: 100%;
 }
 body.checkout #shipping-address input#shipping-address-existing:checked + label,
 body.checkout #shipping-address input#shipping-address-new:checked + label {
@@ -1042,6 +1048,10 @@ body.account_address #content > .box > .content > table .my_address {
 }
 #powered_mobi {
   display: none;
+}
+
+.frm_sidebar_login_wrapper .mobileLogin{
+    display: none;
 }
 
 @media screen and (max-width: 1024px) {

@@ -16,6 +16,7 @@
 
 <div class="frm_sidebar_login_wrapper">
 	<?php if( $this->customer->getEmail() == '' ): ?>
+    <span class="mobileLogin"><a href="<?= $base; ?>index.php?route=account/login">登入 ／ 注冊</a></span>
 	<form action="<?= $base; ?>index.php?route=account/login" method="post" enctype="multipart/form-data" class="frm_sidebar_login">
 		<div class="login-con">
 		    <div class="log-in-title"></div>
@@ -32,7 +33,14 @@
 	</form>
 
 <?php else: ?>
-
+    <span class="mobileLogin">
+        <a href="<?= $base; ?>index.php?route=account/account">
+	    	<button class="half-btn-left">會員資料</button>
+	    </a>
+	    <a href="<?= $base; ?>index.php?route=account/logout">
+	    	<button class="half-btn-right">登出</button>
+	    </a>
+    </span>
 	<div class="login-con frm_sidebar_login">
 	    <div class="member-title"></div>
 	    <div class="user-row">

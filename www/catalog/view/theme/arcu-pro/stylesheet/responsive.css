@@ -10,6 +10,9 @@
 	#logo a {
         width: 200px;
     }
+    .listTableSmall{
+        width: 100px;
+    }
     #toppanel{
         text-align:left;
 	}
@@ -32,7 +35,17 @@
 	background: #FB065A!important;
 	color:#fff!important;
 }
-.frm_sidebar_login_wrapper{display:none;}
+.frm_sidebar_login_wrapper .login-con{display:none;}
+    .frm_sidebar_login_wrapper .mobileLogin{
+        display: block!important;
+        position: absolute;
+        top: 55px;
+        right: 20px;
+        font-size: 20px;
+    }
+    .frm_sidebar_login_wrapper .mobileLogin a{
+        color:#fff!important;
+    }
 .primary-define #powered{position: absolute;
 		bottom: 0;}
 

@@ -52,7 +52,7 @@
 								<span class="stock">***</span>
 								<?php } ?>
 								<?php if ($product['option']) { ?>
-								<div>
+								<div class="listTableSmall">
 									<?php foreach ($product['option'] as $option) { ?>
 									<small>（套裝優惠）<?php //echo $option['name']; ?><?php //echo $option['value']; ?></small><br />
 									<?php } ?>
@@ -62,7 +62,7 @@
 								</div>
 								<?php } ?>
 								<?php if ($product['reward']) { ?>
-								<div> <small class="reward"><?php echo $product['reward']; ?></small>
+								<div class="listTableSmall"> <small class="reward"><?php echo $product['reward']; ?></small>
 									<?php } ?>
 									<?php
 										// Debug

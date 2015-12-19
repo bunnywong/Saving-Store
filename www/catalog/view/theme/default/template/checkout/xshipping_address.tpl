@@ -1,23 +1,20 @@
 <?php if ($addresses) { ?>
- <div class="xleft"><table class="xten" width="100%">
-  <tr><td >
-  <input type="radio" name="shipping_address" value="existing" id="shipping-address-existing" checked="checked" />
-  <label for="shipping-address-existing">
-  <?php echo $text_address_existing; ?>
-  </label>
-  </td></tr>
-  </table>
-  </div>
+ <div class="xleft">
+     <div class="xten">
+        <input type="radio" name="shipping_address" value="existing" id="shipping-address-existing" checked="checked" />
+        <label for="shipping-address-existing">
+          <?php echo $text_address_existing; ?>
+        </label>
+     </div>
+</div>
 <div class="xright">
- <table class="xten" width="100%">
-  <tr><td >
-  <input type="radio" name="shipping_address" value="new" id="shipping-address-new" />
-  <label for="shipping-address-new">
-  <?php echo $text_address_new; ?><br>
-   (只接受香港地區用户訂購)
-  </label>
-  </td></tr>
-  </table>
+    <div class="xten">
+        <input type="radio" name="shipping_address" value="new" id="shipping-address-new" />
+        <label for="shipping-address-new">
+          <?php echo $text_address_new; ?><br>
+           (只接受香港地區用户訂購)
+        </label>
+    </div>
 </div>
 <div class="xleft"><div id="shipping-existing">
 <table class="xten" width="100%">
